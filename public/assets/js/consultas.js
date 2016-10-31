@@ -15,6 +15,9 @@
 			event.preventDefault();
 
 			$('#tipoDropdown').html('Practica  ' + '<span class="caret"></span>');
+
+            var subjectId = $("#subjectsDropDown").attr('data-sel-id'); 
+            setLabsDropDown(subjectId);
 		});;
 
 		$('#tipoDropdown-estudiante').off('click').on('click', function(event) {
@@ -153,14 +156,29 @@
                     $dropDown.children('button').html($this.text() + '  <span class="caret"></span>');
                     $dropDown.attr('data-sel-id', $this.attr('data-id'));
 
-                    var groupId = $("#groupsDropDown").attr('data-sel-id'); 
-                    setStudentsDropDown(groupId); 
+                    var nomSel = $('#nomSelect').attr('data-type');
+                    if(nomSel == 'est'){
+                        var groupId = $("#groupsDropDown").attr('data-sel-id'); 
+                        setStudentsDropDown(groupId);                
+                    }
+                    else{
+                        var subjectId = $("#subjectsDropDown").attr('data-sel-id'); 
+                        setLabsDropDown(subjectId);
+                    }
                 });
 
             });
 
-            var groupId = $("#groupsDropDown").attr('data-sel-id'); 
-            setStudentsDropDown(groupId);                
+            var nomSel = $('#nomSelect').attr('data-type');
+
+            if(nomSel == 'est'){
+                var groupId = $("#groupsDropDown").attr('data-sel-id'); 
+                setStudentsDropDown(groupId);                
+            }
+            else{
+                var subjectId = $("#subjectsDropDown").attr('data-sel-id'); 
+                setLabsDropDown(subjectId);
+            }
         }).fail(function(data) {
             console.log("ajax fail");
         });
@@ -182,6 +200,7 @@
             var res = $.parseJSON(b64_to_utf8(data));
 
             $('#nomSelect').html("");
+            $('#nomSelect').attr('data-type', 'est');;
             
             if(res.data.length == 0){
                 $('#nomSelect').select2({
@@ -203,6 +222,56 @@
                     /* Act on the event */
                     
                     setTableEval( event.params.data.id, subjectId);
+                });
+            }
+            
+            $('#nomSelect').trigger('change');
+            $('#nomSelect').trigger('change.select2');
+        }).fail(function(data) {
+            console.log("ajax fail");
+        });
+    }
+
+    function setLabsDropDown(subjectId) {
+
+        var session = $.cookie(SESSION_COOKIE);
+
+        var data = {
+            subjectId:subjectId
+        };
+
+        var jData = utf8_to_b64( JSON.stringify(data) );
+        $.ajax({
+            url: CON_URL+"laboratories/getBySubId",
+            data:{data:jData}
+        }).done(function(data) {
+            var res = $.parseJSON(b64_to_utf8(data));
+
+            $('#nomSelect').html("");
+            $('#nomSelect').attr('data-type', 'lab');;
+            
+            if(res.data.length == 0){
+                $('#nomSelect').select2({
+                  data: res.data,
+                  placeholder: 'Sin prácticas'
+                });
+                $("#jsGrid").jsGrid("destroy");
+            }
+            else{
+                var groupId = $("#groupsDropDown").attr('data-sel-id');
+                setTableEst(groupId, res.data[0].id);
+                //setTableEval( res.data[0].id, subjectId);
+                $('#nomSelect').select2({
+                  data: res.data
+                });  
+
+                $('#nomSelect').off('select2:select').on('select2:select', function(event) {
+                    event.preventDefault();
+                    /* Act on the event */
+                    
+                    //setTableEval( event.params.data.id, subjectId);
+                    var groupId = $("#groupsDropDown").attr('data-sel-id');
+                    setTableEst(groupId, event.params.data.id);
                 });
             }
             
@@ -274,7 +343,6 @@
                 $modal = $('#practInfoModal');
                 $modal.off('shown.bs.modal');
                 var item = obj.item;
-                console.log(item);
 
                 $labelState = $modal.find(".labelState");
                 $modal.find('.modal-title').text(item.lab_name);
@@ -395,7 +463,185 @@
         });
     }
 
+    function setTableEst(groupId, labId) {
+        $("#jsGrid").jsGrid({
+            width: "100%",
+            filtering: true,
+            sorting: true,
+            paging: true,
+            editting: true,
+            autoload: true,
+            pageSize: 5,
+            pageButtonCount: 5,
+            noDataContent: "Ningún dato encontrado.",
+            controller: {
+                loadData: function(filter) {
+                    var d = $.Deferred();
+                    var session = $.cookie(SESSION_COOKIE);
+
+                    var data = {
+                        groupId:groupId,
+                        labId:labId
+                    };
+     
+                    var jData = utf8_to_b64( JSON.stringify(data) );
+                    $.ajax({
+                        url: CON_URL+"students/getByLabId",
+                        data:{data:jData}
+                    }).done(function(data) {
+                        var res = $.parseJSON(b64_to_utf8(data));
+
+                        var dt = res.data;
+
+                        var dataFiltered = $.grep(dt, function(obj) {
+                            return (!filter.user_name || obj.user_name.indexOf(filter.lab_name) > -1)
+                                && (filter.lab_state === undefined || Boolean(obj.lab_state) === filter.lab_state)
+                                && (!filter.delivery_date || obj.delivery_date.indexOf(filter.delivery_date) > -1)
+                                && (!filter.lab_delivery_time || obj.lab_delivery_time.indexOf(filter.lab_delivery_time) > -1)
+                                && (!filter.lab_attempts || obj.lab_attempts.indexOf(filter.lab_attempts) > -1)
+                                && (!filter.lab_teacher_score || obj.lab_teacher_score.indexOf(filter.lab_teacher_score) > -1)
+                                && (!filter.lab_app_score || obj.lab_app_score.indexOf(filter.lab_app_score) > -1)
+                                && (!filter.lab_final_score || obj.lab_final_score.indexOf(filter.lab_final_score) > -1);
+                        });
+
+                        d.resolve(dataFiltered);
+
+                        setAvanceProm(dt);
+                    }).fail(function(data) {
+                        console.log("ajax fail");
+                        d.resolve([]);
+                    });
+
+                    return d.promise();
+                }
+            },
+
+            rowClick: function(obj) {
+                $modal = $('#practInfoModal');
+                $modal.off('shown.bs.modal');
+                var item = obj.item;
+
+                $labelState = $modal.find(".labelState");
+                $modal.find('.modal-title').text(item.lab_name);
+
+                if(item.lab_state == "1"){
+                    $labelState.removeClass('label-danger');
+                    $labelState.addClass("label").addClass('label-success');
+                    $labelState.text('Entregado');
+                    $modal.find('#fEntrega').val(item.delivery_date);
+                    $modal.find('#tEntrega').val(item.lab_delivery_time + " Días");
+                    $modal.find('#nProfesor').val(item.lab_teacher_score);
+                    $modal.find('#nApp').val(item.lab_app_score);
+                    $modal.find('#nFinal').val(item.lab_final_score);
+                    $modal.find('#obsrv').val(item.lab_comments);
+                    $modal.find('#numInten').val(item.lab_attempts);
+                }
+                else{
+                    $labelState.removeClass('label-success');
+                    $labelState.addClass("label").addClass('label-danger');
+                    $labelState.text('Pendiente');
+                }
+
+                $('#btnSave').off('click').on('click', function(event) {
+                    event.preventDefault();
+                    
+                    var data = {
+                        id:item.lab_users_id,
+                        comments:$modal.find('#obsrv').val(),
+                        teacher_score:$modal.find('#nProfesor').val()
+                    }
+
+                    var jData = utf8_to_b64( JSON.stringify(data) );
+                    $.ajax({
+                        url: CON_URL+"evaluation/updateLaboratory",
+                        data:{data:jData}
+                    }).done(function(data) {
+                        var res = $.parseJSON(b64_to_utf8(data));
+
+                        if(res.status == "true"){
+                            $("#jsGrid").jsGrid("render");
+                            $modal.modal('toggle');
+                        }
+                        else{
+                            alert("La información no pudo ser actualizada.");
+                        }
+                    }).fail(function(data) {
+                        console.log("ajax fail");
+                        alert("La información no pudo ser actualizada.");
+                    });
+                });
+
+                $modal.modal('show');
+                $modal.on('shown.bs.modal', function (e) {
+                    //console.log(item);
+                });
+            },
+
+            pagerFormat: "Pag {first} {prev} {pages} {next} {last}    {pageIndex} de {pageCount}",
+            pagePrevText: " < ",
+            pageNextText: " > ",
+            pageFirstText: " << ",
+            pageLastText: " >> ",
+
+            loadIndicator: {
+                show: function() {
+                },
+                hide: function() {
+                    $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(3)");
+                    $e.attr({
+                        "data-toggle": 'tooltip',
+                        "data-container": 'body',
+                        "title": 'Tiempo de entrega'
+                    });
+
+                    $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(4)");
+                    $e.attr({
+                        "data-toggle": 'tooltip',
+                        "data-container": 'body',
+                        "title": 'Intentos'
+                    });
+
+                    $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(5)");
+                    $e.attr({
+                        "data-toggle": 'tooltip',
+                        "data-container": 'body',
+                        "title": 'Nota del Profesor'
+                    });
+
+                    $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(6)");
+                    $e.attr({
+                        "data-toggle": 'tooltip',
+                        "data-container": 'body',
+                        "title": 'Nota de la APP'
+                    });
+
+                    $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(7)");
+                    $e.attr({
+                        "data-toggle": 'tooltip',
+                        "data-container": 'body',
+                        "title": 'Nota Final'
+                    });
+
+                    $('[data-toggle="tooltip"]').tooltip();
+                }
+            },
+
+            fields: [
+                { name: "user_name", type: "text", align: "center", width: 180, title: "Nombre" },
+                { name: "delivery_date", type: "text", align: "center", width: 50, title: "Fecha" },
+                { name: "lab_state", type: "checkbox", align: "center", width: 50, title: "Estado" },
+                { name: "lab_delivery_time", type: "text", align: "center", width: 30, title:"E" },
+                { name: "lab_attempts", type: "text", align: "center", width: 30, title:"I" },
+                { name: "lab_teacher_score", type: "text", align: "center", width: 30, title:"P" },
+                { name: "lab_app_score", type: "text", align: "center", width: 30, title:"A" },
+                { name: "lab_final_score", type: "text", align: "center", width: 30, title:"F" },
+                { type: "control" }
+            ]
+        });
+    }
+
     function setAvanceProm(data) {
+        console.log(data);
         var n = data.length;
         var entre = 0;
         var avan = 0;
@@ -413,7 +659,7 @@
         for (var i = 0; i < n; i++) {
             var elem = data[i];
 
-            if(elem.lab_state == '1'){
+            if(elem.lab_state == "1"){
                 entre++;
                 prom+= elem.lab_final_score;
             }
