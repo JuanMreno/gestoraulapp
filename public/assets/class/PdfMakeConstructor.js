@@ -39,15 +39,15 @@ class PdfMakeConstructor {
 	b.push(header);
 
 	data.rows.forEach(function(e,i,a){
-		var estado = e.Estado ? "Entregado" : "Pendiente";
+		var estado = (e.lab_state == "1") ? "Entregado" : "Pendiente";
 		b.push(
 			[
-				e.Practica,
-				e.Fecha,
+				e.lab_name,
+				e.delivery_date,
 				estado,
-				e.N_PROFESOR,
-				e.N_APP,
-				e.N_FINAL,
+				e.lab_teacher_score,
+				e.lab_app_score,
+				e.lab_final_score,
 			]
 		);
  	});
@@ -58,7 +58,7 @@ class PdfMakeConstructor {
 	  	{ text: 'Reporte de Notas', style: 'header' },
 	  	{ text: 'Nombre: ' + data.name, style: 'subheader' },
 	  	{ text: 'Fecha:	' + data.date, style: 'subheader' },
-	  	{ text: 'Grupo: ' + data.group, style: 'subheader' },
+	  	//{ text: 'Grupo: ' + data.group, style: 'subheader' },
 	  	{ text: 'Materia: ' + data.subject, style: 'subheader' },
 	    {
     		style: 'tableExample',

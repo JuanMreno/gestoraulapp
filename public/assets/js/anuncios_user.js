@@ -2,37 +2,55 @@
 (function($) {
 
 	function init() {
-	    setTableAnun();
+        setTableAnun()
 	}
 
 	init();
 
 	function setTableAnun() {
-		var c1 = "auto",
-			c2 = "auto",
-			c3 = "auto",
-			c4 = "auto";
-
-		var w = $(".container").width();
-
-		if(w > 600){
-			c1 = parseInt( 0.2 * w );
-			c2 = parseInt( 0.2 * w );
-			c3 = parseInt( 0.4 * w );
-			c4 = parseInt( 0.2 * w );
-		}
-
-		var jsGridParams = {
+		$("#jsGrid").jsGrid({
             width: "100%",
+            filtering: true,
             sorting: true,
             paging: true,
-            editing:false,
             autoload: true,
+            confirmDeleting: false,
             pageSize: 10,
             pageButtonCount: 5,
-            updateOnResize: true,
             noDataContent: "Ningún dato encontrado.",
-            controller: dbAnun,
+            loadMessage: "Cargando...",
+            controller: {
+                loadData: function(filter) {
+                    var d = $.Deferred();
+                    var session = $.cookie(SESSION_COOKIE);
+
+                    var data = {
+                        userId:session.id
+                    };
+     
+                    var jData = utf8_to_b64( JSON.stringify(data) );
+                    $.ajax({
+                        url: CON_URL+"messages/getByUserId",
+                        data:{data:jData}
+                    }).done(function(data) {
+                        var res = $.parseJSON(b64_to_utf8(data));
+
+                        var dt = res.data;
+                        var dataFiltered = $.grep(dt, function(obj) {
+                            return (!filter.title || obj.title.indexOf(filter.title) > -1)
+                                && (!filter.content || obj.content.indexOf(filter.content) > -1)
+                                && (!filter.date || obj.date.indexOf(filter.date) > -1);
+                        });
+
+                        d.resolve(dataFiltered);
+                    }).fail(function(data) {
+                        console.log("ajax fail");
+                        d.resolve([]);
+                    });
+
+                    return d.promise();
+                }
+            },
 
             pagerFormat: "Pag {first} {prev} {pages} {next} {last}    {pageIndex} de {pageCount}",
             pagePrevText: " < ",
@@ -41,37 +59,12 @@
 		    pageLastText: " >> ",
 
             fields: [
-             	{ name: "Profesor", type: "text", align: "center", width: c1 },
-             	{ name: "Titulo", type: "text", align: "center", width: c2 },
-	            { name: "Contenido", type: "textarea", align: "center", width: c3 },
-	            { name: "Fecha", type: "text", align: "center", width: c4 },
+             	{ name: "title", type: "text", align: "center", width: 250, filtering: true, inserting:true, editing: true, title:"Título" },
+	            { name: "content", type: "text", align: "center", width: 400, filtering: true, inserting:true, editing: true, title:"Contenido" },
+	            { name: "date", type: "text", align: "center", width: 100, filtering: true, inserting:false, editing: false, title:"Fecha" },
             	{ type: "control" }
             ]
-        };
-
-		$( window ).resize(function() {
-			w = $(".container").width();
-            console.log("resize_anun");
-
-			if(w > 600){
-				jsGridParams.fields[0].width = parseInt( 0.2 * w );
-				jsGridParams.fields[1].width = parseInt( 0.2 * w );
-				jsGridParams.fields[2].width = parseInt( 0.4 * w );
-				jsGridParams.fields[3].width = parseInt( 0.2 * w );
-
-			}
-			else{
-				jsGridParams.fields[0].width = "auto";
-				jsGridParams.fields[1].width = "auto";
-				jsGridParams.fields[2].width = "auto";
-				jsGridParams.fields[3].width = "auto";
-			}
-
-			$("#jsGrid").jsGrid("destroy");
-			$("#jsGrid").jsGrid(jsGridParams);
-		});
-
-		$("#jsGrid").jsGrid(jsGridParams);
+        });
 	}
 
 })(jQuery);

@@ -2220,6 +2220,7 @@
 	.consTable .jsgrid-delete-button,
 	.rankTable .jsgrid-delete-button,
 	.anunEstTable .jsgrid-delete-button,
+	.mGroupsTable .jsgrid-delete-button,
 	.estTable .jsgrid-edit-button,
 	.consTable .jsgrid-edit-button,
 	.rankTable .jsgrid-edit-button,
@@ -2294,7 +2295,14 @@
 	}
 
 	li.select2-results__option {
-		padding: 0px 0px 0px 10px
+		padding: 0px 0px 0px 10px;
+		font-size: initial;
+	    font-weight: initial;
+	    color: #4C4C4C !important;
+	}
+
+	li.select2-results__option.select2-results__option--highlighted {
+	    background-color: #9bc1ff !important;
 	}
 
 	span.select2-selection__rendered {

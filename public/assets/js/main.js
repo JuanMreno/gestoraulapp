@@ -98,7 +98,7 @@
 		var session = $.cookie(SESSION_COOKIE);
 		
 		$('#nav-title').text(session.name);
-		$('#nav-rol').text(session.rolName);
+		$('#nav-rol').text(session.rol_name);
 		$('.'+session.rol).show();
 
 		switch(session.rol){
@@ -157,6 +157,14 @@
 			else if(session.rol == EST_ROL){
 				$('#section').load('views/anuncios_user.html');
 			}
+		});
+		
+		$('#mgrp-link').off("click").on('click', function(event) {
+			event.preventDefault();
+			$('.nav-menu-li a').removeClass('active');
+			$(this).addClass('active');
+
+			$('#section').load('views/mis_grupos.html');
 		});
 		
 		$('#cses-link').off("click").on('click', function(event) {

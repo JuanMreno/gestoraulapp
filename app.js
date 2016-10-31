@@ -13,6 +13,14 @@ var basic = auth.basic({
 
 var app = express();
 
+var rLogin = require('./routes/login');
+var rGroups = require('./routes/groups');
+var rMess = require('./routes/messages');
+var rRank = require('./routes/ranking');
+var rSubj = require('./routes/subjects');
+var rStud = require('./routes/students');
+var rEval = require('./routes/evaluation');
+
 // view engine setup
 //app.set('views', path.join(__dirname, 'views'));
 //app.set('view engine', 'jade');
@@ -29,6 +37,13 @@ app.use(cookieParser());
 //app.use('/', routes);
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/login', rLogin);
+app.use('/groups', rGroups);
+app.use('/messages', rMess);
+app.use('/ranking', rRank);
+app.use('/subjects', rSubj);
+app.use('/students', rStud);
+app.use('/evaluation', rEval);
 //app.use(auth.connect(basic));
 
 // catch 404 and forward to error handler
