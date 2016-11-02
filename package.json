@@ -15,7 +15,8 @@
     "nedb": "^1.1.2",
     "serve-favicon": "~2.2.1",
     "http-auth": "^2.2.5",
-    "mysql":"latest"
+    "mysql":"latest",
+    "exceljs":"0.2.33"
   },
   "engines": {
     "node": "4.4.7"

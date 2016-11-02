@@ -112,7 +112,7 @@ router.get('/getStudentsLabsByGroSub', function(req, res) {
 				l.\`name\` as lab_name,
 				le.\`name\` as less_name,
 				DATE_FORMAT(l.delivery_date,'%Y/%m/%d') as delivery_date,
-				CASE WHEN lu.state IS NULL THEN '0' ELSE lu.state END as lab_state,
+				CASE WHEN lu.state IS NULL THEN '0' WHEN lu.state = '' THEN '0' ELSE lu.state END as lab_state,
 				CASE WHEN lu.attempts IS NULL THEN '' ELSE lu.attempts END as lab_attempts,
 				CASE WHEN lu.delivery_time IS NULL THEN '' ELSE lu.delivery_time END as lab_delivery_time,
 				CASE WHEN lu.report_url IS NULL THEN '' ELSE lu.report_url END as lab_report_url,

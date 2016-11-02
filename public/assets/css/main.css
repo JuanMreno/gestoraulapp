@@ -2212,6 +2212,11 @@
 		padding: 0px;
 	}
 
+	.jsgrid-button.jsgrid-search-button,
+	.jsgrid-button.jsgrid-clear-filter-button {
+		display: none
+	}
+
 	input.jsgrid-button.jsgrid-delete-button {
 		margin-left: 0px;
 	}
@@ -2272,6 +2277,7 @@
 
 	input.form-control.only-read,textarea.form-control.only-read {
 		pointer-events: none;
+		background: rgba(148, 148, 148, 0.1);
 	}
 
 	.daterangepicker{

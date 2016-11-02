@@ -70,6 +70,8 @@
             pageButtonCount: 5,
             noDataContent: "Ningún dato encontrado.",
             loadMessage: "Cargando...",
+            confirmDeleting: true,
+            deleteConfirm: "¿Seguro desea eliminar el mensaje?",
             controller: {
                 loadData: function(filter) {
                     var d = $.Deferred();
@@ -102,6 +104,7 @@
                     return d.promise();
                 },
                 insertItem: function(item) {
+                    item.date = moment().format("DD/MM/YYYY");
                     var d = $.Deferred();
                     var session = $.cookie(SESSION_COOKIE);
 

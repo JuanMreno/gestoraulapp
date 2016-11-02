@@ -59,8 +59,8 @@
 		    pageLastText: " >> ",
 
             fields: [
-             	{ name: "title", type: "text", align: "center", width: 250, filtering: true, inserting:true, editing: true, title:"Título" },
-	            { name: "content", type: "text", align: "center", width: 400, filtering: true, inserting:true, editing: true, title:"Contenido" },
+             	{ name: "title", type: "text", align: "center", width: 250, filtering: true, inserting:true, editing: true, title:"Asunto" },
+	            { name: "content", type: "text", align: "center", width: 400, filtering: true, inserting:true, editing: true, title:"Mensaje" },
 	            { name: "date", type: "text", align: "center", width: 100, filtering: true, inserting:false, editing: false, title:"Fecha" },
             	{ type: "control" }
             ]

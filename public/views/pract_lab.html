@@ -3,7 +3,7 @@
 	<section id="contact" class="four">
 		<div class="container">
 			<div class="containerHeader">
-				<h1>Prácticas de Laboratorio</h1>
+				<h1>Prácticas de laboratorio</h1>
 			</div>
 			<div class="row controlBar">
 			  <div class="col-xs-12 col-sm-5 col-md-5 col-lg-4">
@@ -100,19 +100,19 @@
         <div class="row form-group">
 			<div class="col-sm-4">
 		        <div class="input-group">
-				  <span class="input-group-addon" id="basic-addon1">N. Profesor</span>
+				  <span class="input-group-addon" id="basic-addon1" data-toggle="tooltip" data-placement="right" title="Nota del profesor">Nota 1</span>
 				  <input id="nProfesor" type="text" class="form-control only-read" placeholder="" aria-describedby="basic-addon1">
 				</div>
 			</div>
 			<div class="col-sm-4">
 		        <div class="input-group">
-				  <span class="input-group-addon" id="basic-addon1">N. App</span>
+				  <span class="input-group-addon" id="basic-addon1" data-toggle="tooltip" data-placement="right" title="Nota de laboratorio">Nota 2</span>
 				  <input id="nApp" type="text" class="form-control only-read" placeholder="" aria-describedby="basic-addon1">
 				</div>
 			</div>
 			<div class="col-sm-4">
 		        <div class="input-group">
-				  <span class="input-group-addon" id="basic-addon1">Final</span>
+				  <span class="input-group-addon" id="basic-addon1" data-toggle="tooltip" data-placement="right" title="Nota final">Nota Final</span>
 				  <input id="nFinal" type="text" class="form-control only-read" placeholder="" aria-describedby="basic-addon1">
 				</div>
 			</div>
@@ -131,10 +131,12 @@
 		
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Subir Reporte</button>
-        <button id="btnDownL" type="button" class="btn btn-primary">Descargar Reporte</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        <button id="btnUpload" type="button" class="btn btn-primary">Subir reporte</button>
+        <button id="btnDownL" type="button" class="btn btn-primary">Ver reporte de práctica</button>
       </div>
     </div>
   </div>
+  
 </div>
 <script src="assets/js/pract_lab.js"></script>

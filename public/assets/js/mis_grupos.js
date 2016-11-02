@@ -86,7 +86,7 @@
 
             fields: [ 
                 { name: "name", type: "text", align: "center", title: "Nombre", editing:false },
-                { name: "asignado", type: "checkbox", align: "center", title: "Asignado" },
+                { name: "asignado", type: "checkbox", align: "center", title: "Matriculado" },
             	{ type: "control" }
             ]
         });

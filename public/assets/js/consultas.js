@@ -1,11 +1,13 @@
 
 (function($) {
+    var valSelected;
+    var aData = [];
     var popGenReport = 
         '<div id="dlEvalPopOver" class="row" style="padding:4px 10px 4px 10px">'+
-            '<button id="dlGeneralEvalReport" type="button" class="btn btn-primary" data-toggle="popover" style="margin-right:5px">'+
+            '<button id="dlExcelReport" type="button" class="btn btn-primary" data-toggle="popover" style="margin-left:5px">'+
                 '<i class="fa fa-file-excel-o fa-2x" aria-hidden="true"></i>'+
             '</button>'+
-            '<button id="dlGeneralEvalReport" type="button" class="btn btn-primary" data-toggle="popover" style="margin-right:5px">'+
+            '<button id="dlGeneralConsReport" type="button" class="btn btn-primary" data-toggle="popover" style="margin-right:5px">'+
                 '<i class="fa fa-file-pdf-o fa-2x" aria-hidden="true"></i>'+
             '</button>'+
         '</div>';
@@ -36,6 +38,10 @@
             placement:'bottom',
             html:true,
             trigger:'focus'
+        });
+
+        $('#dlGeneralEvalReport').off('click').on('shown.bs.popover', function () {
+            setDownLoadBtns();
         });
 
         $('#nomSelect').select2();
@@ -86,7 +92,7 @@
             }
             else{
                 //setTableAnun(res.data[0].user_group_id);
-                $dropDown.children('button').html(res.data[0].name + $dropDown.children('button').html());
+                $dropDown.children('button').html(res.data[0].name + '  <span class="caret"></span>');
                 $dropDown.attr('data-sel-id', res.data[0].group_id);
             }
 
@@ -206,7 +212,8 @@
                 $('#nomSelect').select2({
                   data: res.data,
                   placeholder: 'Sin estudiantes'
-                });
+                });  
+
                 $("#jsGrid").jsGrid("destroy");
             }
             else{
@@ -216,12 +223,14 @@
                 $('#nomSelect').select2({
                   data: res.data
                 });  
+                valSelected = res.data[0].text;
 
                 $('#nomSelect').off('select2:select').on('select2:select', function(event) {
                     event.preventDefault();
                     /* Act on the event */
                     
                     setTableEval( event.params.data.id, subjectId);
+                    valSelected = event.params.data.text;
                 });
             }
             
@@ -255,6 +264,7 @@
                   data: res.data,
                   placeholder: 'Sin prácticas'
                 });
+
                 $("#jsGrid").jsGrid("destroy");
             }
             else{
@@ -264,6 +274,7 @@
                 $('#nomSelect').select2({
                   data: res.data
                 });  
+                valSelected = res.data[0].text;
 
                 $('#nomSelect').off('select2:select').on('select2:select', function(event) {
                     event.preventDefault();
@@ -272,6 +283,7 @@
                     //setTableEval( event.params.data.id, subjectId);
                     var groupId = $("#groupsDropDown").attr('data-sel-id');
                     setTableEst(groupId, event.params.data.id);
+                    valSelected = event.params.data.text;
                 });
             }
             
@@ -329,6 +341,7 @@
 
                         d.resolve(dataFiltered);
 
+                        aData = dataFiltered;
                         setAvanceProm(dt);
                     }).fail(function(data) {
                         console.log("ajax fail");
@@ -352,7 +365,7 @@
                     $labelState.addClass("label").addClass('label-success');
                     $labelState.text('Entregado');
                     $modal.find('#fEntrega').val(item.delivery_date);
-                    $modal.find('#tEntrega').val(item.lab_delivery_time + " Días");
+                    $modal.find('#tEntrega').val(item.lab_delivery_time);
                     $modal.find('#nProfesor').val(item.lab_teacher_score);
                     $modal.find('#nApp').val(item.lab_app_score);
                     $modal.find('#nFinal').val(item.lab_final_score);
@@ -428,21 +441,21 @@
                     $e.attr({
                         "data-toggle": 'tooltip',
                         "data-container": 'body',
-                        "title": 'Nota del Profesor'
+                        "title": 'Nota del profesor'
                     });
 
                     $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(6)");
                     $e.attr({
                         "data-toggle": 'tooltip',
                         "data-container": 'body',
-                        "title": 'Nota de la APP'
+                        "title": 'Nota de laboratorio'
                     });
 
                     $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(7)");
                     $e.attr({
                         "data-toggle": 'tooltip',
                         "data-container": 'body',
-                        "title": 'Nota Final'
+                        "title": 'Nota final'
                     });
 
                     $('[data-toggle="tooltip"]').tooltip();
@@ -450,13 +463,13 @@
             },
 
             fields: [
-                { name: "lab_name", type: "text", align: "center", width: 180, title: "Nombre" },
-                { name: "delivery_date", type: "text", align: "center", width: 70, title: "Fecha" },
-                { name: "lab_state", type: "checkbox", align: "center", width: 50, title: "Estado" },
-                { name: "lab_delivery_time", type: "text", align: "center", width: 30, title:"E" },
+                { name: "lab_name", type: "text", align: "center", width: 170, title: "Nombre" },
+                { name: "delivery_date", type: "text", align: "center", width: 60, title: "Fecha" },
+                { name: "lab_state", type: "checkbox", align: "center", width: 50, title: "Entregado" },
+                { name: "lab_delivery_time", type: "text", align: "center", width: 50, title:"E" },
                 { name: "lab_attempts", type: "text", align: "center", width: 30, title:"I" },
                 { name: "lab_teacher_score", type: "text", align: "center", width: 30, title:"P" },
-                { name: "lab_app_score", type: "text", align: "center", width: 30, title:"A" },
+                { name: "lab_app_score", type: "text", align: "center", width: 30, title:"L" },
                 { name: "lab_final_score", type: "text", align: "center", width: 30, title:"F" },
                 { type: "control" }
             ]
@@ -506,6 +519,7 @@
 
                         d.resolve(dataFiltered);
 
+                        aData = dataFiltered;
                         setAvanceProm(dt);
                     }).fail(function(data) {
                         console.log("ajax fail");
@@ -605,14 +619,14 @@
                     $e.attr({
                         "data-toggle": 'tooltip',
                         "data-container": 'body',
-                        "title": 'Nota del Profesor'
+                        "title": 'Nota del profesor'
                     });
 
                     $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(6)");
                     $e.attr({
                         "data-toggle": 'tooltip',
                         "data-container": 'body',
-                        "title": 'Nota de la APP'
+                        "title": 'Nota de laboratorio'
                     });
 
                     $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(7)");
@@ -627,13 +641,13 @@
             },
 
             fields: [
-                { name: "user_name", type: "text", align: "center", width: 180, title: "Nombre" },
-                { name: "delivery_date", type: "text", align: "center", width: 50, title: "Fecha" },
-                { name: "lab_state", type: "checkbox", align: "center", width: 50, title: "Estado" },
-                { name: "lab_delivery_time", type: "text", align: "center", width: 30, title:"E" },
+                { name: "user_name", type: "text", align: "center", width: 170, title: "Nombre" },
+                { name: "delivery_date", type: "text", align: "center", width: 40, title: "Fecha" },
+                { name: "lab_state", type: "checkbox", align: "center", width: 50, title: "Entregado" },
+                { name: "lab_delivery_time", type: "text", align: "center", width: 50, title:"E" },
                 { name: "lab_attempts", type: "text", align: "center", width: 30, title:"I" },
                 { name: "lab_teacher_score", type: "text", align: "center", width: 30, title:"P" },
-                { name: "lab_app_score", type: "text", align: "center", width: 30, title:"A" },
+                { name: "lab_app_score", type: "text", align: "center", width: 30, title:"L" },
                 { name: "lab_final_score", type: "text", align: "center", width: 30, title:"F" },
                 { type: "control" }
             ]
@@ -641,7 +655,6 @@
     }
 
     function setAvanceProm(data) {
-        console.log(data);
         var n = data.length;
         var entre = 0;
         var avan = 0;
@@ -670,12 +683,85 @@
         }
         else{
             prom = prom/entre;
-            $avanInd.text(prom.toFixed(1) + " %");
+            $promInd.text(prom.toFixed(1));
         }
 
         avan = entre * 100 / n;
         $avanInd.text(parseInt(avan) + " %");
     }
 
+    function setDownLoadBtns(){
+        $('#dlGeneralConsReport').off('click').on('click', function(event) {
+            event.preventDefault();
+
+            if(aData.length == 0){
+                return;
+            }
+            var drp = $('#evalDatePicker').data('daterangepicker');
+            var fIni = drp.startDate.format('YYYY/MM/DD');
+            var fFin = drp.endDate.format('YYYY/MM/DD');
+
+
+            var group = $("#groupsDropDown").children('button').text();
+            var subject = $("#subjectsDropDown").children('button').text();
+
+            var avanInd = $('#avanInd').text();
+            var promInd = $('#promInd').text();
+
+            var stuName = valSelected;
+
+            var data = {
+                group:group,
+                subject:subject,
+                avanInd:avanInd,
+                promInd:promInd,
+                fIni:fIni,
+                fFin:fFin,
+                stuName:stuName,
+                rows:aData
+            }
+            
+            const pdfConst = new PdfMakeConstructor(stuName.replace(" ", "_") + "_report.pdf");
+
+            var selType = $('#nomSelect').attr('data-type');
+            pdfConst.makeStuEvalReport(data,selType);
+        });
+
+        $('#dlExcelReport').off('click').on('click', function(event) {
+            event.preventDefault();
+
+            if(aData.length == 0){
+                return;
+            }
+
+            var drp = $('#evalDatePicker').data('daterangepicker');
+            var fIni = drp.startDate.format('YYYY/MM/DD');
+            var fFin = drp.endDate.format('YYYY/MM/DD');
+
+
+            var group = $("#groupsDropDown").children('button').text();
+            var subject = $("#subjectsDropDown").children('button').text();
+
+            var avanInd = $('#avanInd').text();
+            var promInd = $('#promInd').text();
+
+            var stuName = valSelected;
+
+            var selType = $('#nomSelect').attr('data-type');
+            var data = {
+                type:selType,
+                group:group,
+                subject:subject,
+                avanInd:avanInd,
+                promInd:promInd,
+                fIni:fIni,
+                fFin:fFin,
+                stuName:stuName,
+                rows:aData
+            }
+
+            $.fileDownload(CON_URL+"reports/getTeacher?data=" + JSON.stringify(data));
+        });
+    }
 
 })(jQuery);
