@@ -114,8 +114,8 @@ router.get('/getByLabId', function(req, res) {
 			var queryLab = 
 				`SELECT
 					l.id as lab_id, 
+					l.lab_code as lab_code, 
 					l.\`name\` as lab_name, 
-					DATE_FORMAT(l.delivery_date,'%d/%m/%Y') as delivery_date, 
 					ls.\`name\` as less_name 
 				FROM
 					laboratory l
@@ -155,9 +155,10 @@ router.get('/getByLabId', function(req, res) {
 							u.id as user_id,
 							CONCAT(u.\`name\`,' ',u.last_name) as user_name,
 							l.id as lab_id,
+							l.id as lab_code,
 							l.\`name\` as lab_name,
 							le.\`name\` as less_name,
-							DATE_FORMAT(l.delivery_date,'%Y/%m/%d') as delivery_date,
+							DATE_FORMAT(lu.delivery_date,'%Y/%m/%d') as delivery_date,
 							CASE WHEN lu.state IS NULL THEN '0' ELSE lu.state END as lab_state,
 							CASE WHEN lu.attempts IS NULL THEN '' ELSE lu.attempts END as lab_attempts,
 							CASE WHEN lu.delivery_time IS NULL THEN '' ELSE lu.delivery_time END as lab_delivery_time,
@@ -207,10 +208,11 @@ router.get('/getByLabId', function(req, res) {
 							labsRows.push({
 								user_id:e.user_id,
 								user_name:e.user_name,
-								lab_id:labRow.lab_is,
+								lab_id:labRow.lab_id,
+								lab_code:labRow.lab_code,
 								lab_name:labRow.lab_name,
 								less_name:labRow.less_name,
-								delivery_date:labRow.delivery_date,
+								delivery_date:"",
 								lab_state:0,
 								lab_attempts:"",
 								lab_delivery_time:"",

@@ -171,15 +171,15 @@ router.get('/asignUser', function(req, res) {
 								? AS users_id,
 								? AS class_group_id
 						) AS tmp
-				WHERE
-					NOT EXISTS (
-						SELECT
-							*
-						FROM
-							users_class_groups
-						WHERE
-							users_id = ? AND
-							class_group_id = ?
+					WHERE
+						NOT EXISTS (
+							SELECT
+								*
+							FROM
+								users_class_groups
+							WHERE
+								users_id = ? AND
+								class_group_id = ?
 					)
 				LIMIT 1;`;
 		}

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<label for="data">Service</label>
+	<select name="service" id="selServId">
+		<option value="login">login</option>
+		<option value="externals/put_lab">put_lab</option>
+	</select>
+	<br>
+	<br>
+	<label for="data">Data</label>
+	<input id="dataInpt" name="data" type="text" style="width:100%">
+	<br>
+	<button onclick="sendData()">Send</button>
+	<br>
+	<p id="resContId"></p>
+
+	<script src="assets/js/jquery.min.js"></script>
+	<script>
+		var CON_URL = "http://"+window.location.hostname+":3000/";
+
+		function utf8_to_b64( str ) {
+		  return window.btoa(unescape(encodeURIComponent( str )));
+		}
+
+		function b64_to_utf8( str ) {
+		  return decodeURIComponent(escape(window.atob( str )));
+		}
+
+		$('input[name="gender"]').each(function(index, el) {
+			$(el).on('click', function(event) {
+				event.preventDefault();
+				/* Act on the event */
+				$('input[name="gender"]').removeAttr("checked");
+				$(this).attr('checked',true);
+			});
+		});
+
+		function sendData() {
+			var dataText = $("#dataInpt").val();
+			var service = $('#selServId option:selected').val();
+
+			var jData = utf8_to_b64( dataText );
+			$.ajax({
+				url: CON_URL+service,
+				data:{data:jData}
+			})
+			.done(function( data ) {
+				
+				var res = $.parseJSON(b64_to_utf8(data));
+				$('#resContId').text(b64_to_utf8(data));
+				console.log(res);
+				/*
+				if(res.status == "true"){
+					if(res.data.length == 1){
+						var user = res.data[0];
+						clearInterval(loadIntervaId);
+						$.cookie(SESSION_COOKIE, user);
+						goToMain();
+					}
+					else{
+						alert("Nombre o Usuario inválido, intenta de nuevo.");
+						restartButton();
+					}
+				}
+				else{
+					alert("Nombre o Usuario inválido, intenta de nuevo.");
+					restartButton();
+				}
+				*/
+				//alert("Nombre o Usuario inválido, intenta de nuevo.")
+				//clearInterval(loadIntervaId);
+				//$.cookie(SESSION_COOKIE, {id:"1",name:"Oscar Moreno",rol:"pro-rol",rolName:"Profesor"});
+				//goToMain();
+			})
+			.error(function(e) {
+				console.log("Error ajax.");
+				restartButton();
+			});
+		}
+	</script>
+</body>
+</html>

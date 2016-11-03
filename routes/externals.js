@@ -1,19 +1,22 @@
 var express = require('express');
 var router = express.Router();
 var conn = require('../objs/SqlConnection.js');
+var fs = require('fs');
+var Excel = require('exceljs');
+const url = require('url');
 
-// middleware that is specific to this router
 router.use(function timeLog(req, res, next) {
   console.log('Time: ', Date.now());
   next();
 });
-// define the home page route
-router.get('/', function(req, res) {
+
+
+router.get('/put_lab', function(req, res) {
 	var buf = Buffer.from(req.query.data, 'base64');
 	var params = JSON.parse(buf);
 
 	var data = {
-		status:"true",
+		status:"",
 		data:{}
 	};
 
@@ -22,6 +25,7 @@ router.get('/', function(req, res) {
 		if (err) {
 			console.error('error connecting: ' + err.stack);
 			data.status = "false";
+			data.res_code = "DB_CONNECTION_FAILED";
 
 			var jData = JSON.stringify(data);
 			res.send(new Buffer(jData).toString('base64'));
@@ -29,26 +33,15 @@ router.get('/', function(req, res) {
 			return;
 		}
 
-		var query = 
-			"SELECT " +
-			"	u.id, " +
-			"	u.`name`, " +
-			"	u.last_name, " +
-			"	r.rol, " +
-			"	r.rol_name, " +
-			"	u.rols_id " +
-			"FROM " + 
-			"	users u " + 
-			"INNER JOIN ROLS r ON u.rols_id = r.id " +
-			"WHERE " +
-			"	u.`user` = '" + params.user + "' AND " +
-			"	u.pass = '" + params.pass + "'";
+		var query = "CALL put_lab(?,?,?,?,?,?)";
 
-		connection.query(query, function(err, rows) {
+		var p = [params.userName, params.labCode, params.attempts, params.delivery_date, params.delivery_time, params.app_score];
+		connection.query(query, p , function(err, rows) {
 		
-			if (err) {
+			if (err || rows.length == 0) {
 				console.error('error query: ' + query + err.stack);
 				data.status = "false";
+				data.res_code = "DB_EXCEPTION";
 
 				var jData = JSON.stringify(data);
 				res.send(new Buffer(jData).toString('base64'));
@@ -56,8 +49,10 @@ router.get('/', function(req, res) {
 				return;
 			}
 
-			data.data = rows;
 			data.status = "true";
+			data.res_code = "STATUS_OK";
+			data.data = rows[0][0];
+
 			var jData = JSON.stringify(data);
 		  	res.send(new Buffer(jData).toString('base64'));
 		  	connection.end();

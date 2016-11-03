@@ -391,10 +391,10 @@
             },
 
             fields: [
-                { name: "lab_name", type: "text", align: "center", width: 180, title: "Nombre" },
+                { name: "lab_name", type: "text", align: "center", width: 160, title: "Nombre" },
                 { name: "delivery_date", type: "text", align: "center", width: 70, title: "Fecha" },
                 { name: "lab_state", type: "checkbox", align: "center", width: 50, title: "Entregado" },
-                { name: "lab_delivery_time", type: "text", align: "center", width: 30, title:"E" },
+                { name: "lab_delivery_time", type: "text", align: "center", width: 50, title:"E" },
                 { name: "lab_attempts", type: "text", align: "center", width: 30, title:"I" },
                 { name: "lab_teacher_score", type: "text", align: "center", width: 30, title:"P" },
                 { name: "lab_app_score", type: "text", align: "center", width: 30, title:"L" },

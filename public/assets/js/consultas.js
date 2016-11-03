@@ -50,6 +50,9 @@
             locale: {
               format: 'DD-MM-YYYY'
             },
+            dateLimit: {
+                "months": 12
+            },
             startDate: moment().format('DD/MM/YYYY'),
             endDate: moment().add(3, 'months').format('DD/MM/YYYY')
         });

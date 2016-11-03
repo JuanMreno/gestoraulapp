@@ -34,8 +34,9 @@ router.get('/getLabsByGroSubEst', function(req, res) {
 				l.id as lab_id,
 				lu.id as lab_users_id,
 				l.\`name\` as lab_name,
+				l.lab_code as lab_code, 
 				le.\`name\` as less_name,
-				DATE_FORMAT(l.delivery_date,'%Y/%m/%d') as delivery_date,
+				DATE_FORMAT(lu.delivery_date,'%Y/%m/%d') as delivery_date,
 				CASE WHEN lu.state IS NULL THEN '0' ELSE lu.state END as lab_state,
 				CASE WHEN lu.attempts IS NULL THEN '' ELSE lu.attempts END as lab_attempts,
 				CASE WHEN lu.delivery_time IS NULL THEN '' ELSE lu.delivery_time END as lab_delivery_time,
@@ -54,15 +55,15 @@ router.get('/getLabsByGroSubEst', function(req, res) {
 				FROM
 					laboratories_users
 				WHERE
-					user_id = ?
+					user_id = ? AND
+					delivery_date BETWEEN ? AND ?
 			) lu ON l.id = lu.laboratory_id
 			INNER JOIN lessons le ON l.lesson_id = le.id
 			WHERE
-				l.subject_id = ? AND
-				l.delivery_date BETWEEN ? AND ?` 
+				l.subject_id = ?` 
 		;
 
-		var p = [params.user_id, params.subject_id, params.fIni, params.fFin];
+		var p = [params.user_id, params.fIni, params.fFin, params.subject_id];
 		connection.query(query, p , function(err, rows) {
 		
 			if (err) {
@@ -110,8 +111,9 @@ router.get('/getStudentsLabsByGroSub', function(req, res) {
 				l.id as lab_id,
 				lu.id as lab_users_id,
 				l.\`name\` as lab_name,
+				l.lab_code as lab_code, 
 				le.\`name\` as less_name,
-				DATE_FORMAT(l.delivery_date,'%Y/%m/%d') as delivery_date,
+				DATE_FORMAT(lu.delivery_date,'%Y/%m/%d') as delivery_date,
 				CASE WHEN lu.state IS NULL THEN '0' WHEN lu.state = '' THEN '0' ELSE lu.state END as lab_state,
 				CASE WHEN lu.attempts IS NULL THEN '' ELSE lu.attempts END as lab_attempts,
 				CASE WHEN lu.delivery_time IS NULL THEN '' ELSE lu.delivery_time END as lab_delivery_time,
@@ -130,15 +132,15 @@ router.get('/getStudentsLabsByGroSub', function(req, res) {
 				FROM
 					laboratories_users
 				WHERE
-					user_id = ?
+					user_id = ? AND
+					delivery_date BETWEEN ? AND ?
 			) lu ON l.id = lu.laboratory_id
 			INNER JOIN lessons le ON l.lesson_id = le.id
 			WHERE
-				l.subject_id = ? AND
-				l.delivery_date BETWEEN ? AND ?` 
+				l.subject_id = ?` 
 		;
 
-		var p = [params.user_id, params.subject_id, params.fIni, params.fFin];
+		var p = [params.user_id, params.fIni, params.fFin, params.subject_id];
 		connection.query(query, p , function(err, rows) {
 		
 			if (err) {
@@ -239,8 +241,9 @@ router.get('/getStudentsLabsBySub', function(req, res) {
 				l.id as lab_id,
 				lu.id as lab_users_id,
 				l.\`name\` as lab_name,
+				l.lab_code as lab_code, 
 				le.\`name\` as less_name,
-				DATE_FORMAT(l.delivery_date,'%Y/%m/%d') as delivery_date,
+				DATE_FORMAT(lu.delivery_date,'%Y/%m/%d') as delivery_date,
 				CASE WHEN lu.state IS NULL THEN '0' ELSE lu.state END as lab_state,
 				CASE WHEN lu.attempts IS NULL THEN '' ELSE lu.attempts END as lab_attempts,
 				CASE WHEN lu.delivery_time IS NULL THEN '' ELSE lu.delivery_time END as lab_delivery_time,
@@ -259,12 +262,12 @@ router.get('/getStudentsLabsBySub', function(req, res) {
 				FROM
 					laboratories_users
 				WHERE
-					user_id = ?
+					user_id = ? AND
+					delivery_date BETWEEN ? AND ?
 			) lu ON l.id = lu.laboratory_id
 			INNER JOIN lessons le ON l.lesson_id = le.id
 			WHERE
-				l.subject_id = ? AND
-				l.delivery_date BETWEEN ? AND ?` 
+				l.subject_id = ?` 
 		;
 
 		var p = [params.user_id, params.subject_id, params.fIni, params.fFin];

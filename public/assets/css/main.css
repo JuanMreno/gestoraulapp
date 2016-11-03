@@ -2251,6 +2251,14 @@
     	color: #FFFFFF
 	}
 
+	.btn.btn-primary.btn-file {
+		vertical-align: initial;
+	}
+
+	.glyphicon.glyphicon-folder-open {
+		display: none;
+	}
+
 	.modal-title {
 	    font-weight: bold;
 	    font-size: larger;

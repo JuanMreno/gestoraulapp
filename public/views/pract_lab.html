@@ -125,9 +125,17 @@
 				</div>
 			</div>
 		</div>
-		<br>
 		<h6 class="field-label">Observaciones</h6>
 		<textarea id="obsrv" class="form-control only-read" rows="3"></textarea>
+		<br>
+		<div class="form-group">
+			<form enctype="multipart/form-data">
+				<h6 class="field-label">Cargar reporte de laboratorio</h6>
+	            <input id="uploadPrcFile" class="file" type="file" multiple data-min-file-count="1">
+	            <button type="submit" class="btn btn-primary">Subir</button>
+	            <button type="reset" class="btn btn-default">Restaurar</button>
+	        </form>
+		</div>
 		
       </div>
       <div class="modal-footer">
