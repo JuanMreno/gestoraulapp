@@ -49,6 +49,7 @@
             startDate: moment().format('DD/MM/YYYY'),
             endDate: moment().add(3, 'months').format('DD/MM/YYYY')
         });
+        $('#evalDatePicker').attr('disabled',true);
 
         $('#evalDatePicker').on('apply.daterangepicker', function(ev, picker) {
             var subjectId = $("#subjectsDropDown").attr('data-sel-id');
@@ -223,9 +224,15 @@
 
     var aData = [];
     function setTableEval(user_id, subject_id) {
-        var drp = $('#evalDatePicker').data('daterangepicker');
-        var fIni = drp.startDate.format('YYYY/MM/DD');
-        var fFin = drp.endDate.format('YYYY/MM/DD');
+        var fIni = 'null';
+        var fFin = 'null';
+
+        if(!$('#evalDatePicker').prop('disabled')){
+            var drp = $('#evalDatePicker').data('daterangepicker');
+            fIni = drp.startDate.format('YYYY/MM/DD');
+            fFin = drp.endDate.format('YYYY/MM/DD');
+        }
+
         $("#jsGrid").jsGrid({
             width: "100%",
             filtering: true,
@@ -283,10 +290,12 @@
                 $modal = $('#practInfoModal');
                 $modal.off('shown.bs.modal');
                 var item = obj.item;
-                console.log(item);
 
                 $labelState = $modal.find(".labelState");
                 $modal.find('.modal-title').text(item.lab_name);
+
+                $('#aBtnDownL').show();
+                $('#btnRestInt').show();
 
                 if(item.lab_state == "1"){
                     $labelState.removeClass('label-danger');
@@ -304,6 +313,13 @@
                     $labelState.removeClass('label-success');
                     $labelState.addClass("label").addClass('label-danger');
                     $labelState.text('Pendiente');
+                }
+
+                if(item.lab_users_id == null || item.lab_users_id == ""){
+                    $('#aBtnDownL').hide();
+                }
+                else{
+                    $('#aBtnDownL').attr('href', item.lab_report_url);
                 }
 
                 $('#btnSave').off('click').on('click', function(event) {
@@ -334,6 +350,36 @@
                         alert("La información no pudo ser actualizada.");
                     });
                 });
+
+                if(item.lab_users_id != null && item.lab_users_id != "" && item.lab_state == "1")
+                    $('#btnRestInt').off('click').on('click', function(event) {
+                        event.preventDefault();
+                        
+                        var data = {
+                            labId:item.lab_users_id
+                        }
+
+                        var jData = utf8_to_b64( JSON.stringify(data) );
+                        $.ajax({
+                            url: CON_URL+"evaluation/resetLabAttempt",
+                            data:{data:jData}
+                        }).done(function(data) {
+                            var res = $.parseJSON(b64_to_utf8(data));
+
+                            if(res.status == "true"){
+                                $("#jsGrid").jsGrid("render");
+                                $modal.modal('toggle');
+                            }
+                            else{
+                                alert("La información no pudo ser actualizada.");
+                            }
+                        }).fail(function(data) {
+                            console.log("ajax fail");
+                            alert("La información no pudo ser actualizada.");
+                        });
+                    });
+                else
+                    $('#btnRestInt').hide();
 
                 $modal.modal('show');
                 $modal.on('shown.bs.modal', function (e) {

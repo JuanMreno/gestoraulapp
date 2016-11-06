@@ -14,18 +14,38 @@
 	init();
 
 	function init() {
-		$('#uploadFileInput').click();
 		$('#practLabFchas').daterangepicker({
+            autoApply: true,
             locale: {
               format: 'DD-MM-YYYY'
             },
-            startDate: moment().format('DD/MM/YYYY'),
+            startDate: moment().add(-3, 'months').format('DD/MM/YYYY'),
             endDate: moment().add(3, 'months').format('DD/MM/YYYY')
         });
+        $('#practLabFchas').attr('disabled',true);
 
         $('#practLabFchas').on('apply.daterangepicker', function(ev, picker) {
             var subjectId = $("#subjectsDropDown").attr('data-sel-id'); 
             setPracLabTable(subjectId); 
+        });
+
+        $('#dateFilterBtn').off('click').on('click', function(event) {
+            event.preventDefault();
+
+            if($(this).hasClass('fa-square-o')){
+                $(this).toggleClass( 'fa-square-o', false );
+                $(this).toggleClass( 'fa-check-square-o', true );
+                $('#practLabFchas').prop('disabled', false);
+            }
+            else{
+                $(this).toggleClass( 'fa-check-square-o', false );
+                $(this).toggleClass( 'fa-square-o', true );
+                $('#practLabFchas').prop('disabled', true);
+            }
+
+            var subjectId = $("#subjectsDropDown").attr('data-sel-id'); 
+            setPracLabTable(subjectId); 
+
         });
 
         $('#downloadGeneralReport').popover({
@@ -40,7 +60,7 @@
         });
 
         setSubjectsDropDown();
-        setPracLabTable();
+        //setPracLabTable();
 	}
 
 	function setSubjectsDropDown() {
@@ -100,9 +120,15 @@
 
     var aData;
     function setPracLabTable(subjectId) {
-    	var drp = $('#practLabFchas').data('daterangepicker');
-        var fIni = drp.startDate.format('YYYY/MM/DD');
-        var fFin = drp.endDate.format('YYYY/MM/DD');
+        var fIni = 'null';
+        var fFin = 'null';
+
+        if(!$('#practLabFchas').prop('disabled')){
+            var drp = $('#practLabFchas').data('daterangepicker');
+            fIni = drp.startDate.format('YYYY/MM/DD');
+            fFin = drp.endDate.format('YYYY/MM/DD');
+        }
+
     	$("#jsGrid").jsGrid({
                 width: "100%",
                 filtering: true,
@@ -131,7 +157,7 @@
 	                        data:{data:jData}
 	                    }).done(function(data) {
 	                        var res = $.parseJSON(b64_to_utf8(data));
-
+                            console.log(res.data);
 	                        var dt = res.data;
 	                        var dataFiltered = $.grep(dt, function(obj) {
 	                            return (!filter.lab_name || obj.lab_name.indexOf(filter.lab_name) > -1)
@@ -160,21 +186,19 @@
                 	$modal = $('#practInfoModal');
                 	$modal.off('shown.bs.modal');
                 	var item = obj.item;
+                    console.log(item);
 
                 	$labelState = $modal.find(".labelState");
                 	$modal.find('.modal-title').text(item.lab_name);
+
+                    $('#aBtnDownL').show();
+                    $('#formLoadFile').show();
 
                 	if(item.lab_state == "1"){
 	                	$labelState.removeClass('label-danger');
                 		$labelState.addClass("label").addClass('label-success');
                 		$labelState.text('Entregado');
-	                	$modal.find('#fEntrega').val(item.delivery_date);
-	                	$modal.find('#tEntrega').val(item.lab_delivery_time);
-	                	$modal.find('#nProfesor').val(item.lab_teacher_score);
-	                	$modal.find('#nApp').val(item.lab_app_score);
-	                	$modal.find('#nFinal').val(item.lab_app_score);
-	                	$modal.find('#obsrv').val(item.lab_comments);
-	                	$modal.find('#nIntent').val(item.lab_attempts);
+                        $('#formLoadFile').hide();
                 	}
                 	else{
 	                	$labelState.removeClass('label-success');
@@ -182,21 +206,79 @@
                 		$labelState.text('Pendiente');
                 	}
 
-                	$('#btnDownL').off('click').on('click', function(event) {
-                		event.preventDefault();
-                		$.fileDownload('/docs/report.pdf');
-                	});
+                    if(item.lab_users_id == null){
+                        $('#aBtnDownL').hide();
+                    }
+                    else{
+                        $('#aBtnDownL').attr('href', item.lab_report_url);
+                    }
 
-                	$('#btnUpload').off('click').on('click', function(event) {
-                		event.preventDefault();
-                		console.log($('#uploadFileInput'))
-                		$('#uploadFileInput').click();
-                	});
+                    $modal.find('#fEntrega').val(item.delivery_date);
+                    $modal.find('#tEntrega').val(item.lab_delivery_time);
+                    $modal.find('#nProfesor').val(item.lab_teacher_score);
+                    $modal.find('#nApp').val(item.lab_app_score);
+                    $modal.find('#nFinal').val(item.lab_app_score);
+                    $modal.find('#obsrv').val(item.lab_comments);
+                    $modal.find('#nIntent').val(item.lab_attempts);
+
+
+                    /*
+                	$('#btnDownL').off('click').on('click', function(event) {
+                        event.preventDefault();
+                        console.log(CON_URL+ item.lab_report_url);
+                        $.fileDownload(CON_URL+ item.lab_report_url);
+                    });
+                    */
+                    $('#btnUploadReport').off('click').on('click', function(event) {
+                        event.preventDefault();
+
+                        var fd = new FormData(document.getElementById("formLoadFile"));
+
+                        var session = $.cookie(SESSION_COOKIE);
+
+                        var labId = (item.lab_users_id == '') ? null : item.lab_users_id;
+                        var data = {
+                            userId:session.id,
+                            labId:item.lab_id,
+                            labUserId:labId
+                        }
+
+                        var jData = JSON.stringify(data);
+                        fd.append("data", jData);
+
+                        $.ajax({
+                            method: "POST",
+                            url: CON_URL+"students/put_lab",
+                            data:fd,
+                            processData: false,  // tell jQuery not to process the data
+                            contentType: false
+                        })
+                        .done(function( data ) {
+                            
+                            var res = $.parseJSON(b64_to_utf8(data));
+                            if(res.state == "true"){
+                                if(res.res_code == "LAB_UPDATED" || res.res_code == "LAB_INSERTED"){
+                                    alert("Reporte generado con éxito.");
+                                    $modal.modal('hide');
+                                    var subjectId = $("#subjectsDropDown").attr('data-sel-id'); 
+                                    setPracLabTable(subjectId); 
+                                }
+                                else{
+                                    alert("El reporte ya ha sido entregado.");
+                                }
+                            }
+                            else{
+                                alert("Ha ocurrido un error inesperado, inténtalo de nuevo.");
+                            }
+                        })
+                        .error(function(e) {
+                            alert("Error de conexión.");
+                            console.log("Error ajax.");
+                        });
+                    });
 
             		$modal.modal('show');
             		$modal.on('shown.bs.modal', function (e) {
-						console.log(item);
-
 						$('#uploadPrcFile').fileinput({
                             language: 'es',
                             allowedFileExtensions : ['pdf', 'xlsx','xls'],

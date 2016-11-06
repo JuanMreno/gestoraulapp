@@ -2279,6 +2279,12 @@
 	    padding: 0px 0px 9px;
 	}
 
+	.fileinput-remove-button,
+	.fileinput-cancel-button,
+	.fileinput-upload-button {
+		display: none;
+	}
+
 	input {
 		line-height: normal; 
 	}

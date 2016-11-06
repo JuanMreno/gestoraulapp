@@ -152,6 +152,8 @@ router.get('/getStudent', function(req, res) {
 });
 
 function decode(str) {
+	if(str == null)
+		return "";
 	return str
 		.replace("Ã¡","á")
 		.replace("Ã©","é")

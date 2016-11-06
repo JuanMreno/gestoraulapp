@@ -9,15 +9,17 @@
 	<select name="service" id="selServId">
 		<option value="externals/login">login</option>
 		<option value="externals/put_lab">put_lab</option>
+		<option value="externals/getLab">getLab</option>
 	</select>
 	<br>
 	<br>
-	<label for="data">Data</label>
+	<label for="data">login, get_lab Form</label>
 	<input id="dataInpt" name="data" type="text" style="width:100%">
 	<br>
 	<button onclick="sendData()">Send</button>
 	<br>
 	<br>
+	<label for="data">put_lab Form</label>
 	<form id="putLabForm" action="externals/put_lab" method="POST">
 		<input type="text" name="data" style="width: 100%;">
 		<input type="file" name="report_file">
@@ -42,7 +44,7 @@
 
 			var ajaxConfig;
 
-			if(service == "externals/login"){
+			if(service != "externals/put_lab"){
 				var jData = utf8_to_b64( dataText );
 				ajaxConfig = {
 					method: "GET",

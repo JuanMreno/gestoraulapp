@@ -11,6 +11,8 @@ var basic = auth.basic({
   file: __dirname + "/auth/app_auth.htpasswd" // gevorg:gpass, Sarah:testpass ...
 });
 
+process.env.REPORTS_DIR = "./public/reports";
+
 var app = express();
 
 var rLogin = require('./routes/login');

@@ -32,7 +32,8 @@
 			  	<div class="containerDropDown">
 			  		<div class="row">
 			  			<div class="col-xs-3 col-sm-4 col-md-4">
-							<span>Fechas</span>
+							<i id="dateFilterBtn" class="fa fa-square-o" aria-hidden="true"></i>
+							<span> Fechas</span>
 				  		</div>
 				  		<div class="col-xs-9 col-sm-8 col-md-8 inputContDropDown">
 							<input id="practLabFchas" type="text" name="daterange" value="01/01/2015 - 01/31/2015" style="width:100%" />
@@ -129,19 +130,27 @@
 		<textarea id="obsrv" class="form-control only-read" rows="3"></textarea>
 		<br>
 		<div class="form-group">
-			<form enctype="multipart/form-data">
+			<!--
+			<form id="formLoadFile" enctype="multipart/form-data">
 				<h6 class="field-label">Cargar reporte de laboratorio</h6>
-	            <input id="uploadPrcFile" class="file" type="file" multiple data-min-file-count="1">
+	            <input id="uploadPrcFile" class="file" type="file" multiple data-min-file-count="1" data-show-preview="false">
 	            <button type="submit" class="btn btn-primary">Subir</button>
 	            <button type="reset" class="btn btn-default">Restaurar</button>
 	        </form>
+	        -->
+	        <form id="formLoadFile" id="putLabForm" action="externals/put_lab" method="POST">
+				<h6 class="field-label">Cargar reporte de laboratorio</h6>
+				<input type="file" name="report_file" class="btn btn-default">
+				<button id="btnUploadReport" class="btn btn-primary">Subir</button>
+			</form>
 		</div>
 		
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-        <button id="btnUpload" type="button" class="btn btn-primary">Subir reporte</button>
-        <button id="btnDownL" type="button" class="btn btn-primary">Ver reporte de práctica</button>
+        <a id="aBtnDownL" href="" target="_blank">
+	        <button id="btnDownL" type="button" class="btn btn-primary">Ver reporte de práctica</button>
+        </a>
       </div>
     </div>
   </div>

@@ -47,6 +47,7 @@
         $('#nomSelect').select2();
 
         $('#evalDatePicker').daterangepicker({
+            autoApply: true,
             locale: {
               format: 'DD-MM-YYYY'
             },
@@ -56,13 +57,55 @@
             startDate: moment().format('DD/MM/YYYY'),
             endDate: moment().add(3, 'months').format('DD/MM/YYYY')
         });
+        $('#evalDatePicker').attr('disabled',true);
 
         $('#evalDatePicker').on('apply.daterangepicker', function(ev, picker) {
-            var subjectId = $("#subjectsDropDown").attr('data-sel-id');
-            var groupId = $("#groupsDropDown").attr('data-sel-id');
 
-            setTableEval( groupId, subjectId);
+            var nomSel = $('#nomSelect').attr('data-type'); 
 
+            if(nomSel == 'est'){
+                var subjectId = $("#subjectsDropDown").attr('data-sel-id');
+                var stuId = $('#nomSelect').attr('data-sel-id');
+
+                setTableEval( stuId, subjectId);
+            }
+            else{
+                var labId = $('#nomSelect').attr('data-sel-id');
+                var groupId = $("#groupsDropDown").attr('data-sel-id');
+                
+                setTableEst(groupId, labId);
+            }
+
+        });
+
+        $('#dateFilterBtn').off('click').on('click', function(event) {
+            event.preventDefault();
+
+            if($(this).hasClass('fa-square-o')){
+                $(this).toggleClass( 'fa-square-o', false );
+                $(this).toggleClass( 'fa-check-square-o', true );
+                $('#evalDatePicker').prop('disabled', false);
+            }
+            else{
+                $(this).toggleClass( 'fa-check-square-o', false );
+                $(this).toggleClass( 'fa-square-o', true );
+                $('#evalDatePicker').prop('disabled', true);
+            }
+
+            var nomSel = $('#nomSelect').attr('data-type');
+
+            if(nomSel == 'est'){
+                var subjectId = $("#subjectsDropDown").attr('data-sel-id');
+                var stuId = $('#nomSelect').attr('data-sel-id');
+
+                setTableEval( stuId, subjectId);
+            }
+            else{
+                var labId = $('#nomSelect').attr('data-sel-id');
+                var groupId = $("#groupsDropDown").attr('data-sel-id');
+                
+                setTableEst(groupId, labId);
+            }
         });
 
         setGroupsDropDown();
@@ -223,6 +266,7 @@
                 var subjectId = $("#subjectsDropDown").attr('data-sel-id');
 
                 setTableEval( res.data[0].id, subjectId);
+                $('#nomSelect').attr('data-sel-id', res.data[0].id);
                 $('#nomSelect').select2({
                   data: res.data
                 });  
@@ -232,6 +276,7 @@
                     event.preventDefault();
                     /* Act on the event */
                     
+                    $('#nomSelect').attr('data-sel-id', event.params.data.id);
                     setTableEval( event.params.data.id, subjectId);
                     valSelected = event.params.data.text;
                 });
@@ -273,7 +318,7 @@
             else{
                 var groupId = $("#groupsDropDown").attr('data-sel-id');
                 setTableEst(groupId, res.data[0].id);
-                //setTableEval( res.data[0].id, subjectId);
+                $('#nomSelect').attr('data-sel-id', res.data[0].id);
                 $('#nomSelect').select2({
                   data: res.data
                 });  
@@ -283,8 +328,9 @@
                     event.preventDefault();
                     /* Act on the event */
                     
-                    //setTableEval( event.params.data.id, subjectId);
+                    $('#nomSelect').attr('data-sel-id', event.params.data.id);
                     var groupId = $("#groupsDropDown").attr('data-sel-id');
+
                     setTableEst(groupId, event.params.data.id);
                     valSelected = event.params.data.text;
                 });
@@ -298,9 +344,15 @@
     }
 
     function setTableEval(user_id, subject_id) {
-        var drp = $('#evalDatePicker').data('daterangepicker');
-        var fIni = drp.startDate.format('YYYY/MM/DD');
-        var fFin = drp.endDate.format('YYYY/MM/DD');
+        var fIni = 'null';
+        var fFin = 'null';
+
+        if(!$('#evalDatePicker').prop('disabled')){
+            var drp = $('#evalDatePicker').data('daterangepicker');
+            fIni = drp.startDate.format('YYYY/MM/DD');
+            fFin = drp.endDate.format('YYYY/MM/DD');
+        }
+
         $("#jsGrid").jsGrid({
             width: "100%",
             filtering: true,
@@ -363,6 +415,8 @@
                 $labelState = $modal.find(".labelState");
                 $modal.find('.modal-title').text(item.lab_name);
 
+                $('#aBtnDownL').show();
+
                 if(item.lab_state == "1"){
                     $labelState.removeClass('label-danger');
                     $labelState.addClass("label").addClass('label-success');
@@ -379,6 +433,13 @@
                     $labelState.removeClass('label-success');
                     $labelState.addClass("label").addClass('label-danger');
                     $labelState.text('Pendiente');
+                }
+
+                if(item.lab_users_id == null){
+                    $('#aBtnDownL').hide();
+                }
+                else{
+                    $('#aBtnDownL').attr('href', item.lab_report_url);
                 }
 
                 $('#btnSave').off('click').on('click', function(event) {
@@ -480,6 +541,15 @@
     }
 
     function setTableEst(groupId, labId) {
+        var fIni = 'null';
+        var fFin = 'null';
+
+        if(!$('#evalDatePicker').prop('disabled')){
+            var drp = $('#evalDatePicker').data('daterangepicker');
+            fIni = drp.startDate.format('YYYY/MM/DD');
+            fFin = drp.endDate.format('YYYY/MM/DD');
+        }
+
         $("#jsGrid").jsGrid({
             width: "100%",
             filtering: true,
@@ -497,7 +567,9 @@
 
                     var data = {
                         groupId:groupId,
-                        labId:labId
+                        labId:labId,
+                        fIni:fIni,
+                        fFin:fFin
                     };
      
                     var jData = utf8_to_b64( JSON.stringify(data) );
@@ -537,10 +609,13 @@
                 $modal = $('#practInfoModal');
                 $modal.off('shown.bs.modal');
                 var item = obj.item;
+                console.log(item)
 
                 $labelState = $modal.find(".labelState");
                 $modal.find('.modal-title').text(item.lab_name);
 
+                $('#aBtnDownL').show();
+                
                 if(item.lab_state == "1"){
                     $labelState.removeClass('label-danger');
                     $labelState.addClass("label").addClass('label-success');
@@ -557,6 +632,13 @@
                     $labelState.removeClass('label-success');
                     $labelState.addClass("label").addClass('label-danger');
                     $labelState.text('Pendiente');
+                }
+
+                if(item.lab_users_id == null || item.lab_users_id == ""){
+                    $('#aBtnDownL').hide();
+                }
+                else{
+                    $('#aBtnDownL').attr('href', item.lab_report_url);
                 }
 
                 $('#btnSave').off('click').on('click', function(event) {

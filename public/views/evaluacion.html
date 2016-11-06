@@ -49,6 +49,7 @@
 					<div class="containerDropDown">
 						<div class="row">
 							<div class="col-xs-3 col-sm-4 col-md-4">
+								<i id="dateFilterBtn" class="fa fa-square-o" aria-hidden="true"></i>
 								<span>Fechas</span>
 					  		</div>
 					  		<div class="col-xs-9 col-sm-8 col-md-8 inputContDropDown">
@@ -165,7 +166,7 @@
 			<div class="col-sm-4">
 		        <div class="input-group">
 				  <span class="input-group-addon" id="basic-addon1" data-toggle="tooltip" data-placement="right" title="Nota del profesor">Nota 1</span>
-				  <input id="nProfesor" type="text" class="form-control only-read" placeholder="" aria-describedby="basic-addon1">
+				  <input id="nProfesor" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
 				</div>
 			</div>
 			<div class="col-sm-4">
@@ -196,8 +197,11 @@
       </div>
       <div class="modal-footer">
   		<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+  		<button id="btnRestInt" type="button" class="btn btn-success">Restaurar intento</button>
         <button id="btnSave" type="button" class="btn btn-primary">Guardar</button>
-        <button id="btnDownLoad" type="button" class="btn btn-primary">Ver reporte de práctica</button>
+        <a id="aBtnDownL" href="" target="_blank">
+	        <button id="btnDownL" type="button" class="btn btn-primary">Ver reporte de práctica</button>
+        </a>
       </div>
     </div>
   </div>
