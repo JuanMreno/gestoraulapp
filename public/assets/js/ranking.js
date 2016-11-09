@@ -4,13 +4,67 @@
 	function init() {
         var session = $.cookie(SESSION_COOKIE);
 
-        if(session.rol != EST_ROL){
-            $('#mRankBar').hide();
+        if(session.rol == EST_ROL){
+            $('#groupsBar').hide();
         }
+        else{
+            $('#mRankBar').hide();
+            setGroupsDropDown();
+        }
+
 	    setRankTable();
 	}
 
 	init();
+
+    function setGroupsDropDown() {
+        $dropDown = $("#groupsDropDown");
+        $dropDownMenu = $dropDown.children('.dropdown-menu').first();
+        $dropDownMenu.html("");
+
+        var session = $.cookie(SESSION_COOKIE);
+
+        var data = {
+            userId:session.id
+        };
+
+        var jData = utf8_to_b64( JSON.stringify(data) );
+        $.ajax({
+            url: CON_URL+"groups/getGroupsByUser",
+            data:{data:jData}
+        }).done(function(data) {
+            var res = $.parseJSON(b64_to_utf8(data));
+
+            if(res.data.length == 0){
+                //setTableAnun('-1');
+                $dropDown.children('button').text('Ninguno')
+                return;
+            }
+            else{
+                $dropDown.attr('data-sel-id', res.data[0].group_id);
+                $dropDown.children('button').html(res.data[0].name + '  <span class="caret"></span>');
+                setRankTable();
+            }
+            
+            res.data.forEach(function(e,i) {
+                $aNewRow = $('<a class="userGroupSelElem" data-id="' + e.user_group_id + '" href="#">' + e.name + '</a>');
+                $aNewRow.off("click").on('click', function(event) {
+                    event.preventDefault();
+                    $this = $(this);
+
+                    $dropDown.attr('data-sel-id', e.group_id);
+                    $dropDown.children('button').html($this.text() + '<span class="caret"></span>');
+                    setRankTable();
+                });  
+
+                $newRow = $('<li></li>').append($aNewRow);
+                $dropDownMenu.append($newRow);
+            });
+
+        }).fail(function(data) {
+            console.log("ajax fail");
+        });
+    }
 
 	function setRankTable() {
 		$("#jsGrid").jsGrid({
@@ -29,13 +83,24 @@
                     var d = $.Deferred();
                     var session = $.cookie(SESSION_COOKIE);
 
-                    var data = {
-                        userId:session.id
-                    };
+                    if(session.rol == EST_ROL){
+                        var service = "ranking/getByUser";
+                        var data = {
+                            userId:session.id
+                        };
+                    }
+                    else{
+                        var service = "ranking/getByGrp";
+                        var groupId = $("#groupsDropDown").attr('data-sel-id');
+                        var data = {
+                            groupId:groupId
+                        };
+                    }
+                    
      
                     var jData = utf8_to_b64( JSON.stringify(data) );
                     $.ajax({
-                        url: CON_URL+"ranking/getByUser",
+                        url: CON_URL+service,
                         data:{data:jData}
                     }).done(function(data) {
                         var res = $.parseJSON(b64_to_utf8(data));
@@ -48,9 +113,10 @@
 
                         d.resolve(dataFiltered);
 
+                        console.log(res.data);
                         res.data.forEach(function(e,i,a) {
                             if(e.user_id == session.id){
-                                $('#userRank').text(e.rank);
+                                $('#userRank').text(e.rank + 'º');
                             }
                         });
                     }).fail(function(data) {
@@ -71,28 +137,28 @@
                 show: function() {
                 },
                 hide: function() {
-                    $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(4)");
+                    $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(2)");
                     $e.attr({
                         "data-toggle": 'tooltip',
                         "data-container": 'body',
                         "title": 'Puntaje por calificaciones'
                     });
 
-                    $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(5)");
+                    $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(3)");
                     $e.attr({
                         "data-toggle": 'tooltip',
                         "data-container": 'body',
                         "title": 'Puntaje por prácticas entregadas'
                     });
 
-                    $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(6)");
+                    $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(4)");
                     $e.attr({
                         "data-toggle": 'tooltip',
                         "data-container": 'body',
                         "title": 'Puntaje por tiempos de entrega'
                     });
 
-                    $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(7)");
+                    $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(5)");
                     $e.attr({
                         "data-toggle": 'tooltip',
                         "data-container": 'body',

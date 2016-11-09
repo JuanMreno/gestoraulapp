@@ -110,6 +110,10 @@
 				$('#section').load('views/pract_lab.html');
 				$('#pract-link').addClass('active');
 				break;
+			case ADM_ROL:
+				$('#section').load('views/grupos.html');
+				$('#grps-link').addClass('active');
+				break;
 			default:
 				break;
 		}
@@ -165,6 +169,22 @@
 			$(this).addClass('active');
 
 			$('#section').load('views/mis_grupos.html');
+		});
+		
+		$('#grps-link').off("click").on('click', function(event) {
+			event.preventDefault();
+			$('.nav-menu-li a').removeClass('active');
+			$(this).addClass('active');
+
+			$('#section').load('views/grupos.html');
+		});
+		
+		$('#mtrs-link').off("click").on('click', function(event) {
+			event.preventDefault();
+			$('.nav-menu-li a').removeClass('active');
+			$(this).addClass('active');
+
+			$('#section').load('views/materias.html');
 		});
 		
 		$('#cses-link').off("click").on('click', function(event) {

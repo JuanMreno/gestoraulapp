@@ -8,7 +8,7 @@ router.use(function timeLog(req, res, next) {
   next();
 });
 // define the home page route
-router.get('/getAll', function(req, res) {
+router.get('/getAllByUser', function(req, res) {
 	var buf = Buffer.from(req.query.data, 'base64');
 	var params = JSON.parse(buf);
 
@@ -149,12 +149,8 @@ router.get('/asignUser', function(req, res) {
 		}
 
 		if(params.asignado == 0){
-			var query = 
-				`DELETE FROM
-					users_class_groups
-				WHERE
-					users_id = ? AND
-					class_group_id = ?`;
+			var query = "CALL groups_asign_user(?,?)";
+			var p = [ params.userId, params.groupId ];
 		}
 		else{
 			var query = 
@@ -182,9 +178,10 @@ router.get('/asignUser', function(req, res) {
 								class_group_id = ?
 					)
 				LIMIT 1;`;
+			var p = [params.userId, params.groupId, params.userId, params.groupId];
 		}
 
-		var p = [params.userId, params.groupId, params.userId, params.groupId];
+		
 		connection.query(query, p , function(err, rows) {
 		
 			if (err) {
@@ -199,6 +196,163 @@ router.get('/asignUser', function(req, res) {
 
 			data.data = rows;
 			data.status = "true";
+			var jData = JSON.stringify(data);
+		  	res.send(new Buffer(jData).toString('base64'));
+		  	connection.end();
+		});
+	});
+});
+
+router.get('/getAll', function(req, res) {
+	var buf = Buffer.from(req.query.data, 'base64');
+	var params = JSON.parse(buf);
+
+	var data = {
+		status:"OK",
+		data:{}
+	};
+
+	var connection = new conn.SqlConnection().connection;
+	connection.connect(function(err) {
+		if (err) {
+			console.error('error connecting: ' + err.stack);
+			data.status = "false";
+
+			var jData = JSON.stringify(data);
+			res.send(new Buffer(jData).toString('base64'));
+			connection.end();
+			return;
+		}
+
+		var query = 
+				"SELECT\
+					c.id,\
+					c.`name`\
+				FROM\
+					class_group c";
+		
+		connection.query(query, function(err, rows) {
+		
+			if (err) {
+				console.error('error query: ' + query + err.stack);
+				data.status = "false";
+
+				var jData = JSON.stringify(data);
+				res.send(new Buffer(jData).toString('base64'));
+				connection.end();
+				return;
+			}
+
+			data.data = rows;
+			data.status = "true";
+			var jData = JSON.stringify(data);
+		  	res.send(new Buffer(jData).toString('base64'));
+		  	connection.end();
+		});
+	});
+});
+
+router.get('/edit', function(req, res) {
+	var buf = Buffer.from(req.query.data, 'base64');
+	var params = JSON.parse(buf);
+
+	var data = {
+		status:"OK",
+		data:{}
+	};
+
+	var connection = new conn.SqlConnection().connection;
+	connection.connect(function(err) {
+		if (err) {
+			console.error('error connecting: ' + err.stack);
+			data.status = "false";
+
+			var jData = JSON.stringify(data);
+			res.send(new Buffer(jData).toString('base64'));
+			connection.end();
+			return;
+		}
+
+		var query = "CALL groups_edit(?,?)";
+
+		var p = [params.groupId, params.name];
+		connection.query(query, p, function(err, rows) {
+		
+			if (err) {
+				console.error('error query: ' + query + err.stack);
+				data.status = "false";
+
+				var jData = JSON.stringify(data);
+				res.send(new Buffer(jData).toString('base64'));
+				connection.end();
+				return;
+			}
+
+			var d = rows[0][0];
+
+			if(d.state == "REPEATED"){
+				data.data = d;
+				data.status = "false";
+			}
+			else{
+				data.data = d;
+				data.status = "true";
+			}
+			
+			var jData = JSON.stringify(data);
+		  	res.send(new Buffer(jData).toString('base64'));
+		  	connection.end();
+		});
+	});
+});
+
+router.get('/insert', function(req, res) {
+	var buf = Buffer.from(req.query.data, 'base64');
+	var params = JSON.parse(buf);
+
+	var data = {
+		status:"OK",
+		data:{}
+	};
+
+	var connection = new conn.SqlConnection().connection;
+	connection.connect(function(err) {
+		if (err) {
+			console.error('error connecting: ' + err.stack);
+			data.status = "false";
+
+			var jData = JSON.stringify(data);
+			res.send(new Buffer(jData).toString('base64'));
+			connection.end();
+			return;
+		}
+
+		var query = "CALL groups_insert(?)";
+
+		var p = [params.name];
+		connection.query(query, p, function(err, rows) {
+		
+			if (err) {
+				console.error('error query: ' + query + err.stack);
+				data.status = "false";
+
+				var jData = JSON.stringify(data);
+				res.send(new Buffer(jData).toString('base64'));
+				connection.end();
+				return;
+			}
+
+			var d = rows[0][0];
+
+			if(d.state == "REPEATED"){
+				data.data = d;
+				data.status = "false";
+			}
+			else{
+				data.data = d;
+				data.status = "true";
+			}
+
 			var jData = JSON.stringify(data);
 		  	res.send(new Buffer(jData).toString('base64'));
 		  	connection.end();

@@ -140,40 +140,46 @@
                 //setTableAnun(res.data[0].user_group_id);
                 $dropDown.children('button').html(res.data[0].name + '  <span class="caret"></span>');
                 $dropDown.attr('data-sel-id', res.data[0].group_id);
+                $dropDown.attr('data-sel-ug-id', res.data[0].user_group_id);
             }
 
             res.data.forEach(function(e,i) {
-                $newRow = $('<li><a class="userGroupSelElem" data-id="' + e.group_id + '" href="#">' + e.name + '</a></li>')
-                $dropDownMenu.append($newRow);
-            });
+                $aNewRow = $('<a class="userGroupSelElem" href="#">' + e.name + '</a>');
+                $aNewRow.attr('data-id', e.group_id);
+                $aNewRow.attr('data-ug-id', e.user_group_id);
 
-            $dropDown.find('.userGroupSelElem').each(function(index, el) {
-                $(el).off("click").on('click', function(event) {
+                $aNewRow.off("click").on('click', function(event) {
                     event.preventDefault();
                     $this = $(this);
                     //setTableAnun($this.attr('data-id'));
 
                     $("#groupsDropDown").children('button').html($this.text() + '  <span class="caret"></span>');
                     $("#groupsDropDown").attr('data-sel-id', $this.attr('data-id'));
+                    $("#groupsDropDown").attr('data-sel-ug-id', $this.attr('data-ug-id'));
 
-                    setSubjectsDropDown($this.attr('data-id'));
-                });                
+                    setSubjectsDropDown();
+                });
+
+                $newRow = $('<li></li>').append($aNewRow);
+                $dropDownMenu.append($newRow);
             });
 
-            setSubjectsDropDown(res.data[0].group_id);
+            setSubjectsDropDown();
         }).fail(function(data) {
             console.log("ajax fail");
         });
     }
 
-    function setSubjectsDropDown(groupId) {
+    function setSubjectsDropDown() {
         $dropDown = $("#subjectsDropDown");
         $dropDownMenu = $dropDown.children('.dropdown-menu').first();
         $dropDownMenu.html("");
 
+        var groupId = $("#groupsDropDown").attr('data-sel-id');        
         var session = $.cookie(SESSION_COOKIE);
 
         var data = {
+            userId:session.id,
             groupId:groupId
         };
 

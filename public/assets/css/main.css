@@ -2164,7 +2164,7 @@
     	font-size: x-large;
 	}
 
-	.containerHeader>h1 {
+	.containerHeader h1 {
 	    font-weight: bold;	
 	    font-size: larger			
 	}

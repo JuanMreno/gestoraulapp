@@ -2,23 +2,7 @@
 (function($) {
 
 	function init() {
-        $('#tipoDropdown-grupos').on('click', function(event) {
-            event.preventDefault();
-
-            setGroupsTable();
-            $('#tipoDropdown').html('Grupos  ' + '<span class="caret"></span>');
-            $('#gDropDownCont').hide();
-        });;
-
-        $('#tipoDropdown-materias').on('click', function(event) {
-            event.preventDefault();
-
-            $('#tipoDropdown').html('Materias  ' + '<span class="caret"></span>');
-            setGroupsDropDown();
-        });;
-
-	    setGroupsTable();
-        $('#gDropDownCont').hide();
+	    setGroupsDropDown();
 	}
 
 	init();
@@ -36,47 +20,42 @@
 
         var jData = utf8_to_b64( JSON.stringify(data) );
         $.ajax({
-            url: CON_URL+"groups/getGroupsByUser",
+            url: CON_URL+"groups/getAll",
             data:{data:jData}
         }).done(function(data) {
             var res = $.parseJSON(b64_to_utf8(data));
-            $('#gDropDownCont').show();
-            $dropDown.children('button').html();
 
-            if(res.data.length == 0){
-                //setTableAnun('-1');
-                $dropDown.children('button').text('Ninguno')
-                return;
-            }
-            else{
-                //setTableAnun(res.data[0].user_group_id);
-                $dropDown.children('button').html(res.data[0].name + '  <span class="caret"></span>');
-                $dropDown.attr('data-sel-id', res.data[0].group_id);
-                $dropDown.attr('data-sel-ug-id', res.data[0].user_group_id);
-                setSubjectsTable();
-            }
+            $dropDown.children('button').html('Todos  ' + '<span class="caret"></span>');
+            $dropDown.attr('data-sel-id', '-1');
+            setGroupsTable();
 
+            $newRow = $('<li><a class="userGroupSelElem" data-id="-1" href="#">Todos</a></li>');
+            $newRow.off("click").on('click', function(event) {
+                event.preventDefault();
+                $this = $(this);
+                
+                $dropDown.attr('data-sel-id', $this.attr('data-id'));
+                $dropDown.children('button').html($this.text() + '<span class="caret"></span>');
+                setGroupsTable();
+            }); 
+
+            $dropDownMenu.append($newRow);
             res.data.forEach(function(e,i) {
-                $aRow = 
-                    $('<a class="userGroupSelElem" data-id="' + e.group_id 
-                        + '" data-ug-id="' + e.user_group_id + '" href="#">' + e.name + '</a>');
+                $aNewRow = $('<a class="userGroupSelElem" data-id="' + e.id + '" href="#">' + e.name + '</a>');
 
-                $aRow.off("click").on('click', function(event) {
+                $aNewRow.off("click").on('click', function(event) {
                     event.preventDefault();
                     $this = $(this);
-                    $dropDown.children('button').html(e.name + '  <span class="caret"></span>');
-                    $dropDown.attr('data-sel-id', e.group_id);
-                    $dropDown.attr('data-sel-ug-id', e.user_group_id);
-
-                    setSubjectsTable();
-                    //setTableAnun($this.attr('data-id'));
+                    
+                    $dropDown.attr('data-sel-id', $this.attr('data-id'));
+                    $dropDown.children('button').html($this.text() + '<span class="caret"></span>');
+                    setSubjectsTable($this.attr('data-id'));
                 }); 
 
-                $newRow = $('<li></li>').append($aRow);
+                $newRow = $('<li></li>').append($aNewRow);
                 $dropDownMenu.append($newRow);
-            });
+            });            
 
-            //setSubjectsDropDown(res.data[0].group_id);
         }).fail(function(data) {
             console.log("ajax fail");
         });
@@ -85,6 +64,7 @@
 	function setGroupsTable() {
 		$("#jsGrid").jsGrid({
             width: "100%",
+            inserting:true,
             filtering: true,
             sorting: true,
             paging: true,
@@ -100,12 +80,11 @@
                     var session = $.cookie(SESSION_COOKIE);
 
                     var data = {
-                        userId:session.id
                     };
      
                     var jData = utf8_to_b64( JSON.stringify(data) );
                     $.ajax({
-                        url: CON_URL+"groups/getAllByUser",
+                        url: CON_URL+"groups/getAll",
                         data:{data:jData}
                     }).done(function(data) {
                         var res = $.parseJSON(b64_to_utf8(data));
@@ -128,32 +107,84 @@
                     var d = $.Deferred();
                     var session = $.cookie(SESSION_COOKIE);
 
+                    d.fail(function() {
+                        return null;
+                        $("#jsGrid").jsGrid("render");
+                    });
+
                     var data = {
-                        userId:session.id,
                         groupId:item.id,
-                        asignado:item.asignado
+                        name:item.name
                     };
      
                     var jData = utf8_to_b64( JSON.stringify(data) );
                     $.ajax({
-                        url: CON_URL+"groups/asignUser",
+                        url: CON_URL+"groups/edit",
                         data:{data:jData}
                     }).done(function(data) {
-                        //var res = $.parseJSON(b64_to_utf8(data));
+                        var res = $.parseJSON(b64_to_utf8(data));
                         //console.log(res);
-                        d.resolve(item);
+                        if(res.status == "true")
+                            d.resolve(item);
+                        else{
+                            if(res.data.state == "REPEATED"){
+                                alert("El grupo ya ha sido registrado.");
+                            }
+                            else{
+                                alert("Error al intentar realizar el registro.");
+                            }
+                            d.reject();
+                            //d.resolve(false);
+                        }
                     }).fail(function(data) {
                         console.log("ajax fail");
                         item.asignado = (item.asignado == 0) ? 1 : 0;
-                        d.resolve(item);
+                        alert("Error al intentar realizar el registro.");
+                        d.reject();
                     });
      
                     return d.promise();
-                }
-            },
+                },
+                insertItem: function(item) {
+                    item.date = moment().format("DD/MM/YYYY");
+                    var d = $.Deferred();
+                    var session = $.cookie(SESSION_COOKIE);
 
-            rowClick: function(obj) {
-                var item = obj.item;
+                    d.fail(function() {
+                        return null;
+                        $("#jsGrid").jsGrid("render");
+                    });
+
+                    var data = {
+                        name:item.name
+                    };
+                    var jData = utf8_to_b64( JSON.stringify(data) );
+                    $.ajax({
+                        url: CON_URL+"groups/insert",
+                        data:{data:jData}
+                    }).done(function(data) {
+                        var res = $.parseJSON(b64_to_utf8(data));
+
+                        if(res.status == "true")
+                            d.resolve(item);
+                        else{
+                            if(res.data.state == "REPEATED"){
+                                alert("El grupo ya ha sido registrado.");
+                            }
+                            else{
+                                alert("Error al intentar realizar el registro.");
+                            }
+                            d.reject();
+                            //d.resolve(false);
+                        }
+                    }).fail(function(data) {
+                        console.log("ajax fail");
+                        alert("Error al intentar realizar el registro.");
+                        d.reject();
+                    });
+
+                    return d.promise();
+                }
             },
 
             pagerFormat: "Pag {first} {prev} {pages} {next} {last}    {pageIndex} de {pageCount}",
@@ -163,16 +194,14 @@
 		    pageLastText: " >> ",
 
             fields: [ 
-                { name: "name", type: "text", align: "center", title: "Nombre", editing:false },
-                { name: "asignado", type: "checkbox", align: "center", title: "Matriculado" },
+                { name: "name", type: "text", align: "center", title: "Nombre", editing:true },
             	{ type: "control" }
             ]
         });
 	}
 
     function setSubjectsTable() {
-        var groupId = $dropDown.attr('data-sel-id');
-        var userGroupId = $dropDown.attr('data-sel-ug-id');
+        var groupId = $("#groupsDropDown").attr('data-sel-id');
 
         $("#jsGrid").jsGrid({
             width: "100%",
@@ -193,13 +222,12 @@
                     var session = $.cookie(SESSION_COOKIE);
 
                     var data = {
-                        groupId:groupId,
-                        userGroupId:userGroupId,
+                        groupId:groupId
                     };
      
                     var jData = utf8_to_b64( JSON.stringify(data) );
                     $.ajax({
-                        url: CON_URL+"subjects/getByUserGroup",
+                        url: CON_URL+"subjects/getByGroupId",
                         data:{data:jData}
                     }).done(function(data) {
                         var res = $.parseJSON(b64_to_utf8(data));
@@ -224,14 +252,14 @@
                     var session = $.cookie(SESSION_COOKIE);
 
                     var data = {
-                        userGroupId:userGroupId,
-                        scId:item.sc_id,
+                        groupId:groupId,
+                        subjectId:item.id,
                         asignado:item.asignado
                     };
      
                     var jData = utf8_to_b64( JSON.stringify(data) );
                     $.ajax({
-                        url: CON_URL+"subjects/assignUserSubject",
+                        url: CON_URL+"subjects/assignGroupSubject",
                         data:{data:jData}
                     }).done(function(data) {
                         //var res = $.parseJSON(b64_to_utf8(data));
@@ -256,7 +284,7 @@
 
             fields: [ 
                 { name: "name", type: "text", align: "center", title: "Nombre", editing:false },
-                { name: "asignado", type: "checkbox", align: "center", title: "Matriculado" },
+                { name: "asignado", type: "checkbox", align: "center", title: "Asignado" },
                 { type: "control" }
             ]
         });

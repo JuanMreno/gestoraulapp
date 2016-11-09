@@ -29,20 +29,37 @@ router.get('/getByUserGroup', function(req, res) {
 			return;
 		}
 
-		var query = 
-			`SELECT
-				m.id,
-				m.title,
-				m.content,
-				DATE_FORMAT(m.creation_date, '%d/%m/%Y') as date,
-				m.last_update
-			FROM
-				messages m
-			WHERE
-				m.user_class_groups_id = ?` 
-		;
+		if(params.userGroupId != '-1'){
+			var query = 
+				`SELECT
+					m.id,
+					m.title,
+					m.content,
+					DATE_FORMAT(m.creation_date, '%d/%m/%Y') as date,
+					m.last_update
+				FROM
+					messages m
+				WHERE
+					m.user_class_groups_id = ?` 
+			;
+ 			var p = [params.userGroupId];
+		}
+		else{
+			var query = 
+				`SELECT
+					m.id,
+					m.title,
+					m.content,
+					DATE_FORMAT(m.creation_date, '%d/%m/%Y') as date,
+					m.last_update
+				FROM
+					messages_all m
+				WHERE
+					m.user_id = ?` 
+			;
+ 			var p = [params.userId];
+		}
 
-		var p = [params.userGroupId];
 		connection.query(query, p , function(err, rows) {
 		
 			if (err) {
@@ -262,6 +279,221 @@ router.get('/delete', function(req, res) {
 		var query = 
 			`DELETE FROM
 				messages
+			WHERE
+				id = ?`;
+
+		var p = [params.id];
+		connection.query(query, p , function(err, rows) {
+		
+			if (err) {
+				console.error('error query: ' + query + err.stack);
+				data.status = "false";
+
+				var jData = JSON.stringify(data);
+				res.send(new Buffer(jData).toString('base64'));
+				connection.end();
+				return;
+			}
+
+			data.data = rows;
+			data.status = "true";
+			var jData = JSON.stringify(data);
+		  	res.send(new Buffer(jData).toString('base64'));
+		  	connection.end();
+		});
+	});
+});
+
+router.get('/getByUser', function(req, res) {
+	var buf = Buffer.from(req.query.data, 'base64');
+	var params = JSON.parse(buf);
+
+	var data = {
+		status:"OK",
+		data:{}
+	};
+
+	var connection = new conn.SqlConnection().connection;
+	connection.connect(function(err) {
+		if (err) {
+			console.error('error connecting: ' + err.stack);
+			data.status = "false";
+
+			var jData = JSON.stringify(data);
+			res.send(new Buffer(jData).toString('base64'));
+			connection.end();
+			return;
+		}
+
+		var query = 
+			`SELECT
+				m.id,
+				m.title,
+				m.content,
+				DATE_FORMAT(m.creation_date, '%d/%m/%Y') as date,
+				m.last_update
+			FROM
+				messages_all m
+			WHERE
+				m.user_id = ?` 
+		;
+		var p = [params.userId];
+
+		connection.query(query, p , function(err, rows) {
+		
+			if (err) {
+				console.error('error query: ' + query + err.stack);
+				data.status = "false";
+
+				var jData = JSON.stringify(data);
+				res.send(new Buffer(jData).toString('base64'));
+				connection.end();
+				return;
+			}
+
+			data.data = rows;
+			data.status = "true";
+			var jData = JSON.stringify(data);
+		  	res.send(new Buffer(jData).toString('base64'));
+		  	connection.end();
+		});
+	});
+});
+
+router.get('/createAll', function(req, res) {
+	var buf = Buffer.from(req.query.data, 'base64');
+	var params = JSON.parse(buf);
+
+	var data = {
+		status:"OK",
+		data:{}
+	};
+
+	var connection = new conn.SqlConnection().connection;
+	connection.connect(function(err) {
+		if (err) {
+			console.error('error connecting: ' + err.stack);
+			data.status = "false";
+
+			var jData = JSON.stringify(data);
+			res.send(new Buffer(jData).toString('base64'));
+			connection.end();
+			return;
+		}
+
+		var query = 
+			`INSERT INTO
+				messages_all
+				(
+					title,
+					content,
+					user_id
+				)
+			VALUES 
+				(
+					?,
+					?,
+					?
+				)`;
+
+		var p = [params.title, params.content, params.user_id];
+		connection.query(query, p , function(err, rows) {
+		
+			if (err) {
+				console.error('error query: ' + query + err.stack);
+				data.status = "false";
+
+				var jData = JSON.stringify(data);
+				res.send(new Buffer(jData).toString('base64'));
+				connection.end();
+				return;
+			}
+
+			data.data = rows;
+			data.status = "true";
+			var jData = JSON.stringify(data);
+		  	res.send(new Buffer(jData).toString('base64'));
+		  	connection.end();
+		});
+	});
+});
+
+router.get('/editAll', function(req, res) {
+	var buf = Buffer.from(req.query.data, 'base64');
+	var params = JSON.parse(buf);
+
+	var data = {
+		status:"OK",
+		data:{}
+	};
+
+	var connection = new conn.SqlConnection().connection;
+	connection.connect(function(err) {
+		if (err) {
+			console.error('error connecting: ' + err.stack);
+			data.status = "false";
+
+			var jData = JSON.stringify(data);
+			res.send(new Buffer(jData).toString('base64'));
+			connection.end();
+			return;
+		}
+
+		var query = 
+			`UPDATE
+				messages_all
+			SET
+				title = ?,
+				content = ?
+			WHERE
+				id = ?`;
+
+		var p = [params.title,params.content,params.id];
+		connection.query(query, p , function(err, rows) {
+		
+			if (err) {
+				console.error('error query: ' + query + err.stack);
+				data.status = "false";
+
+				var jData = JSON.stringify(data);
+				res.send(new Buffer(jData).toString('base64'));
+				connection.end();
+				return;
+			}
+
+			data.data = rows;
+			data.status = "true";
+			var jData = JSON.stringify(data);
+		  	res.send(new Buffer(jData).toString('base64'));
+		  	connection.end();
+		});
+	});
+});
+
+router.get('/deleteAll', function(req, res) {
+	var buf = Buffer.from(req.query.data, 'base64');
+	var params = JSON.parse(buf);
+
+	var data = {
+		status:"OK",
+		data:{}
+	};
+
+	var connection = new conn.SqlConnection().connection;
+	connection.connect(function(err) {
+		if (err) {
+			console.error('error connecting: ' + err.stack);
+			data.status = "false";
+
+			var jData = JSON.stringify(data);
+			res.send(new Buffer(jData).toString('base64'));
+			connection.end();
+			return;
+		}
+
+		var query = 
+			`DELETE FROM
+				messages_all
 			WHERE
 				id = ?`;
 

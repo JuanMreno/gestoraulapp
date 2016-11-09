@@ -126,6 +126,7 @@
         var session = $.cookie(SESSION_COOKIE);
 
         var data = {
+            userId:session.id,
             groupId:groupId
         };
 

@@ -31,10 +31,15 @@
                 return;
             }
             else{
-                setTableAnun(res.data[0].user_group_id);
-                $dropDown.children('button').html(res.data[0].name + $dropDown.children('button').html());
+                //setTableAnun(res.data[0].user_group_id);
+                //$dropDown.children('button').html(res.data[0].name + $dropDown.children('button').html());
             }
 
+            setTableAnunAll();
+            $dropDown.children('button').html('Todos  ' + '<span class="caret"></span>');
+
+            $newRow = $('<li><a class="userGroupSelElem" data-id="-1" href="#">Todos</a></li>')
+            $dropDownMenu.append($newRow);
             res.data.forEach(function(e,i) {
                 $newRow = $('<li><a class="userGroupSelElem" data-id="' + e.user_group_id + '" href="#">' + e.name + '</a></li>')
                 $dropDownMenu.append($newRow);
@@ -44,7 +49,12 @@
                 $(el).off("click").on('click', function(event) {
                     event.preventDefault();
                     $this = $(this);
-                    setTableAnun($this.attr('data-id'));
+
+                    if($this.attr('data-id') == '-1')
+                        setTableAnunAll();
+                    else
+                        setTableAnun($this.attr('data-id'));
+
                     $dropDown.children('button').html($this.text() + '<span class="caret"></span>');
                 });                
             });
@@ -65,7 +75,6 @@
             paging: true,
             editing: true,
             autoload: true,
-            confirmDeleting: false,
             pageSize: 10,
             pageButtonCount: 5,
             noDataContent: "Ningún dato encontrado.",
@@ -78,7 +87,8 @@
                     var session = $.cookie(SESSION_COOKIE);
 
                     var data = {
-                        userGroupId:user_group_id
+                        userGroupId:user_group_id,
+                        userId:session.id
                     };
      
                     var jData = utf8_to_b64( JSON.stringify(data) );
@@ -174,5 +184,150 @@
             ]
         });
 	}
+
+    function setTableAnunAll() {
+        $("#jsGrid").jsGrid({
+            width: "100%",
+            inserting:true,
+            filtering: true,
+            sorting: true,
+            paging: true,
+            editing: true,
+            autoload: true,
+            pageSize: 10,
+            pageButtonCount: 5,
+            noDataContent: "Ningún dato encontrado.",
+            loadMessage: "Cargando...",
+            confirmDeleting: true,
+            deleteConfirm: "¿Seguro desea eliminar el mensaje?",
+            controller: {
+                loadData: function(filter) {
+                    var d = $.Deferred();
+                    var session = $.cookie(SESSION_COOKIE);
+
+                    var data = {
+                        userId:session.id
+                    };
+     
+                    var jData = utf8_to_b64( JSON.stringify(data) );
+                    $.ajax({
+                        url: CON_URL+"messages/getByUser",
+                        data:{data:jData}
+                    }).done(function(data) {
+                        var res = $.parseJSON(b64_to_utf8(data));
+
+                        var dt = res.data;
+                        var dataFiltered = $.grep(dt, function(obj) {
+                            return (!filter.title || obj.title.indexOf(filter.title) > -1)
+                                && (!filter.content || obj.content.indexOf(filter.content) > -1)
+                                && (!filter.date || obj.date.indexOf(filter.date) > -1);
+                        });
+
+                        d.resolve(dataFiltered);
+                    }).fail(function(data) {
+                        console.log("ajax fail");
+                        d.resolve([]);
+                    });
+
+                    return d.promise();
+                },
+                insertItem: function(item) {
+                    item.date = moment().format("DD/MM/YYYY");
+                    var d = $.Deferred();
+                    var session = $.cookie(SESSION_COOKIE);
+
+                    var data = {
+                        title:item.title,
+                        content:item.content,
+                        user_id:session.id,
+                    };
+                    var jData = utf8_to_b64( JSON.stringify(data) );
+                    $.ajax({
+                        url: CON_URL+"messages/createAll",
+                        data:{data:jData}
+                    }).done(function(data) {
+                        var res = $.parseJSON(b64_to_utf8(data));
+
+                        if(res.status == "true")
+                            d.resolve(item);
+                        else
+                            d.resolve([]);
+                    }).fail(function(data) {
+                        console.log("ajax fail");
+                        d.resolve([]);
+                    });
+
+                    return d.promise();
+                },
+                deleteItem: function(item) {
+                    var d = $.Deferred();
+                    var session = $.cookie(SESSION_COOKIE);
+
+                    var data = {
+                        id:item.id
+                    };
+     
+                    var jData = utf8_to_b64( JSON.stringify(data) );
+                    $.ajax({
+                        url: CON_URL+"messages/deleteAll",
+                        data:{data:jData}
+                    }).done(function(data) {
+                        var res = $.parseJSON(b64_to_utf8(data));
+                        
+                        if(res.status != "true")
+                            $("#jsGrid").refresh();
+
+                        d.resolve();
+                    }).fail(function(data) {
+                        console.log("ajax fail");
+                        $("#jsGrid").refresh();
+                        d.resolve();
+                    });
+     
+                    return d.promise();
+                },
+                updateItem: function(item) {
+                    var d = $.Deferred();
+                    var session = $.cookie(SESSION_COOKIE);
+
+                    var data = {
+                        title:item.title,
+                        content:item.content,
+                        user_id:session.id,
+                    };
+                    var jData = utf8_to_b64( JSON.stringify(data) );
+                    $.ajax({
+                        url: CON_URL+"messages/editAll",
+                        data:{data:jData}
+                    }).done(function(data) {
+                        var res = $.parseJSON(b64_to_utf8(data));
+
+                        if(res.status == "true")
+                            d.resolve(item);
+                        else
+                            d.resolve([]);
+                    }).fail(function(data) {
+                        console.log("ajax fail");
+                        d.resolve([]);
+                    });
+
+                    return d.promise();
+                },
+            },
+
+            pagerFormat: "Pag {first} {prev} {pages} {next} {last}    {pageIndex} de {pageCount}",
+            pagePrevText: " < ",
+            pageNextText: " > ",
+            pageFirstText: " << ",
+            pageLastText: " >> ",
+
+            fields: [
+                { name: "title", type: "text", align: "center", width: 250, filtering: true, inserting:true, editing: true, title:"Título" },
+                { name: "content", type: "text", align: "center", width: 400, filtering: true, inserting:true, editing: true, title:"Contenido" },
+                { name: "date", type: "text", align: "center", width: 100, filtering: true, inserting:false, editing: false, title:"Fecha" },
+                { type: "control" }
+            ]
+        });
+    }
 
 })(jQuery);
