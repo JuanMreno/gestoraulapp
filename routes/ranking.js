@@ -98,5 +98,49 @@ router.get('/getByGrp', function(req, res) {
 	});
 });
 
+router.get('/getRankSchool', function(req, res) {
+	var buf = Buffer.from(req.query.data, 'base64');
+	var params = JSON.parse(buf);
+
+	var data = {
+		status:"OK",
+		data:{}
+	};
+
+	var connection = new conn.SqlConnection().connection;
+	connection.connect(function(err) {
+		if (err) {
+			console.error('error connecting: ' + err.stack);
+			data.status = "false";
+
+			var jData = JSON.stringify(data);
+			res.send(new Buffer(jData).toString('base64'));
+			connection.end();
+			return;
+		}
+
+		var query = "CALL get_rank_school()";
+
+		//var p = [params.groupId];
+		connection.query(query, function(err, rows) {
+		
+			if (err) {
+				console.error('error query: ' + query + err.stack);
+				data.status = "false";
+
+				var jData = JSON.stringify(data);
+				res.send(new Buffer(jData).toString('base64'));
+				connection.end();
+				return;
+			}
+
+			data.data = rows[0];
+			data.status = "true";
+			var jData = JSON.stringify(data);
+		  	res.send(new Buffer(jData).toString('base64'));
+		  	connection.end();
+		});
+	});
+});
 
 module.exports = router;

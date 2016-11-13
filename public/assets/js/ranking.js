@@ -4,33 +4,31 @@
 	function init() {
         var session = $.cookie(SESSION_COOKIE);
 
-        if(session.rol == EST_ROL){
-            $('#groupsBar').hide();
+        if(session.rol != EST_ROL){
+            setTeachGroupsDropDown();
+            $('#mRankBar').hide();
         }
         else{
-            $('#mRankBar').hide();
-            setGroupsDropDown();
+            setStudGroupsDropDown();
         }
-
-	    setRankTable();
 	}
 
 	init();
 
-    function setGroupsDropDown() {
+    function setTeachGroupsDropDown() {
         $dropDown = $("#groupsDropDown");
         $dropDownMenu = $dropDown.children('.dropdown-menu').first();
         $dropDownMenu.html("");
 
         var session = $.cookie(SESSION_COOKIE);
 
+        var service = "groups/getAll";
         var data = {
-            userId:session.id
         };
 
         var jData = utf8_to_b64( JSON.stringify(data) );
         $.ajax({
-            url: CON_URL+"groups/getGroupsByUser",
+            url: CON_URL+"groups/getAll",
             data:{data:jData}
         }).done(function(data) {
             var res = $.parseJSON(b64_to_utf8(data));
@@ -41,13 +39,65 @@
                 return;
             }
             else{
-                $dropDown.attr('data-sel-id', res.data[0].group_id);
-                $dropDown.children('button').html(res.data[0].name + '  <span class="caret"></span>');
+                $dropDown.attr('data-sel-id',-1);
+                $dropDown.children('button').html('Escuela  <span class="caret"></span>');
                 setRankTable();
             }
             
+            res.data.unshift({id:-1,name:'Escuela'});
             res.data.forEach(function(e,i) {
-                $aNewRow = $('<a class="userGroupSelElem" data-id="' + e.user_group_id + '" href="#">' + e.name + '</a>');
+                $aNewRow = $('<a class="userGroupSelElem" data-id="' + e.id + '" href="#">' + e.name + '</a>');
+                $aNewRow.off("click").on('click', function(event) {
+                    event.preventDefault();
+                    $this = $(this);
+
+                    $dropDown.attr('data-sel-id', e.id);
+                    $dropDown.children('button').html($this.text() + '<span class="caret"></span>');
+                    setRankTable();
+                });  
+
+                $newRow = $('<li></li>').append($aNewRow);
+                $dropDownMenu.append($newRow);
+            });
+
+        }).fail(function(data) {
+            console.log("ajax fail");
+        });
+    }
+
+    function setStudGroupsDropDown() {
+        $dropDown = $("#groupsDropDown");
+        $dropDownMenu = $dropDown.children('.dropdown-menu').first();
+        $dropDownMenu.html("");
+
+        var session = $.cookie(SESSION_COOKIE);
+
+        var service = "groups/getGroupsByUser";
+        var data = {
+            userId:session.id
+        };
+
+        var jData = utf8_to_b64( JSON.stringify(data) );
+        $.ajax({
+            url: CON_URL+service,
+            data:{data:jData}
+        }).done(function(data) {
+            var res = $.parseJSON(b64_to_utf8(data));
+
+            if(res.data.length == 0){
+                //setTableAnun('-1');
+                $dropDown.children('button').text('Ninguno')
+                return;
+            }
+            else{
+                $dropDown.attr('data-sel-id',-1);
+                $dropDown.children('button').html('Escuela  <span class="caret"></span>');
+                setRankTable();
+            }
+            
+            res.data.unshift({group_id:-1,name:'Escuela'});
+            res.data.forEach(function(e,i) {
+                $aNewRow = $('<a class="userGroupSelElem" data-id="' + e.group_id + '" href="#">' + e.name + '</a>');
                 $aNewRow.off("click").on('click', function(event) {
                     event.preventDefault();
                     $this = $(this);
@@ -67,6 +117,8 @@
     }
 
 	function setRankTable() {
+        var groupId = $("#groupsDropDown").attr('data-sel-id');
+
 		$("#jsGrid").jsGrid({
             width: "100%",
             filtering: true,
@@ -83,15 +135,13 @@
                     var d = $.Deferred();
                     var session = $.cookie(SESSION_COOKIE);
 
-                    if(session.rol == EST_ROL){
-                        var service = "ranking/getByUser";
+                    if(groupId == -1){
+                        var service = "ranking/getRankSchool";
                         var data = {
-                            userId:session.id
                         };
                     }
                     else{
                         var service = "ranking/getByGrp";
-                        var groupId = $("#groupsDropDown").attr('data-sel-id');
                         var data = {
                             groupId:groupId
                         };

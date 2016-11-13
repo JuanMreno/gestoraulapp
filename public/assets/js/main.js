@@ -111,8 +111,8 @@
 				$('#pract-link').addClass('active');
 				break;
 			case ADM_ROL:
-				$('#section').load('views/grupos.html');
-				$('#grps-link').addClass('active');
+				$('#section').load('views/usuarios.html');
+				$('#usrs-link').addClass('active');
 				break;
 			default:
 				break;
@@ -185,6 +185,14 @@
 			$(this).addClass('active');
 
 			$('#section').load('views/materias.html');
+		});
+		
+		$('#usrs-link').off("click").on('click', function(event) {
+			event.preventDefault();
+			$('.nav-menu-li a').removeClass('active');
+			$(this).addClass('active');
+
+			$('#section').load('views/usuarios.html');
 		});
 		
 		$('#cses-link').off("click").on('click', function(event) {

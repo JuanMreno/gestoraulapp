@@ -26,6 +26,7 @@ var rLabs = require('./routes/laboratories');
 var rUpLs = require('./routes/uploads');
 var rRepo = require('./routes/reports');
 var rExts = require('./routes/externals');
+var rUsrs = require('./routes/users');
 
 // view engine setup
 //app.set('views', path.join(__dirname, 'views'));
@@ -54,6 +55,7 @@ app.use('/laboratories', rLabs);
 app.use('/uploads', rUpLs);
 app.use('/reports', rRepo);
 app.use('/externals', rExts);
+app.use('/users', rUsrs);
 //app.use(auth.connect(basic));
 
 // catch 404 and forward to error handler
