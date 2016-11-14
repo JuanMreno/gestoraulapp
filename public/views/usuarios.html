@@ -33,4 +33,104 @@
 
 	</section>
 </div>
+
+<div id="editInfoUser" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+      	<!--<h4 class="modal-title">Práctica</h4>-->
+        <div class="row">
+        	<div class="col-xs-9">
+		        <h4 class="modal-title">Información de Usuario</h4>
+        	</div>
+        </div>
+      </div>
+      <div class="modal-body">
+      	<div class="row form-group">
+      		<div class="col-sm-12">
+      			<h4>Cambiar Contraseña</h4>
+      		</div>      		
+        	<div class="col-sm-6">
+		        <div class="form-group">
+				    <label for="exampleInputEmail1">Nueva Contraseña</label>
+				    <input type="password" class="form-control" id="password1" placeholder="Contraseña">
+				</div>
+        	</div>
+        	<div class="col-sm-6">
+		        <div class="form-group">
+				    <label for="exampleInputEmail1">Repetir Contraseña</label>
+				    <input type="password" class="form-control" id="password2" placeholder="Repetir Contraseña">
+				</div>
+        	</div>
+        	<div class="col-sm-6">
+		        <button class="btn btn-primary" id="updatepass">Actualizar Contraseña</button>
+        	</div>
+        </div>
+        <div class="row">
+  			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+				<span>Usuarios</span>
+	  		</div>
+	  		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+				<div class="list-group" id="listGroups">
+
+				</div>
+	  		</div>
+  		</div>		
+      </div>
+      <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="editInfoStudent" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+      	<!--<h4 class="modal-title">Práctica</h4>-->
+        <div class="row">
+        	<div class="col-xs-9">
+		        <h4 class="modal-title">Información de Estudiante</h4>
+        	</div>
+        </div>
+      </div>
+      <div class="modal-body">
+      	<div class="row form-group">
+      		<div class="col-sm-12">
+      			<h4>Cambiar Contraseña</h4>
+      		</div>      		
+        	<div class="col-sm-6">
+		        <div class="form-group">
+				    <label for="exampleInputEmail1">Nueva Contraseña</label>
+				    <input type="password" class="form-control" id="passwordst1" placeholder="Contraseña">
+				</div>
+        	</div>
+        	<div class="col-sm-6">
+		        <div class="form-group">
+				    <label for="exampleInputEmail1">Repetir Contraseña</label>
+				    <input type="password" class="form-control" id="passwordst2" placeholder="Repetir Contraseña">
+				</div>
+        	</div>
+        	<div class="col-sm-6">
+		        <button class="btn btn-primary" id="updatepasswst">Actualizar Contraseña</button>
+        	</div>
+        </div>
+        <div class="row">
+  			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+				<span>Grupo Asignado</span>
+	  		</div>
+	  		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+				<select class="form-control" id="allGroupSt">
+					<option value=""></option>
+				</select>
+	  		</div>
+  		</div>		
+      </div>
+      <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
 <script src="assets/js/usuarios.js"></script>

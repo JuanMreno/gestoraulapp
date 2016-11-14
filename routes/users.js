@@ -29,20 +29,38 @@ router.get('/getAll', function(req, res) {
 			return;
 		}
 
-		var query = 
-			"SELECT\
-				u.id,\
-				u.`name`,\
-				u.last_name,\
-				r.rol\
-			FROM\
-				users u\
-			INNER JOIN rols r ON u.rols_id = r.id\
-			WHERE\
-				r.id = ?"
-		;
-
-		var p = [params.rolId];
+		if(params.rolId == 4){
+			var query = 
+				"SELECT\
+					u.id,\
+					u.`name`,\
+					u.last_name,\
+					r.rol,\
+					uc.class_group_id\
+				FROM\
+					users u\
+				INNER JOIN rols r ON u.rols_id = r.id\
+				LEFT JOIN users_class_groups uc ON u.id = uc.users_id\
+				WHERE\
+					r.id = ?"
+			;
+			var p = [params.rolId];
+		}
+		else{
+			var query = 
+				"SELECT\
+					u.id,\
+					u.`name`,\
+					u.last_name,\
+					r.rol\
+				FROM\
+					users u\
+				INNER JOIN rols r ON u.rols_id = r.id\
+				WHERE\
+					r.id = ?"
+			;
+			var p = [params.rolId];
+		}
 		connection.query(query, p , function(err, rows) {
 		
 			if (err) {
