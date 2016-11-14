@@ -34,6 +34,8 @@ router.get('/getAll', function(req, res) {
 				"SELECT\
 					u.id,\
 					u.`name`,\
+					u.user as userName,\
+					CASE WHEN pass IS NOT NULL THEN 'true' ELSE 'false' END as hasPass,\
 					u.last_name,\
 					r.rol,\
 					uc.class_group_id\
@@ -51,6 +53,8 @@ router.get('/getAll', function(req, res) {
 				"SELECT\
 					u.id,\
 					u.`name`,\
+					u.user as userName,\
+					CASE WHEN pass IS NOT NULL THEN 'true' ELSE 'false' END as hasPass,\
 					u.last_name,\
 					r.rol\
 				FROM\
@@ -233,15 +237,29 @@ router.get('/resetPass', function(req, res) {
 			return;
 		}
 
-		var query = "\
-			UPDATE\
-				users\
-			SET \
-				pass = ?\
-			WHERE\
-				id = ?";
+		if(params.pass != ""){
+			var query = "\
+				UPDATE\
+					users\
+				SET \
+					pass = ?,\
+					user = ?\
+				WHERE\
+					id = ?";
 
-		var p = [params.pass, params.id];
+			var p = [params.pass, params.userName, params.id];
+		}
+		else{
+			var query = "\
+				UPDATE\
+					users\
+				SET \
+					user = ?\
+				WHERE\
+					id = ?";
+
+			var p = [params.userName, params.id];
+		}
 		connection.query(query, p, function(err, rows) {
 		
 			if (err) {

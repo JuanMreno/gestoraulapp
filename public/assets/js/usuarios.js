@@ -52,6 +52,8 @@
                     var d = $.Deferred();
                     var session = $.cookie(SESSION_COOKIE);
 
+                    // userName:"juan1106"
+                    // hasPass:"true/false"
                     var data = {
                         rolId:rolId
                     };
@@ -100,8 +102,10 @@
                     }).done(function(data) {
                         var res = $.parseJSON(b64_to_utf8(data));
                         //console.log(res);
-                        if(res.status == "true")
+                        if(res.status == "true"){
                             d.resolve(item);
+                            $("#jsGrid").jsGrid("render");
+                        }
                         else{
                             if(res.data.state == "REPEATED"){
                                 alert("El usuario ya ha sido registrado.");
@@ -142,8 +146,10 @@
                     }).done(function(data) {
                         var res = $.parseJSON(b64_to_utf8(data));
 
-                        if(res.status == "true")
+                        if(res.status == "true"){
                             d.resolve(item);
+                            $("#jsGrid").jsGrid("render");
+                        }
                         else{
                             if(res.data.state == "REPEATED"){
                                 alert("El usuario ya ha sido registrado.");
