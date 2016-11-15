@@ -47,33 +47,53 @@
       </div>
       <div class="modal-body">
       	<div class="row form-group">
-      		<div class="col-sm-12">
-      			<h4>Cambiar Contraseña</h4>
-      		</div>      		
+      		<div class="col-sm-8">
+		        <div class="form-group">
+				    <label  class="field-label" for="nameUser">Nombre de Usuario</label>
+				    <input type="text" class="form-control profilepf" id="nameUser" placeholder="Nombre de Usuario">
+				</div>
+        	</div>      		
         	<div class="col-sm-6">
 		        <div class="form-group">
-				    <label for="exampleInputEmail1">Nueva Contraseña</label>
-				    <input type="password" class="form-control" id="password1" placeholder="Contraseña">
+				    <label  class="field-label" for="password1">Nueva Contraseña</label>
+				    <input type="password" class="form-control passpf" id="password1" placeholder="Contraseña">
 				</div>
         	</div>
         	<div class="col-sm-6">
 		        <div class="form-group">
-				    <label for="exampleInputEmail1">Repetir Contraseña</label>
-				    <input type="password" class="form-control" id="password2" placeholder="Repetir Contraseña">
+				    <label  class="field-label" for="password2">Repetir Contraseña</label>
+				    <input type="password" class="form-control passpf" id="password2" placeholder="Repetir Contraseña">
 				</div>
         	</div>
         	<div class="col-sm-6">
-		        <button class="btn btn-primary" id="updatepass">Actualizar Contraseña</button>
+		        <button class="btn btn-primary" id="updatepass">Guardar</button>
         	</div>
         </div>
         <div class="row">
-  			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-				<span>Usuarios</span>
+  			<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+				<span class="title-label">Grupos asignados</span>
 	  		</div>
-	  		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-				<div class="list-group" id="listGroups">
-
-				</div>
+	  		<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+				<select id="listGroups" class=""  multiple="multiple"></select>
+	  		</div>
+  		</div>	
+  		<br>
+  		<div class="row">
+  			<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+		  		<h6 class="title-label">Asignar materias</h6>
+			</div>
+  		</div>
+  		<div class="row">
+  			<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+				<select id="listGroupsSubjets" class="form-control">
+					
+				</select>
+	  		</div>
+	  		<br>
+	  		<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+				<select id="listsubjectsGroup" class="form-control"  multiple="multiple">
+					
+				</select>
 	  		</div>
   		</div>		
       </div>
@@ -97,19 +117,22 @@
       </div>
       <div class="modal-body">
       	<div class="row form-group">
-      		<div class="col-sm-12">
-      			<h4>Cambiar Contraseña</h4>
-      		</div>      		
+      		<div class="col-sm-8">
+		        <div class="form-group">
+				    <label  class="field-label" for="nameUserst">Nombre de Usuario</label>
+				    <input type="text" class="form-control profilest" id="nameUserst" placeholder="Nombre de Usuario">
+				</div>
+        	</div>    		
         	<div class="col-sm-6">
 		        <div class="form-group">
-				    <label for="exampleInputEmail1">Nueva Contraseña</label>
-				    <input type="password" class="form-control" id="passwordst1" placeholder="Contraseña">
+				    <label class="field-label" for="passwordst1">Nueva Contraseña</label>
+				    <input type="password" class="form-control passst" id="passwordst1" placeholder="Contraseña">
 				</div>
         	</div>
         	<div class="col-sm-6">
 		        <div class="form-group">
-				    <label for="exampleInputEmail1">Repetir Contraseña</label>
-				    <input type="password" class="form-control" id="passwordst2" placeholder="Repetir Contraseña">
+				    <label class="field-label" for="passwordst2">Repetir Contraseña</label>
+				    <input type="password" class="form-control passst" id="passwordst2" placeholder="Repetir Contraseña">
 				</div>
         	</div>
         	<div class="col-sm-6">
@@ -117,10 +140,10 @@
         	</div>
         </div>
         <div class="row">
-  			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-				<span>Grupo Asignado</span>
-	  		</div>
-	  		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+  			<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+		  		<h6 class="title-label">Grupo</h6>
+			</div>
+	  		<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 				<select class="form-control" id="allGroupSt">
 					<option value=""></option>
 				</select>

@@ -120,9 +120,10 @@ router.get('/getByGroup', function(req, res) {
 			INNER JOIN users_class_groups uc ON ugs.ucg_id = uc.id\
 			WHERE\
 				uc.class_group_id = ? AND\
-				uc.users_id = ?";
+				uc.users_id = ? AND\
+				sc.class_group_id = ?";
 
-		var p = [params.groupId, params.userId];
+		var p = [params.groupId, params.userId, params.groupId];
 		connection.query(query, p , function(err, rows) {
 		
 			if (err) {

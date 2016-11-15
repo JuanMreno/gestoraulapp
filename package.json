@@ -18,7 +18,8 @@
     "multiparty": "4.1.2",
     "mysql": "latest",
     "nedb": "^1.1.2",
-    "serve-favicon": "~2.2.1"
+    "serve-favicon": "~2.2.1",
+    "q": "1.4.1"
   },
   "engines": {
     "node": "4.4.7"

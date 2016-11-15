@@ -91,6 +91,13 @@
 		width: 100%;
 	}
 
+	.container-config{
+		background: #fff;
+    	padding: 10px;
+    	/* margin: 20px; */
+    	margin-top: 20px;
+	}
+
 	.menu-grupos {
     background: #999999;
     height: 40px;
@@ -2315,6 +2322,18 @@
 	.labelStateCont {
 	    text-align: -webkit-right;
 	}
+
+	.title-label {
+	    font-size: 15px;
+	    font-weight: 700;
+	    line-height: 1;
+	    color: #555;
+	    padding: 0px 0px 9px;
+	}
+
+	.select2-container{
+		width: 100% !important;
+	}
 	
 	.field-label {
 	    font-size: 14px;
@@ -2374,6 +2393,14 @@
 		font-size: inherit;
         color: #888 !important;
 	    font-weight: initial;
+	}
+
+	.select2-selection__choice{
+		font-size: initial;
+		line-height: 1;
+		font-weight: 400;
+		color: #555;
+		padding: 6px 6px 6px 6px !important;
 	}
 
 	@media screen and (min-width: 961px) and (max-width: 2200px) {

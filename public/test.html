@@ -10,6 +10,7 @@
 		<option value="externals/login">login</option>
 		<option value="externals/put_lab">put_lab</option>
 		<option value="externals/getLab">getLab</option>
+		<option value="uploads/labs">put_lab</option>
 		<option value="subjects/getAll">subjects/getAll</option>
 		<option value="users/resetPass">users/resetPass</option>
 		<option value="users/asignStudUser">users/asignStudUser</option>
@@ -37,6 +38,14 @@
 		<input type="text" name="data" style="width: 100%;">
 		<input type="file" name="report_file">
 	</form>
+	<br>
+	<label for="data">upload_lab Form</label>
+	<form id="uploadLabsForm" action="externals/put_lab" method="POST">
+		<input type="text" name="data" style="width: 100%;">
+		<input type="file" name="labs_file">
+	</form>
+	<br>
+	<button onclick="sendUploadLab()">Send</button>
 	<p id="resContId"></p>
 
 	<script src="assets/js/jquery.min.js"></script>
@@ -65,6 +74,16 @@
 					data:{data:jData}
 				}
 			}
+			else if(service == "externals/put_lab"){
+				var fd = new FormData(document.getElementById("putLabForm"));
+				ajaxConfig = {
+					method: "POST",
+					url: CON_URL+service,
+					data:fd,
+					processData: false,  // tell jQuery not to process the data
+  					contentType: false
+				}
+			}
 			else{
 				var fd = new FormData(document.getElementById("putLabForm"));
 				ajaxConfig = {
@@ -75,6 +94,55 @@
   					contentType: false
 				}
 			}
+
+			$.ajax(ajaxConfig)
+			.done(function( data ) {
+				
+				var res = $.parseJSON(b64_to_utf8(data));
+				$('#resContId').text(b64_to_utf8(data));
+				console.log(res);
+				/*
+				if(res.status == "true"){
+					if(res.data.length == 1){
+						var user = res.data[0];
+						clearInterval(loadIntervaId);
+						$.cookie(SESSION_COOKIE, user);
+						goToMain();
+					}
+					else{
+						alert("Nombre o Usuario inválido, intenta de nuevo.");
+						restartButton();
+					}
+				}
+				else{
+					alert("Nombre o Usuario inválido, intenta de nuevo.");
+					restartButton();
+				}
+				*/
+				//alert("Nombre o Usuario inválido, intenta de nuevo.")
+				//clearInterval(loadIntervaId);
+				//$.cookie(SESSION_COOKIE, {id:"1",name:"Oscar Moreno",rol:"pro-rol",rolName:"Profesor"});
+				//goToMain();
+			})
+			.error(function(e) {
+				console.log("Error ajax.");
+			});
+		}
+
+		function sendUploadLab() {
+			var dataText = $("#dataInpt").val();
+			var service = $('#selServId option:selected').val();
+
+			var ajaxConfig;
+
+			var fd = new FormData(document.getElementById("uploadLabsForm"));
+			ajaxConfig = {
+				method: "POST",
+				url: CON_URL+"uploads/labs",
+				data:fd,
+				processData: false,  // tell jQuery not to process the data
+				contentType: false
+			};
 
 			$.ajax(ajaxConfig)
 			.done(function( data ) {

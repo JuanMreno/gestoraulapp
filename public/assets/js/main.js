@@ -114,6 +114,10 @@
 				$('#section').load('views/usuarios.html');
 				$('#usrs-link').addClass('active');
 				break;
+			case SAD_ROL:
+				$('#section').load('views/consultas.html');
+				$('#cons-link').addClass('active');
+				break;
 			default:
 				break;
 		}
@@ -193,6 +197,30 @@
 			$(this).addClass('active');
 
 			$('#section').load('views/usuarios.html');
+		});
+
+		$('#labs-link').off("click").on('click', function(event) {
+			event.preventDefault();
+			$('.nav-menu-li a').removeClass('active');
+			$(this).addClass('active');
+
+			$('#section').load('views/laboratorios.html');
+		});
+
+		$('#conf-link').off("click").on('click', function(event) {
+			event.preventDefault();
+			$('.nav-menu-li a').removeClass('active');
+			$(this).addClass('active');
+
+			$('#section').load('views/config.html');
+		});
+		
+		$('#serv-link').off("click").on('click', function(event) {
+			event.preventDefault();
+			$('.nav-menu-li a').removeClass('active');
+			$(this).addClass('active');
+
+			$('#section').load('views/servidor.html');
 		});
 		
 		$('#cses-link').off("click").on('click', function(event) {
