@@ -128,26 +128,37 @@
                     var d = $.Deferred();
                     var session = $.cookie(SESSION_COOKIE);
 
-                    var data = {
-                        userId:session.id,
-                        groupId:item.id,
-                        asignado:item.asignado
-                    };
-     
-                    var jData = utf8_to_b64( JSON.stringify(data) );
-                    $.ajax({
-                        url: CON_URL+"groups/asignUser",
-                        data:{data:jData}
-                    }).done(function(data) {
-                        //var res = $.parseJSON(b64_to_utf8(data));
-                        //console.log(res);
+                    if(item.asignado)
+                        mns = 'Seguro desea asinarse el grupo ' + item.name + '.';
+                    else
+                        mns = 'Se perderá toda la información relacionada con el grupo ' + item.name + '. ¿Desea continuar?';
+
+                    var res = confirm(mns);
+                            
+                    if (res) {
+                        var data = {
+                            userId:session.id,
+                            groupId:item.id,
+                            asignado:item.asignado
+                        };     
+                        var jData = utf8_to_b64( JSON.stringify(data) );
+                        $.ajax({
+                            url: CON_URL+"groups/asignUser",
+                            data:{data:jData}
+                        }).done(function(data) {
+                            //var res = $.parseJSON(b64_to_utf8(data));
+                            //console.log(res);
+                            d.resolve(item);
+                        }).fail(function(data) {
+                            console.log("ajax fail");
+                            item.asignado = (item.asignado == 0) ? 1 : 0;
+                            d.resolve(item);
+                        });
+                    }
+                    else{
+                        item.asignado = !item.asignado;
                         d.resolve(item);
-                    }).fail(function(data) {
-                        console.log("ajax fail");
-                        item.asignado = (item.asignado == 0) ? 1 : 0;
-                        d.resolve(item);
-                    });
-     
+                    }
                     return d.promise();
                 }
             },
@@ -219,29 +230,43 @@
                     return d.promise();
                 },
                 updateItem: function(item) {
-
+                    console.log("sdasd");
+                    var mns = '';
                     var d = $.Deferred();
                     var session = $.cookie(SESSION_COOKIE);
 
-                    var data = {
-                        userGroupId:userGroupId,
-                        scId:item.sc_id,
-                        asignado:item.asignado
-                    };
-     
-                    var jData = utf8_to_b64( JSON.stringify(data) );
-                    $.ajax({
-                        url: CON_URL+"subjects/assignUserSubject",
-                        data:{data:jData}
-                    }).done(function(data) {
-                        //var res = $.parseJSON(b64_to_utf8(data));
-                        //console.log(res);
+                    if(item.asignado)
+                        mns = 'Seguro desea asinarse la materia ' + item.name + '.';
+                    else
+                        mns = 'Se perderá toda la información relacionada con la materia ' + item.name + '. ¿Desea continuar?';
+
+                    var res = confirm(mns);
+                            
+                    if (res) {
+                        var data = {
+                            userGroupId:userGroupId,
+                            scId:item.sc_id,
+                            asignado:item.asignado
+                        };
+         
+                        var jData = utf8_to_b64( JSON.stringify(data) );
+                        $.ajax({
+                            url: CON_URL+"subjects/assignUserSubject",
+                            data:{data:jData}
+                        }).done(function(data) {
+                            //var res = $.parseJSON(b64_to_utf8(data));
+                            //console.log(res);
+                            d.resolve(item);
+                        }).fail(function(data) {
+                            console.log("ajax fail");
+                            item.asignado = (item.asignado == 0) ? 1 : 0;
+                            d.resolve(item);
+                        });
+                    }
+                    else{
+                        item.asignado = !item.asignado;
                         d.resolve(item);
-                    }).fail(function(data) {
-                        console.log("ajax fail");
-                        item.asignado = (item.asignado == 0) ? 1 : 0;
-                        d.resolve(item);
-                    });
+                    }
      
                     return d.promise();
                 }

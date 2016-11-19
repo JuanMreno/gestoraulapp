@@ -192,7 +192,16 @@
 
             if(res.data.length == 0){
                 //setTableAnun('-1');
-                $dropDown.children('button').text('Ninguna')
+                $dropDown.children('button').text('Ninguna');
+                $dropDown.attr('data-sel-id', -1);
+
+                $('#nomSelect').html("");
+                $('#nomSelect').select2({
+                  data: [],
+                  placeholder: 'Sin estudiantes'
+                });  
+
+                $("#jsGrid").jsGrid("destroy");
                 return;
             }
             else{
@@ -201,6 +210,7 @@
                 $dropDown.attr('data-sel-id', res.data[0].id);
             }
 
+            console.log("continuo");
             res.data.forEach(function(e,i) {
                 $newRow = $('<li><a class="subjectSelElem" data-id="' + e.id + '" href="#">' + e.name + '</a></li>')
                 $dropDownMenu.append($newRow);
@@ -763,9 +773,9 @@
         for (var i = 0; i < n; i++) {
             var elem = data[i];
 
-            if(elem.lab_state == "1"){
+            if((elem.lab_state == 1 || elem.lab_state == "1") && (elem.lab_final_score != '')){
                 entre++;
-                prom+= elem.lab_final_score;
+                prom+= parseFloat(elem.lab_final_score);
             }
         }
 

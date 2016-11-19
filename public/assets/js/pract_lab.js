@@ -233,6 +233,12 @@
                         event.preventDefault();
 
                         var fd = new FormData(document.getElementById("formLoadFile"));
+                        console.log(fd);
+                        if(document.getElementById('inpFile').files.length == 0){
+                            alert('No se ha adjuntado ningún archivo.');
+                            $('#inpFile').replaceWith($('#inpFile').clone());
+                            return;
+                        }
 
                         var session = $.cookie(SESSION_COOKIE);
 
@@ -279,11 +285,33 @@
 
             		$modal.modal('show');
             		$modal.on('shown.bs.modal', function (e) {
+
+                        $('#formLoadFile').change(
+                            function(e){
+                                var fileName = e.target.files[0].name;
+                                var ext = fileName.split('.').pop();
+
+                                if(ext != 'pdf' && ext != 'PDF'){
+                                    alert('Únicamente se permiten adjuntar archivos tipo PDF.');
+                                    $('#inpFile').replaceWith($('#inpFile').clone());
+                                    $('#inpFile').val('');
+                                } 
+                        });
+                        /*
 						$('#uploadPrcFile').fileinput({
                             language: 'es',
-                            allowedFileExtensions : ['pdf', 'xlsx','xls'],
+                            allowedFileTypes: ['text'],
+                            allowedFileExtensions : ['pdf'],
+                            msgInvalidFileExtension : "Únicamente se permiten adjuntar archivos tipo '{extensions}'.",
+                            allowedPreviewTypes: ['text'],
+                            allowedPreviewMimeTypes: ['application/pdf'],
                             previewFileIcon: ""
                         });
+
+                        $('#uploadPrcFile').on('fileloaded', function(event, file, previewId, index, reader) {
+                            console.log("fileloaded");
+                        });
+                        */
 					});
                 },
 

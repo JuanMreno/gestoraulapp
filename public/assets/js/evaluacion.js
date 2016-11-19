@@ -139,7 +139,16 @@
 
             if(res.data.length == 0){
                 //setTableAnun('-1');
-                $dropDown.children('button').text('Ninguna')
+                $dropDown.children('button').text('Ninguna');
+                $dropDown.attr('data-sel-id', -1);
+
+                $('#nomSelect').html("");
+                $('#nomSelect').select2({
+                  data: [],
+                  placeholder: 'Sin datos'
+                });  
+
+                $("#jsGrid").jsGrid("destroy");
                 return;
             }
             else{
@@ -469,18 +478,19 @@
         for (var i = 0; i < n; i++) {
             var elem = data[i];
 
-            if(elem.lab_state == '1'){
+            if((elem.lab_state == 1 || elem.lab_state == "1") && (elem.lab_final_score != '')){
                 entre++;
-                prom+= elem.lab_final_score;
+                prom+= parseFloat(elem.lab_final_score);
             }
         }
 
+        console.log(data);
         if(entre == 0){
             $promInd.text('-');
         }
         else{
             prom = prom/entre;
-            $avanInd.text(prom.toFixed(1) + " %");
+            $promInd.text(prom.toFixed(1));
         }
 
         avan = entre * 100 / n;

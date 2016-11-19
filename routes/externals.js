@@ -52,6 +52,8 @@ router.get('/login', function(req, res) {
 
 			data = rows[0][0];
 			var jData = JSON.stringify(data);
+
+			console.log(jData);
 		  	res.send(new Buffer(jData).toString('base64'));
 		  	connection.end();
 		});

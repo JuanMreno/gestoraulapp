@@ -220,7 +220,7 @@
             },
 
             fields: [
-             	{ name: "rank", type: "text", align: "center", width: 30, title: "#" },
+             	{ name: "rank", type: "text", align: "center", width: 30, title: "Pos" },
              	{ name: "name", type: "text", align: "center", width: 250, title: "Nombre" },
 	            { name: "lab_qual_score", type: "text", align: "center", filtering: false, width: 30, title:"P" },
 	            { name: "lab_num_score", type: "text", align: "center", filtering: false, width: 30, title:"A" },

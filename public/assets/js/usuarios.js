@@ -232,9 +232,9 @@
                             });
                         });
                         $("#listGroups").on("select2:unselect", function (e) { 
-                            var mensaje = confirm("¿Estas seguro de retirar este profesor del grupo, si hace esto perdera toda la información relacionada?");
-                            //Detectamos si el usuario acepto el mensaje
-                            if (mensaje) {
+                            var res = confirm("¿Estas seguro de retirar este profesor del grupo, si hace esto perdera toda la información relacionada?");
+                            
+                            if (res) {
                                 var xdata = {
                                     userId:objUser.item.id,
                                     groupId:e.params.data.id,
