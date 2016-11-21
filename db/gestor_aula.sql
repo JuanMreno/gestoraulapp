@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80000
 File Encoding         : 65001
 
-Date: 2016-11-19 20:43:44
+Date: 2016-11-20 21:01:49
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -59,8 +59,8 @@ CREATE TABLE `class_group` (
 -- Records of class_group
 -- ----------------------------
 INSERT INTO `class_group` VALUES ('1', '7-A', '2016-10-29 14:53:36', '2016-11-08 15:05:07');
-INSERT INTO `class_group` VALUES ('2', '8-B', '2016-10-29 14:53:39', '2016-11-08 15:04:12');
-INSERT INTO `class_group` VALUES ('3', '8-C', '2016-10-29 14:53:42', '2016-11-08 15:04:21');
+INSERT INTO `class_group` VALUES ('2', '8-B', '2016-10-29 14:53:39', '2016-11-20 14:23:09');
+INSERT INTO `class_group` VALUES ('3', '8-C', '2016-10-29 14:53:42', '2016-11-20 14:23:02');
 INSERT INTO `class_group` VALUES ('4', '9-A', '2016-10-29 14:53:45', '2016-11-08 15:04:24');
 INSERT INTO `class_group` VALUES ('5', '9-B', '2016-10-29 14:53:48', '2016-11-08 15:04:27');
 INSERT INTO `class_group` VALUES ('6', '9-C', '2016-10-29 14:53:51', '2016-11-08 15:04:32');
@@ -122,7 +122,7 @@ CREATE TABLE `laboratory` (
   KEY `lesson_id` (`lesson_id`),
   KEY `subject_id` (`subject_id`),
   CONSTRAINT `laboratory_ibfk_1` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=373 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of laboratory
@@ -366,50 +366,30 @@ CREATE TABLE `temp_labs` (
 -- ----------------------------
 -- Records of temp_labs
 -- ----------------------------
-INSERT INTO `temp_labs` VALUES ('Física', 'Magnitudes y unidades', 'FISVEC003', 'Clases de vectores\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Magnitudes y unidades', 'FISVEC001', 'Suma de vectores - Rescate en altamar\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Magnitudes y unidades', 'FISVEC002', 'Resta de vectores - Fuerzas en un puente\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Cinemática', 'FISMRU003', 'Gráficas de posición contra tiempo\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Cinemática', 'FISMRU004', 'Gráficas de velocidad contra tiempo\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Cinemática', 'FISMRU001', 'Movimiento rectilíneo uniforme M.R.U\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Cinemática', 'FISMRU002', 'Movimiento rectilíneo uniformemente acelerado M.R.U.A\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Cinemática', 'FISS3D004', 'Movimiento en el plano\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Cinemática', 'FISS3D001', 'Tiro parabólico - Reto lanzamiento baloncesto\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Dinámica y estática', 'FISVEC004', 'Resultante de dos fuerzas\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Dinámica y estática', 'FISMRU005', 'Fuerza de fricción\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Dinámica y estática', 'FISNEW001', 'Comprobación segunda ley de Newton - Desplazamiento de un móvil.\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Dinámica y estática', 'FISNEW002', 'Segunda ley de Newton - Elevando una carga\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Dinámica y estática', 'FISEQU003', 'La carreta como máquina simple\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Dinámica y estática', 'FISEQU001', 'Momento de una fuerza\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Dinámica y estática', 'FISEQU002', 'Equilibrio\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Dinámica y estática', 'FISNEW003', 'Gravedad\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Trabajo energía y potencia', 'FISTEP002', 'Trabajo y potencia en un elevador de carga\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Trabajo energía y potencia', 'FISTEP003', 'Trabajo energía y potencia en una montaña rusa\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Trabajo energía y potencia', 'FISTEP001', 'Fuentes y transformaciones de la energía\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Fluidos', 'FISS3D005', 'Principio de Pascal\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Fluidos', 'FISS3D002', 'Prensa hidráhulica\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Termodinámica', 'FISTER001', 'Escalas de temperatura\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Termodinámica', 'FISTER002', 'Calor específico y capacidad térmica\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Termodinámica', 'FISTER003', 'Calor latente\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Movimiento armónico simple', 'FISS3D006', 'La energía en el movimiento armónico simple\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Movimiento armónico simple', 'FISS3D007', 'Leyes del péndulo simple\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Movimiento armónico simple', 'FISS3D003', 'Movimiento pendular - Reto reloj de péndulo\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Ondas', 'FISOND001', 'Produciendo una onda de radio (Ondas electromagnéticas)\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Ondas', 'FISOND002', 'Ondas de sonido (Ondas mecánicas)\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Ondas', 'FISOND003', 'Espectro electromagnético\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Óptica', 'FISOND004', 'Luz visible\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Óptica', 'FISOPT001', 'Dispersión y síntesis de la luz\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Óptica', 'FISOPT002', 'Espejo cóncavo\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Óptica', 'FISOPT004', 'Espejos esféricos\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Óptica', 'FISOPT003', 'Lente convergente\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Óptica', 'FISOPT005', 'Lentes\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Electricidad y electromagnetismo', 'FISELE004', 'Magnitudes eléctricas\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Electricidad y electromagnetismo', 'FISELE001', 'Circuito serie\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Electricidad y electromagnetismo', 'FISELE002', 'Circuito paralelo\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Electricidad y electromagnetismo', 'FISELE003', 'Circuito mixto\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Electricidad y electromagnetismo', 'FISELE005', 'Resistencia equivalente\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Electricidad y electromagnetismo', 'FISELE006', 'Ley de los voltajes\r');
-INSERT INTO `temp_labs` VALUES ('Física', 'Electricidad y electromagnetismo', 'FISELE007', 'Ley de las corrientes');
+
+-- ----------------------------
+-- Table structure for temp_users
+-- ----------------------------
+DROP TABLE IF EXISTS `temp_users`;
+CREATE TABLE `temp_users` (
+  `userType` varchar(255) DEFAULT NULL,
+  `user` varchar(255) DEFAULT NULL,
+  `pass` varchar(255) DEFAULT NULL,
+  `userName` varchar(255) DEFAULT NULL,
+  `userLastName` varchar(255) DEFAULT NULL,
+  `group` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of temp_users
+-- ----------------------------
+INSERT INTO `temp_users` VALUES ('ESTUDIANTE', 'est2', 'est', 'Andrés', 'Orozco', '8-C');
+INSERT INTO `temp_users` VALUES ('ESTUDIANTE', 'est1', 'est', 'Carlos', 'García', '8-B');
+INSERT INTO `temp_users` VALUES ('ESTUDIANTE', 'est3', 'est', 'Cesar', 'Mora', '8-C');
+INSERT INTO `temp_users` VALUES ('ESTUDIANTE', 'est4', 'est', 'Felipe', 'Perez', '8-C');
+INSERT INTO `temp_users` VALUES ('PROFESOR', 'pro1', 'pro', 'Mateo', 'Perez', '-');
+INSERT INTO `temp_users` VALUES ('PROFESOR', 'pro2', 'pro', 'Sergio', 'Perez', '-');
+INSERT INTO `temp_users` VALUES ('PROFESOR', 'pro3', 'pro', 'Victor', 'Vélez', '-');
 
 -- ----------------------------
 -- Table structure for users
@@ -427,7 +407,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   KEY `rols_id` (`rols_id`),
   CONSTRAINT `users_ibfk_1` FOREIGN KEY (`rols_id`) REFERENCES `rols` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of users
@@ -457,7 +437,7 @@ CREATE TABLE `users_class_groups` (
   KEY `class_group_id` (`class_group_id`),
   CONSTRAINT `users_class_groups_ibfk_1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`),
   CONSTRAINT `users_class_groups_ibfk_2` FOREIGN KEY (`class_group_id`) REFERENCES `class_group` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=107 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of users_class_groups
@@ -1829,6 +1809,170 @@ END
 DELIMITER ;
 
 -- ----------------------------
+-- Procedure structure for uploads_users
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `uploads_users`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `uploads_users`()
+BEGIN
+	DECLARE uType VARCHAR(100) DEFAULT NULL;
+	DECLARE usr VARCHAR(100) DEFAULT NULL;
+	DECLARE pss VARCHAR(100) DEFAULT NULL;
+	DECLARE usrName VARCHAR(100) DEFAULT NULL;
+	DECLARE usrLastName VARCHAR(100) DEFAULT NULL;
+	DECLARE uGroup VARCHAR(100) DEFAULT NULL;
+
+	DECLARE dataOk INT DEFAULT 1;
+
+	DECLARE gId INT DEFAULT NULL;
+
+	DECLARE cur1 CURSOR FOR ( SELECT * FROM temp_users );
+	DECLARE cur2 CURSOR FOR ( SELECT * FROM temp_users );
+
+	OPEN cur1;
+	BEGIN
+		DECLARE exit_flag INT DEFAULT 0;
+		DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET exit_flag = 1;
+
+		read_loop: LOOP
+			FETCH cur1 INTO uType, usr, pss, usrName, usrLastName, uGroup;
+			IF exit_flag THEN
+				LEAVE read_loop;
+			END IF;
+
+			SET gId = (
+				SELECT
+					cg.id
+				FROM
+					class_group cg
+				WHERE
+					cg.`name` = uGroup
+			);
+
+			IF( gId IS NULL AND uType = 'ESTUDIANTE')
+			THEN
+				SET dataOk = 0;	
+				SELECT 'GROUP', uGroup;
+				LEAVE read_loop;
+			END IF;
+
+			IF (
+				EXISTS (
+					SELECT
+						id 
+					FROM
+						users
+					WHERE
+						`name` = usrName AND
+						last_name = usrLastName
+				) OR
+				EXISTS (
+					SELECT
+						id 
+					FROM
+						users
+					WHERE
+						`user` = usr
+				)
+			)
+			THEN
+				SET dataOk = 0;
+				SELECT 'USER';
+				LEAVE read_loop;
+			END IF;
+		END LOOP;
+	END;
+	CLOSE cur1;
+
+	IF(dataOk = 1)
+	THEN
+		OPEN cur2;
+		BEGIN
+			DECLARE exit_flag INT DEFAULT 0;
+			DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET exit_flag = 1;
+
+			read_loop_2: LOOP
+				FETCH cur2 INTO uType, usr, pss, usrName, usrLastName, uGroup;
+				IF exit_flag THEN
+					LEAVE read_loop_2;
+				END IF;
+
+				SET gId = (
+					SELECT
+						cg.id
+					FROM
+						class_group cg
+					WHERE
+						cg.`name` = uGroup
+				);
+
+				IF( gId IS NOT NULL AND uType = 'ESTUDIANTE')
+				THEN
+					INSERT INTO
+						users
+					(
+						`user`,
+						pass,
+						`name`,
+						last_name,
+						rols_id						
+					)
+					VALUES
+					(
+						usr,
+						MD5(pss),
+						usrName,
+						usrLastName,
+						4
+					);
+
+					SET @userId = LAST_INSERT_ID();
+					INSERT INTO
+						users_class_groups
+					(
+						users_id,
+						class_group_id
+					)
+					VALUES
+					(
+						@userId,
+						gId
+					);
+				ELSE
+					INSERT INTO
+						users
+					(
+						`user`,
+						pass,
+						`name`,
+						last_name,
+						rols_id						
+					)
+					VALUES
+					(
+						usr,
+						MD5(pss),
+						usrName,
+						usrLastName,
+						3
+					);
+				END IF;
+				
+			END LOOP;
+		END;
+		CLOSE cur2;
+
+		DELETE FROM temp_labs;
+		SELECT 'true' as state, 'QUERY_OK' as res_code;
+	ELSE
+		SELECT 'true' as state, 'WRONG_DATA' as res_code;
+	END IF;
+
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
 -- Procedure structure for users_assign_stud
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `users_assign_stud`;
@@ -1976,20 +2120,6 @@ BEGIN
 	ELSE
 		SELECT 'REPEATED' as state;
 	END IF;
-END
-;;
-DELIMITER ;
-
--- ----------------------------
--- Function structure for upload_labs
--- ----------------------------
-DROP FUNCTION IF EXISTS `upload_labs`;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` FUNCTION `upload_labs`(`fileName` varchar(100)) RETURNS int(11)
-BEGIN
-	#Routine body goes here...
-
-	RETURN 0;
 END
 ;;
 DELIMITER ;
