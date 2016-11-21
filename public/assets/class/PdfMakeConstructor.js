@@ -29,6 +29,7 @@ class PdfMakeConstructor {
   	var b = [];
   	var header = [
   		{ text: 'Práctica', style: 'tableHeader', alignment: 'center' }, 
+  		{ text: 'Unidad', style: 'tableHeader', alignment: 'center' }, 
   		{ text: 'Fecha', style: 'tableHeader', alignment: 'center' }, 
   		{ text: 'Estado', style: 'tableHeader', alignment: 'center' },
   		{ text: 'N. Profesor', style: 'tableHeader', alignment: 'center' },
@@ -43,6 +44,7 @@ class PdfMakeConstructor {
 		b.push(
 			[
 				e.lab_name,
+				e.less_name,
 				e.delivery_date,
 				estado,
 				e.lab_teacher_score,
@@ -55,7 +57,7 @@ class PdfMakeConstructor {
 
   	var docDefinition = {
 	  content: [
-	  	{ text: 'Reporte de notas', style: 'header' },
+	  	{ text: 'Reporte de notas de laboratorio de laboratorio', style: 'header' },
 	  	{ text: 'Nombre: ' + data.name, style: 'subheader' },
 	  	{ text: 'Fecha:	' + data.date, style: 'subheader' },
 	  	//{ text: 'Grupo: ' + data.group, style: 'subheader' },
@@ -66,16 +68,19 @@ class PdfMakeConstructor {
 			// headers are automatically repeated if the table spans over multiple pages
 			// you can declare how many rows should be treated as headers
 				headerRows: 1,
-				widths: [ 'auto', 'auto', 'auto', 'auto', 'auto', 'auto' ],
+				widths: [ 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto' ],
 				body: b
 			}
 	    }
 	  ],
-	  styles:this.styles
+	  styles:this.styles,
+	  pageSize: 'A5',
+	  pageOrientation: 'landscape'
 	};
  	pdfMake.createPdf(docDefinition).download(this.fName);
   }
 
+  /*
   makeStuEvalReport(data){
   	console.log(data);
   	var b = [];
@@ -111,7 +116,7 @@ class PdfMakeConstructor {
 
   	var docDefinition = {
 	  content: [
-	  	{ text: 'Reporte de notas', style: 'header' },
+	  	{ text: 'Reporte de notas de laboratorio', style: 'header' },
 	  	{ text: 'Nombre: ' + data.stuName, style: 'subheader' },
 	  	{ text: 'Grupo: ' + data.group, style: 'subheader' },
 	  	{ text: 'Periodo:	' + data.fIni + ' a ' + data.fFin, style: 'subheader' },
@@ -129,12 +134,14 @@ class PdfMakeConstructor {
 			}
 	    }
 	  ],
-	  styles:this.styles
+	  styles:this.styles,
+	  pageSize: 'A5',
+	  pageOrientation: 'landscape'
 	};
  	pdfMake.createPdf(docDefinition).download(this.fName);
-  }
+  }*/
 
-  makeStuEvalReport(data,type){
+  makeLabReport(data){
   	console.log(data);
   	
   	var b = [];
@@ -153,16 +160,10 @@ class PdfMakeConstructor {
 
 	data.rows.forEach(function(e,i,a){
 		var estado = (e.lab_state == "1") ? "Entregado" : "Pendiente";
-		var name;
-
-		if(type == 'lab') 
-			name = e.user_name;
-		else
-			name = e.lab_name;
 		
 		b.push(
 			[
-				name,
+				e.user_name,
 				e.delivery_date,
 				estado,
 				e.lab_delivery_time,
@@ -177,7 +178,7 @@ class PdfMakeConstructor {
 
   	var docDefinition = {
 	  content: [
-	  	{ text: 'Reporte de notas', style: 'header' },
+	  	{ text: 'Reporte de notas de laboratorio', style: 'header' },
 	  	{ text: 'Nombre: ' + data.stuName, style: 'subheader' },
 	  	{ text: 'Grupo: ' + data.group, style: 'subheader' },
 	  	{ text: 'Periodo:	' + data.fIni + ' a ' + data.fFin, style: 'subheader' },
@@ -195,7 +196,73 @@ class PdfMakeConstructor {
 			}
 	    }
 	  ],
-	  styles:this.styles
+	  styles:this.styles,
+	  pageSize: 'A5',
+	  pageOrientation: 'landscape'
+	};
+ 	pdfMake.createPdf(docDefinition).download(this.fName);
+  }
+
+  makeStuReport(data){
+  	console.log(data);
+  	
+  	var b = [];
+  	var header = [
+  		{ text: 'Práctica', style: 'tableHeader', alignment: 'center' }, 
+  		{ text: 'Unidad', style: 'tableHeader', alignment: 'center' }, 
+  		{ text: 'Fecha', style: 'tableHeader', alignment: 'center' }, 
+  		{ text: 'Estado', style: 'tableHeader', alignment: 'center' },
+  		{ text: 'Tiempo entrega', style: 'tableHeader', alignment: 'center' },
+  		{ text: 'Intentos', style: 'tableHeader', alignment: 'center' },
+  		{ text: 'N. Profesor', style: 'tableHeader', alignment: 'center' },
+  		{ text: 'N. Lab', style: 'tableHeader', alignment: 'center' },
+  		{ text: 'N. Final', style: 'tableHeader', alignment: 'center' }
+	];
+
+	b.push(header);
+
+	data.rows.forEach(function(e,i,a){
+		var estado = (e.lab_state == "1") ? "Entregado" : "Pendiente";
+		
+		b.push(
+			[
+				e.lab_name,
+				e.less_name,
+				e.delivery_date,
+				estado,
+				e.lab_delivery_time,
+				e.lab_attempts,
+				e.lab_teacher_score,
+				e.lab_app_score,
+				e.lab_final_score
+			]
+		);
+ 	});
+	//.push(bodyData);
+
+  	var docDefinition = {
+	  content: [
+	  	{ text: 'Reporte de notas de laboratorio', style: 'header' },
+	  	{ text: 'Nombre: ' + data.stuName, style: 'subheader' },
+	  	{ text: 'Grupo: ' + data.group, style: 'subheader' },
+	  	{ text: 'Periodo:	' + data.fIni + ' a ' + data.fFin, style: 'subheader' },
+	  	{ text: 'Materia: ' + data.subject, style: 'subheader' },
+	  	{ text: 'Avance: ' + data.avanInd, style: 'subheader' },
+	  	{ text: 'Promedio: ' + data.promInd, style: 'subheader' },
+	    {
+    		style: 'tableExample',
+			table: {
+			// headers are automatically repeated if the table spans over multiple pages
+			// you can declare how many rows should be treated as headers
+				headerRows: 1,
+				widths: [ 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto' ],
+				body: b
+			}
+	    }
+	  ],
+	  styles:this.styles,
+	  pageSize: 'A5',
+	  pageOrientation: 'landscape'
 	};
  	pdfMake.createPdf(docDefinition).download(this.fName);
   }

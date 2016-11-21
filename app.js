@@ -12,6 +12,7 @@ var basic = auth.basic({
 });
 
 process.env.REPORTS_DIR = "./public/reports";
+process.env.ABS_REPORTS_DIR = __dirname + "/public/reports";
 
 var app = express();
 

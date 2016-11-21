@@ -43,7 +43,7 @@ router.get('/getLabsByGroSubEst', function(req, res) {
 				lu.id as lab_users_id,
 				l.\`name\` as lab_name,
 				l.lab_code as lab_code, 
-				le.\`name\` as less_name,
+				l.lesson_name as less_name,
 				CASE WHEN lu.delivery_date IS NULL THEN '' ELSE DATE_FORMAT(lu.delivery_date,'%Y/%m/%d') END as delivery_date,
 				CASE 
 					WHEN (lu.state IS NULL OR lu.state = '' OR lu.state = 0) THEN false 
@@ -66,7 +66,6 @@ router.get('/getLabsByGroSubEst', function(req, res) {
 				WHERE
 					user_id = ?
 			) lu ON l.id = lu.laboratory_id
-			INNER JOIN lessons le ON l.lesson_id = le.id
 			WHERE
 				l.subject_id = ? ` + filterQ 
 		;
@@ -129,7 +128,7 @@ router.get('/getStudentsLabsByGroSub', function(req, res) {
 				lu.id as lab_users_id,
 				l.\`name\` as lab_name,
 				l.lab_code as lab_code, 
-				le.\`name\` as less_name,
+				l.lesson_name as less_name,
 				CASE WHEN lu.delivery_date IS NULL THEN '' ELSE DATE_FORMAT(lu.delivery_date,'%Y/%m/%d') END as delivery_date,
 				CASE 
 					WHEN (lu.state IS NULL OR lu.state = '' OR lu.state = 0) THEN false 
@@ -152,7 +151,6 @@ router.get('/getStudentsLabsByGroSub', function(req, res) {
 				WHERE
 					user_id = ?
 			) lu ON l.id = lu.laboratory_id
-			INNER JOIN lessons le ON l.lesson_id = le.id
 			WHERE
 				l.subject_id = ? ` + filterQ  
 		;
@@ -259,7 +257,7 @@ router.get('/getStudentsLabsBySub', function(req, res) {
 				lu.id as lab_users_id,
 				l.\`name\` as lab_name,
 				l.lab_code as lab_code, 
-				le.\`name\` as less_name,
+				l.lesson_name as less_name,
 				DATE_FORMAT(lu.delivery_date,'%Y/%m/%d') as delivery_date,
 				CASE WHEN lu.state IS NULL THEN '0' ELSE lu.state END as lab_state,
 				CASE WHEN lu.attempts IS NULL THEN '' ELSE lu.attempts END as lab_attempts,
@@ -282,7 +280,6 @@ router.get('/getStudentsLabsBySub', function(req, res) {
 					user_id = ? AND
 					delivery_date BETWEEN ? AND ?
 			) lu ON l.id = lu.laboratory_id
-			INNER JOIN lessons le ON l.lesson_id = le.id
 			WHERE
 				l.subject_id = ?` 
 		;

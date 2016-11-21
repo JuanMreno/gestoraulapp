@@ -40,7 +40,7 @@ router.get('/getTeacher', function(req, res) {
 	sheet.addRow(['Promedio',decode(data.promInd)]);
 	sheet.addRow([]);
 	sheet.addRow([]);
-	sheet.addRow(["Nombre","Fecha","Estado","Tiempo entrega","Intentos","N. Profesor","N. Lab","N. Final"]);
+	sheet.addRow(["Nombre","Unidad","Fecha","Estado","Tiempo entrega","Intentos","N. Profesor","N. Lab","N. Final"]);
 
 	sheet.getRow(1).font = { size: 15, bold: true };
 	for(var i=2 ; i<8 ; i++){
@@ -59,6 +59,7 @@ router.get('/getTeacher', function(req, res) {
 
 		sheet.addRow([
 				decode(name),
+				decode(e.less_name),
 				decode(e.delivery_date),
 				decode(estado),
 				decode(e.lab_delivery_time),
@@ -71,12 +72,13 @@ router.get('/getTeacher', function(req, res) {
 
 	sheet.getColumn('A').width = 27;
 	sheet.getColumn('B').width = 33;
-	sheet.getColumn('C').width = 10;
-	sheet.getColumn('D').width = 17;
-	sheet.getColumn('E').width = 10;
-	sheet.getColumn('F').width = 13;
-	sheet.getColumn('G').width = 9;
-	sheet.getColumn('H').width = 10;
+	sheet.getColumn('C').width = 12;
+	sheet.getColumn('D').width = 10;
+	sheet.getColumn('E').width = 17;
+	sheet.getColumn('F').width = 10;
+	sheet.getColumn('G').width = 13;
+	sheet.getColumn('H').width = 9;
+	sheet.getColumn('I').width = 10;
 
 	res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; charset=utf-8');
 	res.setHeader("Content-Disposition", "attachment; filename=" + "Report.xlsx");
@@ -113,7 +115,7 @@ router.get('/getStudent', function(req, res) {
 	sheet.addRow(['Materia',decode(data.subject)]);
 	sheet.addRow([]);
 	sheet.addRow([]);
-	sheet.addRow(["Práctica","Fecha","Estado","N. Profesor","N. Lab","N. Final"]);
+	sheet.addRow(["Práctica","Unidad","Fecha","Estado","N. Profesor","N. Lab","N. Final"]);
 
 	sheet.getRow(1).font = { size: 15, bold: true };
 	sheet.getRow(2).font = { size: 13, bold: true };
@@ -126,6 +128,7 @@ router.get('/getStudent', function(req, res) {
 
 		sheet.addRow([
 				decode(e.lab_name),
+				decode(e.less_name),
 				decode(e.delivery_date),
 				decode(estado),
 				decode(e.lab_teacher_score),
@@ -136,10 +139,11 @@ router.get('/getStudent', function(req, res) {
 
 	sheet.getColumn('A').width = 27;
 	sheet.getColumn('B').width = 33;
-	sheet.getColumn('C').width = 10;
-	sheet.getColumn('D').width = 17;
-	sheet.getColumn('E').width = 10;
-	sheet.getColumn('F').width = 13;
+	sheet.getColumn('C').width = 12;
+	sheet.getColumn('D').width = 10;
+	sheet.getColumn('E').width = 17;
+	sheet.getColumn('F').width = 10;
+	sheet.getColumn('G').width = 13;
 
 	res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; charset=utf-8');
 	res.setHeader("Content-Disposition", "attachment; filename=" + "Report.xlsx");

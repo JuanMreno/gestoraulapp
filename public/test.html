@@ -40,12 +40,20 @@
 	</form>
 	<br>
 	<label for="data">upload_lab Form</label>
-	<form id="uploadLabsForm" action="externals/put_lab" method="POST">
+	<form id="uploadLabsForm" action="uploads/labs" method="POST">
 		<input type="text" name="data" style="width: 100%;">
 		<input type="file" name="labs_file">
 	</form>
 	<br>
 	<button onclick="sendUploadLab()">Send</button>
+	<br>
+	<label for="data">upload_users Form</label>
+	<form id="uploadUsersForm" action="uploads/users" method="POST">
+		<input type="text" name="data" style="width: 100%;">
+		<input type="file" name="users_file">
+	</form>
+	<br>
+	<button onclick="sendUploadUsers()">Send</button>
 	<p id="resContId"></p>
 
 	<script src="assets/js/jquery.min.js"></script>
@@ -101,28 +109,6 @@
 				var res = $.parseJSON(b64_to_utf8(data));
 				$('#resContId').text(b64_to_utf8(data));
 				console.log(res);
-				/*
-				if(res.status == "true"){
-					if(res.data.length == 1){
-						var user = res.data[0];
-						clearInterval(loadIntervaId);
-						$.cookie(SESSION_COOKIE, user);
-						goToMain();
-					}
-					else{
-						alert("Nombre o Usuario inválido, intenta de nuevo.");
-						restartButton();
-					}
-				}
-				else{
-					alert("Nombre o Usuario inválido, intenta de nuevo.");
-					restartButton();
-				}
-				*/
-				//alert("Nombre o Usuario inválido, intenta de nuevo.")
-				//clearInterval(loadIntervaId);
-				//$.cookie(SESSION_COOKIE, {id:"1",name:"Oscar Moreno",rol:"pro-rol",rolName:"Profesor"});
-				//goToMain();
 			})
 			.error(function(e) {
 				console.log("Error ajax.");
@@ -150,28 +136,33 @@
 				var res = $.parseJSON(b64_to_utf8(data));
 				$('#resContId').text(b64_to_utf8(data));
 				console.log(res);
-				/*
-				if(res.status == "true"){
-					if(res.data.length == 1){
-						var user = res.data[0];
-						clearInterval(loadIntervaId);
-						$.cookie(SESSION_COOKIE, user);
-						goToMain();
-					}
-					else{
-						alert("Nombre o Usuario inválido, intenta de nuevo.");
-						restartButton();
-					}
-				}
-				else{
-					alert("Nombre o Usuario inválido, intenta de nuevo.");
-					restartButton();
-				}
-				*/
-				//alert("Nombre o Usuario inválido, intenta de nuevo.")
-				//clearInterval(loadIntervaId);
-				//$.cookie(SESSION_COOKIE, {id:"1",name:"Oscar Moreno",rol:"pro-rol",rolName:"Profesor"});
-				//goToMain();
+			})
+			.error(function(e) {
+				console.log("Error ajax.");
+			});
+		}
+
+		function sendUploadUsers() {
+			var dataText = $("#dataInpt").val();
+			var service = $('#selServId option:selected').val();
+
+			var ajaxConfig;
+
+			var fd = new FormData(document.getElementById("uploadUsersForm"));
+			ajaxConfig = {
+				method: "POST",
+				url: CON_URL+"uploads/users",
+				data:fd,
+				processData: false,  // tell jQuery not to process the data
+				contentType: false
+			};
+
+			$.ajax(ajaxConfig)
+			.done(function( data ) {
+				
+				var res = $.parseJSON(b64_to_utf8(data));
+				$('#resContId').text(b64_to_utf8(data));
+				console.log(res);
 			})
 			.error(function(e) {
 				console.log("Error ajax.");

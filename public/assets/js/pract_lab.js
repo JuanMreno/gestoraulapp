@@ -213,6 +213,7 @@
                         $('#aBtnDownL').attr('href', item.lab_report_url);
                     }
 
+                    $modal.find('#cUnidad').val(item.less_name);
                     $modal.find('#fEntrega').val(item.delivery_date);
                     $modal.find('#tEntrega').val(item.lab_delivery_time);
                     $modal.find('#nProfesor').val(item.lab_teacher_score);

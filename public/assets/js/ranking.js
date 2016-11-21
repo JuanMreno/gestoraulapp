@@ -191,24 +191,10 @@
                     $e.attr({
                         "data-toggle": 'tooltip',
                         "data-container": 'body',
-                        "title": 'Puntaje por calificaciones'
+                        "title": 'Tiempo promedio de prácticas'
                     });
 
                     $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(3)");
-                    $e.attr({
-                        "data-toggle": 'tooltip',
-                        "data-container": 'body',
-                        "title": 'Puntaje por prácticas entregadas'
-                    });
-
-                    $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(4)");
-                    $e.attr({
-                        "data-toggle": 'tooltip',
-                        "data-container": 'body',
-                        "title": 'Puntaje por tiempos de entrega'
-                    });
-
-                    $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(5)");
                     $e.attr({
                         "data-toggle": 'tooltip',
                         "data-container": 'body',
@@ -222,10 +208,8 @@
             fields: [
              	{ name: "rank", type: "text", align: "center", width: 30, title: "Pos" },
              	{ name: "name", type: "text", align: "center", width: 250, title: "Nombre" },
-	            { name: "lab_qual_score", type: "text", align: "center", filtering: false, width: 30, title:"P" },
-	            { name: "lab_num_score", type: "text", align: "center", filtering: false, width: 30, title:"A" },
-	            { name: "tab_t_wasted_score", type: "text", align: "center", filtering: false, width: 30, title:"F" },
-	            { name: "total_score", type: "text", align: "center", filtering: false, width: 30, title:"T" },
+	            { name: "tmeAvg", type: "text", align: "center", filtering: false, width: 30, title:"T" },
+                { name: "rnkScore", type: "text", align: "center", filtering: false, width: 30, title:"P" },
             	{ type: "control" }
             ]
         });

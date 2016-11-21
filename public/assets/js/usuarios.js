@@ -25,6 +25,53 @@
 
         $('#tipoDropdown').html('Profesores  ' + '<span class="caret"></span>');
         $("#tipoDropdown").attr('data-sel-id','3'); 
+
+        $('#uploadUsers').off('click').on('click', function(event) {
+            event.preventDefault();
+            /* Act on the event */
+
+            $modal = $('#modalUploadUsers');
+            $modal.off('shown.bs.modal').on('shown.bs.modal', function (e) {
+                //console.log(item);
+
+                $('#btnUploadUsers').off('click').on('click', function(event) {
+                    event.preventDefault();
+                    var fd = new FormData(document.getElementById("uploadUsersForm"));
+                    ajaxConfig = {
+                        method: "POST",
+                        url: CON_URL+"uploads/users",
+                        data:fd,
+                        processData: false,  // tell jQuery not to process the data
+                        contentType: false
+                    };
+
+                    $.ajax(ajaxConfig)
+                    .done(function( data ) {
+                            
+                        var res = $.parseJSON(b64_to_utf8(data));
+                        if(res.state == "true"){
+                            if(res.res_code == "QUERY_OK"){
+                                alert("Información cargada con éxito.");
+                                $modal.modal('hide');
+                                init();
+                            }
+                            else{
+                                alert("Formato o información incorrecta, valide la información e intente de nuevo.");
+                            }
+                        }
+                        else{
+                            alert("Ha ocurrido un error inesperado, inténtalo de nuevo.");
+                        }
+                    })
+                    .error(function(e) {
+                        alert("Error de conexión.");
+                        console.log("Error ajax.");
+                    });
+                });
+            });
+            $modal.modal("show");
+        });
+
         setUsersTable();
         listAllGroups();
 	}

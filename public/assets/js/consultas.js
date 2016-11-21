@@ -433,6 +433,7 @@
 
                 $('#aBtnDownL').show();
 
+                $modal.find('#cUnidad').val(item.less_name);
                 if(item.lab_state == "1"){
                     $labelState.removeClass('label-danger');
                     $labelState.addClass("label").addClass('label-success');
@@ -631,7 +632,8 @@
                 $modal.find('.modal-title').text(item.lab_name);
 
                 $('#aBtnDownL').show();
-                
+
+                $modal.find('#cUnidad').val(item.less_name);
                 if(item.lab_state == "1"){
                     $labelState.removeClass('label-danger');
                     $labelState.addClass("label").addClass('label-success');
@@ -822,10 +824,14 @@
                 rows:aData
             }
             
-            const pdfConst = new PdfMakeConstructor(stuName.replace(" ", "_") + "_report.pdf");
+            const pdfConst = new PdfMakeConstructor(stuName.replace(" ", "_") + "_reporte.pdf");
 
             var selType = $('#nomSelect').attr('data-type');
-            pdfConst.makeStuEvalReport(data,selType);
+
+            if(selType == 'lab')
+                pdfConst.makeLabReport(data);
+            else
+                pdfConst.makeStuReport(data);
         });
 
         $('#dlExcelReport').off('click').on('click', function(event) {

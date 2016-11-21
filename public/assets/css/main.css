@@ -2356,6 +2356,9 @@
 	input.form-control.only-read,textarea.form-control.only-read {
 		pointer-events: none;
 		background: rgba(148, 148, 148, 0.1);
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis
 	}
 
 	.daterangepicker{

@@ -307,6 +307,7 @@
                 $('#aBtnDownL').show();
                 $('#btnRestInt').show();
 
+                $modal.find('#cUnidad').val(item.less_name);
                 if(item.lab_state == "1"){
                     $labelState.removeClass('label-danger');
                     $labelState.addClass("label").addClass('label-success');

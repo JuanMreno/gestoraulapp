@@ -6,5 +6,18 @@ var SqlConnection = function () {
 	this.connection = mysql.createConnection(this.s);
 }
 
-// export the class
 module.exports.SqlConnection = SqlConnection;
+
+
+var SqlConMultStat = function () {
+  // always initialize all instance properties
+	this.connection = mysql.createConnection({
+	  host     : '127.0.0.1',
+	  user     : 'root',
+	  password : 'root',
+  	  database: 'gestor_aula',
+	  multipleStatements: true
+	});
+}
+
+module.exports.SqlConMultStat = SqlConMultStat;

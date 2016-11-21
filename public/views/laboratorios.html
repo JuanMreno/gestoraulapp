@@ -25,10 +25,45 @@
 			  		</div>
 				</div>
 			  </div>
+			  <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+				<div class="containerDropDown">
+			  		<div class="row" style="text-align: center;margin-right: 0px;">
+			  			<button id="uploadLabs" type="button" class="btn btn-primary" data-toggle="tooltip" title="Ir al ranking global"  data-placement="bottom" style="margin-left:5px">
+							<i class="fa fa-upload fa-2x" aria-hidden="true"></i>
+						</button>
+			  		</div>
+				</div>
+			  </div>
 			</div>
 			<div id="jsGrid" class="jsGridTable"></div>
 		</div>
 
 	</section>
+</div>
+<div id="modalUploadLabs" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+      	<!--<h4 class="modal-title">Práctica</h4>-->
+        <div class="row">
+        	<div class="col-xs-9">
+		        <h4 class="modal-title">Cargar lista de laboratorios</h4>
+        	</div>
+        </div>
+      </div>
+      <div class="modal-body">
+      	<div class="form-group">
+	        <form id="uploadLabsForm" action="" method="POST">
+				<h6 class="field-label">Cargar laboratorios</h6>
+				<input id="inpFile" type="file" name="labs_file" class="btn btn-default">
+			</form>
+			<button id="btnUploadLabs" class="btn btn-primary">Subir</button>
+		</div>		
+      </div>
+      <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
 </div>
 <script src="assets/js/laboratorios.js"></script>

@@ -82,123 +82,204 @@ router.post('/labs', function(req, res) {
 
 		var workbook = new Excel.Workbook();
 
-		console.log(file.path);
-		var rowBase = ["Nombre", "Unidad", "Materia", "Codigo"];
+		if (!fs.existsSync(process.env.REPORTS_DIR)){
+		    fs.mkdirSync(process.env.REPORTS_DIR);
+		}
+
+		var fileName = "practicas.csv";
+
+		findRemoveSync(
+			process.env.REPORTS_DIR, { files: [ "practicas.csv" ] }
+		);
+
+		fs.createReadStream(file.path)
+			.pipe(fs.createWriteStream(process.env.REPORTS_DIR + "/" + fileName ) );
+
+		var query = "\
+			DELETE FROM temp_labs;\
+			LOAD DATA INFILE \"" + process.env.ABS_REPORTS_DIR + "/" + fileName + "\"\
+			INTO TABLE temp_labs\
+			COLUMNS TERMINATED BY ','\
+			OPTIONALLY ENCLOSED BY '\"'\
+			ESCAPED BY '\"'\
+			LINES TERMINATED BY '\r\n'\
+			IGNORE 1 LINES;";
+
+		var conMS = new conn.SqlConMultStat().connection;
+		conMS.query(query, function(err, results) {
 		
-		workbook.xlsx.readFile(file.path)
-		    .then(function() {
-		    	data.status = "false";
-			 		data.res_code = "EXCEL_ERROR";
-
-			 		var jData = JSON.stringify(data);
-			 		var jData = new Buffer(jData).toString('base64');
-			 		res.end(jData);
-			 		return;	
-				function ExcelFormatError() {};
-	    		try{
-			    	var worksheet = workbook.getWorksheet('Practicas');
-
-			    	worksheet.eachRow(function(row, rowNumber) {
-					    console.log('Row ' + rowNumber + ' = ' + JSON.stringify(row.values));
-					    console.log('Res: ' + JSON.stringify(r));
-
-			    		if(rowNumber == 1 && row.values !== rowBase)
-			    			throw ExcelFormatError;
-
-			    		if(row.values.length != 4)
-			    			throw ExcelFormatError;
-
-			    		var p = [
-		    				row.getCell(0).value,
-		    				row.getCell(1).value,
-		    				row.getCell(2).value,
-		    				row.getCell(3).value
-	    				];
-		    			var r = query("CALL laboratories_validate(?,?,?,?)",p);
-
-					});
-				}
-				catch(e){
-					if(e instanceof ExcelFormatError){
-						data.res_code = "FORMAT_EXCEL_ERROR";
-					}
-					else{
-						data.res_code = "EXCEL_ERROR";
-					}
-
-					data.status = "false";
-			 		data.res_code = "EXCEL_ERROR";
-
-			 		var jData = JSON.stringify(data);
-			 		var jData = new Buffer(jData).toString('base64');
-			 		res.end(jData);
-			 		return;			
-				}
-		    });
-		
-		/*
-		var connection = new conn.SqlConnection().connection;
-		var query = "CALL external_put_lab(?,?,?,?,?,?,?)";
-		var fileExt = "." + file.path.split('.').pop();
-
-		var p = [params.user, params.labCode, params.attempts, params.delivery_date, params.delivery_time, params.app_score, fileExt];
-		connection.query(query, p , function(err, rows) {
-		
-			if (err || rows.length == 0) {
+			if (err) {
 				console.error('error query: ' + query + err.stack);
 				data.status = "false";
 				data.res_code = "DB_EXCEPTION";
 
 				var jData = JSON.stringify(data);
 				res.send(new Buffer(jData).toString('base64'));
-				connection.end();
+				conMS.end();
 				return;
 			}
 
-			data = rows[0][0];
-
-			if(data.res_code == "LAB_INSERTED" || data.res_code == "LAB_UPDATED"){
-				try{
-					var labUserId = rows[1][0].labUserId;
-					if (!fs.existsSync(process.env.REPORTS_DIR)){
-					    fs.mkdirSync(process.env.REPORTS_DIR);
-					}
-
-					var fileName = labUserId + "_" + params.labCode + "." + file.path.split('.').pop();
-
-					findRemoveSync(
-						process.env.REPORTS_DIR, 
-						{
-							files: [
-								labUserId + "_" + params.labCode + ".xlsx",
-								labUserId + "_" + params.labCode + ".xls",
-								labUserId + "_" + params.labCode + ".docx",
-								labUserId + "_" + params.labCode + ".doc",
-								labUserId + "_" + params.labCode + ".pdf",
-								labUserId + "_" + params.labCode + ".jpg"
-							]
-						}
-					);
-
-					fs.createReadStream(file.path)
-						.pipe(fs.createWriteStream(process.env.REPORTS_DIR + "/" + fileName ) );
-				}
-				catch(e){
+			var connection = new conn.SqlConnection().connection;
+			connection.connect(function(err) {
+				if (err) {
+					console.error('error connecting: ' + err.stack);
 					data.status = "false";
-					data.res_code = "FILE_ERROR";
 
 					var jData = JSON.stringify(data);
 					res.send(new Buffer(jData).toString('base64'));
 					connection.end();
+					conMS.end();
 					return;
 				}
+
+				var query = "CALL uploads_labs()";
+
+				connection.query(query, function(err, results) {
+				
+					if (err) {
+						console.error('error query: ' + query + err.stack);
+						data.status = "false";
+						data.res_code = "DB_EXCEPTION";
+
+						var jData = JSON.stringify(data);
+						res.send(new Buffer(jData).toString('base64'));
+						conMS.end();
+						return;
+					}
+
+					data = results[0][0];
+					var jData = JSON.stringify(data);
+				  	res.send(new Buffer(jData).toString('base64'));
+				  	conMS.end();
+				  	connection.end();
+
+				});
+
+			});
+		});
+    });
+});
+
+router.post('/users', function(req, res) {
+	var data = {
+		status:"",
+		res_code:""
+	};
+
+	var form = new multiparty.Form();
+
+ 	form.parse(req, function(err, fields, files) {
+		if(err){
+			data.status = "false";
+	 		data.res_code = "ERROR";
+
+	 		var jData = JSON.stringify(data);
+	 		jData = new Buffer(jData).toString('base64');
+	 		res.end(jData);
+	 		return;
+		}
+
+		var file;
+		if(!files.users_file){
+			data.status = "false";
+	 		data.res_code = "FILE_NOT_FOUND";
+
+	 		var jData = JSON.stringify(data);
+	 		var jData = new Buffer(jData).toString('base64');
+	 		res.end(jData);
+	 		return;
+		}
+		else{
+			file = files.users_file[0];
+
+			if(file.originalFilename == ''){
+				data.status = "false";
+		 		data.res_code = "FILE_NOT_FOUND";
+
+		 		var jData = JSON.stringify(data);
+		 		var jData = new Buffer(jData).toString('base64');
+		 		res.end(jData);
+		 		return;
+			}
+		}
+
+		var workbook = new Excel.Workbook();
+
+		if (!fs.existsSync(process.env.REPORTS_DIR)){
+		    fs.mkdirSync(process.env.REPORTS_DIR);
+		}
+
+		var fileName = "usuarios.csv";
+
+		findRemoveSync(
+			process.env.REPORTS_DIR, { files: [ "usuarios.csv" ] }
+		);
+
+		fs.createReadStream(file.path)
+			.pipe(fs.createWriteStream(process.env.REPORTS_DIR + "/" + fileName ) );
+
+		var query = "\
+			DELETE FROM temp_users;\
+			LOAD DATA INFILE \"" + process.env.ABS_REPORTS_DIR + "/" + fileName + "\"\
+			INTO TABLE temp_users\
+			COLUMNS TERMINATED BY ','\
+			OPTIONALLY ENCLOSED BY '\"'\
+			ESCAPED BY '\"'\
+			LINES TERMINATED BY '\r\n'\
+			IGNORE 1 LINES;";
+
+		var conMS = new conn.SqlConMultStat().connection;
+		conMS.query(query, function(err, results) {
+		
+			if (err) {
+				console.error('error query: ' + query + err.stack);
+				data.status = "false";
+				data.res_code = "DB_EXCEPTION";
+
+				var jData = JSON.stringify(data);
+				res.send(new Buffer(jData).toString('base64'));
+				conMS.end();
+				return;
 			}
 
-			var jData = JSON.stringify(data);
-		  	res.send(new Buffer(jData).toString('base64'));
-		  	connection.end();
+			var connection = new conn.SqlConnection().connection;
+			connection.connect(function(err) {
+				if (err) {
+					console.error('error connecting: ' + err.stack);
+					data.status = "false";
+
+					var jData = JSON.stringify(data);
+					res.send(new Buffer(jData).toString('base64'));
+					connection.end();
+					conMS.end();
+					return;
+				}
+
+				var query = "CALL uploads_users()";
+
+				connection.query(query, function(err, results) {
+				
+					if (err) {
+						console.error('error query: ' + query + err.stack);
+						data.status = "false";
+						data.res_code = "DB_EXCEPTION";
+
+						var jData = JSON.stringify(data);
+						res.send(new Buffer(jData).toString('base64'));
+						conMS.end();
+						return;
+					}
+
+					data = results[0][0];
+					var jData = JSON.stringify(data);
+				  	res.send(new Buffer(jData).toString('base64'));
+				  	conMS.end();
+				  	connection.end();
+
+				});
+
+			});
 		});
-		*/
     });
 });
 
