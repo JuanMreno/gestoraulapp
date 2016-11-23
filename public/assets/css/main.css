@@ -2837,6 +2837,11 @@
 		#estMatDropdown  {
 			vertical-align:baseline;
 		}
+
+		.jsGridTable {
+		    font-size: medium;
+		    padding: 0px;
+		}
 	}
 
 	/* Mobile */
@@ -2893,6 +2898,11 @@
 				#footer .copyright li:first-child {
 					margin-top: 0;
 				}
+
+		.jsGridTable {
+		    font-size: xx-small;
+		    padding: 0px;
+		}
 	}
 
 	@media screen and (max-width: 660px) {

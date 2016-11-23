@@ -193,12 +193,14 @@
 
                     $('#aBtnDownL').show();
                     $('#formLoadFile').show();
+                    $('#btnUploadReport').show();
 
                 	if(item.lab_state == "1"){
 	                	$labelState.removeClass('label-danger');
                 		$labelState.addClass("label").addClass('label-success');
                 		$labelState.text('Entregado');
                         $('#formLoadFile').hide();
+                        $('#btnUploadReport').hide();
                 	}
                 	else{
 	                	$labelState.removeClass('label-success');
@@ -287,8 +289,7 @@
             		$modal.modal('show');
             		$modal.on('shown.bs.modal', function (e) {
 
-                        $('#formLoadFile').change(
-                            function(e){
+                        $('#formLoadFile').off('change').on('change',function(e){
                                 var fileName = e.target.files[0].name;
                                 var ext = fileName.split('.').pop();
 
@@ -326,12 +327,19 @@
 	                show: function() {
 	                },
 	                hide: function() {
-	                    $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(3)");
-	                    $e.attr({
-	                        "data-toggle": 'tooltip',
-	                        "data-container": 'body',
-	                        "title": 'Tiempo de entrega'
-	                    });
+                        $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(2)");
+                        $e.attr({
+                            "data-toggle": 'tooltip',
+                            "data-container": 'body',
+                            "title": 'Entregado/Sin entregar'
+                        });
+
+                        $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(3)");
+                        $e.attr({
+                            "data-toggle": 'tooltip',
+                            "data-container": 'body',
+                            "title": 'Tiempo de entrega'
+                        });
 
 	                    $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(4)");
 	                    $e.attr({
@@ -368,8 +376,8 @@
 	            fields: [
 	                { name: "lab_name", type: "text", align: "center", width: 160, title: "Nombre" },
 	                { name: "delivery_date", type: "text", align: "center", width: 70, title: "Fecha" },
-	                { name: "lab_state", type: "checkbox", align: "center", width: 50, title: "Entregado" },
-	                { name: "lab_delivery_time", type: "text", align: "center", width: 50, title:"E" },
+	                { name: "lab_state", type: "checkbox", align: "center", width: 50, title: "Entre" },
+	                { name: "lab_delivery_time", type: "text", align: "center", width: 50, title:"T" },
 	                { name: "lab_attempts", type: "text", align: "center", width: 30, title:"I" },
 	                { name: "lab_teacher_score", type: "text", align: "center", width: 30, title:"P" },
 	                { name: "lab_app_score", type: "text", align: "center", width: 30, title:"L" },

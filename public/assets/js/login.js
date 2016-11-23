@@ -99,5 +99,11 @@
 	}
 
 	loginInit();
+
+	console.log($(window).width());   // returns width of browser viewport
+	console.log($(window).height());   // returns height of browser viewport
+	
+	console.log($(document).width());
+	console.log($(document).height()); // returns height of HTML document
 	//goToMain();
 })(jQuery);

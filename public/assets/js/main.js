@@ -70,10 +70,10 @@
 		// Toggle.
 		$(
 			'<div id="headerToggle">' +
-				'<a href="#header" class="toggle"></a>' +
+				'<a id="panelToogleBtn" href="#header" class="toggle"></a>' +
 			'</div>'
 		)
-			.appendTo($body);
+		.appendTo($body);
 
 		// Header.
 		$('#header')
@@ -128,6 +128,7 @@
 			$(this).addClass('active');
 
 			$('#section').load('views/pract_lab.html');
+			$('#panelToogleBtn').trigger('click');
 		});
 		
 		$('#cons-link').off("click").on('click', function(event) {
@@ -136,6 +137,7 @@
 			$(this).addClass('active');
 
 			$('#section').load('views/consultas.html');
+			$('#panelToogleBtn').trigger('click');
 		});
 		
 		$('#eval-link').off("click").on('click', function(event) {
@@ -144,6 +146,7 @@
 			$(this).addClass('active');
 
 			$('#section').load('views/evaluacion.html');
+			$('#panelToogleBtn').trigger('click');
 		});
 		
 		$('#rank-link').off("click").on('click', function(event) {
@@ -152,6 +155,7 @@
 			$(this).addClass('active');
 
 			$('#section').load('views/ranking.html');
+			$('#panelToogleBtn').trigger('click');
 		});
 		
 		$('#anun-link').off("click").on('click', function(event) {
@@ -165,6 +169,7 @@
 			else if(session.rol == EST_ROL){
 				$('#section').load('views/anuncios_user.html');
 			}
+			$('#panelToogleBtn').trigger('click');
 		});
 		
 		$('#mgrp-link').off("click").on('click', function(event) {
@@ -173,6 +178,7 @@
 			$(this).addClass('active');
 
 			$('#section').load('views/mis_grupos.html');
+			$('#panelToogleBtn').trigger('click');
 		});
 		
 		$('#grps-link').off("click").on('click', function(event) {
@@ -181,6 +187,7 @@
 			$(this).addClass('active');
 
 			$('#section').load('views/grupos.html');
+			$('#panelToogleBtn').trigger('click');
 		});
 		
 		$('#mtrs-link').off("click").on('click', function(event) {
@@ -189,6 +196,7 @@
 			$(this).addClass('active');
 
 			$('#section').load('views/materias.html');
+			$('#panelToogleBtn').trigger('click');
 		});
 		
 		$('#usrs-link').off("click").on('click', function(event) {
@@ -197,6 +205,7 @@
 			$(this).addClass('active');
 
 			$('#section').load('views/usuarios.html');
+			$('#panelToogleBtn').trigger('click');
 		});
 
 		$('#labs-link').off("click").on('click', function(event) {
@@ -205,6 +214,7 @@
 			$(this).addClass('active');
 
 			$('#section').load('views/laboratorios.html');
+			$('#panelToogleBtn').trigger('click');
 		});
 
 		$('#conf-link').off("click").on('click', function(event) {
@@ -213,6 +223,7 @@
 			$(this).addClass('active');
 
 			$('#section').load('views/config.html');
+			$('#panelToogleBtn').trigger('click');
 		});
 		
 		$('#serv-link').off("click").on('click', function(event) {
@@ -221,6 +232,7 @@
 			$(this).addClass('active');
 
 			$('#section').load('views/servidor.html');
+			$('#panelToogleBtn').trigger('click');
 		});
 		
 		$('#cses-link').off("click").on('click', function(event) {

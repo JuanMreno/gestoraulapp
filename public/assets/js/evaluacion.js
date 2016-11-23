@@ -408,6 +408,13 @@
                 show: function() {
                 },
                 hide: function() {
+                    $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(2)");
+                    $e.attr({
+                        "data-toggle": 'tooltip',
+                        "data-container": 'body',
+                        "title": 'Entregado/Sin entregar'
+                    });
+
                     $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(3)");
                     $e.attr({
                         "data-toggle": 'tooltip',
@@ -450,8 +457,8 @@
             fields: [
                 { name: "lab_name", type: "text", align: "center", width: 160, title: "Nombre" },
                 { name: "delivery_date", type: "text", align: "center", width: 70, title: "Fecha" },
-                { name: "lab_state", type: "checkbox", align: "center", width: 50, title: "Entregado" },
-                { name: "lab_delivery_time", type: "text", align: "center", width: 50, title:"E" },
+                { name: "lab_state", type: "checkbox", align: "center", width: 50, title: "Entr" },
+                { name: "lab_delivery_time", type: "text", align: "center", width: 50, title:"T" },
                 { name: "lab_attempts", type: "text", align: "center", width: 30, title:"I" },
                 { name: "lab_teacher_score", type: "text", align: "center", width: 30, title:"P" },
                 { name: "lab_app_score", type: "text", align: "center", width: 30, title:"L" },
