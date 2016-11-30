@@ -232,8 +232,78 @@
                         $.fileDownload(CON_URL+ item.lab_report_url);
                     });
                     */
+                    //console.log(navigator.userAgent);
+                    //console.log(isNativeApp());
+
                     $('#btnUploadReport').off('click').on('click', function(event) {
                         event.preventDefault();
+
+                        //console.log($("#inpCodFile").val());
+                        //return;
+                        /*
+                        var inpFile = document.getElementById("inpFile");
+                        var fd = new FormData();
+                        
+                        if(document.getElementById('inpFile').files.length == 0){
+                            alert('No se ha adjuntado ningún archivo.');
+                            $('#inpFile').replaceWith($('#inpFile').clone());
+                            return;
+                        }
+
+                        var session = $.cookie(SESSION_COOKIE);
+
+                        var labId = (item.lab_users_id == '') ? null : item.lab_users_id;
+                        var data = {
+                            userId:session.id,
+                            labId:item.lab_id,
+                            labUserId:labId
+                        }
+
+                        var jData = JSON.stringify(data);
+                        
+                        $('#inpData').val(jData);
+                        $('#inpSbmt').trigger('click');
+                        
+                        fd.append("data", jData);
+
+                        console.log("inpFile.files[0].name: " + inpFile.files[0].name)
+                        //fd.append('report_file',inpFile.files[0],'doc.pdf');
+
+                        $.ajax({
+                            method: "POST",
+                            url: CON_URL+"students/put_lab",
+                            data:fd,
+                            processData: false,  // tell jQuery not to process the data
+                            contentType: false
+                        })
+                        .done(function( data ) {
+                            
+                            var res = $.parseJSON(b64_to_utf8(data));
+                            console.log(b64_to_utf8(data));
+                            if(res.state == "true"){
+                                if(res.res_code == "LAB_UPDATED" || res.res_code == "LAB_INSERTED"){
+                                    alert("Reporte generado con éxito.");
+                                    $modal.modal('hide');
+                                    var subjectId = $("#subjectsDropDown").attr('data-sel-id'); 
+                                    setPracLabTable(subjectId); 
+                                }
+                                else{
+                                    alert("El reporte ya ha sido entregado.");
+                                }
+                            }
+                            else{
+                                alert("Ha ocurrido un error inesperado, inténtalo de nuevo.");
+                            }
+                        })
+                        .error(function(e,t,er) {
+                            alert("Error de conexión.");
+                            console.log("Error ajax.");
+
+                            console.log("errorThrown: " + er);
+                            console.log("t: " + t);
+                        });
+
+                        */
 
                         var fd = new FormData(document.getElementById("formLoadFile"));
                         console.log(fd);
@@ -284,6 +354,8 @@
                             alert("Error de conexión.");
                             console.log("Error ajax.");
                         });
+
+                        
                     });
 
             		$modal.modal('show');
@@ -429,5 +501,9 @@
             $.fileDownload(CON_URL+"reports/getStudent?data=" + JSON.stringify(data));
         });
 	}
+
+    function isNativeApp()  {
+        return /GestorAula\/[0-9\.]+$/.test(navigator.userAgent);
+    }
 
 })(jQuery);

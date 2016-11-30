@@ -263,9 +263,10 @@ router.post('/put_lab', function(req, res) {
  	form.parse(req, function(err, fields, files) {
 		if(err){
 			data.status = "false";
-	 		data.res_code = "ERROR";
+	 		data.res_code = "FORM_ERROR";
 
 	 		var jData = JSON.stringify(data);
+	 		console.log(jData);
 	 		var jData = new Buffer(jData).toString('base64');
 	 		res.end(jData);
 	 		return;
@@ -277,6 +278,7 @@ router.post('/put_lab', function(req, res) {
 	 		data.res_code = "DATA_NOT_FOUND";
 
 	 		var jData = JSON.stringify(data);
+	 		console.log(jData);
 	 		var jData = new Buffer(jData).toString('base64');
 	 		res.end(jData);
 	 		return;
@@ -291,6 +293,7 @@ router.post('/put_lab', function(req, res) {
 		 		data.res_code = "WRONG_DATA_FORMAT";
 
 		 		var jData = JSON.stringify(data);
+		 		console.log(jData);
 		 		var jData = new Buffer(jData).toString('base64');
 		 		res.end(jData);
 		 		return;
@@ -303,6 +306,7 @@ router.post('/put_lab', function(req, res) {
 	 		data.res_code = "FILE_NOT_FOUND";
 
 	 		var jData = JSON.stringify(data);
+	 		console.log(jData);
 	 		var jData = new Buffer(jData).toString('base64');
 	 		res.end(jData);
 	 		return;
@@ -315,6 +319,7 @@ router.post('/put_lab', function(req, res) {
 		 		data.res_code = "FILE_NOT_FOUND";
 
 		 		var jData = JSON.stringify(data);
+		 		console.log(jData);
 		 		var jData = new Buffer(jData).toString('base64');
 		 		res.end(jData);
 		 		return;
@@ -335,6 +340,7 @@ router.post('/put_lab', function(req, res) {
 				data.res_code = "DB_EXCEPTION";
 
 				var jData = JSON.stringify(data);
+		 		console.log(jData);
 				res.send(new Buffer(jData).toString('base64'));
 				connection.end();
 				return;
@@ -375,6 +381,7 @@ router.post('/put_lab', function(req, res) {
 					data.res_code = "FILE_ERROR";
 
 					var jData = JSON.stringify(data);
+			 		console.log(jData);
 					res.send(new Buffer(jData).toString('base64'));
 					connection.end();
 					return;
@@ -382,6 +389,7 @@ router.post('/put_lab', function(req, res) {
 			}
 
 			var jData = JSON.stringify(data);
+	 		console.log(jData);
 		  	res.send(new Buffer(jData).toString('base64'));
 		  	connection.end();
 		});

@@ -238,4 +238,18 @@ router.post('/put_lab', function(req, res) {
     });
 });
 
+router.get('/validate', function(req, res) {
+
+	var data = {
+		status:"true",
+		data:{}
+	};
+
+	var jData = JSON.stringify(data);
+
+	console.log(jData);
+  	res.send(jData);
+  	connection.end();
+});
+
 module.exports = router;

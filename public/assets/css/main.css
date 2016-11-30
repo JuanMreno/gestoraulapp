@@ -2361,6 +2361,10 @@
 		text-overflow: ellipsis
 	}
 
+	input[type="file"] {
+		max-width: 100%;
+	}
+
 	.daterangepicker{
 	    line-height: normal;
 	}
