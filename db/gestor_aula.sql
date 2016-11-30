@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80000
 File Encoding         : 65001
 
-Date: 2016-11-20 21:01:49
+Date: 2016-11-30 12:12:35
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -94,16 +94,13 @@ CREATE TABLE `laboratories_users` (
   KEY `user_id` (`user_id`),
   CONSTRAINT `laboratories_users_ibfk_1` FOREIGN KEY (`laboratory_id`) REFERENCES `laboratory` (`id`),
   CONSTRAINT `laboratories_users_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of laboratories_users
 -- ----------------------------
-INSERT INTO `laboratories_users` VALUES ('27', '1', '8', '1', '2016-11-17 09:02:58', '1', '00:12:50', 'reports/27_F001.xlsx', null, '3.5', '3.5', null, '2016-11-17 09:02:58', '2016-11-19 13:01:57');
-INSERT INTO `laboratories_users` VALUES ('28', '1', '9', '1', '2016-11-17 09:14:10', '1', '00:15:10', 'reports/28_F002.xlsx', null, '4', '4', null, '2016-11-17 09:14:10', '2016-11-19 13:01:47');
-INSERT INTO `laboratories_users` VALUES ('29', '1', '10', '1', '2016-11-17 20:22:22', null, null, 'reports/29_F003.pdf', null, '3', '3', null, '2016-11-17 20:22:22', '2016-11-19 15:52:15');
-INSERT INTO `laboratories_users` VALUES ('30', '1', '11', '1', '2016-11-18 07:26:32', null, null, 'reports/30_F004.csv', null, null, null, null, '2016-11-18 07:26:32', '2016-11-18 07:26:32');
-INSERT INTO `laboratories_users` VALUES ('31', '1', '12', '1', '2016-11-18 07:28:23', null, null, 'reports/31_F005.pdf', null, null, null, null, '2016-11-18 07:28:23', '2016-11-18 07:28:23');
+INSERT INTO `laboratories_users` VALUES ('35', '1', '379', '1', '2016-11-29 18:34:15', null, null, 'reports/35_FISMRU001.pdf', null, null, null, null, '2016-11-29 18:34:15', '2016-11-29 18:34:18');
+INSERT INTO `laboratories_users` VALUES ('36', '1', '374', '1', '2016-11-29 18:34:36', null, null, 'reports/36_FISVEC003.pdf', null, null, null, null, '2016-11-29 18:34:36', '2016-11-29 18:34:36');
 
 -- ----------------------------
 -- Table structure for laboratory
@@ -122,22 +119,54 @@ CREATE TABLE `laboratory` (
   KEY `lesson_id` (`lesson_id`),
   KEY `subject_id` (`subject_id`),
   CONSTRAINT `laboratory_ibfk_1` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=373 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=418 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of laboratory
 -- ----------------------------
-INSERT INTO `laboratory` VALUES ('4', 'Q004', '2', '1', 'Dosiluciones', 'Compuestos', '2016-10-29 15:00:39', '2016-11-13 20:32:55');
-INSERT INTO `laboratory` VALUES ('5', 'Q005', '2', '2', 'Índice de PH', 'Compuestos', '2016-10-29 15:00:49', '2016-11-13 20:32:55');
-INSERT INTO `laboratory` VALUES ('6', 'Q006', '2', '2', 'Calidad del agua', 'Compuestos', '2016-10-29 15:00:53', '2016-11-13 20:32:55');
-INSERT INTO `laboratory` VALUES ('7', 'Q007', '2', '2', 'Calorimetría', 'Compuestos', '2016-10-29 15:00:58', '2016-11-13 20:32:55');
-INSERT INTO `laboratory` VALUES ('8', 'F001', '1', '1', 'Relación potencial', 'Mecanica', '2016-10-29 15:02:22', '2016-11-13 20:32:31');
-INSERT INTO `laboratory` VALUES ('9', 'F002', '1', '1', 'Relación exponencial', 'Mecanica  compuestos fluidos', '2016-10-29 15:02:35', '2016-11-19 16:28:37');
-INSERT INTO `laboratory` VALUES ('10', 'F003', '1', '1', 'Movimiento uniforme', 'Mecanica', '2016-10-29 15:02:45', '2016-11-13 20:32:31');
-INSERT INTO `laboratory` VALUES ('11', 'F004', '1', '2', 'Movimiento parabólico', 'Mecanica', '2016-10-29 15:02:53', '2016-11-13 20:32:31');
-INSERT INTO `laboratory` VALUES ('12', 'F005', '1', '2', 'MAS', 'Mecanica', '2016-10-29 15:02:57', '2016-11-13 20:32:31');
-INSERT INTO `laboratory` VALUES ('13', 'F006', '1', '2', 'Péndulo simple', 'Mecanica', '2016-10-29 15:03:01', '2016-11-13 20:32:31');
-INSERT INTO `laboratory` VALUES ('14', 'F007', '1', '2', 'Péndulo físico', 'Mecanica', '2016-10-29 15:03:11', '2016-11-13 20:32:31');
+INSERT INTO `laboratory` VALUES ('373', 'QUIDEN001', '2', null, 'Densidad de sólidos', null, '2016-11-29 18:03:53', '2016-11-29 18:03:53');
+INSERT INTO `laboratory` VALUES ('374', 'FISVEC003', '1', null, 'Clases de vectores', 'Magnitudes y unidades', '2016-11-29 18:07:05', '2016-11-29 18:07:05');
+INSERT INTO `laboratory` VALUES ('377', 'FISMRU003', '1', null, 'Gráficas de posición contra tiempo', 'Cinemática', '2016-11-29 18:07:05', '2016-11-29 18:07:05');
+INSERT INTO `laboratory` VALUES ('378', 'FISMRU004', '1', null, 'Gráficas de velocidad contra tiempo', 'Cinemática', '2016-11-29 18:07:05', '2016-11-29 18:07:05');
+INSERT INTO `laboratory` VALUES ('379', 'FISMRU001', '1', null, 'Movimiento rectilíneo uniforme M.R.U', 'Cinemática', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
+INSERT INTO `laboratory` VALUES ('380', 'FISMRU002', '1', null, 'Movimiento rectilíneo uniformemente acelerado M.R.U.A', 'Cinemática', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
+INSERT INTO `laboratory` VALUES ('381', 'FISS3D004', '1', null, 'Movimiento en el plano', 'Cinemática', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
+INSERT INTO `laboratory` VALUES ('382', 'FISS3D001', '1', null, 'Tiro parabólico - Reto lanzamiento baloncesto', 'Cinemática', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
+INSERT INTO `laboratory` VALUES ('383', 'FISVEC004', '1', null, 'Resultante de dos fuerzas', 'Dinámica y estática', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
+INSERT INTO `laboratory` VALUES ('384', 'FISMRU005', '1', null, 'Fuerza de fricción', 'Dinámica y estática', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
+INSERT INTO `laboratory` VALUES ('385', 'FISNEW001', '1', null, 'Comprobación segunda ley de Newton - Desplazamiento de un móvil.', 'Dinámica y estática', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
+INSERT INTO `laboratory` VALUES ('386', 'FISNEW002', '1', null, 'Segunda ley de Newton - Elevando una carga', 'Dinámica y estática', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
+INSERT INTO `laboratory` VALUES ('387', 'FISEQU003', '1', null, 'La carreta como máquina simple', 'Dinámica y estática', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
+INSERT INTO `laboratory` VALUES ('388', 'FISEQU001', '1', null, 'Momento de una fuerza', 'Dinámica y estática', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
+INSERT INTO `laboratory` VALUES ('389', 'FISEQU002', '1', null, 'Equilibrio', 'Dinámica y estática', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
+INSERT INTO `laboratory` VALUES ('390', 'FISNEW003', '1', null, 'Gravedad', 'Dinámica y estática', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
+INSERT INTO `laboratory` VALUES ('391', 'FISTEP002', '1', null, 'Trabajo y potencia en un elevador de carga', 'Trabajo energía y potencia', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
+INSERT INTO `laboratory` VALUES ('392', 'FISTEP003', '1', null, 'Trabajo energía y potencia en una montaña rusa', 'Trabajo energía y potencia', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
+INSERT INTO `laboratory` VALUES ('393', 'FISTEP001', '1', null, 'Fuentes y transformaciones de la energía', 'Trabajo energía y potencia', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
+INSERT INTO `laboratory` VALUES ('394', 'FISS3D005', '1', null, 'Principio de Pascal', 'Fluidos', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
+INSERT INTO `laboratory` VALUES ('395', 'FISS3D002', '1', null, 'Prensa hidráhulica', 'Fluidos', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
+INSERT INTO `laboratory` VALUES ('396', 'FISTER001', '1', null, 'Escalas de temperatura', 'Termodinámica', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
+INSERT INTO `laboratory` VALUES ('397', 'FISTER002', '1', null, 'Calor específico y capacidad térmica', 'Termodinámica', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
+INSERT INTO `laboratory` VALUES ('398', 'FISTER003', '1', null, 'Calor latente', 'Termodinámica', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
+INSERT INTO `laboratory` VALUES ('399', 'FISS3D006', '1', null, 'La energía en el movimiento armónico simple', 'Movimiento armónico simple', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
+INSERT INTO `laboratory` VALUES ('400', 'FISS3D007', '1', null, 'Leyes del péndulo simple', 'Movimiento armónico simple', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
+INSERT INTO `laboratory` VALUES ('401', 'FISS3D003', '1', null, 'Movimiento pendular - Reto reloj de péndulo', 'Movimiento armónico simple', '2016-11-29 18:07:07', '2016-11-29 18:07:07');
+INSERT INTO `laboratory` VALUES ('402', 'FISOND001', '1', null, 'Produciendo una onda de radio (Ondas electromagnéticas)', 'Ondas', '2016-11-29 18:07:07', '2016-11-29 18:07:07');
+INSERT INTO `laboratory` VALUES ('403', 'FISOND002', '1', null, 'Ondas de sonido (Ondas mecánicas)', 'Ondas', '2016-11-29 18:07:07', '2016-11-29 18:07:07');
+INSERT INTO `laboratory` VALUES ('404', 'FISOND003', '1', null, 'Espectro electromagnético', 'Ondas', '2016-11-29 18:07:07', '2016-11-29 18:07:07');
+INSERT INTO `laboratory` VALUES ('405', 'FISOND004', '1', null, 'Luz visible', 'Óptica', '2016-11-29 18:07:07', '2016-11-29 18:07:07');
+INSERT INTO `laboratory` VALUES ('406', 'FISOPT001', '1', null, 'Dispersión y síntesis de la luz', 'Óptica', '2016-11-29 18:07:07', '2016-11-29 18:07:07');
+INSERT INTO `laboratory` VALUES ('407', 'FISOPT002', '1', null, 'Espejo cóncavo', 'Óptica', '2016-11-29 18:07:07', '2016-11-29 18:07:07');
+INSERT INTO `laboratory` VALUES ('408', 'FISOPT004', '1', null, 'Espejos esféricos', 'Óptica', '2016-11-29 18:07:07', '2016-11-29 18:07:07');
+INSERT INTO `laboratory` VALUES ('409', 'FISOPT003', '1', null, 'Lente convergente', 'Óptica', '2016-11-29 18:07:07', '2016-11-29 18:07:07');
+INSERT INTO `laboratory` VALUES ('410', 'FISOPT005', '1', null, 'Lentes', 'Óptica', '2016-11-29 18:07:07', '2016-11-29 18:07:07');
+INSERT INTO `laboratory` VALUES ('411', 'FISELE004', '1', null, 'Magnitudes eléctricas', 'Electricidad y electromagnetismo', '2016-11-29 18:07:07', '2016-11-29 18:07:07');
+INSERT INTO `laboratory` VALUES ('412', 'FISELE001', '1', null, 'Circuito serie', 'Electricidad y electromagnetismo', '2016-11-29 18:07:07', '2016-11-29 18:07:07');
+INSERT INTO `laboratory` VALUES ('413', 'FISELE002', '1', null, 'Circuito paralelo', 'Electricidad y electromagnetismo', '2016-11-29 18:07:07', '2016-11-29 18:07:07');
+INSERT INTO `laboratory` VALUES ('414', 'FISELE003', '1', null, 'Circuito mixto', 'Electricidad y electromagnetismo', '2016-11-29 18:07:07', '2016-11-29 18:07:07');
+INSERT INTO `laboratory` VALUES ('415', 'FISELE005', '1', null, 'Resistencia equivalente', 'Electricidad y electromagnetismo', '2016-11-29 18:07:07', '2016-11-29 18:07:07');
+INSERT INTO `laboratory` VALUES ('416', 'FISELE006', '1', null, 'Ley de los voltajes', 'Electricidad y electromagnetismo', '2016-11-29 18:07:07', '2016-11-29 18:07:07');
+INSERT INTO `laboratory` VALUES ('417', 'FISELE007', '1', null, 'Ley de las corrientes', 'Electricidad y electromagnetismo', '2016-11-29 18:07:07', '2016-11-29 18:07:07');
 
 -- ----------------------------
 -- Table structure for lessons
@@ -251,8 +280,6 @@ CREATE TABLE `ranking` (
 -- ----------------------------
 -- Records of ranking
 -- ----------------------------
-INSERT INTO `ranking` VALUES ('1', '1', '52.3', '56', '32', '62', '2016-10-30 12:39:18', '2016-10-30 12:40:19');
-INSERT INTO `ranking` VALUES ('2', '3', '15.2', '15.6', '45.3', '75', '2016-10-30 12:39:19', '2016-10-30 12:40:21');
 
 -- ----------------------------
 -- Table structure for rols
@@ -407,7 +434,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   KEY `rols_id` (`rols_id`),
   CONSTRAINT `users_ibfk_1` FOREIGN KEY (`rols_id`) REFERENCES `rols` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of users
@@ -415,9 +442,6 @@ CREATE TABLE `users` (
 INSERT INTO `users` VALUES ('1', 'juan', '363b122c528f54df4a0446b6bab05515', 'Juan Camilo', 'Moreno Ruiz', '4', '2016-10-29 14:52:18', '2016-11-15 17:01:23');
 INSERT INTO `users` VALUES ('2', 'o', '363b122c528f54df4a0446b6bab05515', 'Andrés', 'Diaz', '3', '2016-10-29 14:52:43', '2016-11-15 16:21:11');
 INSERT INTO `users` VALUES ('3', 'm', '363b122c528f54df4a0446b6bab05515', 'Manuel', 'Moreno', '4', '2016-10-30 12:39:08', '2016-10-30 12:39:08');
-INSERT INTO `users` VALUES ('4', 'c', '81dc9bdb52d04dc20036dbd8313ed055', 'Carlos Antonio', 'Molares', '4', '2016-11-03 06:54:40', '2016-11-13 15:30:18');
-INSERT INTO `users` VALUES ('5', 'd', '363b122c528f54df4a0446b6bab05515', 'Daniel', 'Velez', '4', '2016-11-03 21:54:46', '2016-11-13 18:27:01');
-INSERT INTO `users` VALUES ('6', 'david05', 'e10adc3949ba59abbe56e057f20f883e', 'David', 'Diaz', '3', '2016-11-06 11:27:49', '2016-11-14 12:15:22');
 INSERT INTO `users` VALUES ('7', 'admin', '363b122c528f54df4a0446b6bab05515', 'Juan', 'Moreno', '2', '2016-11-08 07:59:19', '2016-11-08 07:59:32');
 INSERT INTO `users` VALUES ('19', 'sadmin', '363b122c528f54df4a0446b6bab05515', 'Jhonatan', 'Garcia', '1', '2016-11-14 15:46:36', '2016-11-14 23:36:56');
 INSERT INTO `users` VALUES ('20', 'jarango', '202cb962ac59075b964b07152d234b70', 'Johan', 'Arango', '3', '2016-11-15 17:47:09', '2016-11-15 17:47:40');
@@ -437,20 +461,13 @@ CREATE TABLE `users_class_groups` (
   KEY `class_group_id` (`class_group_id`),
   CONSTRAINT `users_class_groups_ibfk_1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`),
   CONSTRAINT `users_class_groups_ibfk_2` FOREIGN KEY (`class_group_id`) REFERENCES `class_group` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=107 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=116 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of users_class_groups
 -- ----------------------------
-INSERT INTO `users_class_groups` VALUES ('21', '3', '1', '2016-10-30 15:26:24', '2016-10-30 15:26:31');
 INSERT INTO `users_class_groups` VALUES ('41', '2', '3', '2016-11-06 19:13:45', '2016-11-06 19:13:45');
-INSERT INTO `users_class_groups` VALUES ('60', '4', '7', '2016-11-13 15:27:38', '2016-11-13 15:27:38');
-INSERT INTO `users_class_groups` VALUES ('61', '6', '1', '2016-11-13 15:29:52', '2016-11-13 15:29:52');
-INSERT INTO `users_class_groups` VALUES ('63', '6', '2', '2016-11-13 15:33:32', '2016-11-13 15:33:32');
-INSERT INTO `users_class_groups` VALUES ('71', '6', '4', '2016-11-14 11:38:35', '2016-11-14 11:38:35');
 INSERT INTO `users_class_groups` VALUES ('74', '2', '4', '2016-11-14 20:22:21', '2016-11-14 20:22:21');
-INSERT INTO `users_class_groups` VALUES ('77', '5', '3', '2016-11-14 21:58:30', '2016-11-14 21:58:30');
-INSERT INTO `users_class_groups` VALUES ('78', '2', '11', '2016-11-14 22:08:58', '2016-11-14 22:08:58');
 INSERT INTO `users_class_groups` VALUES ('79', '2', '7', '2016-11-15 17:22:28', '2016-11-15 17:22:28');
 INSERT INTO `users_class_groups` VALUES ('82', '20', '5', '2016-11-15 17:47:48', '2016-11-15 17:47:48');
 INSERT INTO `users_class_groups` VALUES ('84', '20', '4', '2016-11-15 17:47:59', '2016-11-15 17:47:59');
@@ -458,6 +475,8 @@ INSERT INTO `users_class_groups` VALUES ('85', '20', '2', '2016-11-15 17:48:17',
 INSERT INTO `users_class_groups` VALUES ('87', '1', '2', '2016-11-17 09:02:37', '2016-11-17 09:02:37');
 INSERT INTO `users_class_groups` VALUES ('89', '2', '2', '2016-11-18 06:43:32', '2016-11-18 06:43:32');
 INSERT INTO `users_class_groups` VALUES ('90', '2', '1', '2016-11-18 07:02:31', '2016-11-18 07:02:31');
+INSERT INTO `users_class_groups` VALUES ('108', '2', '8', '2016-11-29 17:34:45', '2016-11-29 17:34:45');
+INSERT INTO `users_class_groups` VALUES ('109', '3', '2', '2016-11-29 17:42:30', '2016-11-29 17:42:30');
 
 -- ----------------------------
 -- Table structure for user_group_subjects
@@ -474,16 +493,12 @@ CREATE TABLE `user_group_subjects` (
   KEY `sc_id` (`sc_id`),
   CONSTRAINT `user_group_subjects_ibfk_1` FOREIGN KEY (`ucg_id`) REFERENCES `users_class_groups` (`id`),
   CONSTRAINT `user_group_subjects_ibfk_2` FOREIGN KEY (`sc_id`) REFERENCES `subjects_class_groups` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_group_subjects
 -- ----------------------------
-INSERT INTO `user_group_subjects` VALUES ('15', '61', '4', '2016-11-14 13:42:54', '2016-11-14 13:42:54');
-INSERT INTO `user_group_subjects` VALUES ('16', '61', '6', '2016-11-14 13:42:57', '2016-11-14 13:42:57');
-INSERT INTO `user_group_subjects` VALUES ('17', '61', '15', '2016-11-14 13:45:06', '2016-11-14 13:45:06');
 INSERT INTO `user_group_subjects` VALUES ('20', '41', '16', '2016-11-14 13:47:28', '2016-11-14 13:47:28');
-INSERT INTO `user_group_subjects` VALUES ('26', '71', '22', '2016-11-14 14:01:29', '2016-11-14 14:01:29');
 INSERT INTO `user_group_subjects` VALUES ('28', '41', '18', '2016-11-14 14:02:03', '2016-11-14 14:02:03');
 INSERT INTO `user_group_subjects` VALUES ('33', '41', '21', '2016-11-14 14:11:36', '2016-11-14 14:11:36');
 INSERT INTO `user_group_subjects` VALUES ('35', '41', '5', '2016-11-14 14:11:47', '2016-11-14 14:11:47');
@@ -1410,7 +1425,6 @@ DROP PROCEDURE IF EXISTS `laboratories_delete`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `laboratories_delete`(IN `labId` int)
 BEGIN
-	#Routine body goes here...
 	DELETE FROM
 		laboratories_users
 	WHERE
@@ -2120,6 +2134,65 @@ BEGIN
 	ELSE
 		SELECT 'REPEATED' as state;
 	END IF;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Procedure structure for user_delete
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `user_delete`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `user_delete`(IN `userId` int)
+BEGIN
+		#RANKING
+		DELETE FROM
+			ranking
+		WHERE
+			user_id = userId;
+
+		#MESSAGES_ALL
+		DELETE FROM
+			messages_all
+		WHERE
+			user_id = userId;
+
+		#LABORATORIES_USERS
+		DELETE FROM
+			laboratories_users
+		WHERE
+			user_id = userId;
+
+		#MESSAGES
+		DELETE 
+			m.*
+		FROM
+			messages m
+		INNER JOIN users_class_groups ucg ON m.user_class_groups_id = ucg.id 
+		WHERE
+			ucg.users_id = userId;
+
+		#USERS_CLASS_GROUPS
+		DELETE 
+			us.*
+		FROM
+			user_group_subjects us
+		INNER JOIN users_class_groups ucg ON us.ucg_id = ucg.id 
+		WHERE
+			ucg.users_id = userId;
+
+		DELETE FROM
+			users_class_groups
+		WHERE
+			users_id = userId;
+		#----------------------------------
+
+		# USERS
+		DELETE FROM
+			users
+		WHERE
+			id = userId;
+
 END
 ;;
 DELIMITER ;

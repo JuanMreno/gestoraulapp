@@ -106,7 +106,7 @@
             autoload: true,
             pageSize: 10,
             confirmDeleting: true,
-            deleteConfirm: "Si elimina el laboratorio, eliminara los datos asociados",
+            deleteConfirm: "Se eliminarán todos los datos asociados a la práctica, ¿está seguro de realizar esta operación?",
             pageButtonCount: 5,
             noDataContent: "Ningún dato encontrado.",
             loadMessage: "Cargando...",
@@ -160,8 +160,10 @@
                     }).done(function(data) {
                         var res = $.parseJSON(b64_to_utf8(data));
                         //console.log(res);
-                        if(res.status == "true")
+                        if(res.status == "true"){
                             d.resolve(item);
+                            $("#jsGrid").jsGrid("deleteItem", item);
+                        }
                         else{
 
                             alert("Error al intentar realizar el borrado.");
@@ -204,8 +206,9 @@
                         }).done(function(data) {
                             var res = $.parseJSON(b64_to_utf8(data));
                             //console.log(res);
-                            if(res.status == "true")
+                            if(res.status == "true"){
                                 d.resolve(item);
+                            }
                             else{
                                 if(res.data.state == "REPEATED"){
                                     alert("El laboratorio ya ha sido registrado.");

@@ -94,6 +94,7 @@
             pageButtonCount: 5,
             noDataContent: "Ningún dato encontrado.",
             loadMessage: "Cargando...",
+            deleteConfirm: "Se eliminarán todos los datos asociados al usuario, ¿está seguro de realizar esta operación?",
             controller: {
                 loadData: function(filter) {
                     var d = $.Deferred();
@@ -213,6 +214,44 @@
                         d.reject();
                     });
 
+                    return d.promise();
+                },
+                deleteItem: function(item) {
+                    var d = $.Deferred();
+                    var session = $.cookie(SESSION_COOKIE);
+
+                    d.fail(function() {
+                        d.resolve(item);
+                        $("#jsGrid").jsGrid("render");
+                    }); 
+
+                    var data = {
+                        userId:item.id
+                    };
+     
+                    var jData = utf8_to_b64( JSON.stringify(data) );
+                    $.ajax({
+                        url: CON_URL+"users/delete",
+                        data:{data:jData}
+                    }).done(function(data) {
+                        var res = $.parseJSON(b64_to_utf8(data));
+                        //console.log(res);
+                        if(res.status == "true"){
+                            d.resolve(item);
+                            $("#jsGrid").jsGrid("deleteItem", item);
+                        }
+                        else{
+
+                            alert("Error al intentar eliminar el elemento.");
+                            d.reject();
+                            //d.resolve(false);
+                        }
+                    }).fail(function(data) {
+                        console.log("ajax fail");
+                        alert("Error al intentar eliminar el elemento.");
+                        d.reject();
+                    });
+     
                     return d.promise();
                 }
             },
