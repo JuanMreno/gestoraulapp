@@ -60,7 +60,7 @@ router.get('/login', function(req, res) {
 	});
 });
 
-router.get('/getLab', function(req, res) {
+router.get('/get_lab', function(req, res) {
 	var buf = Buffer.from(req.query.data, 'base64');
 	var params = JSON.parse(buf);
 
