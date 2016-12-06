@@ -16,7 +16,8 @@
 
         console.log($('#ranking').bootstrapSwitch().state);
         if (nameSchool == "" || country == "" || city == "" || license == "") {
-            alert("Todos los valores deben ser configurados.");
+            $('#alertModalCont').text("Todos los valores deben ser configurados.");
+            $('#alertModal').modal('show');
         } else {
             var data = {
                 schoolName:nameSchool,
@@ -37,7 +38,8 @@
                     getParams();
                 }
                 else{
-                    alert("No se han podido guardar los datos.");
+                    $('#alertModalCont').text("No se han podido guardar los datos.");
+                    $('#alertModal').modal('show');
                 }
                 
             }).fail(function(data) {

@@ -2442,6 +2442,11 @@
 
 	.inputContDropDown {
 		text-align: right;
+	}
+
+	.alertModalBody {
+		padding: 17px;
+    	font-weight: 500;
 	}	
 
 	@media screen and (min-width: 961px) and (max-width: 2180px) {

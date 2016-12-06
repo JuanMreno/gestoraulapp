@@ -29,20 +29,24 @@
                         var res = $.parseJSON(b64_to_utf8(data));
                         if(res.state == "true"){
                             if(res.res_code == "QUERY_OK"){
-                                alert("Información cargada con éxito.");
+                                $('#alertModalCont').text("Información cargada con éxito.");
+                                $('#alertModal').modal('show');
                                 $modal.modal('hide');
                                 init();
                             }
                             else{
-                                alert("Formato o información incorrecta, valide la información e intente de nuevo.");
+                                $('#alertModalCont').text("Formato o información incorrecta, valide la información e intente de nuevo.");
+                                $('#alertModal').modal('show');
                             }
                         }
                         else{
-                            alert("Ha ocurrido un error inesperado, inténtalo de nuevo.");
+                            $('#alertModalCont').text("Ha ocurrido un error inesperado, inténtalo de nuevo.");
+                            $('#alertModal').modal('show');
                         }
                     })
                     .error(function(e) {
-                        alert("Error de conexión.");
+                        $('#alertModalCont').text("Error de conexión.");
+                        $('#alertModal').modal('show');
                         console.log("Error ajax.");
                     });
                 });
@@ -165,14 +169,15 @@
                             $("#jsGrid").jsGrid("deleteItem", item);
                         }
                         else{
-
-                            alert("Error al intentar realizar el borrado.");
+                            $('#alertModalCont').text("Error al intentar eliminar el elemento.");
+                            $('#alertModal').modal('show');
                             d.reject();
                             //d.resolve(false);
                         }
                     }).fail(function(data) {
                         console.log("ajax fail");
-                        alert("Error al intentar realizar el registro.");
+                        $('#alertModalCont').text("Error al intentar eliminar el elemento.");
+                        $('#alertModal').modal('show');
                         d.reject();
                     });
      
@@ -188,7 +193,8 @@
                     }); 
 
                     if (item.name == "" || item.lesson_name == "" || item.lab_code == "") {
-                        alert("Campos Vacios");
+                        $('#alertModalCont').text("Todos los campos son necesarios.");
+                        $('#alertModal').modal('show');
                         d.reject();
                     } else {
                         var data = {
@@ -211,17 +217,20 @@
                             }
                             else{
                                 if(res.data.state == "REPEATED"){
-                                    alert("El laboratorio ya ha sido registrado.");
+                                    $('#alertModalCont').text("El laboratorio ya ha sido registrado.");
+                                    $('#alertModal').modal('show');
                                 }
                                 else{
-                                    alert("Error al intentar realizar el registro.");
+                                    $('#alertModalCont').text("Error al intentar realizar el registro.");
+                                    $('#alertModal').modal('show');
                                 }
                                 d.reject();
                                 //d.resolve(false);
                             }
                         }).fail(function(data) {
                             console.log("ajax fail");
-                            alert("Error al intentar realizar el registro.");
+                            $('#alertModalCont').text("Error al intentar realizar el registro.");
+                            $('#alertModal').modal('show');
                             d.reject();
                         });
                     }               
@@ -237,7 +246,8 @@
                     });
 
                     if (item.name == "" || item.lesson_name == "" || item.lab_code == "") {
-                        alert("Campos Vacios");
+                        $('#alertModalCont').text("Todos los campos son necesarios.");
+                        $('#alertModal').modal('show');
                         d.reject();
                     } else {
                         var data = {
@@ -257,17 +267,20 @@
                                 d.resolve(item);
                             else{
                                 if(res.data.state == "REPEATED"){
-                                    alert("El laboratorio ya ha sido registrado.");
+                                    $('#alertModalCont').text("El laboratorio ya ha sido registrado.");
+                                    $('#alertModal').modal('show');
                                 }
                                 else{
-                                    alert("Error al intentar realizar el registro.");
+                                    $('#alertModalCont').text("Error al intentar realizar el registro.");
+                                    $('#alertModal').modal('show');
                                 }
                                 d.reject();
                                 //d.resolve(false);
                             }
                         }).fail(function(data) {
                             console.log("ajax fail");
-                            alert("Error al intentar realizar el registro.");
+                            $('#alertModalCont').text("Error al intentar realizar el registro.");
+                            $('#alertModal').modal('show');
                             d.reject();
                         });
                     }

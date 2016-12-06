@@ -19,7 +19,6 @@
         });
 
         $("#open-menu-grupos").click(function () {
-            //alert("Error")
             $(this).children("ul").toggle().hide();           
         });
 
@@ -51,20 +50,24 @@
                         var res = $.parseJSON(b64_to_utf8(data));
                         if(res.state == "true"){
                             if(res.res_code == "QUERY_OK"){
-                                alert("Información cargada con éxito.");
+                                $('#alertModalCont').text("Información cargada con éxito.");
+                                $('#alertModal').modal('show');
                                 $modal.modal('hide');
                                 init();
                             }
                             else{
-                                alert("Formato o información incorrecta, valide la información e intente de nuevo.");
+                                $('#alertModalCont').text("Formato o información incorrecta, valide la información e intente de nuevo.");
+                                $('#alertModal').modal('show');
                             }
                         }
                         else{
-                            alert("Ha ocurrido un error inesperado, inténtalo de nuevo.");
+                            $('#alertModalCont').text("Ha ocurrido un error inesperado, inténtalo de nuevo.");
+                            $('#alertModal').modal('show');
                         }
                     })
                     .error(function(e) {
-                        alert("Error de conexión.");
+                        $('#alertModalCont').text("Error de conexión.");
+                        $('#alertModal').modal('show');
                         console.log("Error ajax.");
                     });
                 });
@@ -81,7 +84,7 @@
 
 	function setUsersTable() {
         var rolId = $("#tipoDropdown").attr('data-sel-id'); 
-        console.log(rolId);
+
 		$("#jsGrid").jsGrid({
             width: "100%",
             inserting:true,
@@ -114,7 +117,7 @@
                         var res = $.parseJSON(b64_to_utf8(data));
 
                         var dt = res.data;
-                        console.log(dt);
+
                         var dataFiltered = $.grep(dt, function(obj) {
                             return (!filter.name || obj.name.indexOf(filter.name) > -1)
                                 && (!filter.last_name || obj.last_name.indexOf(filter.last_name) > -1);
@@ -156,17 +159,20 @@
                         }
                         else{
                             if(res.data.state == "REPEATED"){
-                                alert("El usuario ya ha sido registrado.");
+                                $('#alertModalCont').text("El usuario ya ha sido registrado.");
+                                $('#alertModal').modal('show');
                             }
                             else{
-                                alert("Error al intentar realizar el registro.");
+                                $('#alertModalCont').text("Error al intentar realizar el registro.");
+                                $('#alertModal').modal('show');
                             }
                             d.reject();
                             //d.resolve(false);
                         }
                     }).fail(function(data) {
                         console.log("ajax fail");
-                        alert("Error al intentar realizar el registro.");
+                        $('#alertModalCont').text("Error al intentar realizar el registro.");
+                        $('#alertModal').modal('show');
                         d.reject();
                     });
      
@@ -200,17 +206,20 @@
                         }
                         else{
                             if(res.data.state == "REPEATED"){
-                                alert("El usuario ya ha sido registrado.");
+                                $('#alertModalCont').text("El usuario ya ha sido registrado.");
+                                $('#alertModal').modal('show');
                             }
                             else{
-                                alert("Error al intentar realizar el registro.");
+                                $('#alertModalCont').text("Error al intentar realizar el registro.");
+                                $('#alertModal').modal('show');
                             }
                             d.reject();
                             //d.resolve(false);
                         }
                     }).fail(function(data) {
                         console.log("ajax fail");
-                        alert("Error al intentar realizar el registro.");
+                        $('#alertModalCont').text("Error al intentar realizar el registro.");
+                        $('#alertModal').modal('show');
                         d.reject();
                     });
 
@@ -241,14 +250,15 @@
                             $("#jsGrid").jsGrid("deleteItem", item);
                         }
                         else{
-
-                            alert("Error al intentar eliminar el elemento.");
+                            $('#alertModalCont').text("Error al intentar eliminar el elemento.");
+                            $('#alertModal').modal('show');
                             d.reject();
                             //d.resolve(false);
                         }
                     }).fail(function(data) {
                         console.log("ajax fail");
-                        alert("Error al intentar eliminar el elemento.");
+                        $('#alertModalCont').text("Error al intentar eliminar el elemento.");
+                        $('#alertModal').modal('show');
                         d.reject();
                     });
      
@@ -311,7 +321,8 @@
                                     jsonDataLoad.push(e.params.data.id) ;
                                     listAllGroupsSubjets(objUser.item.id);                                   
                                 } else{
-                                    alert("Se presento un error, al registrar el grupo");
+                                    $('#alertModalCont').text("Error al intentar realizar el registro.");
+                                    $('#alertModal').modal('show');
                                 }                                       
                             }).fail(function(data) {
                                 console.log("ajax fail");
@@ -357,8 +368,11 @@
 
                             if (changepass) {
                                 if (pass1 == "" || pass2 == "" || username == "") {
-                                    alert("Campos Vacios");
+                                    $('#alertModalCont').text("Todos los campos son necesarios.");
+                                    $('#alertModal').modal('show');
                                 }else {
+                                    console.log(pass1);
+                                    console.log(pass2);
                                     if (pass1 == pass2) {
                                         var data = {
                                             id:objUser.item.id,
@@ -376,21 +390,27 @@
                                                 $("#password1").val('xxxxxxxxxx');
                                                 $("#password2").val('xxxxxxxxxx');
                                                 $("#jsGrid").jsGrid("render");
-                                                alert("Datos Actualizados");
+
+                                                $('#alertModalCont').text("Los datos han sido actualizados.");
+                                                $('#alertModal').modal('show');
                                             }else{
-                                                alert("Error al intentar realizar el cambio de datos.");
+                                                $('#alertModalCont').text("Ha ocurrido un error inesperado, inténtalo de nuevo.");
+                                                $('#alertModal').modal('show');
                                             }
                                         }).fail(function(data) {
                                             console.log("ajax fail");
-                                            alert("Error al intentar realizar el cambio de datos.");
+                                            $('#alertModalCont').text("Ha ocurrido un error inesperado, inténtalo de nuevo.");
+                                            $('#alertModal').modal('show');
                                         });
                                     }else {
-                                        alert("Las contraseña no coinciden!");
+                                        $('#alertModalCont').text("Las contraseñas deben coincidir.");
+                                        $('#alertModal').modal('show');
                                     }
                                 }
                             }else{
                                 if (username == "") {
-                                    alert("Campos Vacios");
+                                    $('#alertModalCont').text("Todos los campos son necesarios.");
+                                    $('#alertModal').modal('show');
                                 }else {
                                     var data = {
                                         id:objUser.item.id,
@@ -408,13 +428,17 @@
                                             $("#password1").val('xxxxxxxxxx');
                                             $("#password2").val('xxxxxxxxxx');
                                             $("#jsGrid").jsGrid("render");
-                                            alert("Datos Actualizados");
+
+                                            $('#alertModalCont').text("Los datos han sido actualizados.");
+                                            $('#alertModal').modal('show');
                                         }else{
-                                            alert("Error al intentar realizar el cambio de datos.");
+                                            $('#alertModalCont').text("Ha ocurrido un error inesperado, inténtalo de nuevo.");
+                                            $('#alertModal').modal('show');
                                         }
                                     }).fail(function(data) {
                                         console.log("ajax fail");
-                                        alert("Error al intentar realizar el cambio de datos.");
+                                        $('#alertModalCont').text("Ha ocurrido un error inesperado, inténtalo de nuevo.");
+                                        $('#alertModal').modal('show');
                                     });
                                 }
                             }                             
@@ -424,12 +448,15 @@
                     });
 
                     $('#nameUser').off('change').on('change', function(event) {
+                        changepass = false;
                         $("#updatepass").prop("disabled",false);
+                        $('#updatepass').text("Guardar");
                     });  
 
                     $('.passpf').off('change').on('change', function(event) {
                         changepass = true;
                         $("#updatepass").prop("disabled",false);
+                        $('#updatepass').text("Guardar");
                     });
 
                     $("#editInfoUser").modal("show");
@@ -455,8 +482,13 @@
                     }).done(function(data) {
                         var res = $.parseJSON(b64_to_utf8(data));
                         var dt = res.data;
-                        if(res.status == "true"){                            
-                            $("#allGroupSt").val(dt[0].group_id);
+                        if(res.status == "true"){
+                            if(dt.length > 0){
+                                $("#allGroupSt").val(dt[0].group_id);
+                            }   
+                            else{
+                                $("#allGroupSt").val(-1);
+                            }                         
                         }  
                                                    
                     }).fail(function(data) {
@@ -464,8 +496,15 @@
                     });
 
                     $('#allGroupSt').off('change').on('change', function(event) {
-                        var mensaje = confirm("¿Estas seguro de cambiar de grupo, si hace esto perdera toda la información relacionada?");
-                        //Detectamos si el usuario acepto el mensaje
+                        var mensaje;
+
+                        if(objUser.item.class_group_id === null){
+                            mensaje = true;
+                        }
+                        else{
+                            mensaje = confirm("¿Estas seguro de cambiar de grupo, si hace esto perdera toda la información relacionada?");
+                        }
+
                         if (mensaje) {
                             var xdata = {
                                 userId:objUser.item.id,
@@ -478,7 +517,8 @@
                             }).done(function(data) {
                                 var res = $.parseJSON(b64_to_utf8(data));
                                 if (res.status == "true") {
-                                    alert("Grupo Actualizado");
+                                    $('#alertModalCont').text("Los datos han sido actualizados.");
+                                    $('#alertModal').modal('show');
                                 }
                                          
                             }).fail(function(data) {
@@ -492,10 +532,14 @@
                         var pass2 = $("#passwordst2").val();
                         var username = $("#nameUserst").val();
 
-                        if (changepass) {
+                        debugger;
+                        if (changepassSt) {
                             if (pass1 == "" || pass2 == "" || username == "") {
-                                alert("Campos Vacios");
+                                $('#alertModalCont').text("Todos los campos son necesarios.");
+                                $('#alertModal').modal('show');
                             }else {
+                                console.log(pass1);
+                                console.log(pass2);
                                 if (pass1 == pass2) {
                                     var data = {
                                         id:objUser.item.id,
@@ -513,21 +557,27 @@
                                             $("#passwordst1").val('xxxxxxxxxx');
                                             $("#passwordst2").val('xxxxxxxxxx');
                                             $("#jsGrid").jsGrid("render");
-                                            alert("Datos Actualizados");
+
+                                            $('#alertModalCont').text("Los datos han sido actualizados.");
+                                            $('#alertModal').modal('show');
                                         }else{
-                                            alert("Error al intentar realizar el cambio de datos.");
+                                            $('#alertModalCont').text("Ha ocurrido un error inesperado, inténtalo de nuevo.");
+                                            $('#alertModal').modal('show');
                                         }
                                     }).fail(function(data) {
                                         console.log("ajax fail");
-                                        alert("Error al intentar realizar el cambio de datos.");
+                                        $('#alertModalCont').text("Ha ocurrido un error inesperado, inténtalo de nuevo.");
+                                        $('#alertModal').modal('show');
                                     });
                                 }else {
-                                    alert("Las contraseña no coinciden!");
+                                    $('#alertModalCont').text("Las contraseñas deben coincidir.");
+                                    $('#alertModal').modal('show');
                                 }
                             }
                         }else{
                             if (username == "") {
-                                alert("Campos Vacios");
+                                $('#alertModalCont').text("Todos los campos son necesarios.");
+                                $('#alertModal').modal('show');
                             }else {
                                 var data = {
                                     id:objUser.item.id,
@@ -545,25 +595,32 @@
                                         $("#passwordst1").val('xxxxxxxxxx');
                                         $("#passwordst2").val('xxxxxxxxxx');
                                         $("#jsGrid").jsGrid("render");
-                                        alert("Datos Actualizados");
+
+                                        $('#alertModalCont').text("Los datos han sido actualizados.");
+                                        $('#alertModal').modal('show');
                                     }else{
-                                        alert("Error al intentar realizar el cambio de datos.");
+                                        $('#alertModalCont').text("Ha ocurrido un error inesperado, inténtalo de nuevo.");
+                                        $('#alertModal').modal('show');
                                     }
                                 }).fail(function(data) {
                                     console.log("ajax fail");
-                                    alert("Error al intentar realizar el cambio de datos.");
+                                    $('#alertModalCont').text("Ha ocurrido un error inesperado, inténtalo de nuevo.");
+                                    $('#alertModal').modal('show');
                                 });
                             }
                         }                             
                     });
 
                     $('#nameUserst').off('change').on('change', function(event) {
+                        changepassSt = false;
                         $("#updatepasswst").prop("disabled",false);
+                        $('#updatepass').text("Guardar");
                     });  
 
                     $('.passst').off('change').on('change', function(event) {
                         changepassSt = true;
                         $("#updatepasswst").prop("disabled",false);
+                        $('#updatepass').text("Guardar");
                     });
                     $("#editInfoStudent").modal("show");
                 }
@@ -577,8 +634,8 @@
 		    pageLastText: " >> ",
 
             fields: [ 
-                { name: "name", type: "text", align: "center", title: "Nombre", editing:true },
-                { name: "last_name", type: "text", align: "center", title: "Apellido", editing:true },
+                { name: "name", type: "text", align: "center", title: "Nombres", editing:true },
+                { name: "last_name", type: "text", align: "center", title: "Apellidos", editing:true },
             	{ type: "control" }
             ]
         });
@@ -598,6 +655,8 @@
             var dt = res.data;
             if(res.status == "true"){
                 var html = "";
+
+                html+="<option value='-1' disabled>Ninguno</option>";
                 for (var i = 0; i < dt.length; i++) {
                     html+="<option value='"+dt[i].id+"'>"+dt[i].name+"</option>";
                 }
@@ -689,7 +748,8 @@
                         if (res.status == "true") {
                             jsonDataLoadx.push(e.params.data.id);                                   
                         } else{
-                            alert("Se presento un error, al registrar el grupo");
+                            $('#alertModalCont').text("Ha ocurrido un error inesperado, inténtalo de nuevo.");
+                            $('#alertModal').modal('show');
                         }                                       
                     }).fail(function(data) {
                         console.log("ajax fail");

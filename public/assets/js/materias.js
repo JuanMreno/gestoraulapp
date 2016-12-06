@@ -76,10 +76,12 @@
                             d.resolve(item);
                         else{
                             if(res.data.state == "REPEATED"){
-                                alert("La materia ya ha sido registrada.");
+                                $('#alertModalCont').text("La materia ya ha sido registrada.");
+                                $('#alertModal').modal('show');
                             }
                             else{
-                                alert("Error al intentar registrar la materia.");
+                                $('#alertModalCont').text("Error al intentar registrar la materia.");
+                                $('#alertModal').modal('show');
                             }
                             d.reject();
                             //d.resolve(false);
@@ -87,7 +89,8 @@
                     }).fail(function(data) {
                         console.log("ajax fail");
                         item.asignado = (item.asignado == 0) ? 1 : 0;
-                        alert("Error al intentar registrar la materia.");
+                        $('#alertModalCont').text("Error al intentar registrar la materia.");
+                        $('#alertModal').modal('show');
                         d.resolve(item);
                     });
 
@@ -117,17 +120,20 @@
                             d.resolve(item);
                         else{
                             if(res.data.state == "REPEATED"){
-                                alert("La materia ya ha sido registrada.");
+                                $('#alertModalCont').text("La materia ya ha sido registrada.");
+                                $('#alertModal').modal('show');
                             }
                             else{
-                                alert("Error al intentar registrar la materia.")
+                                $('#alertModalCont').text("Error al intentar registrar la materia.");
+                                $('#alertModal').modal('show');
                             }
                             d.reject();
                             //d.resolve(false);
                         }
                     }).fail(function(data) {
                         console.log("ajax fail");
-                        alert("Error al intentar registrar la materia.");
+                        $('#alertModalCont').text("Error al intentar registrar la materia.");
+                        $('#alertModal').modal('show');
                         d.reject();
                     });
 

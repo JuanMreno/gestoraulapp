@@ -6,6 +6,8 @@
 var app = require('../app');
 var debug = require('debug')('express:server');
 var http = require('http');
+var ip = require('ip');
+var conn = require('../objs/SqlConnection.js');
 
 /**
  * Get port from environment and store in Express.
@@ -82,9 +84,37 @@ function onError(error) {
 
 function onListening() {
   var addr = server.address();
-  console.log(addr);
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
+
+  setServerIp();
+}
+
+function setServerIp() {
+  var ipServer = ip.address();
+  console.log("My ip: " + ipServer);
+
+  var connection = new conn.SqlConnection().connection;
+  connection.connect(function(err) {
+    if (err) {
+      console.error('error connecting: ' + err.stack);
+      return;
+    }
+
+    var query = 
+      "UPDATE app_params SET `value` = ? WHERE `name` = 'SERVER_IP'";
+
+    var p = [ipServer];  
+    connection.query(query, p, function(err, rows) {
+    
+      if (err) {
+        console.error('error query: ' + query + err.stack);
+      }
+      else{
+        console.log('Ip configured.');
+      }
+    });
+  });
 }

@@ -128,10 +128,12 @@
                             d.resolve(item);
                         else{
                             if(res.data.state == "REPEATED"){
-                                alert("El grupo ya ha sido registrado.");
+                                $('#alertModalCont').text("El grupo ya ha sido registrado.");
+                                $('#alertModal').modal('show');
                             }
                             else{
-                                alert("Error al intentar realizar el registro.");
+                                $('#alertModalCont').text("Error al intentar realizar el registro.");
+                                $('#alertModal').modal('show');
                             }
                             d.reject();
                             //d.resolve(false);
@@ -139,7 +141,8 @@
                     }).fail(function(data) {
                         console.log("ajax fail");
                         item.asignado = (item.asignado == 0) ? 1 : 0;
-                        alert("Error al intentar realizar el registro.");
+                        $('#alertModalCont').text("Error al intentar realizar el registro.");
+                        $('#alertModal').modal('show');
                         d.reject();
                     });
      
@@ -169,17 +172,20 @@
                             d.resolve(item);
                         else{
                             if(res.data.state == "REPEATED"){
-                                alert("El grupo ya ha sido registrado.");
+                                $('#alertModalCont').text("El grupo ya ha sido registrado.");
+                                $('#alertModal').modal('show');
                             }
                             else{
-                                alert("Error al intentar realizar el registro.");
+                                $('#alertModalCont').text("Error al intentar realizar el registro.");
+                                $('#alertModal').modal('show');
                             }
                             d.reject();
                             //d.resolve(false);
                         }
                     }).fail(function(data) {
                         console.log("ajax fail");
-                        alert("Error al intentar realizar el registro.");
+                        $('#alertModalCont').text("Error al intentar realizar el registro.");
+                        $('#alertModal').modal('show');
                         d.reject();
                     });
 

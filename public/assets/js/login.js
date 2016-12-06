@@ -3,7 +3,7 @@
 	var loadIntervaId;
 
 	function loginInit() {
-		$('button').click(function(event) {
+		$('#loginBtn').click(function(event) {
 			event.preventDefault();
 			$(this).attr("disabled","true");
 
@@ -37,18 +37,16 @@
 							goToMain();
 						}
 						else{
-							alert("Nombre o Usuario inválido, intenta de nuevo.");
+							$('#alertModalCont').text("Nombre o Usuario inválido, intenta de nuevo.");
+							$('#alertModal').modal('show');
 							restartButton();
 						}
 					}
 					else{
-						alert("Nombre o Usuario inválido, intenta de nuevo.");
+						$('#alertModalCont').text("Nombre o Usuario inválido, intenta de nuevo.");
+						$('#alertModal').modal('show');
 						restartButton();
 					}
-					//alert("Nombre o Usuario inválido, intenta de nuevo.")
-					//clearInterval(loadIntervaId);
-					//$.cookie(SESSION_COOKIE, {id:"1",name:"Oscar Moreno",rol:"pro-rol",rolName:"Profesor"});
-					//goToMain();
 				})
 				.error(function(e) {
 					console.log("Error ajax.");
@@ -56,11 +54,10 @@
 				});
 			}
 			else{
-				alert("Todos los campos son requeridos.");
+				$('#alertModalCont').text("Todos los campos son requeridos.");
+				$('#alertModal').modal('show');
 				restartButton();
 			}
-			//$('body').removeClass('in-login');
-			//$('#cont').load('views/main.html');
 		});
 	}
 

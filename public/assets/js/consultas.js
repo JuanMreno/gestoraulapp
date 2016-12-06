@@ -480,11 +480,13 @@
                             $modal.modal('toggle');
                         }
                         else{
-                            alert("La información no pudo ser actualizada.");
+                            $('#alertModalCont').text("La información no pudo ser actualizada.");
+                            $('#alertModal').modal('show');
                         }
                     }).fail(function(data) {
                         console.log("ajax fail");
-                        alert("La información no pudo ser actualizada.");
+                        $('#alertModalCont').text("La información no pudo ser actualizada.");
+                        $('#alertModal').modal('show');
                     });
                 });
 
@@ -687,11 +689,13 @@
                             $modal.modal('toggle');
                         }
                         else{
-                            alert("La información no pudo ser actualizada.");
+                            $('#alertModalCont').text("La información no pudo ser actualizada.");
+                            $('#alertModal').modal('show');
                         }
                     }).fail(function(data) {
                         console.log("ajax fail");
-                        alert("La información no pudo ser actualizada.");
+                        $('#alertModalCont').text("La información no pudo ser actualizada.");
+                        $('#alertModal').modal('show');
                     });
                 });
 

@@ -126,16 +126,25 @@
                 },
                 updateItem: function(item) {
                     var d = $.Deferred();
+
+                    d.fail(function() {
+                        return null;
+                        $("#jsGrid").jsGrid("render");
+                    });
+
                     var session = $.cookie(SESSION_COOKIE);
 
+                    $confirmModal = $('#confirmModal');
+
+                    var mns = "";
                     if(item.asignado)
                         mns = 'Seguro desea asinarse el grupo ' + item.name + '.';
                     else
                         mns = 'Se perderá toda la información relacionada con el grupo ' + item.name + '. ¿Desea continuar?';
 
                     var res = confirm(mns);
-                            
-                    if (res) {
+
+                    if(res){
                         var data = {
                             userId:session.id,
                             groupId:item.id,
@@ -156,7 +165,7 @@
                         });
                     }
                     else{
-                        item.asignado = !item.asignado;
+                        item.asignado = (item.asignado == 0) ? 1 : 0;
                         d.resolve(item);
                     }
                     return d.promise();
@@ -180,6 +189,32 @@
             ]
         });
 	}
+
+    function confirmModal(mns) {
+        var d = $.Deferred();
+
+        $confirmModal = $('#confirmModal');
+
+        $confirmModal.text(mns);
+
+        $confirmModal.off('hidden.bs.modal').on('hidden.bs.modal', function(event) {
+            event.preventDefault();
+            d.resolve(false);
+        });
+
+        $confirmModal.off('shown.bs.modal').on('shown.bs.modal', function(event) {
+            event.preventDefault();
+
+            $('#doneConfirmModal').on('click', function(event) {
+                event.preventDefault();
+
+                d.resolve(true);
+            });
+        });
+
+        $confirmModal.modal('show');
+        return d.promise();
+    }
 
     function setSubjectsTable() {
         var groupId = $dropDown.attr('data-sel-id');
