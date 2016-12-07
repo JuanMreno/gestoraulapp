@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80000
 File Encoding         : 65001
 
-Date: 2016-12-05 21:55:24
+Date: 2016-12-06 22:43:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -99,9 +99,9 @@ CREATE TABLE `laboratories_users` (
 -- ----------------------------
 -- Records of laboratories_users
 -- ----------------------------
-INSERT INTO `laboratories_users` VALUES ('35', '1', '379', '1', '2016-11-29 18:34:15', null, null, 'reports/35_FISMRU001.pdf', null, null, null, null, '2016-11-29 18:34:15', '2016-12-05 20:35:41');
-INSERT INTO `laboratories_users` VALUES ('36', '1', '374', '1', '2016-11-29 18:34:36', '1', '00:25:00', 'reports/36_FISVEC003.pdf', null, null, null, null, '2016-11-29 18:34:36', '2016-12-05 20:37:27');
-INSERT INTO `laboratories_users` VALUES ('38', '1', '377', '1', '2015-11-03 00:00:00', '1', '00:25:00', 'reports/38_FISMRU003.pdf', '3', null, '3', null, '2016-11-30 21:17:07', '2016-11-30 21:17:07');
+INSERT INTO `laboratories_users` VALUES ('35', '1', '379', '0', '2016-11-29 18:34:15', null, null, 'reports/35_FISMRU001.pdf', null, null, null, null, '2016-11-29 18:34:15', '2016-12-06 19:20:02');
+INSERT INTO `laboratories_users` VALUES ('36', '1', '374', '0', '2016-11-29 18:34:36', '1', '00:25:00', 'reports/36_FISVEC003.pdf', null, null, null, null, '2016-11-29 18:34:36', '2016-12-06 19:19:10');
+INSERT INTO `laboratories_users` VALUES ('38', '1', '377', '0', '2015-11-03 00:00:00', '1', '00:25:00', 'reports/38_FISMRU003.pdf', '3', null, '3', null, '2016-11-30 21:17:07', '2016-12-06 19:14:12');
 INSERT INTO `laboratories_users` VALUES ('39', '3', '374', '1', '2015-12-03 00:00:00', '2', '00:30:00', 'reports/39_FISVEC003.pdf', '3', null, '3', null, '2016-12-05 20:43:43', '2016-12-05 21:06:31');
 
 -- ----------------------------
@@ -121,7 +121,7 @@ CREATE TABLE `laboratory` (
   KEY `lesson_id` (`lesson_id`),
   KEY `subject_id` (`subject_id`),
   CONSTRAINT `laboratory_ibfk_1` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=418 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=422 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of laboratory
@@ -233,7 +233,7 @@ CREATE TABLE `messages` (
   PRIMARY KEY (`id`),
   KEY `user_class_groups_id` (`user_class_groups_id`),
   CONSTRAINT `messages_ibfk_2` FOREIGN KEY (`user_class_groups_id`) REFERENCES `users_class_groups` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of messages
@@ -253,13 +253,11 @@ CREATE TABLE `messages_all` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `messages_all_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of messages_all
 -- ----------------------------
-INSERT INTO `messages_all` VALUES ('3', 'dfsdf', 'dsfsdf', '2', '2016-11-06 20:24:29', '2016-11-06 20:24:29');
-INSERT INTO `messages_all` VALUES ('4', 'Hola', 'Buenos días.', '2', '2016-11-15 17:31:29', '2016-11-15 17:31:29');
 
 -- ----------------------------
 -- Table structure for ranking
@@ -412,13 +410,6 @@ CREATE TABLE `temp_users` (
 -- ----------------------------
 -- Records of temp_users
 -- ----------------------------
-INSERT INTO `temp_users` VALUES ('ESTUDIANTE', 'est2', 'est', 'Andrés', 'Orozco', '8-C');
-INSERT INTO `temp_users` VALUES ('ESTUDIANTE', 'est1', 'est', 'Carlos', 'García', '8-B');
-INSERT INTO `temp_users` VALUES ('ESTUDIANTE', 'est3', 'est', 'Cesar', 'Mora', '8-C');
-INSERT INTO `temp_users` VALUES ('ESTUDIANTE', 'est4', 'est', 'Felipe', 'Perez', '8-C');
-INSERT INTO `temp_users` VALUES ('PROFESOR', 'pro1', 'pro', 'Mateo', 'Perez', '-');
-INSERT INTO `temp_users` VALUES ('PROFESOR', 'pro2', 'pro', 'Sergio', 'Perez', '-');
-INSERT INTO `temp_users` VALUES ('PROFESOR', 'pro3', 'pro', 'Victor', 'Vélez', '-');
 
 -- ----------------------------
 -- Table structure for users
@@ -436,7 +427,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   KEY `rols_id` (`rols_id`),
   CONSTRAINT `users_ibfk_1` FOREIGN KEY (`rols_id`) REFERENCES `rols` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of users
@@ -446,8 +437,8 @@ INSERT INTO `users` VALUES ('2', 'o', '363b122c528f54df4a0446b6bab05515', 'Andr�
 INSERT INTO `users` VALUES ('3', 'm', '363b122c528f54df4a0446b6bab05515', 'Manuel', 'Moreno', '4', '2016-10-30 12:39:08', '2016-10-30 12:39:08');
 INSERT INTO `users` VALUES ('7', 'admin', '363b122c528f54df4a0446b6bab05515', 'Juan', 'Moreno', '2', '2016-11-08 07:59:19', '2016-11-08 07:59:32');
 INSERT INTO `users` VALUES ('19', 'sadmin', '363b122c528f54df4a0446b6bab05515', 'Jhonatan', 'Garcia', '1', '2016-11-14 15:46:36', '2016-11-14 23:36:56');
-INSERT INTO `users` VALUES ('20', 'jarango', '7815696ecbf1c96e6894b779456d330e', 'Johan', 'Arango', '3', '2016-11-15 17:47:09', '2016-12-05 19:50:43');
-INSERT INTO `users` VALUES ('66', 'mariom', '363b122c528f54df4a0446b6bab05515', 'Mario', 'Mora', '3', '2016-12-05 20:26:21', '2016-12-05 20:26:31');
+INSERT INTO `users` VALUES ('20', 'jarango', '7815696ecbf1c96e6894b779456d330e', 'Johan', 'Arango', '3', '2016-11-15 17:47:09', '2016-12-06 17:53:41');
+INSERT INTO `users` VALUES ('66', 'mariomora1', '363b122c528f54df4a0446b6bab05515', 'Mario', 'Mora', '3', '2016-12-05 20:26:21', '2016-12-06 17:24:24');
 
 -- ----------------------------
 -- Table structure for users_class_groups
@@ -464,7 +455,7 @@ CREATE TABLE `users_class_groups` (
   KEY `class_group_id` (`class_group_id`),
   CONSTRAINT `users_class_groups_ibfk_1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`),
   CONSTRAINT `users_class_groups_ibfk_2` FOREIGN KEY (`class_group_id`) REFERENCES `class_group` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=122 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=129 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of users_class_groups
@@ -479,7 +470,9 @@ INSERT INTO `users_class_groups` VALUES ('90', '2', '1', '2016-11-18 07:02:31', 
 INSERT INTO `users_class_groups` VALUES ('108', '2', '8', '2016-11-29 17:34:45', '2016-11-29 17:34:45');
 INSERT INTO `users_class_groups` VALUES ('109', '3', '2', '2016-11-29 17:42:30', '2016-11-29 17:42:30');
 INSERT INTO `users_class_groups` VALUES ('118', '2', '5', '2016-12-05 17:20:33', '2016-12-05 17:20:33');
-INSERT INTO `users_class_groups` VALUES ('121', '2', '2', '2016-12-05 20:52:01', '2016-12-05 20:52:01');
+INSERT INTO `users_class_groups` VALUES ('124', '2', '2', '2016-12-06 21:46:37', '2016-12-06 21:46:37');
+INSERT INTO `users_class_groups` VALUES ('127', '66', '2', '2016-12-06 22:37:29', '2016-12-06 22:37:29');
+INSERT INTO `users_class_groups` VALUES ('128', '66', '3', '2016-12-06 22:37:31', '2016-12-06 22:37:31');
 
 -- ----------------------------
 -- Table structure for user_group_subjects
@@ -496,7 +489,7 @@ CREATE TABLE `user_group_subjects` (
   KEY `sc_id` (`sc_id`),
   CONSTRAINT `user_group_subjects_ibfk_1` FOREIGN KEY (`ucg_id`) REFERENCES `users_class_groups` (`id`),
   CONSTRAINT `user_group_subjects_ibfk_2` FOREIGN KEY (`sc_id`) REFERENCES `subjects_class_groups` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_group_subjects
@@ -504,7 +497,7 @@ CREATE TABLE `user_group_subjects` (
 INSERT INTO `user_group_subjects` VALUES ('51', '85', '14', '2016-11-15 17:48:34', '2016-11-15 17:48:34');
 INSERT INTO `user_group_subjects` VALUES ('53', '90', '3', '2016-11-18 07:12:19', '2016-11-18 07:12:19');
 INSERT INTO `user_group_subjects` VALUES ('54', '90', '20', '2016-11-18 07:12:21', '2016-11-18 07:12:21');
-INSERT INTO `user_group_subjects` VALUES ('58', '121', '11', '2016-12-05 20:55:39', '2016-12-05 20:55:39');
+INSERT INTO `user_group_subjects` VALUES ('60', '74', '15', '2016-12-06 22:28:16', '2016-12-06 22:28:16');
 
 -- ----------------------------
 -- Procedure structure for app_edit
@@ -1137,11 +1130,11 @@ BEGIN
 		rt.userId as user_id,
 		rt.userName as `name`,
 		CASE WHEN lScore IS NULL THEN '' ELSE ROUND(lScore,1) END as lScore,
-		CASE WHEN lDeliv IS NULL THEN '' ELSE ROUND(lDeliv,1) END as lDeliv,
+		CASE WHEN lDeliv IS NULL THEN '' ELSE ROUND(lDeliv,0) END as lDeliv,
 		CASE WHEN lTime IS NULL THEN '' ELSE ROUND(lTime,1) END as lTime,
 		CASE WHEN prform IS NULL THEN '' ELSE ROUND(prform,1) END as prform,
 		CASE WHEN tmeAvg IS NULL THEN '' ELSE ROUND(tmeAvg,1) END as tmeAvg,
-		CASE WHEN rnkScore IS NULL THEN '' ELSE ROUND(rnkScore,1) END as rnkScore
+		CASE WHEN rnkScore IS NULL THEN '' ELSE ROUND(rnkScore,0) END as rnkScore
 	FROM
 		(SELECT @rownum:=0) r, rankingTable rt
 	ORDER BY
@@ -1268,6 +1261,11 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `groups_asign_user`(IN `userId` int,IN `groupId` int)
 BEGIN
 	#Routine body goes here...
+	DELETE FROM
+		messages_all
+	WHERE
+		user_id = userId;
+
 	DELETE
 		m.*
 	FROM
