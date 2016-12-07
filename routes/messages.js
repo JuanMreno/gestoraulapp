@@ -103,27 +103,58 @@ router.get('/getByUserId', function(req, res) {
 		}
 
 		var query = 
-			`SELECT
-				m.id,
-				m.title,
-				m.content,
-				DATE_FORMAT(m.creation_date, '%d/%m/%Y') as date
-			FROM
-				messages m
-			INNER JOIN users_class_groups uc ON m.user_class_groups_id = uc.id
-			WHERE
-				uc.class_group_id IN 
-				(
+			`(
+				SELECT
+					m.id,
+					m.title,
+					m.content,
+					DATE_FORMAT(m.creation_date, '%d/%m/%Y') as date
+				FROM
+					messages m
+				INNER JOIN users_class_groups uc ON m.user_class_groups_id = uc.id
+				WHERE
+					uc.class_group_id IN 
+					(
+							SELECT
+								uc.class_group_id
+							FROM
+								users_class_groups uc
+							WHERE
+								uc.users_id = ?
+					)
+			)
+			UNION
+			(
+				SELECT
+					ma.id,
+					ma.title,
+					ma.content,
+					DATE_FORMAT(ma.creation_date, '%d/%m/%Y') as date
+				FROM
+					messages_all ma
+				INNER JOIN (
 						SELECT
-							uc.class_group_id
+							*
 						FROM
-							users_class_groups uc
+							users
 						WHERE
-							uc.users_id = ?
-				)` 
+							rols_id = 3
+					) as u ON ma.user_id = u.id
+				INNER JOIN users_class_groups ucg ON u.id = ucg.users_id
+				WHERE
+						ucg.class_group_id IN 
+							(
+									SELECT
+										uc.class_group_id
+									FROM
+										users_class_groups uc
+									WHERE
+										uc.users_id = ?
+							)
+			)` 
 		;
 
-		var p = [params.userId];
+		var p = [params.userId, params.userId];
 		connection.query(query, p , function(err, rows) {
 		
 			if (err) {

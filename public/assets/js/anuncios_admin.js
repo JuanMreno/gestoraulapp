@@ -118,26 +118,38 @@
                     var d = $.Deferred();
                     var session = $.cookie(SESSION_COOKIE);
 
-                    var data = {
-                        title:item.title,
-                        content:item.content,
-                        user_class_groups_id:user_group_id,
-                    };
-                    var jData = utf8_to_b64( JSON.stringify(data) );
-                    $.ajax({
-                        url: CON_URL+"messages/create",
-                        data:{data:jData}
-                    }).done(function(data) {
-                        var res = $.parseJSON(b64_to_utf8(data));
-
-                        if(res.status == "true")
-                            d.resolve(item);
-                        else
-                            d.resolve([]);
-                    }).fail(function(data) {
-                        console.log("ajax fail");
+                    d.fail(function() {
                         d.resolve([]);
+                        $("#jsGrid").jsGrid("render");
                     });
+
+                    if(item.title == "" || item.content == ""){
+                        $('#alertModalCont').text("Todos los campos son necesarios.");
+                        $('#alertModal').modal('show');
+                        d.reject();
+                    }
+                    else{
+                        var data = {
+                            title:item.title,
+                            content:item.content,
+                            user_class_groups_id:user_group_id,
+                        };
+                        var jData = utf8_to_b64( JSON.stringify(data) );
+                        $.ajax({
+                            url: CON_URL+"messages/create",
+                            data:{data:jData}
+                        }).done(function(data) {
+                            var res = $.parseJSON(b64_to_utf8(data));
+
+                            if(res.status == "true")
+                                d.resolve(item);
+                            else
+                                d.reject();
+                        }).fail(function(data) {
+                            console.log("ajax fail");
+                            d.reject();
+                        });
+                    }
 
                     return d.promise();
                 },
@@ -166,6 +178,45 @@
                         d.resolve();
                     });
      
+                    return d.promise();
+                },
+                updateItem: function(item) {
+                    var d = $.Deferred();
+                    var session = $.cookie(SESSION_COOKIE);
+
+                    d.fail(function() {
+                        d.resolve([]);
+                        $("#jsGrid").jsGrid("render");
+                    });
+
+                    if(item.title == "" || item.content == ""){
+                        $('#alertModalCont').text("Todos los campos son necesarios.");
+                        $('#alertModal').modal('show');
+                        d.reject();
+                    }
+                    else{
+                        var data = {
+                            title:item.title,
+                            content:item.content,
+                            id:item.id,
+                        };
+                        var jData = utf8_to_b64( JSON.stringify(data) );
+                        $.ajax({
+                            url: CON_URL+"messages/edit",
+                            data:{data:jData}
+                        }).done(function(data) {
+                            var res = $.parseJSON(b64_to_utf8(data));
+
+                            if(res.status == "true")
+                                d.resolve(item);
+                            else
+                                d.reject();
+                        }).fail(function(data) {
+                            console.log("ajax fail");
+                            d.reject();
+                        });
+                    }
+                    
                     return d.promise();
                 }
             },
@@ -236,26 +287,39 @@
                     var d = $.Deferred();
                     var session = $.cookie(SESSION_COOKIE);
 
-                    var data = {
-                        title:item.title,
-                        content:item.content,
-                        user_id:session.id,
-                    };
-                    var jData = utf8_to_b64( JSON.stringify(data) );
-                    $.ajax({
-                        url: CON_URL+"messages/createAll",
-                        data:{data:jData}
-                    }).done(function(data) {
-                        var res = $.parseJSON(b64_to_utf8(data));
-
-                        if(res.status == "true")
-                            d.resolve(item);
-                        else
-                            d.resolve([]);
-                    }).fail(function(data) {
-                        console.log("ajax fail");
+                    d.fail(function() {
                         d.resolve([]);
+                        $("#jsGrid").jsGrid("render");
                     });
+
+                    if(item.title == "" || item.content == ""){
+                        $('#alertModalCont').text("Todos los campos son necesarios.");
+                        $('#alertModal').modal('show');
+                        d.reject();
+                    }
+                    else{
+                        var data = {
+                            title:item.title,
+                            content:item.content,
+                            user_id:session.id,
+                        };
+                        var jData = utf8_to_b64( JSON.stringify(data) );
+                        $.ajax({
+                            url: CON_URL+"messages/createAll",
+                            data:{data:jData}
+                        }).done(function(data) {
+                            var res = $.parseJSON(b64_to_utf8(data));
+
+                            if(res.status == "true")
+                                d.resolve(item);
+                            else
+                                d.reject();
+                        }).fail(function(data) {
+                            console.log("ajax fail");
+                            d.reject();
+                        });
+                    }
+                    
 
                     return d.promise();
                 },
@@ -290,29 +354,41 @@
                     var d = $.Deferred();
                     var session = $.cookie(SESSION_COOKIE);
 
-                    var data = {
-                        title:item.title,
-                        content:item.content,
-                        user_id:session.id,
-                    };
-                    var jData = utf8_to_b64( JSON.stringify(data) );
-                    $.ajax({
-                        url: CON_URL+"messages/editAll",
-                        data:{data:jData}
-                    }).done(function(data) {
-                        var res = $.parseJSON(b64_to_utf8(data));
-
-                        if(res.status == "true")
-                            d.resolve(item);
-                        else
-                            d.resolve([]);
-                    }).fail(function(data) {
-                        console.log("ajax fail");
+                    d.fail(function() {
                         d.resolve([]);
+                        $("#jsGrid").jsGrid("render");
                     });
 
+                    if(item.title == "" || item.content == ""){
+                        $('#alertModalCont').text("Todos los campos son necesarios.");
+                        $('#alertModal').modal('show');
+                        d.reject();
+                    }
+                    else{
+                        var data = {
+                            title:item.title,
+                            content:item.content,
+                            id:item.id,
+                        };
+                        var jData = utf8_to_b64( JSON.stringify(data) );
+                        $.ajax({
+                            url: CON_URL+"messages/editAll",
+                            data:{data:jData}
+                        }).done(function(data) {
+                            var res = $.parseJSON(b64_to_utf8(data));
+
+                            if(res.status == "true")
+                                d.resolve(item);
+                            else
+                                d.reject();
+                        }).fail(function(data) {
+                            console.log("ajax fail");
+                            d.reject();
+                        });
+                    }
+
                     return d.promise();
-                },
+                }
             },
 
             pagerFormat: "Pag {first} {prev} {pages} {next} {last}    {pageIndex} de {pageCount}",

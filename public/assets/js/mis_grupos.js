@@ -128,23 +128,24 @@
                     var d = $.Deferred();
 
                     d.fail(function() {
-                        return null;
+                        d.resolve([]);
                         $("#jsGrid").jsGrid("render");
                     });
 
                     var session = $.cookie(SESSION_COOKIE);
-
-                    $confirmModal = $('#confirmModal');
-
                     var mns = "";
                     if(item.asignado)
-                        mns = 'Seguro desea asinarse el grupo ' + item.name + '.';
+                        mns = '¿Está seguro que desea asignarse el grupo ' + item.name + '?';
                     else
                         mns = 'Se perderá toda la información relacionada con el grupo ' + item.name + '. ¿Desea continuar?';
 
-                    var res = confirm(mns);
+                    $confModal = $('#confirmModal');
+                    $confModal.find('#confirmModalCont').text(mns);
 
-                    if(res){
+                    $confModal.find('#doneConfirmModal').off('click').on('click', function(event) {
+                        event.preventDefault();
+                        $confModal.modal('hide');
+                        
                         var data = {
                             userId:session.id,
                             groupId:item.id,
@@ -163,11 +164,13 @@
                             item.asignado = (item.asignado == 0) ? 1 : 0;
                             d.resolve(item);
                         });
-                    }
-                    else{
-                        item.asignado = (item.asignado == 0) ? 1 : 0;
-                        d.resolve(item);
-                    }
+                    });
+
+                    $confModal.on('hidden.bs.modal', function (e) {
+                        d.reject();
+                    });
+
+                    $confModal.modal('show');
                     return d.promise();
                 }
             },
@@ -189,32 +192,6 @@
             ]
         });
 	}
-
-    function confirmModal(mns) {
-        var d = $.Deferred();
-
-        $confirmModal = $('#confirmModal');
-
-        $confirmModal.text(mns);
-
-        $confirmModal.off('hidden.bs.modal').on('hidden.bs.modal', function(event) {
-            event.preventDefault();
-            d.resolve(false);
-        });
-
-        $confirmModal.off('shown.bs.modal').on('shown.bs.modal', function(event) {
-            event.preventDefault();
-
-            $('#doneConfirmModal').on('click', function(event) {
-                event.preventDefault();
-
-                d.resolve(true);
-            });
-        });
-
-        $confirmModal.modal('show');
-        return d.promise();
-    }
 
     function setSubjectsTable() {
         var groupId = $dropDown.attr('data-sel-id');
@@ -270,14 +247,23 @@
                     var d = $.Deferred();
                     var session = $.cookie(SESSION_COOKIE);
 
+                    d.fail(function() {
+                        d.resolve([]);
+                        $("#jsGrid").jsGrid("render");
+                    });
+
                     if(item.asignado)
                         mns = 'Seguro desea asinarse la materia ' + item.name + '.';
                     else
                         mns = 'Se perderá toda la información relacionada con la materia ' + item.name + '. ¿Desea continuar?';
 
-                    var res = confirm(mns);
-                            
-                    if (res) {
+                    $confModal = $('#confirmModal');
+                    $confModal.find('#confirmModalCont').text(mns);
+
+                    $confModal.find('#doneConfirmModal').off('click').on('click', function(event) {
+                        event.preventDefault();
+                        $confModal.modal('hide');
+                        
                         var data = {
                             userGroupId:userGroupId,
                             scId:item.sc_id,
@@ -297,12 +283,13 @@
                             item.asignado = (item.asignado == 0) ? 1 : 0;
                             d.resolve(item);
                         });
-                    }
-                    else{
-                        item.asignado = !item.asignado;
-                        d.resolve(item);
-                    }
-     
+                    });
+
+                    $confModal.on('hidden.bs.modal', function (e) {
+                        d.reject();
+                    });
+
+                    $confModal.modal('show');     
                     return d.promise();
                 }
             },

@@ -191,7 +191,7 @@
                     $e.attr({
                         "data-toggle": 'tooltip',
                         "data-container": 'body',
-                        "title": 'Tiempo promedio de prácticas'
+                        "title": 'Cantidad de laboratorios entregados'
                     });
 
                     $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(3)");
@@ -206,10 +206,10 @@
             },
 
             fields: [
-             	{ name: "rank", type: "text", align: "center", width: 30, title: "Pos" },
+             	{ name: "rank", type: "text", align: "center", width: 30, title: "Pos." },
              	{ name: "name", type: "text", align: "center", width: 250, title: "Nombre" },
-	            { name: "tmeAvg", type: "text", align: "center", filtering: false, width: 30, title:"T" },
-                { name: "rnkScore", type: "text", align: "center", filtering: false, width: 30, title:"P" },
+	            { name: "lDeliv", type: "text", align: "center", filtering: false, width: 30, title:"L" },
+                { name: "rnkScore", type: "text", align: "center", filtering: false, width: 30, title:"Pts" },
             	{ type: "control" }
             ]
         });

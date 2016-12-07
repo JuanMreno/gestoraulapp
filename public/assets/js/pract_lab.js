@@ -260,7 +260,7 @@
                             var res = $.parseJSON(b64_to_utf8(data));
                             if(res.state == "true"){
                                 if(res.res_code == "LAB_UPDATED" || res.res_code == "LAB_INSERTED"){
-                                    $('#alertModalCont').text("Reporte generado con éxito.");
+                                    $('#alertModalCont').text("El documento ha sido subido con éxito.");
                                     $('#alertModal').modal('show');
                                     $modal.modal('hide');
                                     var subjectId = $("#subjectsDropDown").attr('data-sel-id'); 
@@ -376,7 +376,7 @@
 	            fields: [
 	                { name: "lab_name", type: "text", align: "center", width: 160, title: "Nombre" },
 	                { name: "delivery_date", type: "text", align: "center", width: 70, title: "Fecha" },
-	                { name: "lab_state", type: "checkbox", align: "center", width: 50, title: "Entre" },
+	                { name: "lab_state", type: "checkbox", align: "center", width: 50, title: "Estado" },
 	                { name: "lab_delivery_time", type: "text", align: "center", width: 50, title:"T" },
 	                { name: "lab_attempts", type: "text", align: "center", width: 30, title:"I" },
 	                { name: "lab_teacher_score", type: "text", align: "center", width: 30, title:"P" },

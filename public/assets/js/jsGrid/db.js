@@ -26,136 +26,7 @@
 
     window.db = db;
 
-    db.clients = [
-        { "Id":1, "Practica": "Ondas estacionárias", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Extensiometria y transductores", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Péndulo balístico", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Medida de la potencia de pedaleao", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Movimieto bajo fuerzas centrales", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Osciloscopio", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Ciclo de histeresis", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Campo magnetico terrestre", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Magnetico-Conductor", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Acciones entre corrientes", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Ondas estacionárias", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Extensiometria y transductores", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Péndulo balístico", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Medida de la potencia de pedaleao", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Movimieto bajo fuerzas centrales", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Osciloscopio", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Ciclo de histeresis", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Campo magnetico terrestre", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Magnetico-Conductor", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Acciones entre corrientes", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Ondas estacionárias", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Extensiometria y transductores", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Péndulo balístico", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Medida de la potencia de pedaleao", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Movimieto bajo fuerzas centrales", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Osciloscopio", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Ciclo de histeresis", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Campo magnetico terrestre", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Magnetico-Conductor", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Acciones entre corrientes", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Ondas estacionárias", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Extensiometria y transductores", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Péndulo balístico", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Medida de la potencia de pedaleao", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Movimieto bajo fuerzas centrales", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Osciloscopio", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Ciclo de histeresis", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Campo magnetico terrestre", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Magnetico-Conductor", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Acciones entre corrientes", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Ondas estacionárias", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Extensiometria y transductores", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Péndulo balístico", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Medida de la potencia de pedaleao", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Movimieto bajo fuerzas centrales", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Osciloscopio", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Ciclo de histeresis", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Campo magnetico terrestre", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Magnetico-Conductor", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Acciones entre corrientes", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Ondas estacionárias", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Extensiometria y transductores", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Péndulo balístico", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Medida de la potencia de pedaleao", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Movimieto bajo fuerzas centrales", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Osciloscopio", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Ciclo de histeresis", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Campo magnetico terrestre", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Magnetico-Conductor", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Acciones entre corrientes", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Ondas estacionárias", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Extensiometria y transductores", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Péndulo balístico", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Medida de la potencia de pedaleao", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Movimieto bajo fuerzas centrales", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Osciloscopio", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Ciclo de histeresis", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Campo magnetico terrestre", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Magnetico-Conductor", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Acciones entre corrientes", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Ondas estacionárias", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Extensiometria y transductores", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Péndulo balístico", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Medida de la potencia de pedaleao", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Movimieto bajo fuerzas centrales", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Osciloscopio", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Ciclo de histeresis", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Campo magnetico terrestre", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Magnetico-Conductor", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Acciones entre corrientes", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Ondas estacionárias", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Extensiometria y transductores", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Péndulo balístico", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Medida de la potencia de pedaleao", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Movimieto bajo fuerzas centrales", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Osciloscopio", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Ciclo de histeresis", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Campo magnetico terrestre", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Magnetico-Conductor", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Acciones entre corrientes", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Ondas estacionárias", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Extensiometria y transductores", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Péndulo balístico", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Medida de la potencia de pedaleao", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Movimieto bajo fuerzas centrales", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Osciloscopio", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Ciclo de histeresis", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Campo magnetico terrestre", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Magnetico-Conductor", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Acciones entre corrientes", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Ondas estacionárias", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Extensiometria y transductores", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Péndulo balístico", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Medida de la potencia de pedaleao", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Movimieto bajo fuerzas centrales", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Osciloscopio", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Ciclo de histeresis", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Campo magnetico terrestre", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Magnetico-Conductor", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Acciones entre corrientes", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Ondas estacionárias", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Extensiometria y transductores", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Péndulo balístico", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Medida de la potencia de pedaleao", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Movimieto bajo fuerzas centrales", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Osciloscopio", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Ciclo de histeresis", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Campo magnetico terrestre", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Magnetico-Conductor", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Acciones entre corrientes", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Ondas estacionárias", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Extensiometria y transductores", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Péndulo balístico", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Medida de la potencia de pedaleao", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Movimieto bajo fuerzas centrales", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Osciloscopio", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Acciones entre corrientes", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica" : "Campos magnéticos", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." }
-    ];
+    db.clients = [];
 
     /////////////////       ESTUDIANTES     /////////////////////////////////////////////////////
     var dbEst = {
@@ -186,19 +57,7 @@
 
     window.dbEst = dbEst;
 
-    dbEst.practs = [
-        { "Id":1, "Estudiante":"Juan Moreno", "Practica": "Ondas estacionárias", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Estudiante":"Juan Moreno", "Practica": "Extensiometria y transductores", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Estudiante":"Juan Moreno", "Practica" : "Péndulo balístico", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Estudiante":"Juan Moreno", "Practica" : "Medida de la potencia de pedaleao", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Estudiante":"Juan Moreno", "Practica" : "Movimieto bajo fuerzas centrales", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Estudiante":"Juan Moreno", "Practica" : "Osciloscopio", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Estudiante":"Juan Moreno", "Practica" : "Ciclo de histeresis", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Estudiante":"Juan Moreno", "Practica" : "Campo magnetico terrestre", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Estudiante":"Juan Moreno", "Practica" : "Magnetico-Conductor", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": false, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Estudiante":"Juan Moreno", "Practica" : "Acciones entre corrientes", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Estudiante":"Juan Moreno", "Practica" : "Campos magnéticos", "Unidad": "Electromagnetismo", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." }
-    ];
+    dbEst.practs = [];
 
     ////////////////////////    RANKING     /////////////////////////////////////////////////////////////////////////////////
     var dbRan = {
@@ -228,24 +87,7 @@
 
     window.dbRan = dbRan;
 
-    dbRan.est = [
-        { "Id":1, "Estudiante":"Juan Moreno", "Grupo": "11-A", "Nota":"2.5", "Practicas":"5", "Tiempo":"2 Días" },
-        { "Id":1, "Estudiante":"Juan Moreno", "Grupo": "11-A", "Nota":"2.5", "Practicas":"5", "Tiempo":"2 Días" },
-        { "Id":1, "Estudiante":"Juan Moreno", "Grupo": "11-A", "Nota":"2.5", "Practicas":"5", "Tiempo":"2 Días" },
-        { "Id":1, "Estudiante":"Juan Moreno", "Grupo": "11-A", "Nota":"2.5", "Practicas":"5", "Tiempo":"2 Días" },
-        { "Id":1, "Estudiante":"Juan Moreno", "Grupo": "11-A", "Nota":"2.5", "Practicas":"5", "Tiempo":"2 Días" },
-        { "Id":1, "Estudiante":"Juan Moreno", "Grupo": "11-A", "Nota":"2.5", "Practicas":"5", "Tiempo":"2 Días" },
-        { "Id":1, "Estudiante":"Juan Moreno", "Grupo": "11-A", "Nota":"2.5", "Practicas":"5", "Tiempo":"2 Días" },
-        { "Id":1, "Estudiante":"Juan Moreno", "Grupo": "11-A", "Nota":"2.5", "Practicas":"5", "Tiempo":"2 Días" },
-        { "Id":1, "Estudiante":"Juan Moreno", "Grupo": "11-A", "Nota":"2.5", "Practicas":"5", "Tiempo":"2 Días" },
-        { "Id":1, "Estudiante":"Juan Moreno", "Grupo": "11-A", "Nota":"2.5", "Practicas":"5", "Tiempo":"2 Días" },
-        { "Id":1, "Estudiante":"Juan Moreno", "Grupo": "11-A", "Nota":"2.5", "Practicas":"5", "Tiempo":"2 Días" },
-        { "Id":1, "Estudiante":"Juan Moreno", "Grupo": "11-A", "Nota":"2.5", "Practicas":"5", "Tiempo":"2 Días" },
-        { "Id":1, "Estudiante":"Juan Moreno", "Grupo": "11-A", "Nota":"2.5", "Practicas":"5", "Tiempo":"2 Días" },
-        { "Id":1, "Estudiante":"Juan Moreno", "Grupo": "11-A", "Nota":"2.5", "Practicas":"5", "Tiempo":"2 Días" },
-        { "Id":1, "Estudiante":"Juan Moreno", "Grupo": "11-A", "Nota":"2.5", "Practicas":"5", "Tiempo":"2 Días" },
-        { "Id":1, "Estudiante":"Juan Moreno", "Grupo": "11-A", "Nota":"2.5", "Practicas":"5", "Tiempo":"2 Días" }
-    ];
+    dbRan.est = [];
 
     ////////////////////////    ANUNCIOS     /////////////////////////////////////////////////////////////////////////////////
     var dbAnun = {
@@ -274,18 +116,7 @@
 
     window.dbAnun = dbAnun;
 
-    dbAnun.dbAnun = [
-        { "Id":1, "Profesor":"Oscar Moreno", "Titulo":"Quiz próxima semana", "Contenido": "El día viernes se realizará un quiz del último tema visto.", "Fecha":"12/11/2015" },
-        { "Id":1, "Profesor":"Oscar Moreno", "Titulo":"Quiz próxima semana", "Contenido": "El día viernes se realizará un quiz del último tema visto.", "Fecha":"12/11/2015" },
-        { "Id":1, "Profesor":"Oscar Moreno", "Titulo":"Quiz próxima semana", "Contenido": "El día viernes se realizará un quiz del último tema visto.", "Fecha":"12/11/2015" },
-        { "Id":1, "Profesor":"Oscar Moreno", "Titulo":"Quiz próxima semana", "Contenido": "El día viernes se realizará un quiz del último tema visto.", "Fecha":"12/11/2015" },
-        { "Id":1, "Profesor":"Oscar Moreno", "Titulo":"Quiz próxima semana", "Contenido": "El día viernes se realizará un quiz del último tema visto.", "Fecha":"12/11/2015" },
-        { "Id":1, "Profesor":"Oscar Moreno", "Titulo":"Quiz próxima semana", "Contenido": "El día viernes se realizará un quiz del último tema visto.", "Fecha":"12/11/2015" },
-        { "Id":1, "Profesor":"Oscar Moreno", "Titulo":"Quiz próxima semana", "Contenido": "El día viernes se realizará un quiz del último tema visto.", "Fecha":"12/11/2015" },
-        { "Id":1, "Profesor":"Oscar Moreno", "Titulo":"Quiz próxima semana", "Contenido": "El día viernes se realizará un quiz del último tema visto.", "Fecha":"12/11/2015" },
-        { "Id":1, "Profesor":"Oscar Moreno", "Titulo":"Quiz próxima semana", "Contenido": "El día viernes se realizará un quiz del último tema visto.", "Fecha":"12/11/2015" },
-        { "Id":1, "Profesor":"Oscar Moreno", "Titulo":"Quiz próxima semana", "Contenido": "El día viernes se realizará un quiz del último tema visto.", "Fecha":"12/11/2015" }
-    ];
+    dbAnun.dbAnun = [];
 
     /////////////////////////   PRACTICAS   ////////////////////////////////////////////////
     var dbPracs = {
@@ -318,34 +149,6 @@
 
     window.dbPracs = dbPracs;
 
-    dbPracs.data = [
-        { "Id":1, "Practica": "Ondas estacionárias", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "Intentos":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Ondas estacionárias", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "Intentos":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Ondas estacionárias", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "Intentos":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Ondas estacionárias", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "Intentos":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Ondas estacionárias", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "Intentos":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Ondas estacionárias", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "Intentos":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Ondas estacionárias", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "Intentos":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Ondas estacionárias", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "Intentos":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Ondas estacionárias", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "Intentos":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Ondas estacionárias", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "Intentos":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Ondas estacionárias", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "Intentos":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Ondas estacionárias", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "Intentos":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Ondas estacionárias", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "Intentos":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Ondas estacionárias", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "Intentos":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Ondas estacionárias", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "Intentos":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Ondas estacionárias", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "Intentos":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Ondas estacionárias", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "Intentos":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Ondas estacionárias", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "Intentos":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Ondas estacionárias", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "Intentos":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Ondas estacionárias", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "Intentos":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Ondas estacionárias", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "Intentos":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Ondas estacionárias", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "Intentos":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Ondas estacionárias", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "Intentos":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Ondas estacionárias", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "Intentos":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Ondas estacionárias", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "Intentos":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Ondas estacionárias", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "Intentos":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." },
-        { "Id":1, "Practica": "Ondas estacionárias", "Unidad": "Mecánica clásica", "Fecha": "25/10/2016", "Estado": true, "Entrega":2, "Intentos":2, "N_PROFESOR":"3.5", "N_APP":"4.5", "N_FINAL":"4", "OBSRV":"Conclusiones acertadas y coherentes." }
-    ];
+    dbPracs.data = [];
 
 }());

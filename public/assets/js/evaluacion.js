@@ -367,7 +367,44 @@
                 if(item.lab_users_id != null && item.lab_users_id != "" && item.lab_state == "1")
                     $('#btnRestInt').off('click').on('click', function(event) {
                         event.preventDefault();
+
+                        $confModal = $('#confirmModal');
+                        $confModal.find('#confirmModalCont').text("¿Está seguro que desea permitir al estudiante realizar de nuevo esta práctica de\
+                                            laboratorio?");
+
+                        $confModal.find('#doneConfirmModal').off('click').on('click', function(event) {
+                            event.preventDefault();
+                            $confModal.modal('hide');
+                            
+                            var data = {
+                                labId:item.lab_users_id
+                            }
+
+                            var jData = utf8_to_b64( JSON.stringify(data) );
+                            $.ajax({
+                                url: CON_URL+"evaluation/resetLabAttempt",
+                                data:{data:jData}
+                            }).done(function(data) {
+                                var res = $.parseJSON(b64_to_utf8(data));
+
+                                if(res.status == "true"){
+                                    $("#jsGrid").jsGrid("render");
+                                    $modal.modal('toggle');
+                                }
+                                else{
+                                    $('#alertModalCont').text("La información no pudo ser actualizada.");
+                                    $('#alertModal').modal('show');
+                                }
+                            }).fail(function(data) {
+                                console.log("ajax fail");
+                                $('#alertModalCont').text("La información no pudo ser actualizada.");
+                                $('#alertModal').modal('show');
+                            });
+                        });
+
+                        $confModal.modal('show');
                         
+                        /*
                         var data = {
                             labId:item.lab_users_id
                         }
@@ -392,6 +429,7 @@
                             $('#alertModalCont').text("La información no pudo ser actualizada.");
                             $('#alertModal').modal('show');
                         });
+                        */
                     });
                 else
                     $('#btnRestInt').hide();
@@ -460,8 +498,8 @@
 
             fields: [
                 { name: "lab_name", type: "text", align: "center", width: 160, title: "Nombre" },
-                { name: "delivery_date", type: "text", align: "center", width: 70, title: "Fecha" },
-                { name: "lab_state", type: "checkbox", align: "center", width: 50, title: "Entr" },
+                { name: "delivery_date", type: "text", align: "center", width: 60, title: "Fecha" },
+                { name: "lab_state", type: "checkbox", align: "center", width: 50, title: "Estado" },
                 { name: "lab_delivery_time", type: "text", align: "center", width: 50, title:"T" },
                 { name: "lab_attempts", type: "text", align: "center", width: 30, title:"I" },
                 { name: "lab_teacher_score", type: "text", align: "center", width: 30, title:"P" },
@@ -540,7 +578,7 @@
             }
             
             const pdfConst = new PdfMakeConstructor(stuName.replace(" ", "_") + "_report.pdf");
-            pdfConst.makeStuEvalReport(data);
+            pdfConst.makeStuReport(data);
         });
 
         $('#dlExcelReport').off('click').on('click', function(event) {

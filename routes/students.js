@@ -119,10 +119,9 @@ router.get('/getByLabId', function(req, res) {
 					l.id as lab_id, 
 					l.lab_code as lab_code, 
 					l.\`name\` as lab_name, 
-					ls.\`name\` as less_name 
+					l.lesson_name as less_name 
 				FROM
 					laboratory l
-				INNER JOIN lessons ls ON l.lesson_id = ls.id
 				WHERE
 					l.id = ?` 
 			;
@@ -169,7 +168,7 @@ router.get('/getByLabId', function(req, res) {
 							l.id as lab_id,
 							l.id as lab_code,
 							l.\`name\` as lab_name,
-							le.\`name\` as less_name,
+							l.lesson_name as less_name,
 							DATE_FORMAT(lu.delivery_date,'%Y/%m/%d') as delivery_date,
 							CASE WHEN lu.state IS NULL THEN '0' ELSE lu.state END as lab_state,
 							CASE WHEN lu.attempts IS NULL THEN '' ELSE lu.attempts END as lab_attempts,
@@ -184,7 +183,6 @@ router.get('/getByLabId', function(req, res) {
 						INNER JOIN users_class_groups uc ON u.id = uc.users_id
 						INNER JOIN laboratories_users lu ON u.id = lu.user_id
 						INNER JOIN laboratory l ON l.id = lu.laboratory_id
-						INNER JOIN lessons le ON l.lesson_id = le.id
 						WHERE
 							uc.class_group_id = ? AND
 							u.rols_id = 4 AND

@@ -5,14 +5,12 @@
 
 	function mainInit() {
 		$body = $('body');
-		// CSS polyfills (IE<9).
+
 		if (skel.vars.IEVersion < 9)
 			$(':last-child').addClass('last-child');
 
-		// Fix: Placeholder polyfill.
 		$('form').placeholder();
 
-		// Prioritize "important" elements on mobile.
 		skel.on('+mobile -mobile', function() {
 			$.prioritize(
 				'.important\\28 mobile\\29',
@@ -20,13 +18,10 @@
 			);
 		});
 
-		// Scrolly links.
 		$('.scrolly').scrolly();
 
-		// Nav.
 		var $nav_a = $('#nav a');
 
-		// Scrolly-fy links.
 		$nav_a
 			.scrolly()
 			.on('click', function(e) {
@@ -39,17 +34,14 @@
 
 				e.preventDefault();
 
-				// Clear active and lock scrollzer until scrolling has stopped
 				$nav_a
 					.removeClass('active')
 					.addClass('scrollzer-locked');
 
-				// Set this link to active
 				t.addClass('active');
 
 			});
 
-		// Initialize scrollzer.
 		var ids = [];
 
 		$nav_a.each(function() {
@@ -65,9 +57,6 @@
 
 		$.scrollzer(ids, { pad: 200, lastHack: true });
 
-		// Header (narrower + mobile).
-
-		// Toggle.
 		$(
 			'<div id="headerToggle">' +
 				'<a id="panelToogleBtn" href="#header" class="toggle"></a>' +
@@ -75,7 +64,6 @@
 		)
 		.appendTo($body);
 
-		// Header.
 		$('#header')
 			.panel({
 				delay: 500,
@@ -88,7 +76,6 @@
 				visibleClass: 'header-visible'
 			});
 
-		// Fix: Remove transitions on WP<10 (poor/buggy performance).
 		if (skel.vars.os == 'wp' && skel.vars.osVersion < 10)
 			$('#headerToggle, #header, #main')
 				.css('transition', 'none');
@@ -128,7 +115,9 @@
 			$(this).addClass('active');
 
 			$('#section').load('views/pract_lab.html');
-			$('#panelToogleBtn').trigger('click');
+
+			if($(window).width() < 961)
+				$('#panelToogleBtn').trigger('click');
 		});
 		
 		$('#cons-link').off("click").on('click', function(event) {
@@ -137,7 +126,9 @@
 			$(this).addClass('active');
 
 			$('#section').load('views/consultas.html');
-			$('#panelToogleBtn').trigger('click');
+
+			if($(window).width() < 961)
+				$('#panelToogleBtn').trigger('click');
 		});
 		
 		$('#eval-link').off("click").on('click', function(event) {
@@ -146,7 +137,9 @@
 			$(this).addClass('active');
 
 			$('#section').load('views/evaluacion.html');
-			$('#panelToogleBtn').trigger('click');
+
+			if($(window).width() < 961)
+				$('#panelToogleBtn').trigger('click');
 		});
 		
 		$('#rank-link').off("click").on('click', function(event) {
@@ -155,7 +148,9 @@
 			$(this).addClass('active');
 
 			$('#section').load('views/ranking.html');
-			$('#panelToogleBtn').trigger('click');
+
+			if($(window).width() < 961)
+				$('#panelToogleBtn').trigger('click');
 		});
 		
 		$('#anun-link').off("click").on('click', function(event) {
@@ -169,7 +164,9 @@
 			else if(session.rol == EST_ROL){
 				$('#section').load('views/anuncios_user.html');
 			}
-			$('#panelToogleBtn').trigger('click');
+
+			if($(window).width() < 961)
+				$('#panelToogleBtn').trigger('click');
 		});
 		
 		$('#mgrp-link').off("click").on('click', function(event) {
@@ -178,7 +175,9 @@
 			$(this).addClass('active');
 
 			$('#section').load('views/mis_grupos.html');
-			$('#panelToogleBtn').trigger('click');
+
+			if($(window).width() < 961)
+				$('#panelToogleBtn').trigger('click');
 		});
 		
 		$('#grps-link').off("click").on('click', function(event) {
@@ -187,7 +186,9 @@
 			$(this).addClass('active');
 
 			$('#section').load('views/grupos.html');
-			$('#panelToogleBtn').trigger('click');
+
+			if($(window).width() < 961)
+				$('#panelToogleBtn').trigger('click');
 		});
 		
 		$('#mtrs-link').off("click").on('click', function(event) {
@@ -196,7 +197,9 @@
 			$(this).addClass('active');
 
 			$('#section').load('views/materias.html');
-			$('#panelToogleBtn').trigger('click');
+
+			if($(window).width() < 961)
+				$('#panelToogleBtn').trigger('click');
 		});
 		
 		$('#usrs-link').off("click").on('click', function(event) {
@@ -205,7 +208,9 @@
 			$(this).addClass('active');
 
 			$('#section').load('views/usuarios.html');
-			$('#panelToogleBtn').trigger('click');
+
+			if($(window).width() < 961)
+				$('#panelToogleBtn').trigger('click');
 		});
 
 		$('#labs-link').off("click").on('click', function(event) {
@@ -214,7 +219,9 @@
 			$(this).addClass('active');
 
 			$('#section').load('views/laboratorios.html');
-			$('#panelToogleBtn').trigger('click');
+
+			if($(window).width() < 961)
+				$('#panelToogleBtn').trigger('click');
 		});
 
 		$('#conf-link').off("click").on('click', function(event) {
@@ -223,7 +230,9 @@
 			$(this).addClass('active');
 
 			$('#section').load('views/config.html');
-			$('#panelToogleBtn').trigger('click');
+
+			if($(window).width() < 961)
+				$('#panelToogleBtn').trigger('click');
 		});
 		
 		$('#serv-link').off("click").on('click', function(event) {
@@ -232,7 +241,9 @@
 			$(this).addClass('active');
 
 			$('#section').load('views/servidor.html');
-			$('#panelToogleBtn').trigger('click');
+
+			if($(window).width() < 961)
+				$('#panelToogleBtn').trigger('click');
 		});
 		
 		$('#cses-link').off("click").on('click', function(event) {

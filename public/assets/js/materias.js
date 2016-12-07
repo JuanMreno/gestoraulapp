@@ -56,43 +56,50 @@
                     var session = $.cookie(SESSION_COOKIE);
 
                     d.fail(function() {
-                        return null;
+                        d.resolve([]);
                         $("#jsGrid").jsGrid("render");
                     });
 
-                    var data = {
-                        subId:item.id,
-                        name:item.name
-                    };
-     
-                    var jData = utf8_to_b64( JSON.stringify(data) );
-                    $.ajax({
-                        url: CON_URL+"subjects/edit",
-                        data:{data:jData}
-                    }).done(function(data) {
-                        var res = $.parseJSON(b64_to_utf8(data));
-
-                        if(res.status == "true")
-                            d.resolve(item);
-                        else{
-                            if(res.data.state == "REPEATED"){
-                                $('#alertModalCont').text("La materia ya ha sido registrada.");
-                                $('#alertModal').modal('show');
-                            }
-                            else{
-                                $('#alertModalCont').text("Error al intentar registrar la materia.");
-                                $('#alertModal').modal('show');
-                            }
-                            d.reject();
-                            //d.resolve(false);
-                        }
-                    }).fail(function(data) {
-                        console.log("ajax fail");
-                        item.asignado = (item.asignado == 0) ? 1 : 0;
-                        $('#alertModalCont').text("Error al intentar registrar la materia.");
+                    if(item.name == ""){
+                        $('#alertModalCont').text("Todos los campos son necesarios.");
                         $('#alertModal').modal('show');
-                        d.resolve(item);
-                    });
+                        d.reject();
+                    }
+                    else{
+                        var data = {
+                            subId:item.id,
+                            name:item.name
+                        };
+         
+                        var jData = utf8_to_b64( JSON.stringify(data) );
+                        $.ajax({
+                            url: CON_URL+"subjects/edit",
+                            data:{data:jData}
+                        }).done(function(data) {
+                            var res = $.parseJSON(b64_to_utf8(data));
+
+                            if(res.status == "true")
+                                d.resolve(item);
+                            else{
+                                if(res.data.state == "REPEATED"){
+                                    $('#alertModalCont').text("La materia ya ha sido registrada.");
+                                    $('#alertModal').modal('show');
+                                }
+                                else{
+                                    $('#alertModalCont').text("Error al intentar registrar la materia.");
+                                    $('#alertModal').modal('show');
+                                }
+                                d.reject();
+                                //d.resolve(false);
+                            }
+                        }).fail(function(data) {
+                            console.log("ajax fail");
+                            item.asignado = (item.asignado == 0) ? 1 : 0;
+                            $('#alertModalCont').text("Error al intentar registrar la materia.");
+                            $('#alertModal').modal('show');
+                            d.resolve(item);
+                        });
+                    }
 
                     return d.promise();
                 },
@@ -102,40 +109,47 @@
                     var session = $.cookie(SESSION_COOKIE);
 
                     d.fail(function() {
-                        return null;
+                        d.resolve([]);
                         $("#jsGrid").jsGrid("render");
                     });
 
-                    var data = {
-                        name:item.name
-                    };
-                    var jData = utf8_to_b64( JSON.stringify(data) );
-                    $.ajax({
-                        url: CON_URL+"subjects/insert",
-                        data:{data:jData}
-                    }).done(function(data) {
-                        var res = $.parseJSON(b64_to_utf8(data));
-
-                        if(res.status == "true")
-                            d.resolve(item);
-                        else{
-                            if(res.data.state == "REPEATED"){
-                                $('#alertModalCont').text("La materia ya ha sido registrada.");
-                                $('#alertModal').modal('show');
-                            }
-                            else{
-                                $('#alertModalCont').text("Error al intentar registrar la materia.");
-                                $('#alertModal').modal('show');
-                            }
-                            d.reject();
-                            //d.resolve(false);
-                        }
-                    }).fail(function(data) {
-                        console.log("ajax fail");
-                        $('#alertModalCont').text("Error al intentar registrar la materia.");
+                    if(item.name == ""){
+                        $('#alertModalCont').text("Todos los campos son necesarios.");
                         $('#alertModal').modal('show');
                         d.reject();
-                    });
+                    }
+                    else{
+                        var data = {
+                            name:item.name
+                        };
+                        var jData = utf8_to_b64( JSON.stringify(data) );
+                        $.ajax({
+                            url: CON_URL+"subjects/insert",
+                            data:{data:jData}
+                        }).done(function(data) {
+                            var res = $.parseJSON(b64_to_utf8(data));
+
+                            if(res.status == "true")
+                                d.resolve(item);
+                            else{
+                                if(res.data.state == "REPEATED"){
+                                    $('#alertModalCont').text("La materia ya ha sido registrada.");
+                                    $('#alertModal').modal('show');
+                                }
+                                else{
+                                    $('#alertModalCont').text("Error al intentar registrar la materia.");
+                                    $('#alertModal').modal('show');
+                                }
+                                d.reject();
+                                //d.resolve(false);
+                            }
+                        }).fail(function(data) {
+                            console.log("ajax fail");
+                            $('#alertModalCont').text("Error al intentar registrar la materia.");
+                            $('#alertModal').modal('show');
+                            d.reject();
+                        });
+                    }
 
                     return d.promise();
                 }

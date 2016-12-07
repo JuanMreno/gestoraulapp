@@ -253,7 +253,7 @@
                         var data = {
                             subjectId:idSub,
                             labName:item.name,
-                            lesson_name:item.lesson_name,
+                            lessonName:item.lesson_name,
                             labCode:item.lab_code
                         };
                         var jData = utf8_to_b64( JSON.stringify(data) );

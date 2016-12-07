@@ -108,43 +108,50 @@
                     var session = $.cookie(SESSION_COOKIE);
 
                     d.fail(function() {
-                        return null;
+                        d.resolve([]);
                         $("#jsGrid").jsGrid("render");
                     });
 
-                    var data = {
-                        groupId:item.id,
-                        name:item.name
-                    };
-     
-                    var jData = utf8_to_b64( JSON.stringify(data) );
-                    $.ajax({
-                        url: CON_URL+"groups/edit",
-                        data:{data:jData}
-                    }).done(function(data) {
-                        var res = $.parseJSON(b64_to_utf8(data));
-                        //console.log(res);
-                        if(res.status == "true")
-                            d.resolve(item);
-                        else{
-                            if(res.data.state == "REPEATED"){
-                                $('#alertModalCont').text("El grupo ya ha sido registrado.");
-                                $('#alertModal').modal('show');
-                            }
-                            else{
-                                $('#alertModalCont').text("Error al intentar realizar el registro.");
-                                $('#alertModal').modal('show');
-                            }
-                            d.reject();
-                            //d.resolve(false);
-                        }
-                    }).fail(function(data) {
-                        console.log("ajax fail");
-                        item.asignado = (item.asignado == 0) ? 1 : 0;
-                        $('#alertModalCont').text("Error al intentar realizar el registro.");
+                    if(item.name == ""){
+                        $('#alertModalCont').text("Todos los campos son necesarios.");
                         $('#alertModal').modal('show');
                         d.reject();
-                    });
+                    }
+                    else{
+                        var data = {
+                            groupId:item.id,
+                            name:item.name
+                        };
+         
+                        var jData = utf8_to_b64( JSON.stringify(data) );
+                        $.ajax({
+                            url: CON_URL+"groups/edit",
+                            data:{data:jData}
+                        }).done(function(data) {
+                            var res = $.parseJSON(b64_to_utf8(data));
+                            //console.log(res);
+                            if(res.status == "true")
+                                d.resolve(item);
+                            else{
+                                if(res.data.state == "REPEATED"){
+                                    $('#alertModalCont').text("El grupo ya ha sido registrado.");
+                                    $('#alertModal').modal('show');
+                                }
+                                else{
+                                    $('#alertModalCont').text("Error al intentar realizar el registro.");
+                                    $('#alertModal').modal('show');
+                                }
+                                d.reject();
+                                //d.resolve(false);
+                            }
+                        }).fail(function(data) {
+                            console.log("ajax fail");
+                            item.asignado = (item.asignado == 0) ? 1 : 0;
+                            $('#alertModalCont').text("Error al intentar realizar el registro.");
+                            $('#alertModal').modal('show');
+                            d.reject();
+                        });
+                    }
      
                     return d.promise();
                 },
@@ -154,41 +161,48 @@
                     var session = $.cookie(SESSION_COOKIE);
 
                     d.fail(function() {
-                        return null;
+                        d.resolve([]);
                         $("#jsGrid").jsGrid("render");
                     });
 
-                    var data = {
-                        name:item.name
-                    };
-                    var jData = utf8_to_b64( JSON.stringify(data) );
-                    $.ajax({
-                        url: CON_URL+"groups/insert",
-                        data:{data:jData}
-                    }).done(function(data) {
-                        var res = $.parseJSON(b64_to_utf8(data));
-
-                        if(res.status == "true")
-                            d.resolve(item);
-                        else{
-                            if(res.data.state == "REPEATED"){
-                                $('#alertModalCont').text("El grupo ya ha sido registrado.");
-                                $('#alertModal').modal('show');
-                            }
-                            else{
-                                $('#alertModalCont').text("Error al intentar realizar el registro.");
-                                $('#alertModal').modal('show');
-                            }
-                            d.reject();
-                            //d.resolve(false);
-                        }
-                    }).fail(function(data) {
-                        console.log("ajax fail");
-                        $('#alertModalCont').text("Error al intentar realizar el registro.");
+                    if(item.name == ""){
+                        $('#alertModalCont').text("Todos los campos son necesarios.");
                         $('#alertModal').modal('show');
                         d.reject();
-                    });
+                    }
+                    else{
+                        var data = {
+                            name:item.name
+                        };
+                        var jData = utf8_to_b64( JSON.stringify(data) );
+                        $.ajax({
+                            url: CON_URL+"groups/insert",
+                            data:{data:jData}
+                        }).done(function(data) {
+                            var res = $.parseJSON(b64_to_utf8(data));
 
+                            if(res.status == "true")
+                                d.resolve(item);
+                            else{
+                                if(res.data.state == "REPEATED"){
+                                    $('#alertModalCont').text("El grupo ya ha sido registrado.");
+                                    $('#alertModal').modal('show');
+                                }
+                                else{
+                                    $('#alertModalCont').text("Error al intentar realizar el registro.");
+                                    $('#alertModal').modal('show');
+                                }
+                                d.reject();
+                                //d.resolve(false);
+                            }
+                        }).fail(function(data) {
+                            console.log("ajax fail");
+                            $('#alertModalCont').text("Error al intentar realizar el registro.");
+                            $('#alertModal').modal('show');
+                            d.reject();
+                        });
+                    }
+                    
                     return d.promise();
                 }
             },

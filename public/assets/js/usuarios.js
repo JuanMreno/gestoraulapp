@@ -56,12 +56,14 @@
                                 init();
                             }
                             else{
-                                $('#alertModalCont').text("Formato o información incorrecta, valide la información e intente de nuevo.");
+                                $('#alertModalCont').text("El formato del archivo no corresponde con el esperado. Por favor revise el archivo\
+                                                            e intente de nuevo.");
                                 $('#alertModal').modal('show');
                             }
                         }
                         else{
-                            $('#alertModalCont').text("Ha ocurrido un error inesperado, inténtalo de nuevo.");
+                            $('#alertModalCont').text("El formato del archivo no corresponde con el esperado. Por favor revise el archivo\
+                                                        e intente de nuevo.");
                             $('#alertModal').modal('show');
                         }
                     })
@@ -136,45 +138,52 @@
                     var session = $.cookie(SESSION_COOKIE);
 
                     d.fail(function() {
-                        return null;
+                        d.resolve([]);
                         $("#jsGrid").jsGrid("render");
                     });
 
-                    var data = {
-                        id:item.id,
-                        name:item.name,
-                        last_name:item.last_name
-                    };
-     
-                    var jData = utf8_to_b64( JSON.stringify(data) );
-                    $.ajax({
-                        url: CON_URL+"users/edit",
-                        data:{data:jData}
-                    }).done(function(data) {
-                        var res = $.parseJSON(b64_to_utf8(data));
-                        //console.log(res);
-                        if(res.status == "true"){
-                            d.resolve(item);
-                            $("#jsGrid").jsGrid("render");
-                        }
-                        else{
-                            if(res.data.state == "REPEATED"){
-                                $('#alertModalCont').text("El usuario ya ha sido registrado.");
-                                $('#alertModal').modal('show');
-                            }
-                            else{
-                                $('#alertModalCont').text("Error al intentar realizar el registro.");
-                                $('#alertModal').modal('show');
-                            }
-                            d.reject();
-                            //d.resolve(false);
-                        }
-                    }).fail(function(data) {
-                        console.log("ajax fail");
-                        $('#alertModalCont').text("Error al intentar realizar el registro.");
+                    if(item.name == "" || item.last_name == ""){
+                        $('#alertModalCont').text("Todos los campos son necesarios.");
                         $('#alertModal').modal('show');
                         d.reject();
-                    });
+                    }
+                    else{
+                        var data = {
+                            id:item.id,
+                            name:item.name,
+                            last_name:item.last_name
+                        };
+         
+                        var jData = utf8_to_b64( JSON.stringify(data) );
+                        $.ajax({
+                            url: CON_URL+"users/edit",
+                            data:{data:jData}
+                        }).done(function(data) {
+                            var res = $.parseJSON(b64_to_utf8(data));
+                            //console.log(res);
+                            if(res.status == "true"){
+                                d.resolve(item);
+                                $("#jsGrid").jsGrid("render");
+                            }
+                            else{
+                                if(res.data.state == "REPEATED"){
+                                    $('#alertModalCont').text("El usuario ya ha sido registrado.");
+                                    $('#alertModal').modal('show');
+                                }
+                                else{
+                                    $('#alertModalCont').text("Error al intentar realizar el registro.");
+                                    $('#alertModal').modal('show');
+                                }
+                                d.reject();
+                                //d.resolve(false);
+                            }
+                        }).fail(function(data) {
+                            console.log("ajax fail");
+                            $('#alertModalCont').text("Error al intentar realizar el registro.");
+                            $('#alertModal').modal('show');
+                            d.reject();
+                        });
+                    }
      
                     return d.promise();
                 },
@@ -184,44 +193,51 @@
                     var session = $.cookie(SESSION_COOKIE);
 
                     d.fail(function() {
-                        return null;
+                        d.resolve([]);
                         $("#jsGrid").jsGrid("render");
                     });
 
-                    var data = {
-                        name:item.name,
-                        last_name:item.last_name,
-                        rolId:rolId
-                    };
-                    var jData = utf8_to_b64( JSON.stringify(data) );
-                    $.ajax({
-                        url: CON_URL+"users/insert",
-                        data:{data:jData}
-                    }).done(function(data) {
-                        var res = $.parseJSON(b64_to_utf8(data));
-
-                        if(res.status == "true"){
-                            d.resolve(item);
-                            $("#jsGrid").jsGrid("render");
-                        }
-                        else{
-                            if(res.data.state == "REPEATED"){
-                                $('#alertModalCont').text("El usuario ya ha sido registrado.");
-                                $('#alertModal').modal('show');
-                            }
-                            else{
-                                $('#alertModalCont').text("Error al intentar realizar el registro.");
-                                $('#alertModal').modal('show');
-                            }
-                            d.reject();
-                            //d.resolve(false);
-                        }
-                    }).fail(function(data) {
-                        console.log("ajax fail");
-                        $('#alertModalCont').text("Error al intentar realizar el registro.");
+                    if(item.name == "" || item.last_name == ""){
+                        $('#alertModalCont').text("Todos los campos son necesarios.");
                         $('#alertModal').modal('show');
                         d.reject();
-                    });
+                    }
+                    else{
+                        var data = {
+                            name:item.name,
+                            last_name:item.last_name,
+                            rolId:rolId
+                        };
+                        var jData = utf8_to_b64( JSON.stringify(data) );
+                        $.ajax({
+                            url: CON_URL+"users/insert",
+                            data:{data:jData}
+                        }).done(function(data) {
+                            var res = $.parseJSON(b64_to_utf8(data));
+
+                            if(res.status == "true"){
+                                d.resolve(item);
+                                $("#jsGrid").jsGrid("render");
+                            }
+                            else{
+                                if(res.data.state == "REPEATED"){
+                                    $('#alertModalCont').text("El usuario ya ha sido registrado.");
+                                    $('#alertModal').modal('show');
+                                }
+                                else{
+                                    $('#alertModalCont').text("Error al intentar realizar el registro.");
+                                    $('#alertModal').modal('show');
+                                }
+                                d.reject();
+                                //d.resolve(false);
+                            }
+                        }).fail(function(data) {
+                            console.log("ajax fail");
+                            $('#alertModalCont').text("Error al intentar realizar el registro.");
+                            $('#alertModal').modal('show');
+                            d.reject();
+                        });
+                    }
 
                     return d.promise();
                 },
@@ -329,9 +345,15 @@
                             });
                         });
                         $("#listGroups").on("select2:unselect", function (e) { 
-                            var res = confirm("¿Estas seguro de retirar este profesor del grupo, si hace esto perdera toda la información relacionada?");
-                            
-                            if (res) {
+
+                            var mns = "¿Estas seguro de retirar este profesor del grupo, si hace esto perdera toda la información relacionada?";
+                            $confModal = $('#confirmModal');
+                            $confModal.find('#confirmModalCont').text(mns);
+
+                            $confModal.find('#doneConfirmModal').off('click').on('click', function(event) {
+                                event.preventDefault();
+                                $confModal.modal('hide');
+                                
                                 var xdata = {
                                     userId:objUser.item.id,
                                     groupId:e.params.data.id,
@@ -354,9 +376,13 @@
                                 }).fail(function(data) {
                                     console.log("ajax fail");
                                 });
-                            }else{
-                                $("#listGroups").val(jsonDataLoad).trigger("change");
-                            }  
+                            });
+
+                            $confModal.on('hidden.bs.modal', function (e) {
+                                listAllGroupsSubjets(objUser.item.id); 
+                            });
+
+                            $confModal.modal('show');
                         });
 
                         $("#listGroups").val(jsonDataLoad).trigger("change");
@@ -450,13 +476,11 @@
                     $('#nameUser').off('change').on('change', function(event) {
                         changepass = false;
                         $("#updatepass").prop("disabled",false);
-                        $('#updatepass').text("Guardar");
                     });  
 
                     $('.passpf').off('change').on('change', function(event) {
                         changepass = true;
                         $("#updatepass").prop("disabled",false);
-                        $('#updatepass').text("Guardar");
                     });
 
                     $("#editInfoUser").modal("show");
@@ -502,7 +526,8 @@
                             mensaje = true;
                         }
                         else{
-                            mensaje = confirm("¿Estas seguro de cambiar de grupo, si hace esto perdera toda la información relacionada?");
+                            mensaje = confirm("ALERTA ¿Está seguro que desea cambiar el grupo? Si hace esto perderá toda la\
+                                información relacionada.");
                         }
 
                         if (mensaje) {
@@ -614,13 +639,11 @@
                     $('#nameUserst').off('change').on('change', function(event) {
                         changepassSt = false;
                         $("#updatepasswst").prop("disabled",false);
-                        $('#updatepass').text("Guardar");
                     });  
 
                     $('.passst').off('change').on('change', function(event) {
                         changepassSt = true;
                         $("#updatepasswst").prop("disabled",false);
-                        $('#updatepass').text("Guardar");
                     });
                     $("#editInfoStudent").modal("show");
                 }
@@ -681,7 +704,7 @@
             var dt = res.data;
             if(res.status == "true"){
                 var html = "";
-                html+="<option value='' >Seleccionar Grupo</option>";
+                html+="<option value='' >Seleccionar grupo</option>";
                 for (var i = 0; i < dt.length; i++) {
                     html+="<option value='"+dt[i].group_id+"' data-id='"+dt[i].user_group_id+"'>"+dt[i].name+"</option>";
                 }
@@ -757,7 +780,8 @@
                 });
                 $("#listsubjectsGroup").on("select2:unselect", function (e) { 
                     e.preventDefault();
-                    var mensaje = confirm("¿Estas seguro de retirar este profesor de la materia?. Perdera toda la información relacionada");
+                    var mensaje = confirm("ALERTA ¿Está seguro que desea retirar el profesor del grupo? Si hace esto\
+                                            perderá toda la información relacionada.");
                     //Detectamos si el usuario acepto el mensaje
                     if (mensaje) {
                         var xdata = {

@@ -555,7 +555,7 @@
             fields: [
                 { name: "lab_name", type: "text", align: "center", width: 170, title: "Nombre" },
                 { name: "delivery_date", type: "text", align: "center", width: 60, title: "Fecha" },
-                { name: "lab_state", type: "checkbox", align: "center", width: 50, title: "Entr" },
+                { name: "lab_state", type: "checkbox", align: "center", width: 50, title: "Estado" },
                 { name: "lab_delivery_time", type: "text", align: "center", width: 50, title:"T" },
                 { name: "lab_attempts", type: "text", align: "center", width: 30, title:"I" },
                 { name: "lab_teacher_score", type: "text", align: "center", width: 30, title:"P" },
@@ -763,8 +763,8 @@
 
             fields: [
                 { name: "user_name", type: "text", align: "center", width: 170, title: "Nombre" },
-                { name: "delivery_date", type: "text", align: "center", width: 40, title: "Fecha" },
-                { name: "lab_state", type: "checkbox", align: "center", width: 50, title: "Entr" },
+                { name: "delivery_date", type: "text", align: "center", width: 60, title: "Fecha" },
+                { name: "lab_state", type: "checkbox", align: "center", width: 50, title: "Estado" },
                 { name: "lab_delivery_time", type: "text", align: "center", width: 50, title:"T" },
                 { name: "lab_attempts", type: "text", align: "center", width: 30, title:"I" },
                 { name: "lab_teacher_score", type: "text", align: "center", width: 30, title:"P" },
