@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80000
 File Encoding         : 65001
 
-Date: 2016-12-06 22:43:16
+Date: 2016-12-08 20:44:18
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -27,7 +27,7 @@ CREATE TABLE `app_params` (
   `creation_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `last_update` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of app_params
@@ -35,13 +35,15 @@ CREATE TABLE `app_params` (
 INSERT INTO `app_params` VALUES ('1', 'SCHOOL_NAME', 'Instituto', 'EDITABLE', '2016-11-03 21:26:09', '2016-11-14 23:02:21');
 INSERT INTO `app_params` VALUES ('2', 'COUNTRY', 'Colombia', 'EDITABLE', '2016-11-13 21:15:46', '2016-11-14 23:03:11');
 INSERT INTO `app_params` VALUES ('3', 'CITY', 'Pereira', 'EDITABLE', '2016-11-13 21:15:55', '2016-11-14 23:03:11');
-INSERT INTO `app_params` VALUES ('4', 'LICENSE', 'F45D-C3D5-DF48-RE78', 'EDITABLE', '2016-11-13 21:16:01', '2016-11-14 23:03:41');
+INSERT INTO `app_params` VALUES ('4', 'LICENSE', '6ED14-CC956-75FF5-37A4E', 'EDITABLE', '2016-11-13 21:16:01', '2016-12-08 13:46:01');
 INSERT INTO `app_params` VALUES ('5', 'RANK_SEND_ENABLED', '1', 'EDITABLE', '2016-11-13 21:16:24', '2016-11-14 23:15:56');
 INSERT INTO `app_params` VALUES ('6', 'SERVER_NAME', 'Servidor', 'FIX', '2016-11-14 22:13:35', '2016-11-14 22:52:11');
-INSERT INTO `app_params` VALUES ('7', 'SERVER_IP', '192.168.0.3', 'FIX', '2016-11-14 22:13:41', '2016-12-05 21:50:51');
+INSERT INTO `app_params` VALUES ('7', 'SERVER_IP', '192.168.0.3', 'FIX', '2016-11-14 22:13:41', '2016-12-08 17:10:45');
 INSERT INTO `app_params` VALUES ('8', 'LICENSE_PERIOD', '14/11/2016 - 31/12/2017', 'FIX', '2016-11-14 22:15:14', '2016-11-14 22:52:15');
 INSERT INTO `app_params` VALUES ('9', 'DEVICE_NAME', 'Servidor', 'FIX', '2016-11-14 22:15:21', '2016-11-14 22:52:16');
 INSERT INTO `app_params` VALUES ('10', 'LICENSE_NUM_USERS', '10', 'FIX', '2016-11-14 22:15:42', '2016-11-14 22:52:16');
+INSERT INTO `app_params` VALUES ('11', 'LICENSE_STATE', '1', 'FIX', '2016-12-08 13:14:37', '2016-12-08 13:29:17');
+INSERT INTO `app_params` VALUES ('12', 'OFFLINE_ATTEMPTS', '2', 'FIX', '2016-12-08 13:42:30', '2016-12-08 17:34:53');
 
 -- ----------------------------
 -- Table structure for class_group
@@ -94,15 +96,14 @@ CREATE TABLE `laboratories_users` (
   KEY `user_id` (`user_id`),
   CONSTRAINT `laboratories_users_ibfk_1` FOREIGN KEY (`laboratory_id`) REFERENCES `laboratory` (`id`),
   CONSTRAINT `laboratories_users_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of laboratories_users
 -- ----------------------------
-INSERT INTO `laboratories_users` VALUES ('35', '1', '379', '0', '2016-11-29 18:34:15', null, null, 'reports/35_FISMRU001.pdf', null, null, null, null, '2016-11-29 18:34:15', '2016-12-06 19:20:02');
-INSERT INTO `laboratories_users` VALUES ('36', '1', '374', '0', '2016-11-29 18:34:36', '1', '00:25:00', 'reports/36_FISVEC003.pdf', null, null, null, null, '2016-11-29 18:34:36', '2016-12-06 19:19:10');
-INSERT INTO `laboratories_users` VALUES ('38', '1', '377', '0', '2015-11-03 00:00:00', '1', '00:25:00', 'reports/38_FISMRU003.pdf', '3', null, '3', null, '2016-11-30 21:17:07', '2016-12-06 19:14:12');
-INSERT INTO `laboratories_users` VALUES ('39', '3', '374', '1', '2015-12-03 00:00:00', '2', '00:30:00', 'reports/39_FISVEC003.pdf', '3', null, '3', null, '2016-12-05 20:43:43', '2016-12-05 21:06:31');
+INSERT INTO `laboratories_users` VALUES ('41', '1', '380', '0', '2016-12-07 13:35:50', '1', '00:00:30', 'reports/41_FISMRU002.pdf', '4.5', '3.5', '4', '', '2016-12-07 11:43:54', '2016-12-07 14:09:40');
+INSERT INTO `laboratories_users` VALUES ('43', '1', '374', '1', '2016-12-07 13:34:52', null, null, 'reports/43_FISVEC003.pdf', null, '3.5', '3.5', '', '2016-12-07 13:34:52', '2016-12-07 14:02:39');
+INSERT INTO `laboratories_users` VALUES ('44', '1', '377', '1', '2016-12-07 13:35:06', null, null, 'reports/44_FISMRU003.pdf', null, null, null, null, '2016-12-07 13:35:06', '2016-12-07 13:35:06');
 
 -- ----------------------------
 -- Table structure for laboratory
@@ -427,18 +428,17 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   KEY `rols_id` (`rols_id`),
   CONSTRAINT `users_ibfk_1` FOREIGN KEY (`rols_id`) REFERENCES `rols` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('1', 'juan', '363b122c528f54df4a0446b6bab05515', 'Juan Camilo', 'Moreno Ruiz', '4', '2016-10-29 14:52:18', '2016-11-15 17:01:23');
+INSERT INTO `users` VALUES ('1', 'juan', 'e744f57da9e5a4bb6ec8ba3bc0ad3e4e', 'Juan Camilo', 'Moreno Ruiz', '4', '2016-10-29 14:52:18', '2016-12-08 17:30:05');
 INSERT INTO `users` VALUES ('2', 'o', '363b122c528f54df4a0446b6bab05515', 'Andrés', 'Diaz', '3', '2016-10-29 14:52:43', '2016-11-15 16:21:11');
 INSERT INTO `users` VALUES ('3', 'm', '363b122c528f54df4a0446b6bab05515', 'Manuel', 'Moreno', '4', '2016-10-30 12:39:08', '2016-10-30 12:39:08');
 INSERT INTO `users` VALUES ('7', 'admin', '363b122c528f54df4a0446b6bab05515', 'Juan', 'Moreno', '2', '2016-11-08 07:59:19', '2016-11-08 07:59:32');
 INSERT INTO `users` VALUES ('19', 'sadmin', '363b122c528f54df4a0446b6bab05515', 'Jhonatan', 'Garcia', '1', '2016-11-14 15:46:36', '2016-11-14 23:36:56');
 INSERT INTO `users` VALUES ('20', 'jarango', '7815696ecbf1c96e6894b779456d330e', 'Johan', 'Arango', '3', '2016-11-15 17:47:09', '2016-12-06 17:53:41');
-INSERT INTO `users` VALUES ('66', 'mariomora1', '363b122c528f54df4a0446b6bab05515', 'Mario', 'Mora', '3', '2016-12-05 20:26:21', '2016-12-06 17:24:24');
 
 -- ----------------------------
 -- Table structure for users_class_groups
@@ -455,7 +455,7 @@ CREATE TABLE `users_class_groups` (
   KEY `class_group_id` (`class_group_id`),
   CONSTRAINT `users_class_groups_ibfk_1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`),
   CONSTRAINT `users_class_groups_ibfk_2` FOREIGN KEY (`class_group_id`) REFERENCES `class_group` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=129 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=131 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of users_class_groups
@@ -468,11 +468,9 @@ INSERT INTO `users_class_groups` VALUES ('85', '20', '2', '2016-11-15 17:48:17',
 INSERT INTO `users_class_groups` VALUES ('87', '1', '2', '2016-11-17 09:02:37', '2016-11-17 09:02:37');
 INSERT INTO `users_class_groups` VALUES ('90', '2', '1', '2016-11-18 07:02:31', '2016-11-18 07:02:31');
 INSERT INTO `users_class_groups` VALUES ('108', '2', '8', '2016-11-29 17:34:45', '2016-11-29 17:34:45');
-INSERT INTO `users_class_groups` VALUES ('109', '3', '2', '2016-11-29 17:42:30', '2016-11-29 17:42:30');
 INSERT INTO `users_class_groups` VALUES ('118', '2', '5', '2016-12-05 17:20:33', '2016-12-05 17:20:33');
 INSERT INTO `users_class_groups` VALUES ('124', '2', '2', '2016-12-06 21:46:37', '2016-12-06 21:46:37');
-INSERT INTO `users_class_groups` VALUES ('127', '66', '2', '2016-12-06 22:37:29', '2016-12-06 22:37:29');
-INSERT INTO `users_class_groups` VALUES ('128', '66', '3', '2016-12-06 22:37:31', '2016-12-06 22:37:31');
+INSERT INTO `users_class_groups` VALUES ('129', '3', '10', '2016-12-07 10:01:43', '2016-12-07 10:01:43');
 
 -- ----------------------------
 -- Table structure for user_group_subjects
@@ -489,7 +487,7 @@ CREATE TABLE `user_group_subjects` (
   KEY `sc_id` (`sc_id`),
   CONSTRAINT `user_group_subjects_ibfk_1` FOREIGN KEY (`ucg_id`) REFERENCES `users_class_groups` (`id`),
   CONSTRAINT `user_group_subjects_ibfk_2` FOREIGN KEY (`sc_id`) REFERENCES `subjects_class_groups` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_group_subjects
@@ -498,6 +496,11 @@ INSERT INTO `user_group_subjects` VALUES ('51', '85', '14', '2016-11-15 17:48:34
 INSERT INTO `user_group_subjects` VALUES ('53', '90', '3', '2016-11-18 07:12:19', '2016-11-18 07:12:19');
 INSERT INTO `user_group_subjects` VALUES ('54', '90', '20', '2016-11-18 07:12:21', '2016-11-18 07:12:21');
 INSERT INTO `user_group_subjects` VALUES ('60', '74', '15', '2016-12-06 22:28:16', '2016-12-06 22:28:16');
+INSERT INTO `user_group_subjects` VALUES ('61', '85', '11', '2016-12-07 10:23:59', '2016-12-07 10:23:59');
+INSERT INTO `user_group_subjects` VALUES ('62', '74', '16', '2016-12-07 11:02:04', '2016-12-07 11:02:04');
+INSERT INTO `user_group_subjects` VALUES ('63', '124', '12', '2016-12-07 11:02:55', '2016-12-07 11:02:55');
+INSERT INTO `user_group_subjects` VALUES ('64', '124', '13', '2016-12-07 11:02:59', '2016-12-07 11:02:59');
+INSERT INTO `user_group_subjects` VALUES ('65', '124', '11', '2016-12-07 11:16:42', '2016-12-07 11:16:42');
 
 -- ----------------------------
 -- Procedure structure for app_edit
@@ -540,6 +543,35 @@ BEGIN
 		`value` = rank
 	WHERE
 		`name` = 'RANK_SEND_ENABLED';
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Procedure structure for decrease_attempts
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `decrease_attempts`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `decrease_attempts`()
+BEGIN
+	DECLARE attempts DOUBLE DEFAULT NULL;
+
+	SET attempts = 
+		(
+			SELECT
+				`value`
+			FROM
+				app_params
+			WHERE
+				`name` = 'OFFLINE_ATTEMPTS'
+		);
+
+	UPDATE
+		app_params
+	SET
+		`value` = CAST(attempts AS DECIMAL) - 1
+	WHERE
+		`name` = 'OFFLINE_ATTEMPTS';
 END
 ;;
 DELIMITER ;
@@ -1512,6 +1544,37 @@ BEGIN
 	ELSE
 		SELECT 'REPEATED' as state;
 	END IF;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Procedure structure for license_activate
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `license_activate`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `license_activate`(IN `licenseNum` varchar(100),IN `state` varchar(100),IN `offlineAttempts` varchar(100))
+BEGIN
+	UPDATE
+		app_params
+	SET
+		`value` = licenseNum
+	WHERE
+		`name` = 'LICENSE';
+
+	UPDATE
+		app_params
+	SET
+		`value` = state
+	WHERE
+		`name` = 'LICENSE_STATE';
+
+	UPDATE
+		app_params
+	SET
+		`value` = offlineAttempts
+	WHERE
+		`name` = 'OFFLINE_ATTEMPTS';
 END
 ;;
 DELIMITER ;

@@ -29,22 +29,39 @@ router.get('/', function(req, res) {
 			return;
 		}
 
-		var query = 
-			"SELECT " +
-			"	u.id, " +
-			"	u.`name`, " +
-			"	u.last_name, " +
-			"	r.rol, " +
-			"	r.rol_name, " +
-			"	u.rols_id " +
-			"FROM " + 
-			"	users u " + 
-			"INNER JOIN ROLS r ON u.rols_id = r.id " +
-			"WHERE " +
-			"	u.`user` = '" + params.user + "' AND " +
-			"	u.pass = '" + params.pass + "'";
+		var query = "SELECT " +
+				"u.id, " +
+				"u.`user`, " +    
+				"u.`name`, " +    
+				"u.last_name, " +    
+				"r.rol,		" +
+				"r.rol_name, " +   
+				"u.rols_id,	" +
+				"(  			" +
+				"	SELECT  " +
+				"		\`value\`" +  
+				"	FROM  		" +
+				"		app_params" +  
+				"	WHERE  			" +
+				"		\`name\` = 'LICENSE_STATE'" +  
+				") as license," +
+				"(  " +
+				"	SELECT  " +
+				"		\`value\`  " +
+				"	FROM  " +
+				"		app_params  " +
+				"	WHERE  " +
+				"		\`name\` = 'OFFLINE_ATTEMPTS'  " +
+				") as offlineAttempts " +
+			 "FROM     " +
+			 "	users u " +     
+			 "INNER JOIN ROLS r ON u.rols_id = r.id " +    
+			 "WHERE    " +
+			 "	u.\`user\` = ? AND " +    
+			 "	u.pass = ?";
 
-		connection.query(query, function(err, rows) {
+		var p = [params.user, params.pass];
+		connection.query(query, p, function(err, rows) {
 		
 			if (err) {
 				console.error('error query: ' + query + err.stack);

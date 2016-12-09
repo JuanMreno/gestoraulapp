@@ -102,7 +102,7 @@
 				$('#usrs-link').addClass('active');
 				break;
 			case SAD_ROL:
-				$('#section').load('views/consultas.html');
+				$('#section').load('views/usuarios.html');
 				$('#cons-link').addClass('active');
 				break;
 			default:

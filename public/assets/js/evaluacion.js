@@ -333,13 +333,46 @@
                     $('#aBtnDownL').attr('href', item.lab_report_url);
                 }
 
+                console.log($modal.find('#nApp').val());
+                if( $modal.find('#nApp').val() == "" )
+                    $modal.find('#nApp').removeClass('only-read');
+
+                if( $modal.find('#numInten').val() == "" )
+                    $modal.find('#numInten').removeClass('only-read');
+
+                if( $modal.find('#tEntrega').val() == "" )
+                    $modal.find('#tEntrega').removeClass('only-read');
+
                 $('#btnSave').off('click').on('click', function(event) {
                     event.preventDefault();
+
+                    var obsVal = $modal.find('#obsrv').val();
+                    var nProVal = $modal.find('#nProfesor').val();
+                    var nAppVal = $modal.find('#nApp').val();
+                    var nIntVal = $modal.find('#numInten').val();
+                    var tEntVal = $modal.find('#tEntrega').val();
                     
+                    /*
+                    if( nProVal == "" ||
+                        nAppVal == "" ||
+                        nIntVal == ""
+                    ){
+                        $('#alertModalCont').text("Todos los campos son necesarios.");
+                        $('#alertModal').modal('show');
+                        return;
+                    }*/
+
+                    nAppVal = nAppVal == "" ? null : nAppVal;  
+                    nIntVal = nIntVal == "" ? null : nIntVal;  
+                    tEntVal = tEntVal == "" ? null : tEntVal;  
+
                     var data = {
                         id:item.lab_users_id,
-                        comments:$modal.find('#obsrv').val(),
-                        teacher_score:$modal.find('#nProfesor').val()
+                        teacher_score:nProVal,
+                        app_score:nAppVal,
+                        lab_attempts:nIntVal,
+                        delivery_time:tEntVal,
+                        comments:obsVal
                     }
 
                     var jData = utf8_to_b64( JSON.stringify(data) );

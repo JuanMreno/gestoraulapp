@@ -239,11 +239,7 @@ router.get('/getByUserGroup', function(req, res) {
 			INNER JOIN subjects s ON s.id = sc.subjects_id \
 			LEFT JOIN user_group_subjects ugs ON sc.id = ugs.sc_id\
 			WHERE\
-				sc.class_group_id = ? AND\
-				(\
-					ugs.ucg_id = ? OR\
-					ugs.ucg_id IS NULL\
-				)" 
+				sc.class_group_id = ? " 
 		;
 
 		var p = [params.userGroupId, params.groupId, params.userGroupId];

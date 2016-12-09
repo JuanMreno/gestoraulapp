@@ -185,8 +185,6 @@
                 rowClick: function(obj) {
                 	$modal = $('#practInfoModal');
                 	$modal.off('shown.bs.modal');
-                	var item = obj.item;
-                    console.log(item);
 
                 	$labelState = $modal.find(".labelState");
                 	$modal.find('.modal-title').text(item.lab_name);

@@ -8,6 +8,7 @@ var debug = require('debug')('express:server');
 var http = require('http');
 var ip = require('ip');
 var conn = require('../objs/SqlConnection.js');
+var request = require('ajax-request');
 
 /**
  * Get port from environment and store in Express.
@@ -114,7 +115,117 @@ function setServerIp() {
       }
       else{
         console.log('Ip configured.');
+        validateLicense();
       }
+    });
+  });
+}
+
+function validateLicense() {
+  var connection = new conn.SqlConnection().connection;
+  connection.connect(function(err) {
+    if (err) {
+      console.error('error connecting: ' + err.stack);
+      return;
+    }
+
+    var query = 
+        "SELECT\
+        (\
+          SELECT\
+            `value`\
+          FROM\
+            app_params\
+          WHERE\
+            `name` = 'LICENSE'\
+        ) as license,\
+        (\
+          SELECT\
+            `value`\
+          FROM\
+            app_params\
+          WHERE\
+            `name` = 'SERVER_IP'\
+        ) as serverIp";
+
+    connection.query(query, function(err, rows) {
+    
+      if (err) {
+        console.error('error query: ' + query + err.stack);
+        return;
+      }
+
+      var license = rows[0].license;
+      var serverIp = rows[0].serverIp;
+
+      console.log("Validating license: " + license);
+
+      var data = {
+        status:"false",
+        data:{}
+      };
+     
+      request({
+        url: process.env.LICENSE_SERVER,
+        method: 'GET',
+        data: {
+          licencia: license,
+          bundle_id: process.env.BUNDLE_ID,
+          dispositivo_id: serverIp,
+          primera_vez: 'false'
+        }
+      }, function(er, response, body) {
+        if (er) {
+          console.error('error query: ' + er.stack);
+          decreaseAttempt();
+          return;
+        }
+
+        try {
+          var resData = JSON.parse(body);
+        } catch (e) {
+          console.log("res is not JSON.");
+          decreaseAttempt();
+          return;
+        }
+
+        if(resData.result == 'success'){
+          if(resData.message_id == 0){
+            console.log("license OK");
+          }
+          else{
+            console.log("message_id: " + resData.message_id);
+            decreaseAttempt();
+            return;
+          }
+        }
+        else{
+          console.log("result error");
+          decreaseAttempt();
+          return;
+        }
+      });
+    });
+  });
+}
+
+function decreaseAttempt() {
+  var connection = new conn.SqlConnection().connection;
+  connection.connect(function(err) {
+    if (err) {
+      console.error('error connecting: ' + err.stack);
+      return;
+    }
+
+    var query = "CALL decrease_attempts()";
+    connection.query(query, function(err, rows) {
+    
+      if (err) {
+        console.error('error query: ' + query + err.stack);
+        return;
+      }
+
+      console.log("Attempt decreased");
     });
   });
 }

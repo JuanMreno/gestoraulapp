@@ -33,18 +33,74 @@ var CON_URL = "http://"+window.location.hostname+":3000/";
 			$body.removeClass('is-loading');
 
 			if(sesion == undefined){
-				$('#cont').load('views/login.html');
+				gToLogin();
 			}
 			else{
-				$('body').removeClass('in-login');
-				$('#cont').load('views/main.html',function(){
-
-				});
+				validateLogin();
 			}
 			//$('#cont').load('views/main.html',mainInit);
 		});
 	});
 })(jQuery);
+
+function validateLogin() {
+	var sesion = $.cookie(SESSION_COOKIE);
+
+	var data = {
+		user:sesion.user,
+		pass:sesion.pass
+	}
+
+	var jData = utf8_to_b64( JSON.stringify(data) );
+	$.ajax({
+		url: CON_URL+"login",
+		data:{data:jData}
+	})
+	.done(function( data ) {
+		
+		var res = $.parseJSON(b64_to_utf8(data));
+		
+		if(res.status == "true"){
+			if(res.data.length == 1){
+				var user = res.data[0];
+
+				if( user.license != '0' && user.license != '1'){
+					gToLogin();
+					return;
+				}
+
+				if(user.rol != SAD_ROL){
+					if( user.license == '0' || parseInt(user.offlineAttempts) <= 0 ){
+						gToLogin();
+						return;
+					}
+				}
+
+				gToMain();
+			}
+			else{
+				gToLogin();
+			}
+		}
+		else{
+			gToLogin();
+		}
+	})
+	.error(function(e) {
+		console.log("Error ajax.");
+		gToLogin();
+	});
+}
+
+function gToMain() {
+	$('body').removeClass('in-login');
+	$('#cont').load('views/main.html');
+}
+
+function gToLogin() {
+	$.removeCookie(SESSION_COOKIE);
+	$('#cont').load('views/login.html');
+}
 
 function utf8_to_b64( str ) {
   return window.btoa(unescape(encodeURIComponent( str )));

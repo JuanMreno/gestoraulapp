@@ -203,12 +203,15 @@ router.get('/updateLaboratory', function(req, res) {
 				laboratories_users
 			SET
 				teacher_score = ?,	
+				app_score = ?,	
+				delivery_time = ?,	
+				attempts = ?,	
 				comments = ?
 			WHERE
 				id = ?` 
 		;
 
-		var p = [params.teacher_score, params.comments, params.id];
+		var p = [params.teacher_score, params.app_score, params.delivery_time, params.lab_attempts, params.comments, params.id];
 		connection.query(query, p , function(err, rows) {
 		
 			if (err) {

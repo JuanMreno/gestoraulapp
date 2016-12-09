@@ -1,6 +1,14 @@
 <div id="main">
 	<section id="contact" class="four">
 		<div class="container">
+			<div>
+				<h1 class="h1ContHead">
+					<span class="text">GESTIÓN DE AULA CLOUDLABS</span>
+					<span class="span">
+						<img src="../assets/img/cl-header.png" class="contImgHeader">
+					</span>
+    			</h1>
+			</div>
 			<div class="containerHeader">
 				<h1>Configuración</h1>
 			</div>
@@ -52,5 +60,40 @@
 		</div>
 
 	</section>
+</div>
+<div id="licModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+      	<!--<h4 class="modal-title">Práctica</h4>-->
+        <div class="row">
+        	<div class="col-xs-8 col-sm-8 col-md-9 col-lg-9">
+		        <h4 class="modal-title">Información de licencia</h4>
+        	</div>
+        	<div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 labelStateCont">
+		        <span class="labelState"></span>
+        	</div>
+        </div>
+      </div>
+      <div class="modal-body">
+      	<div class="row form-group">
+        	<div class="col-sm-7">
+		        <div class="input-group">
+				  <span class="input-group-addon" id="basic-addon1">Nueva licencia</span>
+				  <input id="licenseVal" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
+				</div>
+        	</div>
+        </div>
+        <div class="row form-group">
+	    	<div class="col-sm-7">
+		        <button id="btnLic" type="button" class="btn btn-primary">Validar</button>
+	    	</div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
 </div>
 <script src="assets/js/config.js"></script>

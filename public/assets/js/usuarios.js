@@ -1,6 +1,8 @@
 
 (function($) {
 
+    var globalUserId;
+
 	function init() {
 	    $('#tipoDropdown-profesores').off('click').on('click', function(event) {
             event.preventDefault();
@@ -99,7 +101,7 @@
             pageButtonCount: 5,
             noDataContent: "Ningún dato encontrado.",
             loadMessage: "Cargando...",
-            deleteConfirm: "Se eliminarán todos los datos asociados al usuario, ¿está seguro de realizar esta operación?",
+            confirmDeleting: false,
             controller: {
                 loadData: function(filter) {
                     var d = $.Deferred();
@@ -250,38 +252,53 @@
                         $("#jsGrid").jsGrid("render");
                     }); 
 
-                    var data = {
-                        userId:item.id
-                    };
-     
-                    var jData = utf8_to_b64( JSON.stringify(data) );
-                    $.ajax({
-                        url: CON_URL+"users/delete",
-                        data:{data:jData}
-                    }).done(function(data) {
-                        var res = $.parseJSON(b64_to_utf8(data));
-                        //console.log(res);
-                        if(res.status == "true"){
-                            d.resolve(item);
-                            $("#jsGrid").jsGrid("deleteItem", item);
-                        }
-                        else{
+                    mns = "ALERTA ¿Está seguro que desea eliminar el usuario? Si hace esto perderá toda la información relacionada.";
+                    $confModal = $('#confirmModal');
+                    $confModal.find('#confirmModalCont').text(mns);
+
+                    $confModal.find('#doneConfirmModal').off('click').on('click', function(event) {
+                        event.preventDefault();
+                        $confModal.modal('hide');
+                        
+                        var data = {
+                            userId:item.id
+                        };
+         
+                        var jData = utf8_to_b64( JSON.stringify(data) );
+                        $.ajax({
+                            url: CON_URL+"users/delete",
+                            data:{data:jData}
+                        }).done(function(data) {
+                            var res = $.parseJSON(b64_to_utf8(data));
+
+                            if(res.status == "true"){
+                                d.resolve(item);
+                                //$("#jsGrid").jsGrid("deleteItem", item);
+                            }
+                            else{
+                                $('#alertModalCont').text("Error al intentar eliminar el elemento.");
+                                $('#alertModal').modal('show');
+                                d.reject();
+                                //d.resolve(false);
+                            }
+                        }).fail(function(data) {
+                            console.log("ajax fail");
                             $('#alertModalCont').text("Error al intentar eliminar el elemento.");
                             $('#alertModal').modal('show');
                             d.reject();
-                            //d.resolve(false);
-                        }
-                    }).fail(function(data) {
-                        console.log("ajax fail");
-                        $('#alertModalCont').text("Error al intentar eliminar el elemento.");
-                        $('#alertModal').modal('show');
+                        });
+                    });
+
+                    $confModal.on('hidden.bs.modal', function (e) {
                         d.reject();
                     });
-     
+
+                    $confModal.modal('show');     
                     return d.promise();
                 }
             },
             rowClick:function(objUser) {
+                globalUserId = objUser.item.id;
                 if (rolId == 3) {
                     listAllGroupsSubjets(objUser.item.id);
 
@@ -344,9 +361,10 @@
                                 console.log("ajax fail");
                             });
                         });
-                        $("#listGroups").on("select2:unselect", function (e) { 
 
-                            var mns = "¿Estas seguro de retirar este profesor del grupo, si hace esto perdera toda la información relacionada?";
+                        $("#listGroups").on("select2:unselect", function(e) { 
+
+                            var mns = "¿Estás seguro de retirar este profesor del grupo? Perdera toda la información relacionada.";
                             $confModal = $('#confirmModal');
                             $confModal.find('#confirmModalCont').text(mns);
 
@@ -379,7 +397,8 @@
                             });
 
                             $confModal.on('hidden.bs.modal', function (e) {
-                                listAllGroupsSubjets(objUser.item.id); 
+                                listAllGroupsSubjets(globalUserId);  
+                                console.log("ent");
                             });
 
                             $confModal.modal('show');
@@ -521,16 +540,9 @@
 
                     $('#allGroupSt').off('change').on('change', function(event) {
                         var mensaje;
+                        var groupId = $(this).val();
 
                         if(objUser.item.class_group_id === null){
-                            mensaje = true;
-                        }
-                        else{
-                            mensaje = confirm("ALERTA ¿Está seguro que desea cambiar el grupo? Si hace esto perderá toda la\
-                                información relacionada.");
-                        }
-
-                        if (mensaje) {
                             var xdata = {
                                 userId:objUser.item.id,
                                 groupId:$(this).val()
@@ -549,7 +561,44 @@
                             }).fail(function(data) {
                                 console.log("ajax fail");
                             });
-                        } 
+                        }
+                        else{
+                            mensaje = "ALERTA ¿Está seguro que desea cambiar el grupo? Si hace esto perderá toda la\
+                                información relacionada.";
+
+                            $confModal = $('#confirmModal');
+                            $confModal.find('#confirmModalCont').text(mensaje);
+
+                            $confModal.find('#doneConfirmModal').off('click').on('click', function(event) {
+                                event.preventDefault();
+                                $confModal.modal('hide');
+                                
+                                var xdata = {
+                                    userId:objUser.item.id,
+                                    groupId:groupId
+                                };
+                                var jxData = utf8_to_b64( JSON.stringify(xdata) );
+                                $.ajax({
+                                    url: CON_URL+"users/asignStudUser",
+                                    data:{data:jxData}
+                                }).done(function(data) {
+                                    var res = $.parseJSON(b64_to_utf8(data));
+                                    if (res.status == "true") {
+                                        $('#alertModalCont').text("Los datos han sido actualizados.");
+                                        $('#alertModal').modal('show');
+                                    }
+                                             
+                                }).fail(function(data) {
+                                    console.log("ajax fail");
+                                });
+                            });
+
+                            $confModal.on('hidden.bs.modal', function (e) {
+                                $confModal.modal('hide');
+                            });
+
+                            $confModal.modal('show'); 
+                        }
                     }); 
 
                     $('#updatepasswst').off('click').on('click', function(event) {
@@ -778,12 +827,23 @@
                         console.log("ajax fail");
                     });
                 });
+
                 $("#listsubjectsGroup").on("select2:unselect", function (e) { 
                     e.preventDefault();
-                    var mensaje = confirm("ALERTA ¿Está seguro que desea retirar el profesor del grupo? Si hace esto\
-                                            perderá toda la información relacionada.");
-                    //Detectamos si el usuario acepto el mensaje
-                    if (mensaje) {
+                    $('#listGroups').trigger('select2:close');
+                    $("#listsubjectsGroup").trigger('select2:close');
+                    $('.select2-selection__rendered').focusout();
+
+                    var mensaje = "ALERTA ¿Está seguro que desea retirar el profesor del grupo? Si hace esto\
+                                            perderá toda la información relacionada.";
+
+                    $confModal = $('#confirmModal');
+                    $confModal.find('#confirmModalCont').text(mensaje);
+
+                    $confModal.find('#doneConfirmModal').off('click').on('click', function(event) {
+                        event.preventDefault();
+                        $confModal.modal('hide');
+                        
                         var xdata = {
                             userGroupId:userGroupId,
                             scId:e.params.data.id,
@@ -804,10 +864,16 @@
                         }).fail(function(data) {
                             console.log("ajax fail");
                         });
-                    }else{
-                        $("#listsubjectsGroup").val(jsonDataLoadx).trigger("change");
-                    }  
+                    });
+
+                    $confModal.on('hidden.bs.modal', function (e) {
+                        //$("#listsubjectsGroup").val(jsonDataLoadx).trigger("change");
+                        listAllGroupsSubjets(globalUserId);
+                    });
+
+                    $confModal.modal('show');  
                 });
+
                 $("#listsubjectsGroup").val(jsonDataLoadx).trigger("change"); 
             }
             

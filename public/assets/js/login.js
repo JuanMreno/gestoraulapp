@@ -28,11 +28,32 @@
 				.done(function( data ) {
 					
 					var res = $.parseJSON(b64_to_utf8(data));
-
+					
 					if(res.status == "true"){
 						if(res.data.length == 1){
 							var user = res.data[0];
 							clearInterval(loadIntervaId);
+
+							if( user.license != '0' && user.license != '1'){
+								$('#alertModalCont').text("Licencia caducada.");
+								$('#alertModal').modal('show');
+								restartButton();
+								return;
+							}
+
+							if(user.rol != SAD_ROL){
+								if( user.license == '0' || parseInt(user.offlineAttempts) <= 0 ){
+									$('#alertModalCont').text("Licencia caducada.");
+									$('#alertModal').modal('show');
+									restartButton();
+									return;
+								}
+							}
+
+							console.log(user);
+
+							user.pass = calcMD5(pass);
+							console.log(user);
 							$.cookie(SESSION_COOKIE, user);
 							goToMain();
 						}
@@ -90,9 +111,7 @@
 
 	function goToMain(){
 		$('body').removeClass('in-login');
-		$('#cont').load('views/main.html',function(){
-
-		});
+		$('#cont').load('views/main.html');
 	}
 
 	loginInit();
