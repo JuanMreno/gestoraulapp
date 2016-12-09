@@ -308,17 +308,18 @@
                 $('#btnRestInt').show();
 
                 $modal.find('#cUnidad').val(item.less_name);
+                $modal.find('#fEntrega').val(item.delivery_date);
+                $modal.find('#tEntrega').val(item.lab_delivery_time);
+                $modal.find('#nProfesor').val(item.lab_teacher_score);
+                $modal.find('#nApp').val(item.lab_app_score);
+                $modal.find('#nFinal').val(item.lab_final_score);
+                $modal.find('#obsrv').val(item.lab_comments);
+                $modal.find('#numInten').val(item.lab_attempts);
+
                 if(item.lab_state == "1"){
                     $labelState.removeClass('label-danger');
                     $labelState.addClass("label").addClass('label-success');
                     $labelState.text('Entregado');
-                    $modal.find('#fEntrega').val(item.delivery_date);
-                    $modal.find('#tEntrega').val(item.lab_delivery_time);
-                    $modal.find('#nProfesor').val(item.lab_teacher_score);
-                    $modal.find('#nApp').val(item.lab_app_score);
-                    $modal.find('#nFinal').val(item.lab_final_score);
-                    $modal.find('#obsrv').val(item.lab_comments);
-                    $modal.find('#numInten').val(item.lab_attempts);
                 }
                 else{
                     $labelState.removeClass('label-success');
@@ -336,12 +337,23 @@
                 console.log($modal.find('#nApp').val());
                 if( $modal.find('#nApp').val() == "" )
                     $modal.find('#nApp').removeClass('only-read');
+                else
+                    $modal.find('#nApp').addClass('only-read');
 
                 if( $modal.find('#numInten').val() == "" )
                     $modal.find('#numInten').removeClass('only-read');
+                else
+                    $modal.find('#numInten').addClass('only-read');
 
                 if( $modal.find('#tEntrega').val() == "" )
                     $modal.find('#tEntrega').removeClass('only-read');
+                else
+                    $modal.find('#tEntrega').addClass('only-read');
+
+
+                var nAppValAct = item.lab_app_score == "" ? null : item.lab_app_score;
+                var nIntValAct = item.lab_attempts == "" ? null : item.lab_attempts;
+                var tEntValAct = item.lab_delivery_time == "" ? null : item.lab_delivery_time;
 
                 $('#btnSave').off('click').on('click', function(event) {
                     event.preventDefault();
@@ -365,6 +377,8 @@
                     nAppVal = nAppVal == "" ? null : nAppVal;  
                     nIntVal = nIntVal == "" ? null : nIntVal;  
                     tEntVal = tEntVal == "" ? null : tEntVal;  
+                    nProVal = nProVal == "" ? null : nProVal;  
+                    obsVal = obsVal == "" ? null : obsVal;  
 
                     var data = {
                         id:item.lab_users_id,
@@ -376,28 +390,62 @@
                     }
 
                     var jData = utf8_to_b64( JSON.stringify(data) );
-                    $.ajax({
-                        url: CON_URL+"evaluation/updateLaboratory",
-                        data:{data:jData}
-                    }).done(function(data) {
-                        var res = $.parseJSON(b64_to_utf8(data));
 
-                        if(res.status == "true"){
-                            $("#jsGrid").jsGrid("render");
-                            $modal.modal('toggle');
-                        }
-                        else{
+                    if(nAppVal != nAppValAct || nIntVal != nIntValAct || tEntVal != tEntValAct ){
+                        $confModal = $('#confirmModal');
+                        $confModal.find('#confirmModalCont').text("El dato que intenta modificar es un dato automático enviado por el reporte, se recomienda ingresar manualmente este campo sólo si el estudiante a enviado su reporte de manera offline. ¿Está seguro que desea modificar este campo?");
+
+                        $confModal.find('#doneConfirmModal').off('click').on('click', function(event) {
+                            event.preventDefault();
+                            $confModal.modal('hide');
+                            
+                            $.ajax({
+                                url: CON_URL+"evaluation/updateLaboratory",
+                                data:{data:jData}
+                            }).done(function(data) {
+                                var res = $.parseJSON(b64_to_utf8(data));
+
+                                if(res.status == "true"){
+                                    $("#jsGrid").jsGrid("render");
+                                    $modal.modal('toggle');
+                                }
+                                else{
+                                    $('#alertModalCont').text("La información no pudo ser actualizada.");
+                                    $('#alertModal').modal('show');
+                                }
+                            }).fail(function(data) {
+                                console.log("ajax fail");
+                                $('#alertModalCont').text("La información no pudo ser actualizada.");
+                                $('#alertModal').modal('show');
+                            });
+                        });
+
+                        $confModal.modal('show');
+                    }
+                    else{
+                        $.ajax({
+                            url: CON_URL+"evaluation/updateLaboratory",
+                            data:{data:jData}
+                        }).done(function(data) {
+                            var res = $.parseJSON(b64_to_utf8(data));
+
+                            if(res.status == "true"){
+                                $("#jsGrid").jsGrid("render");
+                                $modal.modal('toggle');
+                            }
+                            else{
+                                $('#alertModalCont').text("La información no pudo ser actualizada.");
+                                $('#alertModal').modal('show');
+                            }
+                        }).fail(function(data) {
+                            console.log("ajax fail");
                             $('#alertModalCont').text("La información no pudo ser actualizada.");
                             $('#alertModal').modal('show');
-                        }
-                    }).fail(function(data) {
-                        console.log("ajax fail");
-                        $('#alertModalCont').text("La información no pudo ser actualizada.");
-                        $('#alertModal').modal('show');
-                    });
+                        });
+                    }
                 });
 
-                if(item.lab_users_id != null && item.lab_users_id != "" && item.lab_state == "1")
+                if(item.lab_users_id != null && item.lab_users_id != "" && item.lab_state == "1"){
                     $('#btnRestInt').off('click').on('click', function(event) {
                         event.preventDefault();
 
@@ -436,36 +484,11 @@
                         });
 
                         $confModal.modal('show');
-                        
-                        /*
-                        var data = {
-                            labId:item.lab_users_id
-                        }
-
-                        var jData = utf8_to_b64( JSON.stringify(data) );
-                        $.ajax({
-                            url: CON_URL+"evaluation/resetLabAttempt",
-                            data:{data:jData}
-                        }).done(function(data) {
-                            var res = $.parseJSON(b64_to_utf8(data));
-
-                            if(res.status == "true"){
-                                $("#jsGrid").jsGrid("render");
-                                $modal.modal('toggle');
-                            }
-                            else{
-                                $('#alertModalCont').text("La información no pudo ser actualizada.");
-                                $('#alertModal').modal('show');
-                            }
-                        }).fail(function(data) {
-                            console.log("ajax fail");
-                            $('#alertModalCont').text("La información no pudo ser actualizada.");
-                            $('#alertModal').modal('show');
-                        });
-                        */
                     });
-                else
+                }
+                else{
                     $('#btnRestInt').hide();
+                }
 
                 $modal.modal('show');
                 $modal.on('shown.bs.modal', function (e) {

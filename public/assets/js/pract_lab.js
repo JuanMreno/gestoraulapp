@@ -183,6 +183,8 @@
 	            },
 
                 rowClick: function(obj) {
+                    var item = obj.item;
+                    
                 	$modal = $('#practInfoModal');
                 	$modal.off('shown.bs.modal');
 
