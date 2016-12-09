@@ -34,16 +34,9 @@
 							var user = res.data[0];
 							clearInterval(loadIntervaId);
 
-							if( user.license != '0' && user.license != '1'){
-								$('#alertModalCont').text("Licencia caducada.");
-								$('#alertModal').modal('show');
-								restartButton();
-								return;
-							}
-
-							if(user.rol != SAD_ROL){
-								if( user.license == '0' || parseInt(user.offlineAttempts) <= 0 ){
-									$('#alertModalCont').text("Licencia caducada.");
+							if(user.rol != SAD_ROL && user.rol != ADM_ROL){
+								if( user.license != '0' || parseInt(user.offlineAttempts) <= 0 ){
+									$('#alertModalCont').text("Parece que ha pasado mucho tiempo desde la última vez que su licencia fue verificada. Por favor conecte su dispositivo a Internet y haga clic en el botón VALIDAR o CANCELAR para cerrar la aplicación.");
 									$('#alertModal').modal('show');
 									restartButton();
 									return;

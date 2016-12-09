@@ -8,7 +8,7 @@ const util = require('util');
 
 router.get('/activate', function(req, res) {
 	
-	var buf = Buffer.from(req.query.data, 'base64');
+	var buf = Buffer.from(req.query.data, 'base64'); console.log(buf.toString());
 	var params = JSON.parse(buf);
 
 	var data = {
@@ -22,7 +22,7 @@ router.get('/activate', function(req, res) {
 	  data: {
 	    licencia: params.license,
 	    bundle_id: process.env.BUNDLE_ID,
-	    dispositivo_id: params.serverIp,
+	    dispositivo_id: params.macServer,
 	    primera_vez: params.firstTime
 	  }
 	}, function(er, response, body) {
@@ -47,66 +47,42 @@ router.get('/activate', function(req, res) {
 			return;
 		}
 
-		if(resData.result == 'success'){
-			if(resData.message_id == 0){
-				var connection = new conn.SqlConnection().connection;
-				connection.connect(function(err) {
-					if (err) {
-						console.error('error connecting: ' + err.stack);
-						data.status = "false";
+		var connection = new conn.SqlConnection().connection;
+		connection.connect(function(err) {
+			if (err) {
+				console.error('error connecting: ' + err.stack);
+				data.status = "false";
 
-						var jData = JSON.stringify(data);
-						res.send(new Buffer(jData).toString('base64'));
-						connection.end();
-						return;
-					}
-
-					var query = "CALL license_activate(?,?,?)";
-
-					var p = [params.license, '1', resData.offline_attempts];
-					connection.query(query, p , function(err, rows) {
-					
-						if (err) {
-							console.error('error query: ' + query + err.stack);
-							data.status = "false";
-
-							var jData = JSON.stringify(data);
-							res.send(new Buffer(jData).toString('base64'));
-							connection.end();
-							return;
-						}
-
-						data.status = "true";
-						data.license_status = "true";
-						data.data = resData;
-
-						var jData = JSON.stringify(data);
-						res.send(new Buffer(jData).toString('base64'));
-						return;
-					});
-				});
+				var jData = JSON.stringify(data);
+				res.send(new Buffer(jData).toString('base64'));
+				connection.end();
+				return;
 			}
-			else{
+
+			var query = "CALL license_activate(?,?,?)";
+
+			var p = [params.license, resData.message_id, resData.offline_attempts];
+			connection.query(query, p , function(err, rows) {
+			
+				if (err) {
+					console.error('error query: ' + query + err.stack);
+					data.status = "false";
+
+					var jData = JSON.stringify(data);
+					res.send(new Buffer(jData).toString('base64'));
+					connection.end();
+					return;
+				}
+
 				data.status = "true";
-				data.license_status = "false";
 				data.data = resData;
 
 				var jData = JSON.stringify(data);
 				res.send(new Buffer(jData).toString('base64'));
 				return;
-			}
-		}
-		else{
-			data.status = "true";
-			data.license_status = "false";
-			data.data = resData;
-
-			var jData = JSON.stringify(data);
-			res.send(new Buffer(jData).toString('base64'));
-			return;
-		}
+			});
+		});
 	});
-
 	//res.send(new Buffer(jData).toString('base64'));
 });
 

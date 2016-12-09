@@ -21,7 +21,8 @@
     "serve-favicon": "~2.2.1",
     "q": "1.4.1",
     "ip": "1.1.4",
-    "ajax-request": "1.2.1"
+    "ajax-request": "1.2.1",
+    "getmac": "1.2.1"
   },
   "engines": {
     "node": "4.4.7"

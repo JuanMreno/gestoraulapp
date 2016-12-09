@@ -364,7 +364,7 @@
 
                         $("#listGroups").on("select2:unselect", function(e) { 
 
-                            var mns = "¿Estás seguro de retirar este profesor del grupo? Perdera toda la información relacionada.";
+                            var mns = "ALERTA ¿Está seguro que desea retirar el profesor del grupo? Si hace esto perderá toda la información relacionada.";
                             $confModal = $('#confirmModal');
                             $confModal.find('#confirmModalCont').text(mns);
 

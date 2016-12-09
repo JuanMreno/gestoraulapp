@@ -69,7 +69,7 @@ function validateLogin() {
 					return;
 				}
 
-				if(user.rol != SAD_ROL){
+				if(user.rol != SAD_ROL && user.rol != ADM_ROL){
 					if( user.license == '0' || parseInt(user.offlineAttempts) <= 0 ){
 						gToLogin();
 						return;

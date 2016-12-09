@@ -253,9 +253,9 @@
                     });
 
                     if(item.asignado)
-                        mns = 'Seguro desea asinarse la materia ' + item.name + '.';
+                        mns = "¿Está seguro que desea asignarse como profesor de la materia " + item.name + ".";
                     else
-                        mns = 'Se perderá toda la información relacionada con la materia ' + item.name + '. ¿Desea continuar?';
+                        mns = "Se perderá toda la información relacionada con la materia " + item.name + ". ¿Desea continuar?";
 
                     $confModal = $('#confirmModal');
                     $confModal.find('#confirmModalCont').text(mns);

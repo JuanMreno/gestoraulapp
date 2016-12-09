@@ -107,10 +107,9 @@
             paging: true,
             editing: true,
             deleted:true,
+            confirmDeleting: false,
             autoload: true,
             pageSize: 10,
-            confirmDeleting: true,
-            deleteConfirm: "Se eliminarán todos los datos asociados a la práctica, ¿está seguro de realizar esta operación?",
             pageButtonCount: 5,
             noDataContent: "Ningún dato encontrado.",
             loadMessage: "Cargando...",
@@ -149,38 +148,53 @@
                     var session = $.cookie(SESSION_COOKIE);
 
                     d.fail(function() {
-                        return null;
+                        d.resolve(item);
                         $("#jsGrid").jsGrid("render");
-                    }); 
+                    });
 
-                    var data = {
-                        labId:item.id
-                    };
-     
-                    var jData = utf8_to_b64( JSON.stringify(data) );
-                    $.ajax({
-                        url: CON_URL+"laboratories/delete",
-                        data:{data:jData}
-                    }).done(function(data) {
-                        var res = $.parseJSON(b64_to_utf8(data));
-                        //console.log(res);
-                        if(res.status == "true"){
-                            d.resolve(item);
-                            $("#jsGrid").jsGrid("deleteItem", item);
-                        }
-                        else{
+                    var mns = "Se eliminarán todos los datos asociados a la práctica, ¿está seguro de realizar esta operación?";
+
+                    $confModal = $('#confirmModal');
+                    $confModal.find('#confirmModalCont').text(mns);
+
+                    $confModal.find('#doneConfirmModal').off('click').on('click', function(event) {
+                        event.preventDefault();
+                        $confModal.modal('hide');
+                        
+                        var data = {
+                            labId:item.id
+                        };
+         
+                        var jData = utf8_to_b64( JSON.stringify(data) );
+                        $.ajax({
+                            url: CON_URL+"laboratories/delete",
+                            data:{data:jData}
+                        }).done(function(data) {
+                            var res = $.parseJSON(b64_to_utf8(data));
+                            //console.log(res);
+                            if(res.status == "true"){
+                                d.resolve(item);
+                                $("#jsGrid").jsGrid("deleteItem", item);
+                            }
+                            else{
+                                $('#alertModalCont').text("Error al intentar eliminar el elemento.");
+                                $('#alertModal').modal('show');
+                                d.reject();
+                                //d.resolve(false);
+                            }
+                        }).fail(function(data) {
+                            console.log("ajax fail");
                             $('#alertModalCont').text("Error al intentar eliminar el elemento.");
                             $('#alertModal').modal('show');
                             d.reject();
-                            //d.resolve(false);
-                        }
-                    }).fail(function(data) {
-                        console.log("ajax fail");
-                        $('#alertModalCont').text("Error al intentar eliminar el elemento.");
-                        $('#alertModal').modal('show');
+                        });
+                    });
+
+                    $confModal.on('hidden.bs.modal', function (e) {
                         d.reject();
                     });
-     
+
+                    $confModal.modal('show');      
                     return d.promise();
                 },
                 updateItem: function(item) {

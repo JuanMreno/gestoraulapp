@@ -9,7 +9,7 @@ var http = require('http');
 var ip = require('ip');
 var conn = require('../objs/SqlConnection.js');
 var request = require('ajax-request');
-
+var getmac = require('getmac');
 /**
  * Get port from environment and store in Express.
  */
@@ -94,9 +94,37 @@ function onListening() {
 }
 
 function setServerIp() {
+
+  getmac.getMac(function(err,macAddress){
+      if (err)  {
+        console.log("error getting MAC.");
+      }
+      console.log("My MAC: " + macAddress);
+
+      var connection = new conn.SqlConnection().connection;
+      connection.connect(function(err) {
+        if (err) {
+          console.error('error connecting: ' + err.stack);
+          return;
+        }
+
+        var query = "UPDATE app_params SET `value` = ? WHERE `name` = 'SERVER_MAC'";
+
+        var p = [macAddress];  
+        connection.query(query, p, function(err, rows) {
+        
+          if (err) {
+            console.error('error query: ' + query + err.stack);
+          }
+          else{
+            console.log('MAC configured.');
+          }
+        });
+      });
+  })
+
   var ipServer = ip.address();
   console.log("My ip: " + ipServer);
-
   var connection = new conn.SqlConnection().connection;
   connection.connect(function(err) {
     if (err) {
@@ -145,8 +173,8 @@ function validateLicense() {
           FROM\
             app_params\
           WHERE\
-            `name` = 'SERVER_IP'\
-        ) as serverIp";
+            `name` = 'SERVER_MAC'\
+        ) as macServer";
 
     connection.query(query, function(err, rows) {
     
@@ -156,7 +184,7 @@ function validateLicense() {
       }
 
       var license = rows[0].license;
-      var serverIp = rows[0].serverIp;
+      var macServer = rows[0].macServer;
 
       console.log("Validating license: " + license);
 
@@ -164,19 +192,19 @@ function validateLicense() {
         status:"false",
         data:{}
       };
-     
+
       request({
         url: process.env.LICENSE_SERVER,
         method: 'GET',
         data: {
           licencia: license,
           bundle_id: process.env.BUNDLE_ID,
-          dispositivo_id: serverIp,
+          dispositivo_id: macServer,
           primera_vez: 'false'
         }
       }, function(er, response, body) {
         if (er) {
-          console.error('error query: ' + er.stack);
+          console.error('Validate error');
           decreaseAttempt();
           return;
         }
@@ -185,25 +213,32 @@ function validateLicense() {
           var resData = JSON.parse(body);
         } catch (e) {
           console.log("res is not JSON.");
-          decreaseAttempt();
           return;
         }
 
-        if(resData.result == 'success'){
-          if(resData.message_id == 0){
-            console.log("license OK");
-          }
-          else{
-            console.log("message_id: " + resData.message_id);
-            decreaseAttempt();
+        var connection = new conn.SqlConnection().connection;
+        connection.connect(function(err) {
+          if (err) {
+            console.error('DB: error connecting: ' + err.stack);
+            connection.end();
             return;
           }
-        }
-        else{
-          console.log("result error");
-          decreaseAttempt();
-          return;
-        }
+
+          var query = "CALL license_activate(?,?,?)";
+
+          var p = [license, resData.message_id, resData.offline_attempts];
+          connection.query(query, p , function(err, rows) {
+          
+            if (err) {
+              console.error('error query: ' + query + err.stack);
+              connection.end();
+              return;
+            }
+
+            console.log("License status: " + resData.message_id);
+            return;
+          });
+        });
       });
     });
   });
