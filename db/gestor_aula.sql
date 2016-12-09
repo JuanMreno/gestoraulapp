@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80000
 File Encoding         : 65001
 
-Date: 2016-12-08 20:44:18
+Date: 2016-12-09 17:35:42
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -27,7 +27,7 @@ CREATE TABLE `app_params` (
   `creation_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `last_update` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of app_params
@@ -35,15 +35,16 @@ CREATE TABLE `app_params` (
 INSERT INTO `app_params` VALUES ('1', 'SCHOOL_NAME', 'Instituto', 'EDITABLE', '2016-11-03 21:26:09', '2016-11-14 23:02:21');
 INSERT INTO `app_params` VALUES ('2', 'COUNTRY', 'Colombia', 'EDITABLE', '2016-11-13 21:15:46', '2016-11-14 23:03:11');
 INSERT INTO `app_params` VALUES ('3', 'CITY', 'Pereira', 'EDITABLE', '2016-11-13 21:15:55', '2016-11-14 23:03:11');
-INSERT INTO `app_params` VALUES ('4', 'LICENSE', '6ED14-CC956-75FF5-37A4E', 'EDITABLE', '2016-11-13 21:16:01', '2016-12-08 13:46:01');
+INSERT INTO `app_params` VALUES ('4', 'LICENSE', '6ED14-CC956-75FF5-37A4E', 'EDITABLE', '2016-11-13 21:16:01', '2016-12-09 16:52:42');
 INSERT INTO `app_params` VALUES ('5', 'RANK_SEND_ENABLED', '1', 'EDITABLE', '2016-11-13 21:16:24', '2016-11-14 23:15:56');
 INSERT INTO `app_params` VALUES ('6', 'SERVER_NAME', 'Servidor', 'FIX', '2016-11-14 22:13:35', '2016-11-14 22:52:11');
-INSERT INTO `app_params` VALUES ('7', 'SERVER_IP', '192.168.0.3', 'FIX', '2016-11-14 22:13:41', '2016-12-08 17:10:45');
+INSERT INTO `app_params` VALUES ('7', 'SERVER_IP', '10.253.82.54', 'FIX', '2016-11-14 22:13:41', '2016-12-09 17:11:21');
 INSERT INTO `app_params` VALUES ('8', 'LICENSE_PERIOD', '14/11/2016 - 31/12/2017', 'FIX', '2016-11-14 22:15:14', '2016-11-14 22:52:15');
 INSERT INTO `app_params` VALUES ('9', 'DEVICE_NAME', 'Servidor', 'FIX', '2016-11-14 22:15:21', '2016-11-14 22:52:16');
 INSERT INTO `app_params` VALUES ('10', 'LICENSE_NUM_USERS', '10', 'FIX', '2016-11-14 22:15:42', '2016-11-14 22:52:16');
-INSERT INTO `app_params` VALUES ('11', 'LICENSE_STATE', '1', 'FIX', '2016-12-08 13:14:37', '2016-12-08 13:29:17');
-INSERT INTO `app_params` VALUES ('12', 'OFFLINE_ATTEMPTS', '2', 'FIX', '2016-12-08 13:42:30', '2016-12-08 17:34:53');
+INSERT INTO `app_params` VALUES ('11', 'LICENSE_STATE', '0', 'FIX', '2016-12-08 13:14:37', '2016-12-09 16:52:42');
+INSERT INTO `app_params` VALUES ('12', 'OFFLINE_ATTEMPTS', '3', 'FIX', '2016-12-08 13:42:30', '2016-12-09 17:12:29');
+INSERT INTO `app_params` VALUES ('13', 'SERVER_MAC', '14-DA-E9-36-58-C0', 'FIX', '2016-12-09 15:28:29', '2016-12-09 15:33:05');
 
 -- ----------------------------
 -- Table structure for class_group
@@ -55,7 +56,7 @@ CREATE TABLE `class_group` (
   `creation_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `last_update` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of class_group
@@ -71,6 +72,7 @@ INSERT INTO `class_group` VALUES ('8', '10-B', '2016-10-29 14:53:56', '2016-11-0
 INSERT INTO `class_group` VALUES ('9', '11-A', '2016-10-29 14:53:58', '2016-11-08 15:04:42');
 INSERT INTO `class_group` VALUES ('10', '11-B', '2016-11-08 09:12:17', '2016-11-08 15:04:44');
 INSERT INTO `class_group` VALUES ('11', '11-C', '2016-11-08 14:48:56', '2016-11-08 15:04:48');
+INSERT INTO `class_group` VALUES ('12', 'Undécimo dos', '2016-12-09 17:19:23', '2016-12-09 17:19:23');
 
 -- ----------------------------
 -- Table structure for laboratories_users
@@ -96,7 +98,7 @@ CREATE TABLE `laboratories_users` (
   KEY `user_id` (`user_id`),
   CONSTRAINT `laboratories_users_ibfk_1` FOREIGN KEY (`laboratory_id`) REFERENCES `laboratory` (`id`),
   CONSTRAINT `laboratories_users_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of laboratories_users
@@ -104,6 +106,7 @@ CREATE TABLE `laboratories_users` (
 INSERT INTO `laboratories_users` VALUES ('41', '1', '380', '0', '2016-12-07 13:35:50', '1', '00:00:30', 'reports/41_FISMRU002.pdf', '4.5', '3.5', '4', '', '2016-12-07 11:43:54', '2016-12-07 14:09:40');
 INSERT INTO `laboratories_users` VALUES ('43', '1', '374', '1', '2016-12-07 13:34:52', null, null, 'reports/43_FISVEC003.pdf', null, '3.5', '3.5', '', '2016-12-07 13:34:52', '2016-12-07 14:02:39');
 INSERT INTO `laboratories_users` VALUES ('44', '1', '377', '1', '2016-12-07 13:35:06', null, null, 'reports/44_FISMRU003.pdf', null, null, null, null, '2016-12-07 13:35:06', '2016-12-07 13:35:06');
+INSERT INTO `laboratories_users` VALUES ('45', '3', '374', '1', '2016-12-09 17:28:08', '1', '00:15:00', 'reports/45_FISVEC003.pdf', '4', '3.5', '3.75', null, '2016-12-09 17:28:08', '2016-12-09 17:29:13');
 
 -- ----------------------------
 -- Table structure for laboratory
@@ -135,8 +138,6 @@ INSERT INTO `laboratory` VALUES ('379', 'FISMRU001', '1', null, 'Movimiento rect
 INSERT INTO `laboratory` VALUES ('380', 'FISMRU002', '1', null, 'Movimiento rectilíneo uniformemente acelerado M.R.U.A', 'Cinemática', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
 INSERT INTO `laboratory` VALUES ('381', 'FISS3D004', '1', null, 'Movimiento en el plano', 'Cinemática', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
 INSERT INTO `laboratory` VALUES ('382', 'FISS3D001', '1', null, 'Tiro parabólico - Reto lanzamiento baloncesto', 'Cinemática', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
-INSERT INTO `laboratory` VALUES ('383', 'FISVEC004', '1', null, 'Resultante de dos fuerzas', 'Dinámica y estática', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
-INSERT INTO `laboratory` VALUES ('384', 'FISMRU005', '1', null, 'Fuerza de fricción', 'Dinámica y estática', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
 INSERT INTO `laboratory` VALUES ('385', 'FISNEW001', '1', null, 'Comprobación segunda ley de Newton - Desplazamiento de un móvil.', 'Dinámica y estática', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
 INSERT INTO `laboratory` VALUES ('386', 'FISNEW002', '1', null, 'Segunda ley de Newton - Elevando una carga', 'Dinámica y estática', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
 INSERT INTO `laboratory` VALUES ('387', 'FISEQU003', '1', null, 'La carreta como máquina simple', 'Dinámica y estática', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
@@ -455,7 +456,7 @@ CREATE TABLE `users_class_groups` (
   KEY `class_group_id` (`class_group_id`),
   CONSTRAINT `users_class_groups_ibfk_1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`),
   CONSTRAINT `users_class_groups_ibfk_2` FOREIGN KEY (`class_group_id`) REFERENCES `class_group` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=131 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=132 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of users_class_groups
@@ -470,7 +471,7 @@ INSERT INTO `users_class_groups` VALUES ('90', '2', '1', '2016-11-18 07:02:31', 
 INSERT INTO `users_class_groups` VALUES ('108', '2', '8', '2016-11-29 17:34:45', '2016-11-29 17:34:45');
 INSERT INTO `users_class_groups` VALUES ('118', '2', '5', '2016-12-05 17:20:33', '2016-12-05 17:20:33');
 INSERT INTO `users_class_groups` VALUES ('124', '2', '2', '2016-12-06 21:46:37', '2016-12-06 21:46:37');
-INSERT INTO `users_class_groups` VALUES ('129', '3', '10', '2016-12-07 10:01:43', '2016-12-07 10:01:43');
+INSERT INTO `users_class_groups` VALUES ('131', '3', '2', '2016-12-09 17:27:40', '2016-12-09 17:27:40');
 
 -- ----------------------------
 -- Table structure for user_group_subjects
@@ -1168,9 +1169,7 @@ BEGIN
 		CASE WHEN tmeAvg IS NULL THEN '' ELSE ROUND(tmeAvg,1) END as tmeAvg,
 		CASE WHEN rnkScore IS NULL THEN '' ELSE ROUND(rnkScore,0) END as rnkScore
 	FROM
-		(SELECT @rownum:=0) r, rankingTable rt
-	ORDER BY
-		rnkScore DESC;
+		(SELECT @rownum:=0) r, (SELECT * FROM rankingTable ORDER BY rnkScore DESC) rt;
 
 	DROP TABLE IF EXISTS rankingTable;
 
