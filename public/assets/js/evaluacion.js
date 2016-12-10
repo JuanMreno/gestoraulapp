@@ -26,6 +26,7 @@
             $('#tipoDropdown').text('Estudiante');
         });;
 
+        /*
         $contPop = $('#dlEvalPopOver');
         $contPop.css('display', 'block');
 
@@ -38,7 +39,9 @@
 
         $('#dlGeneralEvalReport').off('click').on('shown.bs.popover', function () {
             setDownLoadBtns();
-        });
+        });*/
+        
+        setDownLoadBtns();
 
         $('#nomSelect').select2();
 

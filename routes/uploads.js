@@ -97,7 +97,7 @@ router.post('/labs', function(req, res) {
 
 		var query = "\
 			DELETE FROM temp_labs;\
-			LOAD DATA INFILE \"" + process.env.ABS_REPORTS_DIR + "/" + fileName + "\"\
+			LOAD DATA LOCAL INFILE \"" + process.env.LOCAL_REPORTS_DIR + "/" + fileName + "\"\
 			INTO TABLE temp_labs\
 			COLUMNS TERMINATED BY ','\
 			OPTIONALLY ENCLOSED BY '\"'\
@@ -220,7 +220,7 @@ router.post('/users', function(req, res) {
 
 		var query = "\
 			DELETE FROM temp_users;\
-			LOAD DATA INFILE \"" + process.env.ABS_REPORTS_DIR + "/" + fileName + "\"\
+			LOAD DATA LOCAL INFILE \"" + process.env.LOCAL_REPORTS_DIR + "/" + fileName + "\"\
 			INTO TABLE temp_users\
 			COLUMNS TERMINATED BY ','\
 			OPTIONALLY ENCLOSED BY '\"'\

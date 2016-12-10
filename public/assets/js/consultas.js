@@ -30,12 +30,13 @@
             setStudentsDropDown(groupId);  
 		});;
 
+        /*
         $contPop = $('#dlEvalPopOver');
         $contPop.css('display', 'block');
 
         $('#dlGeneralEvalReport').popover({
             content:popGenReport,
-            placement:'bottom',
+            placement:'right',
             html:true,
             trigger:'focus'
         });
@@ -43,6 +44,8 @@
         $('#dlGeneralEvalReport').off('click').on('shown.bs.popover', function () {
             setDownLoadBtns();
         });
+        */
+        setDownLoadBtns();
 
         $('#nomSelect').select2();
 

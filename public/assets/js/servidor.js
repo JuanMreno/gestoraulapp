@@ -17,8 +17,8 @@
             var res = $.parseJSON(b64_to_utf8(data));
             var dt = res.data;
             if(res.status == "true"){
-                $("#serverName").val(dt[4].value);
-                $("#serverIp").val(dt[5].value);
+                $("#serverName").val(dt[5].value);
+                $("#serverIp").val(dt[6].value);
                 $("#deviceName").val(dt[7].value);
                 $("#numLic").val(dt[3].value);
                 $("#licenseState").val(getLicenseStateStr(dt[10].value));

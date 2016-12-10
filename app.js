@@ -11,10 +11,16 @@ var basic = auth.basic({
   file: __dirname + "/auth/app_auth.htpasswd" // gevorg:gpass, Sarah:testpass ...
 });
 
+var absPath = __dirname + "/public/reports";
+absPath = absPath.replace(absPath.slice(0, 2),'').replace('\\','\/');
+
+process.env.LOCAL_REPORTS_DIR = absPath;
 process.env.REPORTS_DIR = "./public/reports";
 process.env.ABS_REPORTS_DIR = __dirname + "/public/reports";
 process.env.LICENSE_SERVER = 'http://ielicenseserver.herokuapp.com/validacion/verificacion_licencia';
 process.env.BUNDLE_ID = 'cloudlabs.server.classroomversion';
+
+console.log(process.env.LOCAL_REPORTS_DIR);
 
 var app = express();
 

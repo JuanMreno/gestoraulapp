@@ -48,6 +48,7 @@
 
         });
 
+        /*
         $('#downloadGeneralReport').popover({
             content:popGenReport,
             placement:'bottom',
@@ -58,7 +59,8 @@
         $('#downloadGeneralReport').off('click').on('shown.bs.popover', function () {
             setDownLoadBtns();
         });
-
+        */
+        setDownLoadBtns();
         setSubjectsDropDown();
         //setPracLabTable();
 	}

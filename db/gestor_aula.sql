@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80000
 File Encoding         : 65001
 
-Date: 2016-12-09 17:35:42
+Date: 2016-12-10 12:27:59
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -38,12 +38,12 @@ INSERT INTO `app_params` VALUES ('3', 'CITY', 'Pereira', 'EDITABLE', '2016-11-13
 INSERT INTO `app_params` VALUES ('4', 'LICENSE', '6ED14-CC956-75FF5-37A4E', 'EDITABLE', '2016-11-13 21:16:01', '2016-12-09 16:52:42');
 INSERT INTO `app_params` VALUES ('5', 'RANK_SEND_ENABLED', '1', 'EDITABLE', '2016-11-13 21:16:24', '2016-11-14 23:15:56');
 INSERT INTO `app_params` VALUES ('6', 'SERVER_NAME', 'Servidor', 'FIX', '2016-11-14 22:13:35', '2016-11-14 22:52:11');
-INSERT INTO `app_params` VALUES ('7', 'SERVER_IP', '10.253.82.54', 'FIX', '2016-11-14 22:13:41', '2016-12-09 17:11:21');
+INSERT INTO `app_params` VALUES ('7', 'SERVER_IP', '192.168.0.101', 'FIX', '2016-11-14 22:13:41', '2016-12-10 08:06:23');
 INSERT INTO `app_params` VALUES ('8', 'LICENSE_PERIOD', '14/11/2016 - 31/12/2017', 'FIX', '2016-11-14 22:15:14', '2016-11-14 22:52:15');
 INSERT INTO `app_params` VALUES ('9', 'DEVICE_NAME', 'Servidor', 'FIX', '2016-11-14 22:15:21', '2016-11-14 22:52:16');
 INSERT INTO `app_params` VALUES ('10', 'LICENSE_NUM_USERS', '10', 'FIX', '2016-11-14 22:15:42', '2016-11-14 22:52:16');
 INSERT INTO `app_params` VALUES ('11', 'LICENSE_STATE', '0', 'FIX', '2016-12-08 13:14:37', '2016-12-09 16:52:42');
-INSERT INTO `app_params` VALUES ('12', 'OFFLINE_ATTEMPTS', '3', 'FIX', '2016-12-08 13:42:30', '2016-12-09 17:12:29');
+INSERT INTO `app_params` VALUES ('12', 'OFFLINE_ATTEMPTS', '3', 'FIX', '2016-12-08 13:42:30', '2016-12-10 12:24:54');
 INSERT INTO `app_params` VALUES ('13', 'SERVER_MAC', '14-DA-E9-36-58-C0', 'FIX', '2016-12-09 15:28:29', '2016-12-09 15:33:05');
 
 -- ----------------------------
@@ -103,10 +103,6 @@ CREATE TABLE `laboratories_users` (
 -- ----------------------------
 -- Records of laboratories_users
 -- ----------------------------
-INSERT INTO `laboratories_users` VALUES ('41', '1', '380', '0', '2016-12-07 13:35:50', '1', '00:00:30', 'reports/41_FISMRU002.pdf', '4.5', '3.5', '4', '', '2016-12-07 11:43:54', '2016-12-07 14:09:40');
-INSERT INTO `laboratories_users` VALUES ('43', '1', '374', '1', '2016-12-07 13:34:52', null, null, 'reports/43_FISVEC003.pdf', null, '3.5', '3.5', '', '2016-12-07 13:34:52', '2016-12-07 14:02:39');
-INSERT INTO `laboratories_users` VALUES ('44', '1', '377', '1', '2016-12-07 13:35:06', null, null, 'reports/44_FISMRU003.pdf', null, null, null, null, '2016-12-07 13:35:06', '2016-12-07 13:35:06');
-INSERT INTO `laboratories_users` VALUES ('45', '3', '374', '1', '2016-12-09 17:28:08', '1', '00:15:00', 'reports/45_FISVEC003.pdf', '4', '3.5', '3.75', null, '2016-12-09 17:28:08', '2016-12-09 17:29:13');
 
 -- ----------------------------
 -- Table structure for laboratory
@@ -125,52 +121,12 @@ CREATE TABLE `laboratory` (
   KEY `lesson_id` (`lesson_id`),
   KEY `subject_id` (`subject_id`),
   CONSTRAINT `laboratory_ibfk_1` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=422 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=510 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of laboratory
 -- ----------------------------
 INSERT INTO `laboratory` VALUES ('373', 'QUIDEN001', '2', null, 'Densidad de sólidos', null, '2016-11-29 18:03:53', '2016-11-29 18:03:53');
-INSERT INTO `laboratory` VALUES ('374', 'FISVEC003', '1', null, 'Clases de vectores', 'Magnitudes y unidades', '2016-11-29 18:07:05', '2016-11-29 18:07:05');
-INSERT INTO `laboratory` VALUES ('377', 'FISMRU003', '1', null, 'Gráficas de posición contra tiempo', 'Cinemática', '2016-11-29 18:07:05', '2016-11-29 18:07:05');
-INSERT INTO `laboratory` VALUES ('378', 'FISMRU004', '1', null, 'Gráficas de velocidad contra tiempo', 'Cinemática', '2016-11-29 18:07:05', '2016-11-29 18:07:05');
-INSERT INTO `laboratory` VALUES ('379', 'FISMRU001', '1', null, 'Movimiento rectilíneo uniforme M.R.U', 'Cinemática', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
-INSERT INTO `laboratory` VALUES ('380', 'FISMRU002', '1', null, 'Movimiento rectilíneo uniformemente acelerado M.R.U.A', 'Cinemática', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
-INSERT INTO `laboratory` VALUES ('381', 'FISS3D004', '1', null, 'Movimiento en el plano', 'Cinemática', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
-INSERT INTO `laboratory` VALUES ('382', 'FISS3D001', '1', null, 'Tiro parabólico - Reto lanzamiento baloncesto', 'Cinemática', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
-INSERT INTO `laboratory` VALUES ('385', 'FISNEW001', '1', null, 'Comprobación segunda ley de Newton - Desplazamiento de un móvil.', 'Dinámica y estática', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
-INSERT INTO `laboratory` VALUES ('386', 'FISNEW002', '1', null, 'Segunda ley de Newton - Elevando una carga', 'Dinámica y estática', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
-INSERT INTO `laboratory` VALUES ('387', 'FISEQU003', '1', null, 'La carreta como máquina simple', 'Dinámica y estática', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
-INSERT INTO `laboratory` VALUES ('388', 'FISEQU001', '1', null, 'Momento de una fuerza', 'Dinámica y estática', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
-INSERT INTO `laboratory` VALUES ('389', 'FISEQU002', '1', null, 'Equilibrio', 'Dinámica y estática', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
-INSERT INTO `laboratory` VALUES ('390', 'FISNEW003', '1', null, 'Gravedad', 'Dinámica y estática', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
-INSERT INTO `laboratory` VALUES ('391', 'FISTEP002', '1', null, 'Trabajo y potencia en un elevador de carga', 'Trabajo energía y potencia', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
-INSERT INTO `laboratory` VALUES ('392', 'FISTEP003', '1', null, 'Trabajo energía y potencia en una montaña rusa', 'Trabajo energía y potencia', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
-INSERT INTO `laboratory` VALUES ('393', 'FISTEP001', '1', null, 'Fuentes y transformaciones de la energía', 'Trabajo energía y potencia', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
-INSERT INTO `laboratory` VALUES ('394', 'FISS3D005', '1', null, 'Principio de Pascal', 'Fluidos', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
-INSERT INTO `laboratory` VALUES ('395', 'FISS3D002', '1', null, 'Prensa hidráhulica', 'Fluidos', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
-INSERT INTO `laboratory` VALUES ('396', 'FISTER001', '1', null, 'Escalas de temperatura', 'Termodinámica', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
-INSERT INTO `laboratory` VALUES ('397', 'FISTER002', '1', null, 'Calor específico y capacidad térmica', 'Termodinámica', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
-INSERT INTO `laboratory` VALUES ('398', 'FISTER003', '1', null, 'Calor latente', 'Termodinámica', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
-INSERT INTO `laboratory` VALUES ('399', 'FISS3D006', '1', null, 'La energía en el movimiento armónico simple', 'Movimiento armónico simple', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
-INSERT INTO `laboratory` VALUES ('400', 'FISS3D007', '1', null, 'Leyes del péndulo simple', 'Movimiento armónico simple', '2016-11-29 18:07:06', '2016-11-29 18:07:06');
-INSERT INTO `laboratory` VALUES ('401', 'FISS3D003', '1', null, 'Movimiento pendular - Reto reloj de péndulo', 'Movimiento armónico simple', '2016-11-29 18:07:07', '2016-11-29 18:07:07');
-INSERT INTO `laboratory` VALUES ('402', 'FISOND001', '1', null, 'Produciendo una onda de radio (Ondas electromagnéticas)', 'Ondas', '2016-11-29 18:07:07', '2016-11-29 18:07:07');
-INSERT INTO `laboratory` VALUES ('403', 'FISOND002', '1', null, 'Ondas de sonido (Ondas mecánicas)', 'Ondas', '2016-11-29 18:07:07', '2016-11-29 18:07:07');
-INSERT INTO `laboratory` VALUES ('404', 'FISOND003', '1', null, 'Espectro electromagnético', 'Ondas', '2016-11-29 18:07:07', '2016-11-29 18:07:07');
-INSERT INTO `laboratory` VALUES ('405', 'FISOND004', '1', null, 'Luz visible', 'Óptica', '2016-11-29 18:07:07', '2016-11-29 18:07:07');
-INSERT INTO `laboratory` VALUES ('406', 'FISOPT001', '1', null, 'Dispersión y síntesis de la luz', 'Óptica', '2016-11-29 18:07:07', '2016-11-29 18:07:07');
-INSERT INTO `laboratory` VALUES ('407', 'FISOPT002', '1', null, 'Espejo cóncavo', 'Óptica', '2016-11-29 18:07:07', '2016-11-29 18:07:07');
-INSERT INTO `laboratory` VALUES ('408', 'FISOPT004', '1', null, 'Espejos esféricos', 'Óptica', '2016-11-29 18:07:07', '2016-11-29 18:07:07');
-INSERT INTO `laboratory` VALUES ('409', 'FISOPT003', '1', null, 'Lente convergente', 'Óptica', '2016-11-29 18:07:07', '2016-11-29 18:07:07');
-INSERT INTO `laboratory` VALUES ('410', 'FISOPT005', '1', null, 'Lentes', 'Óptica', '2016-11-29 18:07:07', '2016-11-29 18:07:07');
-INSERT INTO `laboratory` VALUES ('411', 'FISELE004', '1', null, 'Magnitudes eléctricas', 'Electricidad y electromagnetismo', '2016-11-29 18:07:07', '2016-11-29 18:07:07');
-INSERT INTO `laboratory` VALUES ('412', 'FISELE001', '1', null, 'Circuito serie', 'Electricidad y electromagnetismo', '2016-11-29 18:07:07', '2016-11-29 18:07:07');
-INSERT INTO `laboratory` VALUES ('413', 'FISELE002', '1', null, 'Circuito paralelo', 'Electricidad y electromagnetismo', '2016-11-29 18:07:07', '2016-11-29 18:07:07');
-INSERT INTO `laboratory` VALUES ('414', 'FISELE003', '1', null, 'Circuito mixto', 'Electricidad y electromagnetismo', '2016-11-29 18:07:07', '2016-11-29 18:07:07');
-INSERT INTO `laboratory` VALUES ('415', 'FISELE005', '1', null, 'Resistencia equivalente', 'Electricidad y electromagnetismo', '2016-11-29 18:07:07', '2016-11-29 18:07:07');
-INSERT INTO `laboratory` VALUES ('416', 'FISELE006', '1', null, 'Ley de los voltajes', 'Electricidad y electromagnetismo', '2016-11-29 18:07:07', '2016-11-29 18:07:07');
-INSERT INTO `laboratory` VALUES ('417', 'FISELE007', '1', null, 'Ley de las corrientes', 'Electricidad y electromagnetismo', '2016-11-29 18:07:07', '2016-11-29 18:07:07');
 
 -- ----------------------------
 -- Table structure for lessons
@@ -412,6 +368,13 @@ CREATE TABLE `temp_users` (
 -- ----------------------------
 -- Records of temp_users
 -- ----------------------------
+INSERT INTO `temp_users` VALUES ('ESTUDIANTE', 'est2', 'est', 'Andrés', 'Orozco', '8-C');
+INSERT INTO `temp_users` VALUES ('ESTUDIANTE', 'est1', 'est', 'Carlos', 'García', '8-B');
+INSERT INTO `temp_users` VALUES ('ESTUDIANTE', 'est3', 'est', 'Cesar', 'Mora', '8-C');
+INSERT INTO `temp_users` VALUES ('ESTUDIANTE', 'est4', 'est', 'Felipe', 'Perez', '8-C');
+INSERT INTO `temp_users` VALUES ('PROFESOR', 'pro1', 'pro', 'Mateo', 'Perez', '-');
+INSERT INTO `temp_users` VALUES ('PROFESOR', 'pro2', 'pro', 'Sergio', 'Perez', '-');
+INSERT INTO `temp_users` VALUES ('PROFESOR', 'pro3', 'pro', 'Victor', 'Vélez', '-');
 
 -- ----------------------------
 -- Table structure for users
@@ -429,7 +392,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   KEY `rols_id` (`rols_id`),
   CONSTRAINT `users_ibfk_1` FOREIGN KEY (`rols_id`) REFERENCES `rols` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of users
@@ -456,7 +419,7 @@ CREATE TABLE `users_class_groups` (
   KEY `class_group_id` (`class_group_id`),
   CONSTRAINT `users_class_groups_ibfk_1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`),
   CONSTRAINT `users_class_groups_ibfk_2` FOREIGN KEY (`class_group_id`) REFERENCES `class_group` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=132 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=137 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of users_class_groups
@@ -472,6 +435,7 @@ INSERT INTO `users_class_groups` VALUES ('108', '2', '8', '2016-11-29 17:34:45',
 INSERT INTO `users_class_groups` VALUES ('118', '2', '5', '2016-12-05 17:20:33', '2016-12-05 17:20:33');
 INSERT INTO `users_class_groups` VALUES ('124', '2', '2', '2016-12-06 21:46:37', '2016-12-06 21:46:37');
 INSERT INTO `users_class_groups` VALUES ('131', '3', '2', '2016-12-09 17:27:40', '2016-12-09 17:27:40');
+INSERT INTO `users_class_groups` VALUES ('132', '2', '12', '2016-12-10 09:33:28', '2016-12-10 09:33:28');
 
 -- ----------------------------
 -- Table structure for user_group_subjects
