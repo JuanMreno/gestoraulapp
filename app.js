@@ -17,8 +17,9 @@ absPath = absPath.replace(absPath.slice(0, 2),'').replace('\\','\/');
 process.env.LOCAL_REPORTS_DIR = absPath;
 process.env.REPORTS_DIR = "./public/reports";
 process.env.ABS_REPORTS_DIR = __dirname + "/public/reports";
-process.env.LICENSE_SERVER = 'http://ielicenseserver.herokuapp.com/validacion/verificacion_licencia';
 process.env.BUNDLE_ID = 'cloudlabs.server.classroomversion';
+process.env.LICENSE_SERVER = 'http://ielicenseserver.herokuapp.com/validacion/verificacion_licencia';
+process.env.RANKING_SERVER = 'http://ranking.indesap.com/server/WebService.asmx/entry';
 
 console.log(process.env.LOCAL_REPORTS_DIR);
 

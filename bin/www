@@ -10,6 +10,7 @@ var ip = require('ip');
 var conn = require('../objs/SqlConnection.js');
 var request = require('ajax-request');
 var getmac = require('getmac');
+var util = require('util');
 /**
  * Get port from environment and store in Express.
  */
@@ -91,6 +92,7 @@ function onListening() {
   debug('Listening on ' + bind);
 
   setServerIp();
+  reportRanking();
 }
 
 function setServerIp() {
@@ -262,5 +264,92 @@ function decreaseAttempt() {
 
       console.log("Attempt decreased");
     });
+  });
+}
+
+function reportRanking() {
+  var connection = new conn.SqlConnection().connection;
+  connection.connect(function(err) {
+    if (err) {
+      console.error('error connecting: ' + err.stack);
+      return;
+    }
+
+    var query = "CALL get_ranking_params()";
+
+    connection.query(query, function(err, rows) {
+    
+      if (err) {
+        console.error('error query: ' + query + err.stack);
+        return;
+      }
+
+      var data = rows[0][0];
+
+      var license     = data.license;
+      var rankEnabled = data.rank_enabled;
+      var schoolName  = data.schoolName;
+      var country     = data.country;
+      var city        = data.city;
+      var schoolId    = data.schoolId;
+
+      if(license == '0' && rankEnabled == '1'){
+        var connection = new conn.SqlConnection().connection;
+        connection.connect(function(err) {
+          if (err) {
+            console.error('DB: error connecting: ' + err.stack);
+            connection.end();
+            return;
+          }
+
+          var query = "CALL get_rank_school_report()";
+          connection.query(query , function(err, rows) {
+          
+            if (err) {
+              console.error('error query: ' + query + err.stack);
+              connection.end();
+              return;
+            }
+
+            var d = rows[0];
+
+            var dta = {
+              METHOD:"put_ranking",
+              PARAMS:{
+                schoolId:schoolId,
+                schoolName:schoolName,
+                schoolCity:city,
+                schoolCountry:country,
+                students:d
+              }
+            };
+
+            console.log("----------------");
+            var jData = JSON.stringify(dta);
+            console.log(jData);
+            jData = new Buffer(jData).toString('base64');
+
+            request({
+              url: process.env.RANKING_SERVER,
+              method: 'POST',
+              data: { data: jData }
+            }, function(er, response, body) {
+              if (er) {
+                console.error('Ranking server error');
+                return;
+              }
+
+              console.log(body);
+            });
+
+          });
+        });
+      }
+      else{
+        console.log("license: " + license);
+        console.log("rankEnabled: " + rankEnabled);
+      }
+    });
+
   });
 }
