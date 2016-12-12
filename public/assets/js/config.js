@@ -145,6 +145,8 @@
                 var res = $.parseJSON(b64_to_utf8(data));
                 var dt = res.data;
                 if(res.status == "true"){
+                    $('#alertModalCont').text("Información cargada con éxito.");
+                    $('#alertModal').modal('show');
                     getParams();
                 }
                 else{

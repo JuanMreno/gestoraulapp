@@ -394,6 +394,20 @@
 
                     var jData = utf8_to_b64( JSON.stringify(data) );
 
+                    if(parseInt(nAppVal) != NaN)
+                        if(parseInt(nAppVal) < 0 || parseInt(nAppVal) > 5){
+                            $('#alertModalCont').text("El valor de nota debe estar entre 0-5.");
+                            $('#alertModal').modal('show');
+                            return;
+                        }
+
+                    if(parseInt(nProVal) != NaN)
+                        if(parseInt(nProVal) < 0 || parseInt(nProVal) > 5){
+                            $('#alertModalCont').text("El valor de nota debe estar entre 0-5.");
+                            $('#alertModal').modal('show');
+                            return;
+                        }
+
                     if(nAppVal != nAppValAct || nIntVal != nIntValAct || tEntVal != tEntValAct ){
                         $confModal = $('#confirmModal');
                         $confModal.find('#confirmModalCont').text("El dato que intenta modificar es un dato automático enviado por el reporte, se recomienda ingresar manualmente este campo sólo si el estudiante a enviado su reporte de manera offline. ¿Está seguro que desea modificar este campo?");
