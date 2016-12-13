@@ -271,7 +271,7 @@ function reportRanking() {
   var connection = new conn.SqlConnection().connection;
   connection.connect(function(err) {
     if (err) {
-      console.error('error connecting: ' + err.stack);
+      console.error('Ranking report: error connecting: ' + err.stack);
       return;
     }
 
@@ -297,7 +297,7 @@ function reportRanking() {
         var connection = new conn.SqlConnection().connection;
         connection.connect(function(err) {
           if (err) {
-            console.error('DB: error connecting: ' + err.stack);
+            console.error('Ranking report: DB: error connecting: ' + err.stack);
             connection.end();
             return;
           }
@@ -324,9 +324,7 @@ function reportRanking() {
               }
             };
 
-            console.log("----------------");
             var jData = JSON.stringify(dta);
-            console.log(jData);
             jData = new Buffer(jData).toString('base64');
 
             request({
@@ -335,11 +333,42 @@ function reportRanking() {
               data: { data: jData }
             }, function(er, response, body) {
               if (er) {
-                console.error('Ranking server error');
+                console.error('Ranking report: Ranking server error');
                 return;
               }
 
-              console.log(body);
+              try {
+                var resData = JSON.parse(JSON.parse(body).d);
+              } catch (e) {
+                console.log("Ranking report: res is not JSON.");
+                return;
+              }
+
+              if(resData.RESULT.ESTADO == 'TRUE'){
+                var resultado = resData.RESULT.RESULTADO;
+
+                var query = "UPDATE\
+                    app_params\
+                  SET\
+                    `value` = ?\
+                  WHERE\
+                    `name` = 'SCHOOL_ID'";
+
+                var p = [resultado.schoolId];
+                connection.query(query, p, function(err, rows) {
+                
+                  if (err) {
+                    console.error('error query: ' + query + err.stack);
+                    connection.end();
+                    return;
+                  }
+                  console.log("Ranking report sent.");
+                });
+              }
+              else{
+                console.log("Ranking report: Ranking server res error");
+                return;
+              }
             });
 
           });

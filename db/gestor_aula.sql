@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80000
 File Encoding         : 65001
 
-Date: 2016-12-10 12:27:59
+Date: 2016-12-12 11:45:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -27,24 +27,25 @@ CREATE TABLE `app_params` (
   `creation_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `last_update` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of app_params
 -- ----------------------------
-INSERT INTO `app_params` VALUES ('1', 'SCHOOL_NAME', 'Instituto', 'EDITABLE', '2016-11-03 21:26:09', '2016-11-14 23:02:21');
+INSERT INTO `app_params` VALUES ('1', 'SCHOOL_NAME', 'Instituto Técnico', 'EDITABLE', '2016-11-03 21:26:09', '2016-12-11 18:29:00');
 INSERT INTO `app_params` VALUES ('2', 'COUNTRY', 'Colombia', 'EDITABLE', '2016-11-13 21:15:46', '2016-11-14 23:03:11');
 INSERT INTO `app_params` VALUES ('3', 'CITY', 'Pereira', 'EDITABLE', '2016-11-13 21:15:55', '2016-11-14 23:03:11');
 INSERT INTO `app_params` VALUES ('4', 'LICENSE', '6ED14-CC956-75FF5-37A4E', 'EDITABLE', '2016-11-13 21:16:01', '2016-12-09 16:52:42');
 INSERT INTO `app_params` VALUES ('5', 'RANK_SEND_ENABLED', '1', 'EDITABLE', '2016-11-13 21:16:24', '2016-11-14 23:15:56');
 INSERT INTO `app_params` VALUES ('6', 'SERVER_NAME', 'Servidor', 'FIX', '2016-11-14 22:13:35', '2016-11-14 22:52:11');
-INSERT INTO `app_params` VALUES ('7', 'SERVER_IP', '192.168.0.101', 'FIX', '2016-11-14 22:13:41', '2016-12-10 08:06:23');
+INSERT INTO `app_params` VALUES ('7', 'SERVER_IP', '10.253.82.54', 'FIX', '2016-11-14 22:13:41', '2016-12-12 08:45:44');
 INSERT INTO `app_params` VALUES ('8', 'LICENSE_PERIOD', '14/11/2016 - 31/12/2017', 'FIX', '2016-11-14 22:15:14', '2016-11-14 22:52:15');
 INSERT INTO `app_params` VALUES ('9', 'DEVICE_NAME', 'Servidor', 'FIX', '2016-11-14 22:15:21', '2016-11-14 22:52:16');
 INSERT INTO `app_params` VALUES ('10', 'LICENSE_NUM_USERS', '10', 'FIX', '2016-11-14 22:15:42', '2016-11-14 22:52:16');
 INSERT INTO `app_params` VALUES ('11', 'LICENSE_STATE', '0', 'FIX', '2016-12-08 13:14:37', '2016-12-09 16:52:42');
 INSERT INTO `app_params` VALUES ('12', 'OFFLINE_ATTEMPTS', '3', 'FIX', '2016-12-08 13:42:30', '2016-12-10 12:24:54');
 INSERT INTO `app_params` VALUES ('13', 'SERVER_MAC', '14-DA-E9-36-58-C0', 'FIX', '2016-12-09 15:28:29', '2016-12-09 15:33:05');
+INSERT INTO `app_params` VALUES ('14', 'SCHOOL_ID', '33', null, '2016-12-10 17:31:57', '2016-12-12 10:04:40');
 
 -- ----------------------------
 -- Table structure for class_group
@@ -98,7 +99,7 @@ CREATE TABLE `laboratories_users` (
   KEY `user_id` (`user_id`),
   CONSTRAINT `laboratories_users_ibfk_1` FOREIGN KEY (`laboratory_id`) REFERENCES `laboratory` (`id`),
   CONSTRAINT `laboratories_users_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of laboratories_users
@@ -314,7 +315,7 @@ CREATE TABLE `subjects_class_groups` (
   KEY `class_group_id` (`class_group_id`),
   CONSTRAINT `subjects_class_groups_ibfk_1` FOREIGN KEY (`subjects_id`) REFERENCES `subjects` (`id`),
   CONSTRAINT `subjects_class_groups_ibfk_2` FOREIGN KEY (`class_group_id`) REFERENCES `class_group` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of subjects_class_groups
@@ -336,6 +337,8 @@ INSERT INTO `subjects_class_groups` VALUES ('21', '2', '1', '2016-11-10 18:44:34
 INSERT INTO `subjects_class_groups` VALUES ('22', '1', '1', '2016-11-10 18:44:37', '2016-11-10 18:44:37');
 INSERT INTO `subjects_class_groups` VALUES ('23', '1', '3', '2016-11-14 21:45:37', '2016-11-14 21:45:37');
 INSERT INTO `subjects_class_groups` VALUES ('24', '2', '3', '2016-11-14 21:45:41', '2016-11-14 21:45:41');
+INSERT INTO `subjects_class_groups` VALUES ('25', '1', '12', '2016-12-12 09:30:26', '2016-12-12 09:30:26');
+INSERT INTO `subjects_class_groups` VALUES ('26', '2', '12', '2016-12-12 09:30:29', '2016-12-12 09:30:29');
 
 -- ----------------------------
 -- Table structure for temp_labs
@@ -392,7 +395,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   KEY `rols_id` (`rols_id`),
   CONSTRAINT `users_ibfk_1` FOREIGN KEY (`rols_id`) REFERENCES `rols` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of users
@@ -403,6 +406,7 @@ INSERT INTO `users` VALUES ('3', 'm', '363b122c528f54df4a0446b6bab05515', 'Manue
 INSERT INTO `users` VALUES ('7', 'admin', '363b122c528f54df4a0446b6bab05515', 'Juan', 'Moreno', '2', '2016-11-08 07:59:19', '2016-11-08 07:59:32');
 INSERT INTO `users` VALUES ('19', 'sadmin', '363b122c528f54df4a0446b6bab05515', 'Jhonatan', 'Garcia', '1', '2016-11-14 15:46:36', '2016-11-14 23:36:56');
 INSERT INTO `users` VALUES ('20', 'jarango', '7815696ecbf1c96e6894b779456d330e', 'Johan', 'Arango', '3', '2016-11-15 17:47:09', '2016-12-06 17:53:41');
+INSERT INTO `users` VALUES ('81', 'aarias', '363b122c528f54df4a0446b6bab05515', 'Andrés', 'Arias', '4', '2016-12-12 09:29:44', '2016-12-12 09:29:53');
 
 -- ----------------------------
 -- Table structure for users_class_groups
@@ -419,7 +423,7 @@ CREATE TABLE `users_class_groups` (
   KEY `class_group_id` (`class_group_id`),
   CONSTRAINT `users_class_groups_ibfk_1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`),
   CONSTRAINT `users_class_groups_ibfk_2` FOREIGN KEY (`class_group_id`) REFERENCES `class_group` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=137 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=138 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of users_class_groups
@@ -436,6 +440,7 @@ INSERT INTO `users_class_groups` VALUES ('118', '2', '5', '2016-12-05 17:20:33',
 INSERT INTO `users_class_groups` VALUES ('124', '2', '2', '2016-12-06 21:46:37', '2016-12-06 21:46:37');
 INSERT INTO `users_class_groups` VALUES ('131', '3', '2', '2016-12-09 17:27:40', '2016-12-09 17:27:40');
 INSERT INTO `users_class_groups` VALUES ('132', '2', '12', '2016-12-10 09:33:28', '2016-12-10 09:33:28');
+INSERT INTO `users_class_groups` VALUES ('137', '81', '12', '2016-12-12 09:29:56', '2016-12-12 09:29:56');
 
 -- ----------------------------
 -- Table structure for user_group_subjects
@@ -452,7 +457,7 @@ CREATE TABLE `user_group_subjects` (
   KEY `sc_id` (`sc_id`),
   CONSTRAINT `user_group_subjects_ibfk_1` FOREIGN KEY (`ucg_id`) REFERENCES `users_class_groups` (`id`),
   CONSTRAINT `user_group_subjects_ibfk_2` FOREIGN KEY (`sc_id`) REFERENCES `subjects_class_groups` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_group_subjects
@@ -466,6 +471,8 @@ INSERT INTO `user_group_subjects` VALUES ('62', '74', '16', '2016-12-07 11:02:04
 INSERT INTO `user_group_subjects` VALUES ('63', '124', '12', '2016-12-07 11:02:55', '2016-12-07 11:02:55');
 INSERT INTO `user_group_subjects` VALUES ('64', '124', '13', '2016-12-07 11:02:59', '2016-12-07 11:02:59');
 INSERT INTO `user_group_subjects` VALUES ('65', '124', '11', '2016-12-07 11:16:42', '2016-12-07 11:16:42');
+INSERT INTO `user_group_subjects` VALUES ('66', '132', '25', '2016-12-12 09:34:38', '2016-12-12 09:34:38');
+INSERT INTO `user_group_subjects` VALUES ('67', '132', '26', '2016-12-12 09:34:46', '2016-12-12 09:34:46');
 
 -- ----------------------------
 -- Procedure structure for app_edit
@@ -817,6 +824,66 @@ END
 DELIMITER ;
 
 -- ----------------------------
+-- Procedure structure for get_ranking_params
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `get_ranking_params`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_ranking_params`()
+BEGIN
+	SELECT
+		(
+			SELECT
+				`value`
+			FROM
+				app_params
+			WHERE
+				`name` = 'LICENSE_STATE'
+		) as license,
+		(
+			SELECT
+				`value`
+			FROM
+				app_params
+			WHERE
+				`name` = 'RANK_SEND_ENABLED'
+		) as rank_enabled,
+		(
+			SELECT
+				`value`
+			FROM
+				app_params
+			WHERE
+				`name` = 'SCHOOL_NAME'
+		) as schoolName,
+		(
+			SELECT
+				`value`
+			FROM
+				app_params
+			WHERE
+				`name` = 'COUNTRY'
+		) as country,
+		(
+			SELECT
+				`value`
+			FROM
+				app_params
+			WHERE
+				`name` = 'CITY'
+		) as city,
+		(
+			SELECT
+				CASE WHEN `value` IS NULL THEN -1 ELSE `value` END
+			FROM
+				app_params
+			WHERE
+				`name` = 'SCHOOL_ID'
+		) as schoolId;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
 -- Procedure structure for get_rank_grp_by_grp
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `get_rank_grp_by_grp`;
@@ -1142,33 +1209,36 @@ END
 DELIMITER ;
 
 -- ----------------------------
--- Procedure structure for get_rank_school_copy
+-- Procedure structure for get_rank_school_report
 -- ----------------------------
-DROP PROCEDURE IF EXISTS `get_rank_school_copy`;
+DROP PROCEDURE IF EXISTS `get_rank_school_report`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_rank_school_copy`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_rank_school_report`()
 BEGIN
 	DECLARE done INT DEFAULT FALSE;
 	DECLARE usrId INT DEFAULT NULL;
 	DECLARE userName VARCHAR(100) DEFAULT NULL;
+	DECLARE userLastName VARCHAR(100) DEFAULT NULL;
+	DECLARE classGroup VARCHAR(100) DEFAULT NULL;
 
-	DECLARE finalAvg DOUBLE DEFAULT NULL;
+	DECLARE labScore DOUBLE DEFAULT NULL;
 	DECLARE labDeliv DOUBLE DEFAULT NULL;
-	DECLARE lScore DOUBLE DEFAULT NULL;
-	DECLARE tScore DOUBLE DEFAULT NULL;
-	DECLARE fScore DOUBLE DEFAULT NULL;
+	DECLARE labTime DOUBLE DEFAULT NULL;
 
-	DECLARE maxTime DOUBLE DEFAULT NULL;
-	DECLARE minTime DOUBLE DEFAULT NULL;
-
-	DECLARE totalRows DOUBLE DEFAULT NULL;
+	DECLARE perform DOUBLE DEFAULT NULL;
+	DECLARE timeAvg DOUBLE DEFAULT NULL;
+	DECLARE rankScore DOUBLE DEFAULT NULL;
 
 	DECLARE cur1 CURSOR FOR (
 		SELECT
 			u.id,
-			CONCAT(u.`name`,' ',u.last_name) as userName
+			u.`name` as userName,
+			u.last_name as userName,
+			cg.`name` as classGroup
 		FROM
 			users u
+		INNER JOIN users_class_groups ucg ON u.id = ucg.users_id
+		INNER JOIN class_group cg ON ucg.class_group_id = cg.id
 		WHERE
 			u.rols_id = 4
 	);
@@ -1178,52 +1248,48 @@ BEGIN
 	CREATE TEMPORARY TABLE rankingTable (
 		userId int, 
 		userName varchar(100), 
-		qualScore double,
-		labScore double,
-		timeScore double,
-		totalScore double
+		userLastName varchar(100), 
+		classGroup varchar(100), 
+		lScore double,
+		lDeliv double,
+		lTime double,
+		prform double,
+		tmeAvg double,
+		rnkScore double
 	); 
 
-	SELECT
-		MAX(TIME_TO_SEC(lu.delivery_time)),
-		MIN(TIME_TO_SEC(lu.delivery_time))
-	INTO maxTime, minTime
-	FROM
-		laboratories_users lu
-	INNER JOIN users u ON lu.user_id = u.id
-	WHERE
-		u.rols_id = 4;
-
 	OPEN cur1;
-
 	read_loop: LOOP
-    FETCH cur1 INTO usrId, userName;
+    FETCH cur1 INTO usrId, userName, userLastName, classGroup;
     IF done THEN
       LEAVE read_loop;
     END IF;
 
+		SET labScore = NULL;
+		SET labTime = NULL;
+		SET labDeliv = NULL;
+
 		SELECT
-			AVG(lu.final_score), AVG(TIME_TO_SEC(lu.delivery_time)), COUNT(lu.final_score)
-		INTO finalAvg, tScore, labDeliv
+			(SUM(lu.final_score) * 20), (TIME_TO_SEC(lu.delivery_time) / 60), COUNT(lu.final_score)
+		INTO labScore, labTime, labDeliv
 		FROM
 			laboratories_users lu
 		WHERE
 			lu.user_id = usrId;
 		
-		IF finalAvg IS NOT NULL
+		IF labScore IS NOT NULL AND labTime IS NOT NULL
 		THEN
-			SET lScore = (50 / labDeliv) + ( (finalAvg * 50) / 5 );
-			SET finalAvg = (finalAvg / 5) * 100;
-			SET tScore = ( 1 - ( ( tScore - minTime ) / ( maxTime - minTime ) ) ) * 100;
+			SET perform = labScore / labDeliv;
+			SET timeAvg = labTime / labDeliv;
+			SET rankScore = labScore * ( perform + (labDeliv / timeAvg) );
 
-			SET fScore = (finalAvg + finalAvg + finalAvg)/3;
 			INSERT INTO
-				rankingTable (userId, userName, qualScore, labScore, timeScore, totalScore)
-			SELECT usrId, userName, finalAvg, lScore, tScore, fScore;
+				rankingTable (userId, userName, userLastName, classGroup, lScore, lDeliv, lTime, prform, tmeAvg, rnkScore)
+			SELECT usrId, userName, userLastName, classGroup, labScore, labDeliv, labTime, perform, timeAvg, rankScore;
 		ELSE
 			INSERT INTO
-				rankingTable (userId, userName, qualScore, labScore, timeScore, totalScore)
-			SELECT usrId, userName, NULL, NULL, NULL, NULL;	
+				rankingTable (userId, userName, userLastName, classGroup, lScore, lDeliv, lTime, prform, tmeAvg, rnkScore)
+			SELECT usrId, userName, userLastName, classGroup, NULL, NULL, NULL, NULL, NULL, NULL;		
 		END IF;
   END LOOP;
 
@@ -1231,16 +1297,14 @@ BEGIN
 
 	SELECT
 		@rownum:=@rownum+1 AS rank,
-		rt.userId as user_id,
+		rt.userId as id,
 		rt.userName as `name`,
-		CASE WHEN qualScore IS NULL THEN '' ELSE ROUND(qualScore,1) END as lab_qual_score,
-		CASE WHEN labScore IS NULL THEN '' ELSE ROUND(labScore,1) END as lab_num_score,
-		CASE WHEN timeScore IS NULL THEN '' ELSE ROUND(timeScore,1) END as tab_t_wasted_score,
-		CASE WHEN totalScore IS NULL THEN '' ELSE ROUND(totalScore,1) END as total_score
+		rt.userLastName as last_name,
+		rt.classGroup as class_group,
+		CASE WHEN lDeliv IS NULL THEN '' ELSE ROUND(lDeliv,0) END as labsDelivery,
+		CASE WHEN rnkScore IS NULL THEN '' ELSE ROUND(rnkScore,0) END as score
 	FROM
-		(SELECT @rownum:=0) r, rankingTable rt
-	ORDER BY
-		totalScore DESC;
+		(SELECT @rownum:=0) r, (SELECT * FROM rankingTable ORDER BY rnkScore DESC) rt;
 
 	DROP TABLE IF EXISTS rankingTable;
 
