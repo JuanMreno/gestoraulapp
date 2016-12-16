@@ -6,8 +6,11 @@
     var macServer;
     var curLicense;
 
+    var countriesData = [];
+    var citiesData = [];
+
     function init() {
-        getParams();
+        getCities();
 
         $('#license').on('focus', function(event) {
             event.preventDefault();
@@ -113,14 +116,26 @@
 
             $modal.modal('show');
         });
+
+        $('#countrySelect').html("");
+        $('#countrySelect').select2({
+          data: [],
+          placeholder: 'Sin datos'
+        });  
+
+        $('#citySelect').html("");
+        $('#citySelect').select2({
+          data: [],
+          placeholder: 'Sin datos'
+        });  
     }
 
     init();
 
     $('#updateParams').off("click").on('click', function(event) {
         var nameSchool =$('#nameSchool').val();
-        var country =$('#country').val();
-        var city=$('#city').val();
+        var country =$('#countrySelect').val();
+        var city=$('#citySelect').val();
         var license =$('#license').val();
         var ranking =rankState;
 
@@ -169,11 +184,47 @@
         }).done(function(data) {
             var res = $.parseJSON(b64_to_utf8(data));
             var dt = res.data;
+            console.log(dt);
             if(res.status == "true"){
                 $("#nameSchool").val(dt[0].value);
-                $("#country").val(dt[1].value);
-                $("#city").val(dt[2].value);
                 $("#license").val(dt[3].value);
+
+                if(dt[1].value == null || dt[1].value == ''){
+                    $('#countrySelect').val(-1).trigger('change');
+                }
+                else{
+                    $('#countrySelect').val(dt[1].value).trigger('change');
+
+                    var cdata = {
+                        countryId:dt[1].value,
+                    };
+                    var jxData = utf8_to_b64( JSON.stringify(cdata) );
+                    $.ajax({
+                        url: CON_URL+"cities/getCities",
+                        data:{data:jxData}
+                    }).done(function(dataCount) {
+                        var res = $.parseJSON(b64_to_utf8(dataCount));
+                                                
+                        if(res.status == "true"){
+                            $('#citySelect').select2({
+                                placeholder: {
+                                    id: -1,
+                                    text: "Seleccionar"
+                                },
+                                data: res.data
+                            }); 
+                            citiesData = res.data;
+
+                            if(dt[2].value == null || dt[2].value == '')
+                                $('#citySelect').val(-1).trigger('change');
+                            else
+                                $('#citySelect').val(dt[2].value).trigger('change');
+                        }
+                        
+                    }).fail(function(data) {
+                        console.log("ajax fail");
+                    });
+                }
 
                 ipServer = dt[6].value;
                 curLicense = dt[3].value;
@@ -197,6 +248,67 @@
                 $('#ranking').on('switchChange.bootstrapSwitch', function(event, state) {
                     rankState = state;
                 });
+            }
+            
+        }).fail(function(data) {
+            console.log("ajax fail");
+        });
+    }
+
+    function getCities() {
+        var jxData = utf8_to_b64( JSON.stringify({}) );
+        $.ajax({
+            url: CON_URL+"cities/getCountries",
+            data:{data:jxData}
+        }).done(function(data) {
+            var res = $.parseJSON(b64_to_utf8(data));
+            var dt = res.data;
+            console.log(res);
+            if(res.status == "true"){
+                $('#countrySelect').select2({
+                    placeholder: {
+                        id: -1,
+                        text: "Seleccionar"
+                    },
+                    data: res.data
+                });  
+                countriesData = res.data;
+
+                $("#countrySelect").on("select2:select", function (e) { 
+                    var cdata = {
+                        countryId:e.params.data.id,
+                    };
+                    var jxData = utf8_to_b64( JSON.stringify(cdata) );
+                    $.ajax({
+                        url: CON_URL+"cities/getCities",
+                        data:{data:jxData}
+                    }).done(function(dataCount) {
+                        var res = $.parseJSON(b64_to_utf8(dataCount));
+
+                        if(res.status == "true"){
+                            $('#citySelect').select2({
+                                placeholder: {
+                                    id: -1,
+                                    text: "Seleccionar"
+                                },
+                                data: res.data
+                            }); 
+                            citiesData = res.data;
+
+                            $('#citySelect').val(-1).trigger('change');
+                            /*
+                            if(dt[2].value == null || dt[2].value == '')
+                                $('#citySelect').val(-1).trigger('change');
+                            else
+                                $('#citySelect').val(dt[2].value).trigger('change');
+                            */
+                        }
+                    }).fail(function(data) {
+                        console.log("ajax fail");
+                    });
+                });
+
+                getParams(); 
             }
             
         }).fail(function(data) {

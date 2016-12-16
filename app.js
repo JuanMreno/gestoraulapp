@@ -39,6 +39,7 @@ var rExts = require('./routes/externals');
 var rUsrs = require('./routes/users');
 var rApp = require('./routes/app');
 var rLic = require('./routes/license');
+var rCit = require('./routes/cities');
 
 // view engine setup
 //app.set('views', path.join(__dirname, 'views'));
@@ -70,6 +71,7 @@ app.use('/externals', rExts);
 app.use('/users', rUsrs);
 app.use('/app', rApp);
 app.use('/license', rLic);
+app.use('/cities', rCit);
 //app.use(auth.connect(basic));
 
 // catch 404 and forward to error handler

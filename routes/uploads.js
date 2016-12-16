@@ -270,6 +270,8 @@ router.post('/users', function(req, res) {
 
 					data = results[0][0];
 					var jData = JSON.stringify(data);
+					console.log(jData);
+
 				  	res.send(new Buffer(jData).toString('base64'));
 				  	conMS.end();
 				  	connection.end();

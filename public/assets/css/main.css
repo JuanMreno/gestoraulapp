@@ -947,6 +947,11 @@
 	.select2-container{
 		width: 100% !important;
 	}
+
+	.citiesFormGroup > .select2{
+		vertical-align: baseline;
+	    font-size: x-large;
+	}
 	
 	.field-label {
 	    font-size: 14px;

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80000
 File Encoding         : 65001
 
-Date: 2016-12-15 22:09:50
+Date: 2016-12-16 12:07:29
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -38,13 +38,13 @@ INSERT INTO `app_params` VALUES ('3', 'CITY', null, 'EDITABLE', '2016-11-13 21:1
 INSERT INTO `app_params` VALUES ('4', 'LICENSE', null, 'EDITABLE', '2016-11-13 21:16:01', '2016-12-15 22:00:37');
 INSERT INTO `app_params` VALUES ('5', 'RANK_SEND_ENABLED', '1', 'EDITABLE', '2016-11-13 21:16:24', '2016-11-14 23:15:56');
 INSERT INTO `app_params` VALUES ('6', 'SERVER_NAME', null, 'FIX', '2016-11-14 22:13:35', '2016-12-15 22:00:45');
-INSERT INTO `app_params` VALUES ('7', 'SERVER_IP', null, 'FIX', '2016-11-14 22:13:41', '2016-12-15 22:09:09');
+INSERT INTO `app_params` VALUES ('7', 'SERVER_IP', '192.168.0.67', 'FIX', '2016-11-14 22:13:41', '2016-12-16 12:06:04');
 INSERT INTO `app_params` VALUES ('8', 'LICENSE_PERIOD', null, 'FIX', '2016-11-14 22:15:14', '2016-12-15 22:00:48');
 INSERT INTO `app_params` VALUES ('9', 'DEVICE_NAME', null, 'FIX', '2016-11-14 22:15:21', '2016-12-15 22:00:49');
 INSERT INTO `app_params` VALUES ('10', 'LICENSE_NUM_USERS', null, 'FIX', '2016-11-14 22:15:42', '2016-12-15 22:00:52');
 INSERT INTO `app_params` VALUES ('11', 'LICENSE_STATE', '1', 'FIX', '2016-12-08 13:14:37', '2016-12-15 22:08:05');
-INSERT INTO `app_params` VALUES ('12', 'OFFLINE_ATTEMPTS', null, 'FIX', '2016-12-08 13:42:30', '2016-12-15 22:09:11');
-INSERT INTO `app_params` VALUES ('13', 'SERVER_MAC', null, 'FIX', '2016-12-09 15:28:29', '2016-12-15 22:09:07');
+INSERT INTO `app_params` VALUES ('12', 'OFFLINE_ATTEMPTS', '0', 'FIX', '2016-12-08 13:42:30', '2016-12-15 23:18:10');
+INSERT INTO `app_params` VALUES ('13', 'SERVER_MAC', '14-DA-E9-36-58-C0', 'FIX', '2016-12-09 15:28:29', '2016-12-15 23:18:05');
 INSERT INTO `app_params` VALUES ('14', 'SCHOOL_ID', null, 'FIX', '2016-12-10 17:31:57', '2016-12-15 22:01:26');
 
 -- ----------------------------
@@ -319,11 +319,13 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   KEY `rols_id` (`rols_id`),
   CONSTRAINT `users_ibfk_1` FOREIGN KEY (`rols_id`) REFERENCES `rols` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
+INSERT INTO `users` VALUES ('96', 'admin', 'b89c40cd946865aa3b6571fd4087b4ae', 'Administrador', '', '2', '2016-12-15 23:19:18', '2016-12-16 11:00:38');
+INSERT INTO `users` VALUES ('97', 'sadmin', '5484233337d402e20ee2dda92b1be4da', 'Super administrador', '', '1', '2016-12-15 23:19:22', '2016-12-16 11:01:02');
 
 -- ----------------------------
 -- Table structure for users_class_groups

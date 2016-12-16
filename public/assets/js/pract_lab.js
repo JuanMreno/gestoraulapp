@@ -11,6 +11,13 @@
             '</button>'+
         '</div>';
 
+    var extAllowed = [
+        'PDF',
+        'pdf',
+        'vplc',
+        'VPLC'
+    ]
+
 	init();
 
 	function init() {
@@ -294,8 +301,8 @@
                                 var fileName = e.target.files[0].name;
                                 var ext = fileName.split('.').pop();
 
-                                if(ext != 'pdf' && ext != 'PDF'){
-                                    $('#alertModalCont').text("Únicamente se permiten adjuntar archivos tipo PDF.");
+                                if(extAllowed.indexOf(ext) == -1 ){
+                                    $('#alertModalCont').text("Únicamente se permiten adjuntar archivos tipo PDF o VPLC.");
                                     $('#alertModal').modal('show');
                                     $('#inpFile').replaceWith($('#inpFile').clone());
                                     $('#inpFile').val('');
