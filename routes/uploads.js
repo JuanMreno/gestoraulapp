@@ -102,8 +102,7 @@ router.post('/labs', function(req, res) {
 			COLUMNS TERMINATED BY ','\
 			OPTIONALLY ENCLOSED BY '\"'\
 			ESCAPED BY '\"'\
-			LINES TERMINATED BY '\r\n'\
-			IGNORE 1 LINES;";
+			LINES TERMINATED BY '\r\n';";
 
 		var conMS = new conn.SqlConMultStat().connection;
 		conMS.query(query, function(err, results) {
@@ -225,8 +224,7 @@ router.post('/users', function(req, res) {
 			COLUMNS TERMINATED BY ','\
 			OPTIONALLY ENCLOSED BY '\"'\
 			ESCAPED BY '\"'\
-			LINES TERMINATED BY '\r\n'\
-			IGNORE 1 LINES;";
+			LINES TERMINATED BY '\r\n';";
 
 		var conMS = new conn.SqlConMultStat().connection;
 		conMS.query(query, function(err, results) {

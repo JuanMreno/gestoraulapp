@@ -5,6 +5,7 @@ var EST_ROL = 'est-rol';
 var ADM_ROL = 'adm-rol';
 var SAD_ROL = 'sad-rol';
 var CON_URL = "http://"+window.location.hostname+":3000/";
+var RANKING_WEB = "http://ranking.indesap.com/";
 
 (function($) {
 
@@ -90,6 +91,37 @@ function validateLogin() {
 		console.log("Error ajax.");
 		gToLogin();
 	});
+}
+
+function getLicenseStateStr(licenseState){
+    var stateStr = "-";
+    switch(licenseState){
+        case '0':
+            stateStr = "Activa";
+            break;
+        case '1':
+            stateStr = "Inválida";
+            break;
+        case '2':
+            stateStr = "Inactiva";
+            break;
+        case '3':
+            stateStr = "Desactivada";
+            break;
+        case '4':
+            stateStr = "Caducada";
+            break;
+        case '5':
+            stateStr = "Aplicación no soportada";
+            break;
+        case '6':
+            stateStr = "Límite alcanzado";
+            break;
+        default:
+            break;
+    }
+
+    return stateStr;
 }
 
 function gToMain() {

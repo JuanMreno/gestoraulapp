@@ -252,5 +252,4 @@
 			location.reload();
 		});	
 	}
-
 })(jQuery);

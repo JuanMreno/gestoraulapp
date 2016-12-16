@@ -9,13 +9,24 @@
 
     var subData = [];
 	function setSubjectsTable() {
+        var session = $.cookie(SESSION_COOKIE);
+        var writePremission = false;
+
+        if(session.rol == SAD_ROL){
+            writePremission = true;
+        }
+        else{
+            $('#jsGrid').addClass('writeHideTable');
+        }
+
 		$("#jsGrid").jsGrid({
             width: "100%",
-            inserting:true,
+            inserting:writePremission,
             filtering: true,
             sorting: true,
             paging: true,
-            editing: true,
+            editing:writePremission,
+            confirmDeleting: false,
             autoload: true,
             pageSize: 10,
             pageButtonCount: 5,
@@ -151,6 +162,59 @@
                         });
                     }
 
+                    return d.promise();
+                },
+                deleteItem: function(item) {
+                    var d = $.Deferred();
+                    var session = $.cookie(SESSION_COOKIE);
+
+                    d.fail(function() {
+                        d.resolve(item);
+                        $("#jsGrid").jsGrid("render");
+                    });
+
+                    var mns = "Se eliminarán todos los datos asociados a la materia, ¿está seguro de realizar esta operación?";
+
+                    $confModal = $('#confirmModal');
+                    $confModal.find('#confirmModalCont').text(mns);
+
+                    $confModal.find('#doneConfirmModal').off('click').on('click', function(event) {
+                        event.preventDefault();
+                        $confModal.modal('hide');
+                        
+                        var data = {
+                            id:item.id
+                        };
+         
+                        var jData = utf8_to_b64( JSON.stringify(data) );
+                        $.ajax({
+                            url: CON_URL+"subjects/delete",
+                            data:{data:jData}
+                        }).done(function(data) {
+                            var res = $.parseJSON(b64_to_utf8(data));
+                            //console.log(res);
+                            if(res.status == "true"){
+                                d.reject();
+                            }
+                            else{
+                                $('#alertModalCont').text("Error al intentar eliminar el elemento.");
+                                $('#alertModal').modal('show');
+                                d.reject();
+                                //d.resolve(false);
+                            }
+                        }).fail(function(data) {
+                            console.log("ajax fail");
+                            $('#alertModalCont').text("Error al intentar eliminar el elemento.");
+                            $('#alertModal').modal('show');
+                            d.reject();
+                        });
+                    });
+
+                    $confModal.on('hidden.bs.modal', function (e) {
+                        d.reject();
+                    });
+
+                    $confModal.modal('show');      
                     return d.promise();
                 }
             },

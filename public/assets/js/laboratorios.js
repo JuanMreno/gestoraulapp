@@ -4,6 +4,13 @@
 	function init() {
 	    setGroupsDropDown();
 
+        var session = $.cookie(SESSION_COOKIE);
+
+        if(session.rol != SAD_ROL){
+            $('#uploadLabsCont').hide();
+            $('#jsGrid').addClass('writeHideTable');
+        }
+
         $('#uploadLabs').off('click').on('click', function(event) {
             event.preventDefault();
             /* Act on the event */
@@ -99,14 +106,20 @@
     }
 
 	function setlaboratoriesTable(idSub) {
+        var session = $.cookie(SESSION_COOKIE);
+        var writePremission = false;
+
+        if(session.rol == SAD_ROL)
+            writePremission = true;
+
+        console.log(writePremission);
 		$("#jsGrid").jsGrid({
             width: "100%",
-            inserting:true,
+            inserting:writePremission,
             filtering: true,
             sorting: true,
             paging: true,
-            editing: true,
-            deleted:true,
+            editing:writePremission,
             confirmDeleting: false,
             autoload: true,
             pageSize: 10,
@@ -309,9 +322,9 @@
 		    pageLastText: " >> ",
 
             fields: [ 
-                { name: "name", type: "text", align: "center", title: "Nombre", editing:true },
-                { name: "lesson_name", type: "text", align: "center", title: "Unidad", editing:true },
-                { name: "lab_code", type: "text", align: "center", title: "Código", editing:true },
+                { name: "name", type: "text", align: "center", title: "Nombre", editing:writePremission },
+                { name: "lesson_name", type: "text", align: "center", title: "Unidad", editing:writePremission },
+                { name: "lab_code", type: "text", align: "center", title: "Código", editing:writePremission },
             	{ type: "control"}
             ]
         });

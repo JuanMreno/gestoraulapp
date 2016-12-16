@@ -892,7 +892,9 @@
 	.estTable .jsgrid-edit-button,
 	.consTable .jsgrid-edit-button,
 	.rankTable .jsgrid-edit-button,
-	.anunEstTable .jsgrid-edit-button {
+	.anunEstTable .jsgrid-edit-button,
+	.writeHideTable .jsgrid-edit-button, 
+	.writeHideTable .jsgrid-delete-button {
 		display: none;
 	}
 

@@ -122,6 +122,9 @@
     }
 
     function setSubjectsDropDown(groupId) {
+        $('#avanInd').text('-');
+        $('#promInd').text('-');
+
         $dropDown = $("#subjectsDropDown");
         $dropDownMenu = $dropDown.children('.dropdown-menu').first();
         $dropDownMenu.html("");
@@ -337,7 +340,6 @@
                     $('#aBtnDownL').attr('href', item.lab_report_url);
                 }
 
-                console.log($modal.find('#nApp').val());
                 if( $modal.find('#nApp').val() == "" )
                     $modal.find('#nApp').removeClass('only-read');
                 else
@@ -365,7 +367,7 @@
                     var nProVal = $modal.find('#nProfesor').val();
                     var nAppVal = $modal.find('#nApp').val();
                     var nIntVal = $modal.find('#numInten').val();
-                    var tEntVal = $modal.find('#tEntrega').val();
+                    var tEntVal = document.getElementById("tEntrega").value;
                     
                     /*
                     if( nProVal == "" ||
@@ -410,7 +412,11 @@
 
                     if(nAppVal != nAppValAct || nIntVal != nIntValAct || tEntVal != tEntValAct ){
                         $confModal = $('#confirmModal');
-                        $confModal.find('#confirmModalCont').text("El dato que intenta modificar es un dato automático enviado por el reporte, se recomienda ingresar manualmente este campo sólo si el estudiante a enviado su reporte de manera offline. ¿Está seguro que desea modificar este campo?");
+                        $confModal.find('#confirmModalCont')
+                                .text("La información que intenta modificar es enviada automáticamente por el simulador. \
+                                        Se recomienda ingresar esta información manualmente sólo si el estudiante ha \
+                                        enviado su reporte de forma manual. ¿Está seguro que desea modificar este \
+                                        campo?");
 
                         $confModal.find('#doneConfirmModal').off('click').on('click', function(event) {
                             event.preventDefault();

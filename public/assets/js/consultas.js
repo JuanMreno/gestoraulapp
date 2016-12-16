@@ -174,6 +174,9 @@
     }
 
     function setSubjectsDropDown() {
+        $('#avanInd').text('-');
+        $('#promInd').text('-');
+
         $dropDown = $("#subjectsDropDown");
         $dropDownMenu = $dropDown.children('.dropdown-menu').first();
         $dropDownMenu.html("");

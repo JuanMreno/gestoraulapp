@@ -4,6 +4,8 @@
 	function init() {
         var session = $.cookie(SESSION_COOKIE);
 
+        $('#rankingLink').attr('href', RANKING_WEB);
+
         if(session.rol != EST_ROL){
             setTeachGroupsDropDown();
             $('#mRankBar').hide();
@@ -40,11 +42,11 @@
             }
             else{
                 $dropDown.attr('data-sel-id',-1);
-                $dropDown.children('button').html('Escuela  <span class="caret"></span>');
+                $dropDown.children('button').html('Colegio  <span class="caret"></span>');
                 setRankTable();
             }
             
-            res.data.unshift({id:-1,name:'Escuela'});
+            res.data.unshift({id:-1,name:'Colegio'});
             res.data.forEach(function(e,i) {
                 $aNewRow = $('<a class="userGroupSelElem" data-id="' + e.id + '" href="#">' + e.name + '</a>');
                 $aNewRow.off("click").on('click', function(event) {
@@ -91,11 +93,11 @@
             }
             else{
                 $dropDown.attr('data-sel-id',-1);
-                $dropDown.children('button').html('Escuela  <span class="caret"></span>');
+                $dropDown.children('button').html('Colegio  <span class="caret"></span>');
                 setRankTable();
             }
             
-            res.data.unshift({group_id:-1,name:'Escuela'});
+            res.data.unshift({group_id:-1,name:'Colegio'});
             res.data.forEach(function(e,i) {
                 $aNewRow = $('<a class="userGroupSelElem" data-id="' + e.group_id + '" href="#">' + e.name + '</a>');
                 $aNewRow.off("click").on('click', function(event) {

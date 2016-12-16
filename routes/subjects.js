@@ -239,7 +239,11 @@ router.get('/getByUserGroup', function(req, res) {
 			INNER JOIN subjects s ON s.id = sc.subjects_id \
 			LEFT JOIN user_group_subjects ugs ON sc.id = ugs.sc_id\
 			WHERE\
-				sc.class_group_id = ? " 
+				sc.class_group_id = ? AND \
+				( \
+					ugs.ucg_id = ? OR \
+					ugs.ucg_id IS NULL \
+				) " 
 		;
 
 		var p = [params.userGroupId, params.groupId, params.userGroupId];
@@ -553,6 +557,52 @@ router.get('/insert', function(req, res) {
 				data.data = d;
 				data.status = "true";
 			}
+
+			var jData = JSON.stringify(data);
+		  	res.send(new Buffer(jData).toString('base64'));
+		  	connection.end();
+		});
+	});
+});
+
+router.get('/delete', function(req, res) {
+	var buf = Buffer.from(req.query.data, 'base64');
+	var params = JSON.parse(buf);
+
+	var data = {
+		status:"OK",
+		data:{}
+	};
+
+	var connection = new conn.SqlConnection().connection;
+	connection.connect(function(err) {
+		if (err) {
+			console.error('error connecting: ' + err.stack);
+			data.status = "false";
+
+			var jData = JSON.stringify(data);
+			res.send(new Buffer(jData).toString('base64'));
+			connection.end();
+			return;
+		}
+
+		var query = "CALL subjects_delete(?)";
+
+		var p = [params.id];
+		connection.query(query, p, function(err, rows) {
+		
+			if (err) {
+				console.error('error query: ' + query + err.stack);
+				data.status = "false";
+
+				var jData = JSON.stringify(data);
+				res.send(new Buffer(jData).toString('base64'));
+				connection.end();
+				return;
+			}
+
+			data.data = {};
+			data.status = "true";
 
 			var jData = JSON.stringify(data);
 		  	res.send(new Buffer(jData).toString('base64'));

@@ -36,7 +36,19 @@
 
 							if(user.rol != SAD_ROL && user.rol != ADM_ROL){
 								if( user.license != '0' || parseInt(user.offlineAttempts) <= 0 ){
-									$('#alertModalCont').text("Parece que ha pasado mucho tiempo desde la última vez que su licencia fue verificada. Por favor conecte su dispositivo a Internet y haga clic en el botón VALIDAR o CANCELAR para cerrar la aplicación.");
+
+									var mns = "";
+									if(parseInt(user.offlineAttempts) <= 0){
+										mns = "Parece que ha pasado mucho tiempo desde la última vez que la licencia fue verificada. \
+												Es necesario conectar el equipo servidor del profesor a Internet y reiniciar la aplicación \
+												Gestor de aula CloudLabs.";
+									}
+									else{
+										var licState = getLicenseStateStr(user.license);
+										mns = "Hay un problema con la licencia del gestor de aula, por favor comuníquese con el proveedor.";
+									}
+
+									$('#alertModalCont').text(mns);
 									$('#alertModal').modal('show');
 									restartButton();
 									return;

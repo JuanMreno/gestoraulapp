@@ -290,6 +290,15 @@ function reportRanking() {
       var city        = data.city;
       var schoolId    = data.schoolId;
 
+      if(
+        schoolName == null ||
+        country == null ||
+        city == null
+      ){
+        console.log("Parameters have not been setted");
+        return;
+      }
+
       if(license == '0' && rankEnabled == '1'){
         var connection = new conn.SqlConnection().connection;
         connection.connect(function(err) {
