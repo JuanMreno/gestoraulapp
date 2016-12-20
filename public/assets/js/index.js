@@ -4,8 +4,14 @@ var PRO_ROL = 'pro-rol';
 var EST_ROL = 'est-rol';
 var ADM_ROL = 'adm-rol';
 var SAD_ROL = 'sad-rol';
-var CON_URL = "http://"+window.location.hostname+":3000/";
-var RANKING_WEB = "http://ranking.indesap.com/";
+var CON_URL = "http://"+window.location.hostname+":";
+var RANKING_WEB = "";
+
+$.getJSON("../../config.json", function(json) {
+	CON_URL += json.PORT + '/';
+	console.log(CON_URL);
+	RANKING_WEB = json.RANKING_WEB;
+});
 
 (function($) {
 

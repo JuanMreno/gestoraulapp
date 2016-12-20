@@ -16,8 +16,8 @@
   z-index: 1;
   background: #D4D7DB;
   max-width: 360px;
-  margin: 0 auto 100px;
-  padding: 45px;
+  margin: 0 auto 15px;
+  padding: 15px 45px 45px 45px;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 7px 7px 0 rgba(0, 0, 0, 0.24);
 }
@@ -54,6 +54,23 @@
   background: rgba(26,80,130,0.9);
 }
 
+.loginTitle {
+  text-align: center;
+  font-family: 'Lato', sans-serif;
+  color: #FFFFFF;
+  font-size: inherit;
+  margin-bottom: 10px;
+  font-weight: 100;
+}
+
+.footLogoLoginForm {
+  width: 20%;
+}
+
+.footLogoLoginFormCont {
+  text-align: center;
+}
+
 body.in-login{
   background: #0E3C67 url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHJhZGlhbEdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9ImNpcmNsZSIgY3k9ImZhcnRoZXN0LXNpZGUiIHI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMzMzMzMzMiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMxMTExMTEiLz48L3JhZGlhbEdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyYWQpIiAvPjwvc3ZnPiA=');
   background: #0E3C67 -moz-radial-gradient(circle farthest-side, #376693, #0E3C67) !important;
@@ -77,6 +94,22 @@ body.in-login{
     max-width: 65%;
     margin-top: 25%;
   }
+
+  .footLogoLoginForm {
+    width: 35%;
+  }
+}
+
+@media screen and (min-width: 350px ) {
+  .footLogoLoginForm {
+    width: 50%;
+  }
+}
+
+@media screen and (min-width: 550px ) {
+  .footLogoLoginForm {
+    width: 30%;
+  }
 }
 
 @media screen and (min-width: 959px ) {
@@ -93,6 +126,10 @@ body.in-login{
   .form button {
     padding: 6px;
     font-size: 13.5px;
+  }
+
+  .footLogoLoginForm {
+    width: 25%;
   }
 }
 
@@ -111,6 +148,10 @@ body.in-login{
     padding: 10px;
     font-size: 15px;
   }
+
+  .footLogoLoginForm {
+    width: 20%;
+  }
 }
 
 @media screen and (min-width: 1400px ) {
@@ -127,6 +168,10 @@ body.in-login{
   .form button {
     padding: 10px;
     font-size: 18px;
+  }
+
+  .footLogoLoginForm {
+    width: 20%;
   }
 }
 
@@ -162,6 +207,10 @@ body.in-login{
     padding: 23px;
     font-size: 23px;
   }
+
+  .footLogoLoginForm {
+    width: 20%;
+  }
 }
 
 @media screen and (min-width: 2000px ) {
@@ -179,4 +228,9 @@ body.in-login{
     padding: 26px;
     font-size: 1.01em;
   }
+
+  .footLogoLoginForm {
+    width: 20%;
+  }
+
 }
