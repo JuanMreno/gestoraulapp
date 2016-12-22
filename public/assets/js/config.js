@@ -137,10 +137,11 @@
         var country =$('#countrySelect').val();
         var city=$('#citySelect').val();
         var license =$('#license').val();
+        var servName =$('#servName').val();
         var ranking =rankState;
 
         console.log($('#ranking').bootstrapSwitch().state);
-        if (nameSchool == "" || country == "" || city == "" || license == "") {
+        if (nameSchool == "" || country == "" || city == "" || servName == "") {
             $('#alertModalCont').text("Todos los valores deben ser configurados.");
             $('#alertModal').modal('show');
         } else {
@@ -149,7 +150,8 @@
                 country:country,
                 city:city,
                 license:license,
-                rank:ranking
+                rank:ranking,
+                servName:servName
             };
 
             var jxData = utf8_to_b64( JSON.stringify(data) );
@@ -188,6 +190,9 @@
             if(res.status == "true"){
                 $("#nameSchool").val(dt[0].value);
                 $("#license").val(dt[3].value);
+
+                if(dt[5].value != null)
+                    $("#servName").val(dt[5].value);
 
                 if(dt[1].value == null || dt[1].value == ''){
                     $('#countrySelect').val(-1).trigger('change');

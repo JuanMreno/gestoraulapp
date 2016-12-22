@@ -1,6 +1,6 @@
 {
-  "name": "estorAulaApp",
-  "version": "1.0.0",
+  "name": "GestorAulaApp",
+  "version": "1.0.2",
   "description": "",
   "private": true,
   "dependencies": {

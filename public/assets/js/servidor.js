@@ -18,8 +18,8 @@
             var dt = res.data;
             if(res.status == "true"){
                 $("#nameSchool").val(dt[0].value);
-                $("#country").val(dt[1].value);
-                $("#city").val(dt[2].value);
+                $("#country").val(dt[14].value);
+                $("#city").val(dt[15].value);
 
                 $("#serverName").val(dt[5].value);
                 $("#serverIp").val(dt[6].value);

@@ -34,7 +34,37 @@ router.get('/getParams', function(req, res) {
 				`name`,\
 				`value`\
 			FROM\
-				app_params"
+				app_params\
+			UNION\
+			SELECT\
+				a.`name`,\
+				c.`name` as `value`\
+			FROM\
+			(\
+				SELECT\
+					`name`,\
+					`value`\
+				FROM\
+					app_params\
+				WHERE\
+					`name` = 'COUNTRY'\
+			) as a\
+			LEFT JOIN countries c ON a.`value` = c.id\
+			UNION\
+			SELECT\
+				a.`name`,\
+				c.`name` as `value`\
+			FROM\
+			(\
+				SELECT\
+					`name`,\
+					`value`\
+				FROM\
+					app_params\
+				WHERE\
+					`name` = 'CITY'\
+			) as a\
+			LEFT JOIN cities c ON a.`value` = c.id"
 		;
 
 		connection.query(query , function(err, rows) {
@@ -131,9 +161,9 @@ router.get('/edit', function(req, res) {
 			return;
 		}
 
-		var query = "CALL app_edit(?,?,?,?,?)";
+		var query = "CALL app_edit(?,?,?,?,?,?)";
 
-		var p = [params.schoolName, params.country, params.city, params.license, params.rank];
+		var p = [params.schoolName, params.country, params.city, params.license, params.rank, params.servName];
 		connection.query(query, p, function(err, rows) {
 		
 			if (err) {
