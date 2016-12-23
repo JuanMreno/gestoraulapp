@@ -315,12 +315,14 @@
 
                 $modal.find('#cUnidad').val(item.less_name);
                 $modal.find('#fEntrega').val(item.delivery_date);
-                $modal.find('#tEntrega').val(item.lab_delivery_time);
                 $modal.find('#nProfesor').val(item.lab_teacher_score);
                 $modal.find('#nApp').val(item.lab_app_score);
                 $modal.find('#nFinal').val(item.lab_final_score);
                 $modal.find('#obsrv').val(item.lab_comments);
                 $modal.find('#numInten').val(item.lab_attempts);
+
+                $("#tEntrega").mask("99:99:99",{placeholder:"hh/mm/ss"});
+                $modal.find('#tEntrega').val(item.lab_delivery_time);
 
                 if(item.lab_state == "1"){
                     $labelState.removeClass('label-danger');
@@ -395,6 +397,13 @@
                     }
 
                     var jData = utf8_to_b64( JSON.stringify(data) );
+
+                    if(tEntVal != null)
+                        if(!validateTimeFormat(tEntVal)){
+                            $('#alertModalCont').text("El valor de tiempo entrega no tiene el formato correcto.");
+                            $('#alertModal').modal('show');
+                            return;
+                        }
 
                     if(parseInt(nAppVal) != NaN)
                         if(parseInt(nAppVal) < 0 || parseInt(nAppVal) > 5){
@@ -695,6 +704,13 @@
 
             $.fileDownload(CON_URL+"reports/getTeacher?data=" + JSON.stringify(data));
         });
+    }
+
+    function validateTimeFormat(timeStr) {
+        return (timeStr.search(/^\d{2}:\d{2}:\d{2}$/) != -1) &&
+            //(timeStr.substr(0,2) >= 0 && timeStr.substr(0,2) <= 99) &&
+            (timeStr.substr(3,2) >= 0 && timeStr.substr(3,2) <= 59) &&
+            (timeStr.substr(6,2) >= 0 && timeStr.substr(6,2) <= 59);    
     }
 
 })(jQuery);

@@ -38,14 +38,14 @@
 								if( user.license != '0' || parseInt(user.offlineAttempts) <= 0 ){
 
 									var mns = "";
-									if(parseInt(user.offlineAttempts) <= 0){
+									if(user.license != '0'){
+										var licState = getLicenseStateStr(user.license);
+										mns = "Hay un problema con la licencia del gestor de aula, por favor comuníquese con el proveedor.";
+									}
+									else{
 										mns = "Parece que ha pasado mucho tiempo desde la última vez que la licencia fue verificada. \
 												Es necesario conectar el equipo servidor del profesor a Internet y reiniciar la aplicación \
 												Gestor de aula CloudLabs.";
-									}
-									else{
-										var licState = getLicenseStateStr(user.license);
-										mns = "Hay un problema con la licencia del gestor de aula, por favor comuníquese con el proveedor.";
 									}
 
 									$('#alertModalCont').text(mns);

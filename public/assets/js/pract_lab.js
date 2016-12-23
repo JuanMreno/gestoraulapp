@@ -229,7 +229,7 @@
                     $modal.find('#tEntrega').val(item.lab_delivery_time);
                     $modal.find('#nProfesor').val(item.lab_teacher_score);
                     $modal.find('#nApp').val(item.lab_app_score);
-                    $modal.find('#nFinal').val(item.lab_app_score);
+                    $modal.find('#nFinal').val(item.lab_final_score);
                     $modal.find('#obsrv').val(item.lab_comments);
                     $modal.find('#nIntent').val(item.lab_attempts);
 
