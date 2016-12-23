@@ -1,6 +1,19 @@
-﻿
+/*
+Navicat MySQL Data Transfer
+
+Source Server         : localhost
+Source Server Version : 80000
+Source Host           : 127.0.0.1:3306
+Source Database       : gestor_aula
+
+Target Server Type    : MYSQL
+Target Server Version : 80000
+File Encoding         : 65001
+
+Date: 2016-12-22 22:16:17
+*/
+
 SET FOREIGN_KEY_CHECKS=0;
-SET NAMES 'utf8' COLLATE 'utf8_general_ci';
 
 -- ----------------------------
 -- Table structure for app_params
@@ -19,20 +32,20 @@ CREATE TABLE `app_params` (
 -- ----------------------------
 -- Records of app_params
 -- ----------------------------
-INSERT INTO `app_params` VALUES ('1', 'SCHOOL_NAME', null, 'EDITABLE', '2016-11-03 21:26:09', '2016-12-18 00:27:49');
-INSERT INTO `app_params` VALUES ('2', 'COUNTRY', null, 'EDITABLE', '2016-11-13 21:15:46', '2016-12-18 00:27:51');
-INSERT INTO `app_params` VALUES ('3', 'CITY', null, 'EDITABLE', '2016-11-13 21:15:55', '2016-12-18 00:27:51');
-INSERT INTO `app_params` VALUES ('4', 'LICENSE', null, 'EDITABLE', '2016-11-13 21:16:01', '2016-12-18 00:27:52');
+INSERT INTO `app_params` VALUES ('1', 'SCHOOL_NAME', null, 'EDITABLE', '2016-11-03 21:26:09', '2016-12-22 21:58:35');
+INSERT INTO `app_params` VALUES ('2', 'COUNTRY', null, 'EDITABLE', '2016-11-13 21:15:46', '2016-12-22 21:58:36');
+INSERT INTO `app_params` VALUES ('3', 'CITY', null, 'EDITABLE', '2016-11-13 21:15:55', '2016-12-22 21:58:36');
+INSERT INTO `app_params` VALUES ('4', 'LICENSE', null, 'EDITABLE', '2016-11-13 21:16:01', '2016-12-22 21:58:37');
 INSERT INTO `app_params` VALUES ('5', 'RANK_SEND_ENABLED', '1', 'EDITABLE', '2016-11-13 21:16:24', '2016-11-14 23:15:56');
-INSERT INTO `app_params` VALUES ('6', 'SERVER_NAME', null, 'FIX', '2016-11-14 22:13:35', '2016-12-15 22:00:45');
-INSERT INTO `app_params` VALUES ('7', 'SERVER_IP', null, 'FIX', '2016-11-14 22:13:41', '2016-12-18 00:27:54');
+INSERT INTO `app_params` VALUES ('6', 'SERVER_NAME', null, 'FIX', '2016-11-14 22:13:35', '2016-12-22 21:58:39');
+INSERT INTO `app_params` VALUES ('7', 'SERVER_IP', '169.254.255.113', 'FIX', '2016-11-14 22:13:41', '2016-12-22 22:05:32');
 INSERT INTO `app_params` VALUES ('8', 'LICENSE_PERIOD', null, 'FIX', '2016-11-14 22:15:14', '2016-12-15 22:00:48');
 INSERT INTO `app_params` VALUES ('9', 'DEVICE_NAME', null, 'FIX', '2016-11-14 22:15:21', '2016-12-15 22:00:49');
 INSERT INTO `app_params` VALUES ('10', 'LICENSE_NUM_USERS', null, 'FIX', '2016-11-14 22:15:42', '2016-12-15 22:00:52');
-INSERT INTO `app_params` VALUES ('11', 'LICENSE_STATE', '2', 'FIX', '2016-12-08 13:14:37', '2016-12-18 00:27:56');
-INSERT INTO `app_params` VALUES ('12', 'OFFLINE_ATTEMPTS', '0', 'FIX', '2016-12-08 13:42:30', '2016-12-17 13:38:37');
-INSERT INTO `app_params` VALUES ('13', 'SERVER_MAC', null, 'FIX', '2016-12-09 15:28:29', '2016-12-18 00:27:58');
-INSERT INTO `app_params` VALUES ('14', 'SCHOOL_ID', null, 'FIX', '2016-12-10 17:31:57', '2016-12-18 00:28:00');
+INSERT INTO `app_params` VALUES ('11', 'LICENSE_STATE', '1', 'FIX', '2016-12-08 13:14:37', '2016-12-22 21:58:43');
+INSERT INTO `app_params` VALUES ('12', 'OFFLINE_ATTEMPTS', '0', 'FIX', '2016-12-08 13:42:30', '2016-12-22 21:58:45');
+INSERT INTO `app_params` VALUES ('13', 'SERVER_MAC', '14-DA-E9-36-58-C0', 'FIX', '2016-12-09 15:28:29', '2016-12-22 22:05:35');
+INSERT INTO `app_params` VALUES ('14', 'SCHOOL_ID', null, 'FIX', '2016-12-10 17:31:57', '2016-12-22 21:58:46');
 
 -- ----------------------------
 -- Table structure for cities
@@ -1057,7 +1070,7 @@ CREATE TABLE `class_group` (
   `creation_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `last_update` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of class_group
@@ -1104,7 +1117,7 @@ CREATE TABLE `laboratories_users` (
   KEY `user_id` (`user_id`),
   CONSTRAINT `laboratories_users_ibfk_1` FOREIGN KEY (`laboratory_id`) REFERENCES `laboratory` (`id`),
   CONSTRAINT `laboratories_users_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of laboratories_users
@@ -1127,145 +1140,145 @@ CREATE TABLE `laboratory` (
   KEY `lesson_id` (`lesson_id`),
   KEY `subject_id` (`subject_id`),
   CONSTRAINT `laboratory_ibfk_1` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1168 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1390 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of laboratory
 -- ----------------------------
-INSERT INTO `laboratory` VALUES ('1034', 'FISVEC003', '22', null, 'Clases de vectores', 'Magnitudes y unidades', '2016-12-17 12:16:37', '2016-12-17 12:16:37');
-INSERT INTO `laboratory` VALUES ('1035', 'FISVEC001', '22', null, 'Suma de vectores - Rescate en altamar', 'Magnitudes y unidades', '2016-12-17 12:16:37', '2016-12-17 12:16:37');
-INSERT INTO `laboratory` VALUES ('1036', 'FISVEC002', '22', null, 'Resta de vectores - Fuerzas en un puente', 'Magnitudes y unidades', '2016-12-17 12:16:37', '2016-12-17 12:16:37');
-INSERT INTO `laboratory` VALUES ('1037', 'FISMRU003', '22', null, 'Gráficas de posición contra tiempo', 'Cinemática', '2016-12-17 12:16:37', '2016-12-17 12:16:37');
-INSERT INTO `laboratory` VALUES ('1038', 'FISMRU004', '22', null, 'Gráficas de velocidad contra tiempo', 'Cinemática', '2016-12-17 12:16:37', '2016-12-17 12:16:37');
-INSERT INTO `laboratory` VALUES ('1039', 'FISMRU001', '22', null, 'Movimiento rectilíneo uniforme M.R.U', 'Cinemática', '2016-12-17 12:16:37', '2016-12-17 12:16:37');
-INSERT INTO `laboratory` VALUES ('1040', 'FISMRU002', '22', null, 'Movimiento rectilíneo uniformemente acelerado M.R.U.A', 'Cinemática', '2016-12-17 12:16:37', '2016-12-17 12:16:37');
-INSERT INTO `laboratory` VALUES ('1041', 'FISS3D004', '22', null, 'Movimiento en el plano', 'Cinemática', '2016-12-17 12:16:38', '2016-12-17 12:16:38');
-INSERT INTO `laboratory` VALUES ('1042', 'FISS3D001', '22', null, 'Tiro parabólico - Reto lanzamiento baloncesto', 'Cinemática', '2016-12-17 12:16:38', '2016-12-17 12:16:38');
-INSERT INTO `laboratory` VALUES ('1043', 'FISVEC004', '22', null, 'Resultante de dos fuerzas', 'Dinámica y estática', '2016-12-17 12:16:38', '2016-12-17 12:16:38');
-INSERT INTO `laboratory` VALUES ('1044', 'FISMRU005', '22', null, 'Fuerza de fricción', 'Dinámica y estática', '2016-12-17 12:16:38', '2016-12-17 12:16:38');
-INSERT INTO `laboratory` VALUES ('1045', 'FISNEW001', '22', null, 'Comprobación segunda ley de Newton - Desplazamiento de un móvil.', 'Dinámica y estática', '2016-12-17 12:16:38', '2016-12-17 12:16:38');
-INSERT INTO `laboratory` VALUES ('1046', 'FISNEW002', '22', null, 'Segunda ley de Newton - Elevando una carga', 'Dinámica y estática', '2016-12-17 12:16:38', '2016-12-17 12:16:38');
-INSERT INTO `laboratory` VALUES ('1047', 'FISEQU003', '22', null, 'La carreta como máquina simple', 'Dinámica y estática', '2016-12-17 12:16:38', '2016-12-17 12:16:38');
-INSERT INTO `laboratory` VALUES ('1048', 'FISEQU001', '22', null, 'Momento de una fuerza', 'Dinámica y estática', '2016-12-17 12:16:38', '2016-12-17 12:16:38');
-INSERT INTO `laboratory` VALUES ('1049', 'FISEQU002', '22', null, 'Equilibrio', 'Dinámica y estática', '2016-12-17 12:16:38', '2016-12-17 12:16:38');
-INSERT INTO `laboratory` VALUES ('1050', 'FISNEW003', '22', null, 'Gravedad', 'Dinámica y estática', '2016-12-17 12:16:38', '2016-12-17 12:16:38');
-INSERT INTO `laboratory` VALUES ('1051', 'FISTEP002', '22', null, 'Trabajo y potencia en un elevador de carga', 'Trabajo energía y potencia', '2016-12-17 12:16:38', '2016-12-17 12:16:38');
-INSERT INTO `laboratory` VALUES ('1052', 'FISTEP003', '22', null, 'Trabajo energía y potencia en una montaña rusa', 'Trabajo energía y potencia', '2016-12-17 12:16:38', '2016-12-17 12:16:38');
-INSERT INTO `laboratory` VALUES ('1053', 'FISTEP001', '22', null, 'Fuentes y transformaciones de la energía', 'Trabajo energía y potencia', '2016-12-17 12:16:38', '2016-12-17 12:16:38');
-INSERT INTO `laboratory` VALUES ('1054', 'FISS3D005', '22', null, 'Principio de Pascal', 'Fluidos', '2016-12-17 12:16:38', '2016-12-17 12:16:38');
-INSERT INTO `laboratory` VALUES ('1055', 'FISS3D002', '22', null, 'Prensa hidráhulica', 'Fluidos', '2016-12-17 12:16:38', '2016-12-17 12:16:38');
-INSERT INTO `laboratory` VALUES ('1056', 'FISTER001', '22', null, 'Escalas de temperatura', 'Termodinámica', '2016-12-17 12:16:38', '2016-12-17 12:16:38');
-INSERT INTO `laboratory` VALUES ('1057', 'FISTER002', '22', null, 'Calor específico y capacidad térmica', 'Termodinámica', '2016-12-17 12:16:38', '2016-12-17 12:16:38');
-INSERT INTO `laboratory` VALUES ('1058', 'FISTER003', '22', null, 'Calor latente', 'Termodinámica', '2016-12-17 12:16:38', '2016-12-17 12:16:38');
-INSERT INTO `laboratory` VALUES ('1059', 'FISS3D006', '22', null, 'La energía en el movimiento armónico simple', 'Movimiento armónico simple', '2016-12-17 12:16:38', '2016-12-17 12:16:38');
-INSERT INTO `laboratory` VALUES ('1060', 'FISS3D007', '22', null, 'Leyes del péndulo simple', 'Movimiento armónico simple', '2016-12-17 12:16:38', '2016-12-17 12:16:38');
-INSERT INTO `laboratory` VALUES ('1061', 'FISS3D003', '22', null, 'Movimiento pendular - Reto reloj de péndulo', 'Movimiento armónico simple', '2016-12-17 12:16:38', '2016-12-17 12:16:38');
-INSERT INTO `laboratory` VALUES ('1062', 'FISOND001', '22', null, 'Produciendo una onda de radio (Ondas electromagnéticas)', 'Ondas', '2016-12-17 12:16:39', '2016-12-17 12:16:39');
-INSERT INTO `laboratory` VALUES ('1063', 'FISOND002', '22', null, 'Ondas de sonido (Ondas mecánicas)', 'Ondas', '2016-12-17 12:16:39', '2016-12-17 12:16:39');
-INSERT INTO `laboratory` VALUES ('1064', 'FISOND003', '22', null, 'Espectro electromagnético', 'Ondas', '2016-12-17 12:16:39', '2016-12-17 12:16:39');
-INSERT INTO `laboratory` VALUES ('1065', 'FISOND004', '22', null, 'Luz visible', 'Óptica', '2016-12-17 12:16:39', '2016-12-17 12:16:39');
-INSERT INTO `laboratory` VALUES ('1066', 'FISOPT001', '22', null, 'Dispersión y síntesis de la luz', 'Óptica', '2016-12-17 12:16:39', '2016-12-17 12:16:39');
-INSERT INTO `laboratory` VALUES ('1067', 'FISOPT002', '22', null, 'Espejo cóncavo', 'Óptica', '2016-12-17 12:16:39', '2016-12-17 12:16:39');
-INSERT INTO `laboratory` VALUES ('1068', 'FISOPT004', '22', null, 'Espejos esféricos', 'Óptica', '2016-12-17 12:16:39', '2016-12-17 12:16:39');
-INSERT INTO `laboratory` VALUES ('1069', 'FISOPT003', '22', null, 'Lente convergente', 'Óptica', '2016-12-17 12:16:39', '2016-12-17 12:16:39');
-INSERT INTO `laboratory` VALUES ('1070', 'FISOPT005', '22', null, 'Lentes', 'Óptica', '2016-12-17 12:16:39', '2016-12-17 12:16:39');
-INSERT INTO `laboratory` VALUES ('1071', 'FISELE004', '22', null, 'Magnitudes eléctricas', 'Electricidad y electromagnetismo', '2016-12-17 12:16:39', '2016-12-17 12:16:39');
-INSERT INTO `laboratory` VALUES ('1072', 'FISELE001', '22', null, 'Circuito serie', 'Electricidad y electromagnetismo', '2016-12-17 12:16:39', '2016-12-17 12:16:39');
-INSERT INTO `laboratory` VALUES ('1073', 'FISELE002', '22', null, 'Circuito paralelo', 'Electricidad y electromagnetismo', '2016-12-17 12:16:39', '2016-12-17 12:16:39');
-INSERT INTO `laboratory` VALUES ('1074', 'FISELE003', '22', null, 'Circuito mixto', 'Electricidad y electromagnetismo', '2016-12-17 12:16:39', '2016-12-17 12:16:39');
-INSERT INTO `laboratory` VALUES ('1075', 'FISELE005', '22', null, 'Resistencia equivalente', 'Electricidad y electromagnetismo', '2016-12-17 12:16:39', '2016-12-17 12:16:39');
-INSERT INTO `laboratory` VALUES ('1076', 'FISELE006', '22', null, 'Ley de los voltajes', 'Electricidad y electromagnetismo', '2016-12-17 12:16:39', '2016-12-17 12:16:39');
-INSERT INTO `laboratory` VALUES ('1077', 'FISELE007', '22', null, 'Ley de las corrientes', 'Electricidad y electromagnetismo', '2016-12-17 12:16:39', '2016-12-17 12:16:39');
-INSERT INTO `laboratory` VALUES ('1078', 'QUIDEN001', '21', null, 'Determinacion de densidad de solidos', 'La materia', '2016-12-17 12:16:46', '2016-12-17 12:16:46');
-INSERT INTO `laboratory` VALUES ('1079', 'QUIDEN002', '21', null, 'Determinación de densidad de liquidos', 'La materia', '2016-12-17 12:16:46', '2016-12-17 12:16:46');
-INSERT INTO `laboratory` VALUES ('1080', 'QUIMEZ001', '21', null, 'Destilación', 'La materia', '2016-12-17 12:16:46', '2016-12-17 12:16:46');
-INSERT INTO `laboratory` VALUES ('1081', 'QUIMEZ002', '21', null, 'Decantación', 'La materia', '2016-12-17 12:16:46', '2016-12-17 12:16:46');
-INSERT INTO `laboratory` VALUES ('1082', 'QUIMEZ003', '21', null, 'Filtración', 'La materia', '2016-12-17 12:16:46', '2016-12-17 12:16:46');
-INSERT INTO `laboratory` VALUES ('1083', 'QUIMEZ004', '21', null, 'Evaporación', 'La materia', '2016-12-17 12:16:46', '2016-12-17 12:16:46');
-INSERT INTO `laboratory` VALUES ('1084', 'QUIEQU001', '21', null, 'Estudio de equilibrio ion cromato-ion dicromato', 'Reacciones químicas', '2016-12-17 12:16:46', '2016-12-17 12:16:46');
-INSERT INTO `laboratory` VALUES ('1085', 'QUIEQU002', '21', null, 'Estudio de equilibrio efecto ino común', 'Reacciones químicas', '2016-12-17 12:16:46', '2016-12-17 12:16:46');
-INSERT INTO `laboratory` VALUES ('1086', 'QUIEQU003', '21', null, 'Desplazamiento de ácidos y bases débiles', 'Reacciones químicas', '2016-12-17 12:16:46', '2016-12-17 12:16:46');
-INSERT INTO `laboratory` VALUES ('1087', 'QUIEQU004', '21', null, 'Precipitación y disolución de hidróxilos metálicos', 'Reacciones químicas', '2016-12-17 12:16:47', '2016-12-17 12:16:47');
-INSERT INTO `laboratory` VALUES ('1088', 'QUIEQU005', '21', null, 'Equilibrio de iones complejos', 'Reacciones químicas', '2016-12-17 12:16:47', '2016-12-17 12:16:47');
-INSERT INTO `laboratory` VALUES ('1089', 'QUIEQU006', '21', null, 'Equilibrio de iones complejos. Influencia de la temperatura.', 'Reacciones químicas', '2016-12-17 12:16:47', '2016-12-17 12:16:47');
-INSERT INTO `laboratory` VALUES ('1090', 'QUITIT001', '21', null, 'Titulación por métodos clásicos (volumétricos)', 'Soluciones', '2016-12-17 12:16:47', '2016-12-17 12:16:47');
-INSERT INTO `laboratory` VALUES ('1091', 'QUITIT002', '21', null, 'Titulación por métodos potenciométricos', 'Soluciones', '2016-12-17 12:16:47', '2016-12-17 12:16:47');
-INSERT INTO `laboratory` VALUES ('1092', 'QUIEQU007', '21', null, 'Medición de pH', 'Soluciones', '2016-12-17 12:16:47', '2016-12-17 12:16:47');
-INSERT INTO `laboratory` VALUES ('1093', 'QUICAL001', '21', null, 'Medida de la capacidad calorífica de un calorímetro', 'Soluciones', '2016-12-17 12:16:47', '2016-12-17 12:16:47');
-INSERT INTO `laboratory` VALUES ('1094', 'QUICAL002', '21', null, 'Medida del calor lantente de fusión del hielo', 'Soluciones', '2016-12-17 12:16:47', '2016-12-17 12:16:47');
-INSERT INTO `laboratory` VALUES ('1095', 'QUICAL003', '21', null, 'Medida aproximada de la entalpía de una reacción de neutralización ácido- base', 'Soluciones', '2016-12-17 12:16:47', '2016-12-17 12:16:47');
-INSERT INTO `laboratory` VALUES ('1096', 'QUICAL004', '21', null, 'Medida de calor específico de metales', 'Soluciones', '2016-12-17 12:16:47', '2016-12-17 12:16:47');
-INSERT INTO `laboratory` VALUES ('1097', 'QUICAL005', '21', null, 'Determinación del equivalente mecánico de calor', 'Soluciones', '2016-12-17 12:16:47', '2016-12-17 12:16:47');
-INSERT INTO `laboratory` VALUES ('1098', 'QUIGAS001', '21', null, 'Ley de Boyle - Mariotte', 'Gases', '2016-12-17 12:16:47', '2016-12-17 12:16:47');
-INSERT INTO `laboratory` VALUES ('1099', 'QUIGAS002', '21', null, 'Ley de Gay-Lussac', 'Gases', '2016-12-17 12:16:48', '2016-12-17 12:16:48');
-INSERT INTO `laboratory` VALUES ('1100', 'QUIGAS003', '21', null, 'Ley de las presiones parciales de Dalton', 'Gases', '2016-12-17 12:16:48', '2016-12-17 12:16:48');
-INSERT INTO `laboratory` VALUES ('1101', 'QUIGAS004', '21', null, 'Ley de Charles', 'Gases', '2016-12-17 12:16:48', '2016-12-17 12:16:48');
-INSERT INTO `laboratory` VALUES ('1102', 'QUIALC001', '21', null, 'Síntesis de metano', 'El carbono', '2016-12-17 12:16:48', '2016-12-17 12:16:48');
-INSERT INTO `laboratory` VALUES ('1103', 'QUIALC002', '21', null, 'Síntesis de ciclopropano', 'Cicloalcanos, alquenos y alquinos', '2016-12-17 12:16:48', '2016-12-17 12:16:48');
-INSERT INTO `laboratory` VALUES ('1104', 'QUIALC003', '21', null, 'Síntesis de etileno', 'Cicloalcanos, alquenos y alquinos', '2016-12-17 12:16:48', '2016-12-17 12:16:48');
-INSERT INTO `laboratory` VALUES ('1105', 'QUIALC004', '21', null, 'Síntesis de acetileno', 'Cicloalcanos, alquenos y alquinos', '2016-12-17 12:16:48', '2016-12-17 12:16:48');
-INSERT INTO `laboratory` VALUES ('1106', 'QUIALH001', '21', null, 'Síntesis de alcohol bencílico', 'Alcoholes, aldehídos y cetonas', '2016-12-17 12:16:48', '2016-12-17 12:16:48');
-INSERT INTO `laboratory` VALUES ('1107', 'QUIS3D001', '21', null, 'Fermentador', 'Alcoholes, aldehídos y cetonas', '2016-12-17 12:16:48', '2016-12-17 12:16:48');
-INSERT INTO `laboratory` VALUES ('1108', 'QUIS3D002', '21', null, 'Destilador', 'Alcoholes, aldehídos y cetonas', '2016-12-17 12:16:48', '2016-12-17 12:16:48');
-INSERT INTO `laboratory` VALUES ('1109', 'QUIALH002', '21', null, 'Síntesis de aldehídos', 'Alcoholes, aldehídos y cetonas', '2016-12-17 12:16:48', '2016-12-17 12:16:48');
-INSERT INTO `laboratory` VALUES ('1110', 'QUIALH003', '21', null, 'Síntesis de ciclohexanona', 'Alcoholes, aldehídos y cetonas', '2016-12-17 12:16:48', '2016-12-17 12:16:48');
-INSERT INTO `laboratory` VALUES ('1111', 'QUIALH004', '21', null, 'Síntesis de ácido acético', 'Ácidos carboxílicos, haluros de acilo, anhídridos, ésteres y amidas', '2016-12-17 12:16:49', '2016-12-17 12:16:49');
-INSERT INTO `laboratory` VALUES ('1112', 'QUIACI001', '21', null, 'Síntesis de anhídrido propiónico (propanóico)', 'Ácidos carboxílicos, haluros de acilo, anhídridos, ésteres y amidas', '2016-12-17 12:16:49', '2016-12-17 12:16:49');
-INSERT INTO `laboratory` VALUES ('1113', 'QUIACI002', '21', null, 'Síntesis de benzoato de metilo', 'Ácidos carboxílicos, haluros de acilo, anhídridos, ésteres y amidas', '2016-12-17 12:16:49', '2016-12-17 12:16:49');
-INSERT INTO `laboratory` VALUES ('1114', 'QUIACI003', '21', null, 'Síntesis de N-etil - 4 - Toluamida', 'Ácidos carboxílicos, haluros de acilo, anhídridos, ésteres y amidas', '2016-12-17 12:16:49', '2016-12-17 12:16:49');
-INSERT INTO `laboratory` VALUES ('1115', 'QUIACI004', '21', null, 'Síntensis de 2-etilhexanonitrilo', 'Nitrilos, éteres, benceno y aminas', '2016-12-17 12:16:49', '2016-12-17 12:16:49');
-INSERT INTO `laboratory` VALUES ('1116', 'QUIACI005', '21', null, 'Síntensis de 4-nitroanilina', 'Nitrilos, éteres, benceno y aminas', '2016-12-17 12:16:49', '2016-12-17 12:16:49');
-INSERT INTO `laboratory` VALUES ('1117', 'QUIS3D003', '21', null, 'Síntesis de aminoácidos', 'Compuestos de interés biológico', '2016-12-17 12:16:49', '2016-12-17 12:16:49');
-INSERT INTO `laboratory` VALUES ('1118', 'CIEECO001', '23', null, 'Tipos de ecosistemas', 'Ecosistemas', '2016-12-17 12:16:58', '2016-12-17 12:16:58');
-INSERT INTO `laboratory` VALUES ('1119', 'CIEECO002', '23', null, 'Cadenas tróficas', 'Ecosistemas', '2016-12-17 12:16:58', '2016-12-17 12:16:58');
-INSERT INTO `laboratory` VALUES ('1120', 'CIEECO003', '23', null, 'Equilibrio de un ecosistema', 'Ecosistemas', '2016-12-17 12:16:58', '2016-12-17 12:16:58');
-INSERT INTO `laboratory` VALUES ('1121', 'CIEECO004', '23', null, 'Factores ambientales de un ecosistema', 'Ecosistemas', '2016-12-17 12:16:58', '2016-12-17 12:16:58');
-INSERT INTO `laboratory` VALUES ('1122', 'CIECEL001', '23', null, 'Tipos de células', 'Origen y clasificación de los seres vivos', '2016-12-17 12:16:58', '2016-12-17 12:16:58');
-INSERT INTO `laboratory` VALUES ('1123', 'CIES3D001', '23', null, 'Morfología celular', 'Origen y clasificación de los seres vivos', '2016-12-17 12:16:58', '2016-12-17 12:16:58');
-INSERT INTO `laboratory` VALUES ('1124', 'CIECEL002', '23', null, 'Metabolismo celular', 'Origen y clasificación de los seres vivos', '2016-12-17 12:16:58', '2016-12-17 12:16:58');
-INSERT INTO `laboratory` VALUES ('1125', 'CIEECO005', '23', null, 'Clasificación de los seres vivos', 'Origen y clasificación de los seres vivos', '2016-12-17 12:16:58', '2016-12-17 12:16:58');
-INSERT INTO `laboratory` VALUES ('1126', 'CIECEL003', '23', null, 'Células y tejidos', 'Origen y clasificación de los seres vivos', '2016-12-17 12:16:58', '2016-12-17 12:16:58');
-INSERT INTO `laboratory` VALUES ('1127', 'CIES3D002', '23', null, 'Histología básica de tejidos', 'Origen y clasificación de los seres vivos', '2016-12-17 12:16:59', '2016-12-17 12:16:59');
-INSERT INTO `laboratory` VALUES ('1128', 'CIEFDQ001', '23', null, 'Instrumetación y elementos volumétricos', 'La materia', '2016-12-17 12:16:59', '2016-12-17 12:16:59');
-INSERT INTO `laboratory` VALUES ('1129', 'CIEFDQ005', '23', null, 'Propiedades de la materia', 'La materia', '2016-12-17 12:16:59', '2016-12-17 12:16:59');
-INSERT INTO `laboratory` VALUES ('1130', 'CIEFDQ004', '23', null, 'Estados de la materia', 'La materia', '2016-12-17 12:16:59', '2016-12-17 12:16:59');
-INSERT INTO `laboratory` VALUES ('1131', 'CIEFDQ002', '23', null, 'Mezclas', 'La materia', '2016-12-17 12:16:59', '2016-12-17 12:16:59');
-INSERT INTO `laboratory` VALUES ('1132', 'CIEFDQ003', '23', null, 'Solubilidad', 'La materia', '2016-12-17 12:16:59', '2016-12-17 12:16:59');
-INSERT INTO `laboratory` VALUES ('1133', 'CIEUNI001', '23', null, 'Componentes y astros del univero', 'Sistema planetario', '2016-12-17 12:16:59', '2016-12-17 12:16:59');
-INSERT INTO `laboratory` VALUES ('1134', 'CIEUNI002', '23', null, 'Sistema solar', 'Sistema planetario', '2016-12-17 12:16:59', '2016-12-17 12:16:59');
-INSERT INTO `laboratory` VALUES ('1135', 'CIEUNI003', '23', null, 'El día, la noche y las estaciones terretres', 'Sistema planetario', '2016-12-17 12:16:59', '2016-12-17 12:16:59');
-INSERT INTO `laboratory` VALUES ('1136', 'CIEUNI004', '23', null, 'Planetas y satélites', 'Sistema planetario', '2016-12-17 12:16:59', '2016-12-17 12:16:59');
-INSERT INTO `laboratory` VALUES ('1137', 'CIESUE001', '23', null, 'Caracterización de los suelos', 'La Tierra', '2016-12-17 12:16:59', '2016-12-17 12:16:59');
-INSERT INTO `laboratory` VALUES ('1138', 'CIESUE002', '23', null, 'Contaminación en suelos', 'La Tierra', '2016-12-17 12:16:59', '2016-12-17 12:16:59');
-INSERT INTO `laboratory` VALUES ('1139', 'CIESUE003', '23', null, 'Identifiación de tipos de suelos por granulometría', 'La Tierra', '2016-12-17 12:16:59', '2016-12-17 12:16:59');
-INSERT INTO `laboratory` VALUES ('1140', 'CIES3D003', '23', null, 'Magnitudes eléctricas', 'Electricidad y magnetismo', '2016-12-17 12:16:59', '2016-12-17 12:16:59');
-INSERT INTO `laboratory` VALUES ('1141', 'CIES3D004', '23', null, 'Análsis fisiológico de especies comunes en la biotecnología', 'Taxonomía y funciones biológicas\r\r\r\r\r\r', '2016-12-17 12:16:59', '2016-12-17 12:16:59');
-INSERT INTO `laboratory` VALUES ('1142', 'CIEFOT001', '23', null, 'Componentes generales de la fotosíntesis', 'Taxonomía y funciones biológicas\r\r\r\r\r\r', '2016-12-17 12:16:59', '2016-12-17 12:16:59');
-INSERT INTO `laboratory` VALUES ('1143', 'CIEFOT002', '23', null, 'Efecto de la luz en el proceso fotosintético', 'Taxonomía y funciones biológicas\r\r\r\r\r\r', '2016-12-17 12:17:00', '2016-12-17 12:17:00');
-INSERT INTO `laboratory` VALUES ('1144', 'CIEFOT003', '23', null, 'Factores que afectan la fotosíntesis', 'Taxonomía y funciones biológicas\r\r\r\r\r\r', '2016-12-17 12:17:00', '2016-12-17 12:17:00');
-INSERT INTO `laboratory` VALUES ('1145', 'CIEFSV002', '23', null, 'Influencia de variable física en los procesos biotecnológicos', 'Taxonomía y funciones biológicas\r\r\r\r\r\r', '2016-12-17 12:17:00', '2016-12-17 12:17:00');
-INSERT INTO `laboratory` VALUES ('1146', 'CIEFSV003', '23', null, 'Análisis de producción de metabolitos en las etapas de la vida de un microorganismo', 'Taxonomía y funciones biológicas\r\r\r\r\r\r', '2016-12-17 12:17:00', '2016-12-17 12:17:00');
-INSERT INTO `laboratory` VALUES ('1147', 'CIEFSV001', '23', null, 'Diseño de una fermentación', 'Taxonomía y funciones biológicas\r\r\r\r\r\r', '2016-12-17 12:17:00', '2016-12-17 12:17:00');
-INSERT INTO `laboratory` VALUES ('1148', 'CIEFDQ007', '23', null, 'Enlaces químicos', 'Fundamentos de la química general', '2016-12-17 12:17:00', '2016-12-17 12:17:00');
-INSERT INTO `laboratory` VALUES ('1149', 'CIEFDQ006', '23', null, 'Reacciones químicas', 'Fundamentos de la química general', '2016-12-17 12:17:00', '2016-12-17 12:17:00');
-INSERT INTO `laboratory` VALUES ('1150', 'CIES3D005', '23', null, 'Principio de Arquímides', 'Fluidos y gases', '2016-12-17 12:17:00', '2016-12-17 12:17:00');
-INSERT INTO `laboratory` VALUES ('1151', 'CIEGEN001', '23', null, 'Genética mendeliana', 'Genética', '2016-12-17 12:17:00', '2016-12-17 12:17:00');
-INSERT INTO `laboratory` VALUES ('1152', 'CIEGEN002', '23', null, 'Árboles genealógicos', 'Genética', '2016-12-17 12:17:00', '2016-12-17 12:17:00');
-INSERT INTO `laboratory` VALUES ('1153', 'CIEGEN003', '23', null, 'Rh y grupos sanguíneos', 'Genética', '2016-12-17 12:17:00', '2016-12-17 12:17:00');
-INSERT INTO `laboratory` VALUES ('1154', 'CIESCH001', '23', null, 'Sistema nervioso', 'Sistemas del cuerpo humano y fisiología al servicio de la salud', '2016-12-17 12:17:00', '2016-12-17 12:17:00');
-INSERT INTO `laboratory` VALUES ('1155', 'CIESCH002', '23', null, 'Medición de factores y estímulos del cuerpo humano', 'Sistemas del cuerpo humano y fisiología al servicio de la salud', '2016-12-17 12:17:00', '2016-12-17 12:17:00');
-INSERT INTO `laboratory` VALUES ('1156', 'CIESCH003', '23', null, 'Sistema endocrino', 'Sistemas del cuerpo humano y fisiología al servicio de la salud', '2016-12-17 12:17:00', '2016-12-17 12:17:00');
-INSERT INTO `laboratory` VALUES ('1157', 'CIESCH004', '23', null, 'Sistema circulatorio', 'Sistemas del cuerpo humano y fisiología al servicio de la salud', '2016-12-17 12:17:00', '2016-12-17 12:17:00');
-INSERT INTO `laboratory` VALUES ('1158', 'CIESCH005', '23', null, 'Medición y análisis de la presión arterial', 'Sistemas del cuerpo humano y fisiología al servicio de la salud', '2016-12-17 12:17:00', '2016-12-17 12:17:00');
-INSERT INTO `laboratory` VALUES ('1159', 'CIESCH006', '23', null, 'Sistema respiratorio', 'Sistemas del cuerpo humano y fisiología al servicio de la salud', '2016-12-17 12:17:00', '2016-12-17 12:17:00');
-INSERT INTO `laboratory` VALUES ('1160', 'CIESCH007', '23', null, 'Medición y análisis de la capacidad respiratoria', 'Sistemas del cuerpo humano y fisiología al servicio de la salud', '2016-12-17 12:17:00', '2016-12-17 12:17:00');
-INSERT INTO `laboratory` VALUES ('1161', 'CIESCH008', '23', null, 'Sistema digestivo', 'Sistemas del cuerpo humano y fisiología al servicio de la salud', '2016-12-17 12:17:00', '2016-12-17 12:17:00');
-INSERT INTO `laboratory` VALUES ('1162', 'CIESCH009', '23', null, 'Comportamiento de los alimentos en la digestión', 'Sistemas del cuerpo humano y fisiología al servicio de la salud', '2016-12-17 12:17:00', '2016-12-17 12:17:00');
-INSERT INTO `laboratory` VALUES ('1163', 'CIEGEN004', '23', null, 'Replicación del ADN', 'Soluciones y fundamentos de la química orgánica', '2016-12-17 12:17:01', '2016-12-17 12:17:01');
-INSERT INTO `laboratory` VALUES ('1164', 'CIEGEN005', '23', null, 'Errores genéticos comunes', 'Soluciones y fundamentos de la química orgánica', '2016-12-17 12:17:01', '2016-12-17 12:17:01');
-INSERT INTO `laboratory` VALUES ('1165', 'CIEOND001', '23', null, 'Tipos y características de las ondas', 'Trabajo, calor y ondas', '2016-12-17 12:17:01', '2016-12-17 12:17:01');
-INSERT INTO `laboratory` VALUES ('1166', 'CIEOND002', '23', null, 'Medios de propagación', 'Trabajo, calor y ondas', '2016-12-17 12:17:01', '2016-12-17 12:17:01');
-INSERT INTO `laboratory` VALUES ('1167', 'CIEOND003', '23', null, '\"La luz, fenómenos ópticos\"', 'Trabajo, calor y ondas', '2016-12-17 12:17:01', '2016-12-17 12:17:01');
+INSERT INTO `laboratory` VALUES ('1256', 'CIEECO001', '23', null, 'Tipos de ecosistemas', 'Ecosistemas', '2016-12-22 22:06:39', '2016-12-22 22:06:39');
+INSERT INTO `laboratory` VALUES ('1257', 'CIEECO002', '23', null, 'Cadenas tróficas', 'Ecosistemas', '2016-12-22 22:06:40', '2016-12-22 22:06:40');
+INSERT INTO `laboratory` VALUES ('1258', 'CIEECO003', '23', null, 'Equilibrio de un ecosistema', 'Ecosistemas', '2016-12-22 22:06:40', '2016-12-22 22:06:40');
+INSERT INTO `laboratory` VALUES ('1259', 'CIEECO004', '23', null, 'Factores ambientales de un ecosistema', 'Ecosistemas', '2016-12-22 22:06:40', '2016-12-22 22:06:40');
+INSERT INTO `laboratory` VALUES ('1260', 'CIECEL001', '23', null, 'Tipos de células', 'Origen y clasificación de los seres vivos', '2016-12-22 22:06:40', '2016-12-22 22:06:40');
+INSERT INTO `laboratory` VALUES ('1261', 'CIES3D001', '23', null, 'Morfología celular', 'Origen y clasificación de los seres vivos', '2016-12-22 22:06:40', '2016-12-22 22:06:40');
+INSERT INTO `laboratory` VALUES ('1262', 'CIECEL002', '23', null, 'Metabolismo celular', 'Origen y clasificación de los seres vivos', '2016-12-22 22:06:40', '2016-12-22 22:06:40');
+INSERT INTO `laboratory` VALUES ('1263', 'CIEECO005', '23', null, 'Clasificación de los seres vivos', 'Origen y clasificación de los seres vivos', '2016-12-22 22:06:40', '2016-12-22 22:06:40');
+INSERT INTO `laboratory` VALUES ('1264', 'CIECEL003', '23', null, 'Células y tejidos', 'Origen y clasificación de los seres vivos', '2016-12-22 22:06:40', '2016-12-22 22:06:40');
+INSERT INTO `laboratory` VALUES ('1265', 'CIES3D002', '23', null, 'Histología básica de tejidos', 'Origen y clasificación de los seres vivos', '2016-12-22 22:06:40', '2016-12-22 22:06:40');
+INSERT INTO `laboratory` VALUES ('1266', 'CIEFDQ001', '23', null, 'Instrumetación y elementos volumétricos', 'La materia', '2016-12-22 22:06:40', '2016-12-22 22:06:40');
+INSERT INTO `laboratory` VALUES ('1267', 'CIEFDQ005', '23', null, 'Propiedades de la materia', 'La materia', '2016-12-22 22:06:40', '2016-12-22 22:06:40');
+INSERT INTO `laboratory` VALUES ('1268', 'CIEFDQ004', '23', null, 'Estados de la materia', 'La materia', '2016-12-22 22:06:40', '2016-12-22 22:06:40');
+INSERT INTO `laboratory` VALUES ('1269', 'CIEFDQ002', '23', null, 'Mezclas', 'La materia', '2016-12-22 22:06:40', '2016-12-22 22:06:40');
+INSERT INTO `laboratory` VALUES ('1270', 'CIEFDQ003', '23', null, 'Solubilidad', 'La materia', '2016-12-22 22:06:40', '2016-12-22 22:06:40');
+INSERT INTO `laboratory` VALUES ('1271', 'CIEUNI001', '23', null, 'Componentes y astros del univero', 'Sistema planetario', '2016-12-22 22:06:40', '2016-12-22 22:06:40');
+INSERT INTO `laboratory` VALUES ('1272', 'CIEUNI002', '23', null, 'Sistema solar', 'Sistema planetario', '2016-12-22 22:06:40', '2016-12-22 22:06:40');
+INSERT INTO `laboratory` VALUES ('1273', 'CIEUNI003', '23', null, 'El día, la noche y las estaciones terretres', 'Sistema planetario', '2016-12-22 22:06:40', '2016-12-22 22:06:40');
+INSERT INTO `laboratory` VALUES ('1274', 'CIEUNI004', '23', null, 'Planetas y satélites', 'Sistema planetario', '2016-12-22 22:06:41', '2016-12-22 22:06:41');
+INSERT INTO `laboratory` VALUES ('1275', 'CIESUE001', '23', null, 'Caracterización de los suelos', 'La Tierra', '2016-12-22 22:06:41', '2016-12-22 22:06:41');
+INSERT INTO `laboratory` VALUES ('1276', 'CIESUE002', '23', null, 'Contaminación en suelos', 'La Tierra', '2016-12-22 22:06:41', '2016-12-22 22:06:41');
+INSERT INTO `laboratory` VALUES ('1277', 'CIESUE003', '23', null, 'Identifiación de tipos de suelos por granulometría', 'La Tierra', '2016-12-22 22:06:41', '2016-12-22 22:06:41');
+INSERT INTO `laboratory` VALUES ('1278', 'CIES3D003', '23', null, 'Magnitudes eléctricas', 'Electricidad y magnetismo', '2016-12-22 22:06:41', '2016-12-22 22:06:41');
+INSERT INTO `laboratory` VALUES ('1279', 'CIES3D004', '23', null, 'Análsis fisiológico de especies comunes en la biotecnología', 'Taxonomía y funciones biológicas\r\r\r\r\r\r', '2016-12-22 22:06:41', '2016-12-22 22:06:41');
+INSERT INTO `laboratory` VALUES ('1280', 'CIEFOT001', '23', null, 'Componentes generales de la fotosíntesis', 'Taxonomía y funciones biológicas\r\r\r\r\r\r', '2016-12-22 22:06:41', '2016-12-22 22:06:41');
+INSERT INTO `laboratory` VALUES ('1281', 'CIEFOT002', '23', null, 'Efecto de la luz en el proceso fotosintético', 'Taxonomía y funciones biológicas\r\r\r\r\r\r', '2016-12-22 22:06:41', '2016-12-22 22:06:41');
+INSERT INTO `laboratory` VALUES ('1282', 'CIEFOT003', '23', null, 'Factores que afectan la fotosíntesis', 'Taxonomía y funciones biológicas\r\r\r\r\r\r', '2016-12-22 22:06:41', '2016-12-22 22:06:41');
+INSERT INTO `laboratory` VALUES ('1283', 'CIEFSV002', '23', null, 'Influencia de variable física en los procesos biotecnológicos', 'Taxonomía y funciones biológicas\r\r\r\r\r\r', '2016-12-22 22:06:41', '2016-12-22 22:06:41');
+INSERT INTO `laboratory` VALUES ('1284', 'CIEFSV003', '23', null, 'Análisis de producción de metabolitos en las etapas de la vida de un microorganismo', 'Taxonomía y funciones biológicas\r\r\r\r\r\r', '2016-12-22 22:06:41', '2016-12-22 22:06:41');
+INSERT INTO `laboratory` VALUES ('1285', 'CIEFSV001', '23', null, 'Diseño de una fermentación', 'Taxonomía y funciones biológicas\r\r\r\r\r\r', '2016-12-22 22:06:41', '2016-12-22 22:06:41');
+INSERT INTO `laboratory` VALUES ('1286', 'CIEFDQ007', '23', null, 'Enlaces químicos', 'Fundamentos de la química general', '2016-12-22 22:06:41', '2016-12-22 22:06:41');
+INSERT INTO `laboratory` VALUES ('1287', 'CIEFDQ006', '23', null, 'Reacciones químicas', 'Fundamentos de la química general', '2016-12-22 22:06:41', '2016-12-22 22:06:41');
+INSERT INTO `laboratory` VALUES ('1288', 'CIES3D005', '23', null, 'Principio de Arquímides', 'Fluidos y gases', '2016-12-22 22:06:41', '2016-12-22 22:06:41');
+INSERT INTO `laboratory` VALUES ('1289', 'CIEGEN001', '23', null, 'Genética mendeliana', 'Genética', '2016-12-22 22:06:42', '2016-12-22 22:06:42');
+INSERT INTO `laboratory` VALUES ('1290', 'CIEGEN002', '23', null, 'Árboles genealógicos', 'Genética', '2016-12-22 22:06:42', '2016-12-22 22:06:42');
+INSERT INTO `laboratory` VALUES ('1291', 'CIEGEN003', '23', null, 'Rh y grupos sanguíneos', 'Genética', '2016-12-22 22:06:42', '2016-12-22 22:06:42');
+INSERT INTO `laboratory` VALUES ('1292', 'CIESCH001', '23', null, 'Sistema nervioso', 'Sistemas del cuerpo humano y fisiología al servicio de la salud', '2016-12-22 22:06:42', '2016-12-22 22:06:42');
+INSERT INTO `laboratory` VALUES ('1293', 'CIESCH002', '23', null, 'Medición de factores y estímulos del cuerpo humano', 'Sistemas del cuerpo humano y fisiología al servicio de la salud', '2016-12-22 22:06:42', '2016-12-22 22:06:42');
+INSERT INTO `laboratory` VALUES ('1294', 'CIESCH003', '23', null, 'Sistema endocrino', 'Sistemas del cuerpo humano y fisiología al servicio de la salud', '2016-12-22 22:06:42', '2016-12-22 22:06:42');
+INSERT INTO `laboratory` VALUES ('1295', 'CIESCH004', '23', null, 'Sistema circulatorio', 'Sistemas del cuerpo humano y fisiología al servicio de la salud', '2016-12-22 22:06:42', '2016-12-22 22:06:42');
+INSERT INTO `laboratory` VALUES ('1296', 'CIESCH005', '23', null, 'Medición y análisis de la presión arterial', 'Sistemas del cuerpo humano y fisiología al servicio de la salud', '2016-12-22 22:06:42', '2016-12-22 22:06:42');
+INSERT INTO `laboratory` VALUES ('1297', 'CIESCH006', '23', null, 'Sistema respiratorio', 'Sistemas del cuerpo humano y fisiología al servicio de la salud', '2016-12-22 22:06:42', '2016-12-22 22:06:42');
+INSERT INTO `laboratory` VALUES ('1298', 'CIESCH007', '23', null, 'Medición y análisis de la capacidad respiratoria', 'Sistemas del cuerpo humano y fisiología al servicio de la salud', '2016-12-22 22:06:42', '2016-12-22 22:06:42');
+INSERT INTO `laboratory` VALUES ('1299', 'CIESCH008', '23', null, 'Sistema digestivo', 'Sistemas del cuerpo humano y fisiología al servicio de la salud', '2016-12-22 22:06:42', '2016-12-22 22:06:42');
+INSERT INTO `laboratory` VALUES ('1300', 'CIESCH009', '23', null, 'Comportamiento de los alimentos en la digestión', 'Sistemas del cuerpo humano y fisiología al servicio de la salud', '2016-12-22 22:06:42', '2016-12-22 22:06:42');
+INSERT INTO `laboratory` VALUES ('1301', 'CIEGEN004', '23', null, 'Replicación del ADN', 'Soluciones y fundamentos de la química orgánica', '2016-12-22 22:06:42', '2016-12-22 22:06:42');
+INSERT INTO `laboratory` VALUES ('1302', 'CIEGEN005', '23', null, 'Errores genéticos comunes', 'Soluciones y fundamentos de la química orgánica', '2016-12-22 22:06:42', '2016-12-22 22:06:42');
+INSERT INTO `laboratory` VALUES ('1303', 'CIEOND001', '23', null, 'Tipos y características de las ondas', 'Trabajo, calor y ondas', '2016-12-22 22:06:42', '2016-12-22 22:06:42');
+INSERT INTO `laboratory` VALUES ('1304', 'CIEOND002', '23', null, 'Medios de propagación', 'Trabajo, calor y ondas', '2016-12-22 22:06:42', '2016-12-22 22:06:42');
+INSERT INTO `laboratory` VALUES ('1305', 'CIEOND003', '23', null, '\"La luz, fenómenos ópticos\"', 'Trabajo, calor y ondas', '2016-12-22 22:06:42', '2016-12-22 22:06:42');
+INSERT INTO `laboratory` VALUES ('1306', 'QUIDEN001', '21', null, 'Determinación de densidad de sólidos', 'La materia', '2016-12-22 22:06:49', '2016-12-22 22:06:49');
+INSERT INTO `laboratory` VALUES ('1307', 'QUIDEN002', '21', null, 'Determinación de densidad de líquidos', 'La materia', '2016-12-22 22:06:49', '2016-12-22 22:06:49');
+INSERT INTO `laboratory` VALUES ('1308', 'QUIMEZ001', '21', null, 'Destilación', 'La materia', '2016-12-22 22:06:49', '2016-12-22 22:06:49');
+INSERT INTO `laboratory` VALUES ('1309', 'QUIMEZ002', '21', null, 'Decantación', 'La materia', '2016-12-22 22:06:49', '2016-12-22 22:06:49');
+INSERT INTO `laboratory` VALUES ('1310', 'QUIMEZ003', '21', null, 'Filtración', 'La materia', '2016-12-22 22:06:49', '2016-12-22 22:06:49');
+INSERT INTO `laboratory` VALUES ('1311', 'QUIMEZ004', '21', null, 'Evaporación', 'La materia', '2016-12-22 22:06:49', '2016-12-22 22:06:49');
+INSERT INTO `laboratory` VALUES ('1312', 'QUIEQU001', '21', null, 'Estudio de equilibrio ion cromato-ion dicromato', 'Reacciones químicas', '2016-12-22 22:06:49', '2016-12-22 22:06:49');
+INSERT INTO `laboratory` VALUES ('1313', 'QUIEQU002', '21', null, 'Estudio de equilibrio efecto ino común', 'Reacciones químicas', '2016-12-22 22:06:49', '2016-12-22 22:06:49');
+INSERT INTO `laboratory` VALUES ('1314', 'QUIEQU003', '21', null, 'Desplazamiento de ácidos y bases débiles', 'Reacciones químicas', '2016-12-22 22:06:50', '2016-12-22 22:06:50');
+INSERT INTO `laboratory` VALUES ('1315', 'QUIEQU004', '21', null, 'Precipitación y disolución de hidróxilos metálicos', 'Reacciones químicas', '2016-12-22 22:06:50', '2016-12-22 22:06:50');
+INSERT INTO `laboratory` VALUES ('1316', 'QUIEQU005', '21', null, 'Equilibrio de iones complejos', 'Reacciones químicas', '2016-12-22 22:06:50', '2016-12-22 22:06:50');
+INSERT INTO `laboratory` VALUES ('1317', 'QUIEQU006', '21', null, 'Equilibrio de iones complejos. Influencia de la temperatura.', 'Reacciones químicas', '2016-12-22 22:06:50', '2016-12-22 22:06:50');
+INSERT INTO `laboratory` VALUES ('1318', 'QUITIT001', '21', null, 'Titulación por métodos clásicos (volumétricos)', 'Soluciones', '2016-12-22 22:06:50', '2016-12-22 22:06:50');
+INSERT INTO `laboratory` VALUES ('1319', 'QUITIT002', '21', null, 'Titulación por métodos potenciométricos', 'Soluciones', '2016-12-22 22:06:50', '2016-12-22 22:06:50');
+INSERT INTO `laboratory` VALUES ('1320', 'QUIEQU007', '21', null, 'Medición de pH', 'Soluciones', '2016-12-22 22:06:50', '2016-12-22 22:06:50');
+INSERT INTO `laboratory` VALUES ('1321', 'QUICAL001', '21', null, 'Medida de la capacidad calorífica de un calorímetro', 'Soluciones', '2016-12-22 22:06:50', '2016-12-22 22:06:50');
+INSERT INTO `laboratory` VALUES ('1322', 'QUICAL002', '21', null, 'Medida del calor latente de fusión del hielo', 'Soluciones', '2016-12-22 22:06:50', '2016-12-22 22:06:50');
+INSERT INTO `laboratory` VALUES ('1323', 'QUICAL003', '21', null, 'Medida aproximada de la entalpía de una reacción de neutralización ácido- base', 'Soluciones', '2016-12-22 22:06:50', '2016-12-22 22:06:50');
+INSERT INTO `laboratory` VALUES ('1324', 'QUICAL004', '21', null, 'Medida de calor específico de metales', 'Soluciones', '2016-12-22 22:06:50', '2016-12-22 22:06:50');
+INSERT INTO `laboratory` VALUES ('1325', 'QUICAL005', '21', null, 'Determinación del equivalente mecánico de calor', 'Soluciones', '2016-12-22 22:06:50', '2016-12-22 22:06:50');
+INSERT INTO `laboratory` VALUES ('1326', 'QUIGAS001', '21', null, 'Ley de Boyle - Mariotte', 'Gases', '2016-12-22 22:06:50', '2016-12-22 22:06:50');
+INSERT INTO `laboratory` VALUES ('1327', 'QUIGAS002', '21', null, 'Ley de Gay-Lussac', 'Gases', '2016-12-22 22:06:50', '2016-12-22 22:06:50');
+INSERT INTO `laboratory` VALUES ('1328', 'QUIGAS003', '21', null, 'Ley de las presiones parciales de Dalton', 'Gases', '2016-12-22 22:06:51', '2016-12-22 22:06:51');
+INSERT INTO `laboratory` VALUES ('1329', 'QUIGAS004', '21', null, 'Ley de Charles', 'Gases', '2016-12-22 22:06:51', '2016-12-22 22:06:51');
+INSERT INTO `laboratory` VALUES ('1330', 'QUIALC001', '21', null, 'Síntesis de metano', 'El carbono', '2016-12-22 22:06:51', '2016-12-22 22:06:51');
+INSERT INTO `laboratory` VALUES ('1331', 'QUIALC002', '21', null, 'Síntesis de ciclopropano', 'Cicloalcanos, alquenos y alquinos', '2016-12-22 22:06:51', '2016-12-22 22:06:51');
+INSERT INTO `laboratory` VALUES ('1332', 'QUIALC003', '21', null, 'Síntesis de etileno', 'Cicloalcanos, alquenos y alquinos', '2016-12-22 22:06:51', '2016-12-22 22:06:51');
+INSERT INTO `laboratory` VALUES ('1333', 'QUIALC004', '21', null, 'Síntesis de acetileno', 'Cicloalcanos, alquenos y alquinos', '2016-12-22 22:06:51', '2016-12-22 22:06:51');
+INSERT INTO `laboratory` VALUES ('1334', 'QUIALH001', '21', null, 'Síntesis de alcohol bencílico', 'Alcoholes, aldehídos y cetonas', '2016-12-22 22:06:51', '2016-12-22 22:06:51');
+INSERT INTO `laboratory` VALUES ('1335', 'QUIS3D001', '21', null, 'Fermentador', 'Alcoholes, aldehídos y cetonas', '2016-12-22 22:06:51', '2016-12-22 22:06:51');
+INSERT INTO `laboratory` VALUES ('1336', 'QUIS3D002', '21', null, 'Destilador', 'Alcoholes, aldehídos y cetonas', '2016-12-22 22:06:51', '2016-12-22 22:06:51');
+INSERT INTO `laboratory` VALUES ('1337', 'QUIALH002', '21', null, 'Síntesis de aldehídos', 'Alcoholes, aldehídos y cetonas', '2016-12-22 22:06:51', '2016-12-22 22:06:51');
+INSERT INTO `laboratory` VALUES ('1338', 'QUIALH003', '21', null, 'Síntesis de ciclohexanona', 'Alcoholes, aldehídos y cetonas', '2016-12-22 22:06:51', '2016-12-22 22:06:51');
+INSERT INTO `laboratory` VALUES ('1339', 'QUIALH004', '21', null, 'Síntesis de ácido acético', 'Ácidos carboxílicos, haluros de acilo, anhídridos, ésteres y amidas', '2016-12-22 22:06:51', '2016-12-22 22:06:51');
+INSERT INTO `laboratory` VALUES ('1340', 'QUIACI001', '21', null, 'Síntesis de anhídrido propiónico (propanóico)', 'Ácidos carboxílicos, haluros de acilo, anhídridos, ésteres y amidas', '2016-12-22 22:06:51', '2016-12-22 22:06:51');
+INSERT INTO `laboratory` VALUES ('1341', 'QUIACI002', '21', null, 'Síntesis de benzoato de metilo', 'Ácidos carboxílicos, haluros de acilo, anhídridos, ésteres y amidas', '2016-12-22 22:06:51', '2016-12-22 22:06:51');
+INSERT INTO `laboratory` VALUES ('1342', 'QUIACI003', '21', null, 'Síntesis de N-etil - 4 - Toluamida', 'Ácidos carboxílicos, haluros de acilo, anhídridos, ésteres y amidas', '2016-12-22 22:06:51', '2016-12-22 22:06:51');
+INSERT INTO `laboratory` VALUES ('1343', 'QUIACI004', '21', null, 'Síntensis de 2-etilhexanonitrilo', 'Nitrilos, éteres, benceno y aminas', '2016-12-22 22:06:51', '2016-12-22 22:06:51');
+INSERT INTO `laboratory` VALUES ('1344', 'QUIACI005', '21', null, 'Síntensis de 4-nitroanilina', 'Nitrilos, éteres, benceno y aminas', '2016-12-22 22:06:51', '2016-12-22 22:06:51');
+INSERT INTO `laboratory` VALUES ('1345', 'QUIS3D003', '21', null, 'Síntesis de aminoácidos', 'Compuestos de interés biológico', '2016-12-22 22:06:51', '2016-12-22 22:06:51');
+INSERT INTO `laboratory` VALUES ('1346', 'FISVEC003', '22', null, 'Clases de vectores', 'Magnitudes y unidades', '2016-12-22 22:07:18', '2016-12-22 22:07:18');
+INSERT INTO `laboratory` VALUES ('1347', 'FISVEC001', '22', null, 'Suma de vectores - Rescate en altamar', 'Magnitudes y unidades', '2016-12-22 22:07:18', '2016-12-22 22:07:18');
+INSERT INTO `laboratory` VALUES ('1348', 'FISVEC002', '22', null, 'Resta de vectores - Fuerzas en un puente', 'Magnitudes y unidades', '2016-12-22 22:07:19', '2016-12-22 22:07:19');
+INSERT INTO `laboratory` VALUES ('1349', 'FISMRU003', '22', null, 'Gráficas de posición contra tiempo', 'Cinemática', '2016-12-22 22:07:19', '2016-12-22 22:07:19');
+INSERT INTO `laboratory` VALUES ('1350', 'FISMRU004', '22', null, 'Gráficas de velocidad contra tiempo', 'Cinemática', '2016-12-22 22:07:19', '2016-12-22 22:07:19');
+INSERT INTO `laboratory` VALUES ('1351', 'FISMRU001', '22', null, 'Movimiento rectilíneo uniforme M.R.U', 'Cinemática', '2016-12-22 22:07:19', '2016-12-22 22:07:19');
+INSERT INTO `laboratory` VALUES ('1352', 'FISMRU002', '22', null, 'Movimiento rectilíneo uniformemente acelerado M.R.U.A', 'Cinemática', '2016-12-22 22:07:19', '2016-12-22 22:07:19');
+INSERT INTO `laboratory` VALUES ('1353', 'FISS3D004', '22', null, 'Movimiento en el plano', 'Cinemática', '2016-12-22 22:07:19', '2016-12-22 22:07:19');
+INSERT INTO `laboratory` VALUES ('1354', 'FISS3D001', '22', null, 'Tiro parabólico - Reto lanzamiento baloncesto', 'Cinemática', '2016-12-22 22:07:19', '2016-12-22 22:07:19');
+INSERT INTO `laboratory` VALUES ('1355', 'FISVEC004', '22', null, 'Resultante de dos fuerzas', 'Dinámica y estática', '2016-12-22 22:07:19', '2016-12-22 22:07:19');
+INSERT INTO `laboratory` VALUES ('1356', 'FISMRU005', '22', null, 'Fuerza de fricción', 'Dinámica y estática', '2016-12-22 22:07:19', '2016-12-22 22:07:19');
+INSERT INTO `laboratory` VALUES ('1357', 'FISNEW001', '22', null, 'Comprobación segunda ley de Newton - Desplazamiento de un móvil.', 'Dinámica y estática', '2016-12-22 22:07:19', '2016-12-22 22:07:19');
+INSERT INTO `laboratory` VALUES ('1358', 'FISNEW002', '22', null, 'Segunda ley de Newton - Elevando una carga', 'Dinámica y estática', '2016-12-22 22:07:19', '2016-12-22 22:07:19');
+INSERT INTO `laboratory` VALUES ('1359', 'FISEQU003', '22', null, 'La carreta como máquina simple', 'Dinámica y estática', '2016-12-22 22:07:19', '2016-12-22 22:07:19');
+INSERT INTO `laboratory` VALUES ('1360', 'FISEQU001', '22', null, 'Momento de una fuerza', 'Dinámica y estática', '2016-12-22 22:07:19', '2016-12-22 22:07:19');
+INSERT INTO `laboratory` VALUES ('1361', 'FISEQU002', '22', null, 'Equilibrio', 'Dinámica y estática', '2016-12-22 22:07:19', '2016-12-22 22:07:19');
+INSERT INTO `laboratory` VALUES ('1362', 'FISNEW003', '22', null, 'Gravedad', 'Dinámica y estática', '2016-12-22 22:07:19', '2016-12-22 22:07:19');
+INSERT INTO `laboratory` VALUES ('1363', 'FISTEP002', '22', null, 'Trabajo y potencia en un elevador de carga', 'Trabajo energía y potencia', '2016-12-22 22:07:19', '2016-12-22 22:07:19');
+INSERT INTO `laboratory` VALUES ('1364', 'FISTEP003', '22', null, 'Trabajo energía y potencia en una montaña rusa', 'Trabajo energía y potencia', '2016-12-22 22:07:19', '2016-12-22 22:07:19');
+INSERT INTO `laboratory` VALUES ('1365', 'FISTEP001', '22', null, 'Fuentes y transformaciones de la energía', 'Trabajo energía y potencia', '2016-12-22 22:07:19', '2016-12-22 22:07:19');
+INSERT INTO `laboratory` VALUES ('1366', 'FISS3D005', '22', null, 'Principio de Pascal', 'Fluidos', '2016-12-22 22:07:19', '2016-12-22 22:07:19');
+INSERT INTO `laboratory` VALUES ('1367', 'FISS3D002', '22', null, 'Prensa hidráhulica', 'Fluidos', '2016-12-22 22:07:19', '2016-12-22 22:07:19');
+INSERT INTO `laboratory` VALUES ('1368', 'FISTER001', '22', null, 'Escalas de temperatura', 'Termodinámica', '2016-12-22 22:07:20', '2016-12-22 22:07:20');
+INSERT INTO `laboratory` VALUES ('1369', 'FISTER002', '22', null, 'Calor específico y capacidad térmica', 'Termodinámica', '2016-12-22 22:07:20', '2016-12-22 22:07:20');
+INSERT INTO `laboratory` VALUES ('1370', 'FISTER003', '22', null, 'Calor latente', 'Termodinámica', '2016-12-22 22:07:20', '2016-12-22 22:07:20');
+INSERT INTO `laboratory` VALUES ('1371', 'FISS3D006', '22', null, 'La energía en el movimiento armónico simple', 'Movimiento armónico simple', '2016-12-22 22:07:20', '2016-12-22 22:07:20');
+INSERT INTO `laboratory` VALUES ('1372', 'FISS3D007', '22', null, 'Leyes del péndulo simple', 'Movimiento armónico simple', '2016-12-22 22:07:20', '2016-12-22 22:07:20');
+INSERT INTO `laboratory` VALUES ('1373', 'FISS3D003', '22', null, 'Movimiento pendular - Reto reloj de péndulo', 'Movimiento armónico simple', '2016-12-22 22:07:20', '2016-12-22 22:07:20');
+INSERT INTO `laboratory` VALUES ('1374', 'FISOND001', '22', null, 'Produciendo una onda de radio (Ondas electromagnéticas)', 'Ondas', '2016-12-22 22:07:20', '2016-12-22 22:07:20');
+INSERT INTO `laboratory` VALUES ('1375', 'FISOND002', '22', null, 'Ondas de sonido (Ondas mecánicas)', 'Ondas', '2016-12-22 22:07:20', '2016-12-22 22:07:20');
+INSERT INTO `laboratory` VALUES ('1376', 'FISOND003', '22', null, 'Espectro electromagnético', 'Ondas', '2016-12-22 22:07:20', '2016-12-22 22:07:20');
+INSERT INTO `laboratory` VALUES ('1377', 'FISOND004', '22', null, 'Luz visible', 'Óptica', '2016-12-22 22:07:20', '2016-12-22 22:07:20');
+INSERT INTO `laboratory` VALUES ('1378', 'FISOPT001', '22', null, 'Dispersión y síntesis de la luz', 'Óptica', '2016-12-22 22:07:20', '2016-12-22 22:07:20');
+INSERT INTO `laboratory` VALUES ('1379', 'FISOPT002', '22', null, 'Espejo cóncavo', 'Óptica', '2016-12-22 22:07:20', '2016-12-22 22:07:20');
+INSERT INTO `laboratory` VALUES ('1380', 'FISOPT004', '22', null, 'Espejos esféricos', 'Óptica', '2016-12-22 22:07:20', '2016-12-22 22:07:20');
+INSERT INTO `laboratory` VALUES ('1381', 'FISOPT003', '22', null, 'Lente convergente', 'Óptica', '2016-12-22 22:07:20', '2016-12-22 22:07:20');
+INSERT INTO `laboratory` VALUES ('1382', 'FISOPT005', '22', null, 'Lentes', 'Óptica', '2016-12-22 22:07:20', '2016-12-22 22:07:20');
+INSERT INTO `laboratory` VALUES ('1383', 'FISELE004', '22', null, 'Magnitudes eléctricas', 'Electricidad y electromagnetismo', '2016-12-22 22:07:20', '2016-12-22 22:07:20');
+INSERT INTO `laboratory` VALUES ('1384', 'FISELE001', '22', null, 'Circuito serie', 'Electricidad y electromagnetismo', '2016-12-22 22:07:20', '2016-12-22 22:07:20');
+INSERT INTO `laboratory` VALUES ('1385', 'FISELE002', '22', null, 'Circuito paralelo', 'Electricidad y electromagnetismo', '2016-12-22 22:07:20', '2016-12-22 22:07:20');
+INSERT INTO `laboratory` VALUES ('1386', 'FISELE003', '22', null, 'Circuito mixto', 'Electricidad y electromagnetismo', '2016-12-22 22:07:20', '2016-12-22 22:07:20');
+INSERT INTO `laboratory` VALUES ('1387', 'FISELE005', '22', null, 'Resistencia equivalente', 'Electricidad y electromagnetismo', '2016-12-22 22:07:20', '2016-12-22 22:07:20');
+INSERT INTO `laboratory` VALUES ('1388', 'FISELE006', '22', null, 'Ley de los voltajes', 'Electricidad y electromagnetismo', '2016-12-22 22:07:21', '2016-12-22 22:07:21');
+INSERT INTO `laboratory` VALUES ('1389', 'FISELE007', '22', null, 'Ley de las corrientes', 'Electricidad y electromagnetismo', '2016-12-22 22:07:21', '2016-12-22 22:07:21');
 
 -- ----------------------------
 -- Table structure for lessons
@@ -1395,7 +1408,7 @@ CREATE TABLE `subjects` (
   `creation_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `last_update` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of subjects
@@ -1419,7 +1432,7 @@ CREATE TABLE `subjects_class_groups` (
   KEY `class_group_id` (`class_group_id`),
   CONSTRAINT `subjects_class_groups_ibfk_1` FOREIGN KEY (`subjects_id`) REFERENCES `subjects` (`id`),
   CONSTRAINT `subjects_class_groups_ibfk_2` FOREIGN KEY (`class_group_id`) REFERENCES `class_group` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of subjects_class_groups
@@ -1456,13 +1469,6 @@ CREATE TABLE `temp_users` (
 -- ----------------------------
 -- Records of temp_users
 -- ----------------------------
-INSERT INTO `temp_users` VALUES ('ESTUDIANTE', 'est2', 'est', 'Andrés', 'Morales', '8-B');
-INSERT INTO `temp_users` VALUES ('ESTUDIANTE', 'est1', 'est', 'Carlos', 'Marín', '8-C');
-INSERT INTO `temp_users` VALUES ('ESTUDIANTE', 'est3', 'est', 'Cesar', 'Restrepo', '8-B');
-INSERT INTO `temp_users` VALUES ('ESTUDIANTE', 'est4', 'est', 'Felipe', 'Morales', '8-C');
-INSERT INTO `temp_users` VALUES ('PROFESOR', 'pro1', 'pro', 'Mateo', 'Marín', '8-B');
-INSERT INTO `temp_users` VALUES ('PROFESOR', 'pro2', 'pro', 'Sergio', 'Restrepo', '8-C');
-INSERT INTO `temp_users` VALUES ('PROFESOR', 'pro3', 'pro', 'Victor', 'Morales', '8-B');
 
 -- ----------------------------
 -- Table structure for users
@@ -1480,7 +1486,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   KEY `rols_id` (`rols_id`),
   CONSTRAINT `users_ibfk_1` FOREIGN KEY (`rols_id`) REFERENCES `rols` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=113 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=127 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of users
@@ -1503,7 +1509,7 @@ CREATE TABLE `users_class_groups` (
   KEY `class_group_id` (`class_group_id`),
   CONSTRAINT `users_class_groups_ibfk_1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`),
   CONSTRAINT `users_class_groups_ibfk_2` FOREIGN KEY (`class_group_id`) REFERENCES `class_group` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=157 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=166 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of users_class_groups
@@ -1524,7 +1530,7 @@ CREATE TABLE `user_group_subjects` (
   KEY `sc_id` (`sc_id`),
   CONSTRAINT `user_group_subjects_ibfk_1` FOREIGN KEY (`ucg_id`) REFERENCES `users_class_groups` (`id`),
   CONSTRAINT `user_group_subjects_ibfk_2` FOREIGN KEY (`sc_id`) REFERENCES `subjects_class_groups` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_group_subjects
@@ -1535,7 +1541,7 @@ CREATE TABLE `user_group_subjects` (
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `app_edit`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `app_edit`(IN `schoolName` varchar(100), IN `country` varchar(100), IN `city` varchar(100), IN `license` varchar(100), IN `rank` varchar(100))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `app_edit`(IN `schoolName` varchar(100), IN `country` varchar(100), IN `city` varchar(100), IN `license` varchar(100), IN `rank` varchar(100),IN `servName` varchar(100))
 BEGIN
 	UPDATE
 		app_params
@@ -1571,6 +1577,13 @@ BEGIN
 		`value` = rank
 	WHERE
 		`name` = 'RANK_SEND_ENABLED';
+
+	UPDATE
+		app_params
+	SET
+		`value` = servName
+	WHERE
+		`name` = 'SERVER_NAME';
 END
 ;;
 DELIMITER ;
@@ -2419,7 +2432,7 @@ DROP PROCEDURE IF EXISTS `groups_asign_user`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `groups_asign_user`(IN `userId` int,IN `groupId` int)
 BEGIN
-	#Routine body goes here...
+	
 	DELETE FROM
 		messages_all
 	WHERE
@@ -2528,7 +2541,7 @@ DROP PROCEDURE IF EXISTS `laboratories_create`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `laboratories_create`(IN `subjectId` int,IN `labName` varchar(100),IN `lesson` varchar(100),IN `labCode` varchar(100))
 BEGIN
-	#Routine body goes here...
+	
 	IF (
 		NOT EXISTS (
 			SELECT
@@ -2599,7 +2612,7 @@ DROP PROCEDURE IF EXISTS `laboratories_edit`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `laboratories_edit`(IN `labId` int, IN `subjectId` int,IN `labName` varchar(100),IN `lesson` varchar(100),IN `labCode` varchar(100))
 BEGIN
-	#Routine body goes here...
+	
 	IF (
 		NOT EXISTS (
 			SELECT
@@ -2645,7 +2658,7 @@ DROP PROCEDURE IF EXISTS `laboratories_validate`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `laboratories_validate`(IN `labName` varchar(100),IN `lesson` varchar(100),IN `subName` varchar(100),IN `labCode` varchar(100))
 BEGIN
-	#Routine body goes here...
+	
 	IF (
 		NOT EXISTS (
 			SELECT
@@ -2797,7 +2810,7 @@ DROP PROCEDURE IF EXISTS `subjects_delete`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `subjects_delete`(IN `subjectId` int)
 BEGIN
-	# LESSONS
+	
 	DELETE
 		le.*
 	FROM
@@ -2805,7 +2818,7 @@ BEGIN
 	WHERE
 		subject_id = subjectId;
 
-	# GROUPS
+	
 	DELETE  
 		ugs.* 
 	FROM 
@@ -2819,7 +2832,7 @@ BEGIN
 	WHERE
 		subjects_id = subjectId;
 
-	# LABORATORIES
+	
 	DELETE  
 		lu.* 
 	FROM 
@@ -2833,7 +2846,7 @@ BEGIN
 	WHERE
 		subject_id = subjectId;
 
-	# SUBJECT
+	
 	DELETE FROM
 		subjects
 	WHERE
@@ -2907,7 +2920,7 @@ DROP PROCEDURE IF EXISTS `subjects_insert`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `subjects_insert`(IN `subName` varchar(100))
 BEGIN
-	#Routine body goes here...
+	
 	
 	IF (
 		NOT EXISTS (
@@ -2944,153 +2957,153 @@ DROP PROCEDURE IF EXISTS `uploads_labs`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `uploads_labs`()
 BEGIN
-  DECLARE suName VARCHAR(100) DEFAULT NULL;
-  DECLARE leName VARCHAR(100) DEFAULT NULL;
-  DECLARE laCode VARCHAR(100) DEFAULT NULL;
-  DECLARE laName VARCHAR(100) DEFAULT NULL;
+	DECLARE suName VARCHAR(100) DEFAULT NULL;
+	DECLARE leName VARCHAR(100) DEFAULT NULL;
+	DECLARE laCode VARCHAR(100) DEFAULT NULL;
+	DECLARE laName VARCHAR(100) DEFAULT NULL;
 
-  DECLARE materia VARCHAR(100) DEFAULT NULL;
-  DECLARE unidad VARCHAR(100) DEFAULT NULL;
-  DECLARE codigo VARCHAR(100) DEFAULT NULL;
-  DECLARE nombrePrac VARCHAR(100) DEFAULT NULL;
+	DECLARE materia VARCHAR(100) DEFAULT NULL;
+	DECLARE unidad VARCHAR(100) DEFAULT NULL;
+	DECLARE codigo VARCHAR(100) DEFAULT NULL;
+	DECLARE nombrePrac VARCHAR(100) DEFAULT NULL;
 
-  DECLARE dataOk INT DEFAULT 1;
+	DECLARE dataOk INT DEFAULT 1;
 
-  DECLARE suId INT DEFAULT NULL;
+	DECLARE suId INT DEFAULT NULL;
 
-  DECLARE cur1 CURSOR FOR ( SELECT * FROM temp_labs );
-  DECLARE cur2 CURSOR FOR ( SELECT * FROM temp_labs );
+	DECLARE cur1 CURSOR FOR ( SELECT * FROM temp_labs );
+	DECLARE cur2 CURSOR FOR ( SELECT * FROM temp_labs );
 
-  
-  SET @materia = NULL, 
-      @unidad = NULL, 
-      @codigo = NULL, 
-      @nombrePrac = NULL;
+	
+	SET @materia = NULL, 
+			@unidad = NULL, 
+			@codigo = NULL, 
+			@nombrePrac = NULL;
 
-  SELECT 
-    subName,
-    lessonName,
-    labCode,
-    labName
-  INTO
-    materia, unidad, codigo, nombrePrac
-  FROM
-    temp_labs
-  LIMIT 1;
-      
-  IF(
-    INSTR(materia, 'MATERIA') AND
-    INSTR(unidad, 'UNIDAD') AND
-    INSTR(codigo, 'CODIGO') AND
-    INSTR(nombrePrac, 'NOMBRE DE LA PRACTICA')
-  )
-  THEN
-    DELETE FROM
-      temp_labs
-    LIMIT 1;
+	SELECT 
+		subName,
+		lessonName,
+		labCode,
+		labName
+	INTO
+		materia, unidad, codigo, nombrePrac
+	FROM
+		temp_labs
+	LIMIT 1;
+			
+	IF(
+		INSTR(materia, 'MATERIA') AND
+		INSTR(unidad, 'UNIDAD') AND
+		INSTR(codigo, 'CODIGO') AND
+		INSTR(nombrePrac, 'NOMBRE DE LA PRACTICA')
+	)
+	THEN
+		DELETE FROM
+			temp_labs
+		LIMIT 1;
 
-    OPEN cur1;
-    BEGIN
-      DECLARE exit_flag INT DEFAULT 0;
-      DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET exit_flag = 1;
+		OPEN cur1;
+		BEGIN
+			DECLARE exit_flag INT DEFAULT 0;
+			DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET exit_flag = 1;
 
-      read_loop: LOOP
-        FETCH cur1 INTO suName, leName, laCode, laName;
-        IF exit_flag THEN
-          LEAVE read_loop;
-        END IF;
+			read_loop: LOOP
+				FETCH cur1 INTO suName, leName, laCode, laName;
+				IF exit_flag THEN
+					LEAVE read_loop;
+				END IF;
 
-        SET suId = (
-          SELECT
-            s.id
-          FROM
-            subjects s
-          WHERE
-            `name` = suName
-        );
+				SET suId = (
+					SELECT
+						s.id
+					FROM
+						subjects s
+					WHERE
+						`name` = suName
+				);
 
-        IF( suId IS NULL)
-        THEN
-          SET dataOk = 0;
-          LEAVE read_loop;
-        END IF;
+				IF( suId IS NULL)
+				THEN
+					SET dataOk = 0;
+					LEAVE read_loop;
+				END IF;
 
-        IF (
-          EXISTS (
-            SELECT
-              id 
-            FROM
-              laboratory
-            WHERE
-              `name` = laName AND
-              subject_id = suId
-          ) OR
-          EXISTS (
-            SELECT
-              l.id 
-            FROM
-              laboratory l
-            WHERE
-              l.lab_code = laCode
-          )
-        )
-        THEN
-          SET dataOk = 0;
-          LEAVE read_loop;
-        END IF;
-      END LOOP;
-    END;
+				IF (
+					EXISTS (
+						SELECT
+							id 
+						FROM
+							laboratory
+						WHERE
+							`name` = laName AND
+							subject_id = suId
+					) OR
+					EXISTS (
+						SELECT
+							l.id 
+						FROM
+							laboratory l
+						WHERE
+							l.lab_code = laCode
+					)
+				)
+				THEN
+					SET dataOk = 0;
+					LEAVE read_loop;
+				END IF;
+			END LOOP;
+		END;
 
-    CLOSE cur1;
-    IF(dataOk = 1)
-    THEN
-      OPEN cur2;
-      BEGIN
-        DECLARE exit_flag INT DEFAULT 0;
-        DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET exit_flag = 1;
+		CLOSE cur1;
+		IF(dataOk = 1)
+		THEN
+			OPEN cur2;
+			BEGIN
+				DECLARE exit_flag INT DEFAULT 0;
+				DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET exit_flag = 1;
 
-        read_loop_2: LOOP
-          FETCH cur2 INTO suName, leName, laCode, laName;
-          IF exit_flag THEN
-            LEAVE read_loop_2;
-          END IF;
+				read_loop_2: LOOP
+					FETCH cur2 INTO suName, leName, laCode, laName;
+					IF exit_flag THEN
+						LEAVE read_loop_2;
+					END IF;
 
-          SET suId = (
-            SELECT
-              s.id
-            FROM
-              subjects s
-            WHERE
-              `name` = suName
-          );
+					SET suId = (
+						SELECT
+							s.id
+						FROM
+							subjects s
+						WHERE
+							`name` = suName
+					);
 
-          INSERT INTO
-            laboratory
-          (
-            lab_code,
-            subject_id,
-            `name`,
-            lesson_name
-          )
-          VALUES
-          (
-            laCode,
-            suId,
-            laName,
-            leName
-          );
-        END LOOP;
-      END;
-      CLOSE cur2;
+					INSERT INTO
+						laboratory
+					(
+						lab_code,
+						subject_id,
+						`name`,
+						lesson_name
+					)
+					VALUES
+					(
+						laCode,
+						suId,
+						laName,
+						leName
+					);
+				END LOOP;
+			END;
+			CLOSE cur2;
 
-      DELETE FROM temp_labs;
-      SELECT 'true' as state, 'QUERY_OK' as res_code;
-    ELSE
-      SELECT 'true' as state, 'WRONG_DATA' as res_code;
-    END IF;
-  ELSE
-    SELECT 'true' as state, 'WRONG_DATA' as res_code;
-  END IF;
+			DELETE FROM temp_labs;
+			SELECT 'true' as state, 'QUERY_OK' as res_code;
+		ELSE
+			SELECT 'true' as state, 'WRONG_DATA' as res_code;
+		END IF;
+	ELSE
+		SELECT 'true' as state, 'WRONG_DATA' as res_code;
+	END IF;
 
 END
 ;;
@@ -3103,191 +3116,191 @@ DROP PROCEDURE IF EXISTS `uploads_users`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `uploads_users`()
 BEGIN
-  DECLARE uType VARCHAR(100) DEFAULT NULL;
-  DECLARE usr VARCHAR(100) DEFAULT NULL;
-  DECLARE pss VARCHAR(100) DEFAULT NULL;
-  DECLARE usrName VARCHAR(100) DEFAULT NULL;
-  DECLARE usrLastName VARCHAR(100) DEFAULT NULL;
-  DECLARE uGroup VARCHAR(100) DEFAULT NULL;
+	DECLARE uType VARCHAR(100) DEFAULT NULL;
+	DECLARE usr VARCHAR(100) DEFAULT NULL;
+	DECLARE pss VARCHAR(100) DEFAULT NULL;
+	DECLARE usrName VARCHAR(100) DEFAULT NULL;
+	DECLARE usrLastName VARCHAR(100) DEFAULT NULL;
+	DECLARE uGroup VARCHAR(100) DEFAULT NULL;
 
-  DECLARE tipo VARCHAR(100) DEFAULT NULL;
-  DECLARE usuario VARCHAR(100) DEFAULT NULL;
-  DECLARE contras VARCHAR(100) DEFAULT NULL;
-  DECLARE nombre VARCHAR(100) DEFAULT NULL;
-  DECLARE apellido VARCHAR(100) DEFAULT NULL;
-  DECLARE grupo VARCHAR(100) DEFAULT NULL;
+	DECLARE tipo VARCHAR(100) DEFAULT NULL;
+	DECLARE usuario VARCHAR(100) DEFAULT NULL;
+	DECLARE contras VARCHAR(100) DEFAULT NULL;
+	DECLARE nombre VARCHAR(100) DEFAULT NULL;
+	DECLARE apellido VARCHAR(100) DEFAULT NULL;
+	DECLARE grupo VARCHAR(100) DEFAULT NULL;
 
-  DECLARE dataOk INT DEFAULT 1;
+	DECLARE dataOk INT DEFAULT 1;
 
-  DECLARE gId INT DEFAULT NULL;
+	DECLARE gId INT DEFAULT NULL;
 
-  DECLARE cur1 CURSOR FOR ( SELECT * FROM temp_users );
-  DECLARE cur2 CURSOR FOR ( SELECT * FROM temp_users );
+	DECLARE cur1 CURSOR FOR ( SELECT * FROM temp_users );
+	DECLARE cur2 CURSOR FOR ( SELECT * FROM temp_users );
 
-  SELECT 
-    *
-  INTO
-    tipo, usuario, contras, nombre, apellido, grupo
-  FROM
-    temp_users
-  LIMIT 1;
-          
-  IF(
-    INSTR(tipo, 'TIPO') AND
-    INSTR(usuario, 'USUARIO') AND
-    INSTR(contras, 'CONTRASEÑA') AND
-    INSTR(nombre, 'NOMBRE') AND
-    INSTR(apellido, 'APELLIDO') AND
-    INSTR(grupo, 'GRUPO')
-  )
-  THEN
-    DELETE FROM
-      temp_users
-    LIMIT 1;
-    
-    OPEN cur1;
-    BEGIN
-      DECLARE exit_flag INT DEFAULT 0;
-      DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET exit_flag = 1;
+	SELECT 
+		*
+	INTO
+		tipo, usuario, contras, nombre, apellido, grupo
+	FROM
+		temp_users
+	LIMIT 1;
+					
+	IF(
+		INSTR(tipo, 'TIPO') AND
+		INSTR(usuario, 'USUARIO') AND
+		INSTR(contras, 'CONTRASEÑA') AND
+		INSTR(nombre, 'NOMBRE') AND
+		INSTR(apellido, 'APELLIDO') AND
+		INSTR(grupo, 'GRUPO')
+	)
+	THEN
+		DELETE FROM
+			temp_users
+		LIMIT 1;
+		
+		OPEN cur1;
+		BEGIN
+			DECLARE exit_flag INT DEFAULT 0;
+			DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET exit_flag = 1;
 
-      read_loop: LOOP
-        FETCH cur1 INTO uType, usr, pss, usrName, usrLastName, uGroup;
-        IF exit_flag THEN
-          LEAVE read_loop;
-        END IF;
+			read_loop: LOOP
+				FETCH cur1 INTO uType, usr, pss, usrName, usrLastName, uGroup;
+				IF exit_flag THEN
+					LEAVE read_loop;
+				END IF;
 
-        SET gId = (
-          SELECT
-            cg.id
-          FROM
-            class_group cg
-          WHERE
-            cg.`name` = uGroup
-        );
+				SET gId = (
+					SELECT
+						cg.id
+					FROM
+						class_group cg
+					WHERE
+						cg.`name` = uGroup
+				);
 
-        IF( gId IS NULL AND uType = 'ESTUDIANTE')
-        THEN
-          SET dataOk = 0; 
-          SELECT 'GROUP', uGroup;
-          LEAVE read_loop;
-        END IF;
+				IF( gId IS NULL AND uType = 'ESTUDIANTE')
+				THEN
+					SET dataOk = 0;	
+					SELECT 'GROUP', uGroup;
+					LEAVE read_loop;
+				END IF;
 
-        IF (
-          EXISTS (
-            SELECT
-              id 
-            FROM
-              users
-            WHERE
-              `name` = usrName AND
-              last_name = usrLastName
-          ) OR
-          EXISTS (
-            SELECT
-              id 
-            FROM
-              users
-            WHERE
-              `user` = usr
-          )
-        )
-        THEN
-          SET dataOk = 0;
-          SELECT 'USER';
-          LEAVE read_loop;
-        END IF;
-      END LOOP;
-    END;
-    CLOSE cur1;
+				IF (
+					EXISTS (
+						SELECT
+							id 
+						FROM
+							users
+						WHERE
+							`name` = usrName AND
+							last_name = usrLastName
+					) OR
+					EXISTS (
+						SELECT
+							id 
+						FROM
+							users
+						WHERE
+							`user` = usr
+					)
+				)
+				THEN
+					SET dataOk = 0;
+					SELECT 'USER';
+					LEAVE read_loop;
+				END IF;
+			END LOOP;
+		END;
+		CLOSE cur1;
 
-    IF(dataOk = 1)
-    THEN
-      OPEN cur2;
-      BEGIN
-        DECLARE exit_flag INT DEFAULT 0;
-        DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET exit_flag = 1;
+		IF(dataOk = 1)
+		THEN
+			OPEN cur2;
+			BEGIN
+				DECLARE exit_flag INT DEFAULT 0;
+				DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET exit_flag = 1;
 
-        read_loop_2: LOOP
-          FETCH cur2 INTO uType, usr, pss, usrName, usrLastName, uGroup;
-          IF exit_flag THEN
-            LEAVE read_loop_2;
-          END IF;
+				read_loop_2: LOOP
+					FETCH cur2 INTO uType, usr, pss, usrName, usrLastName, uGroup;
+					IF exit_flag THEN
+						LEAVE read_loop_2;
+					END IF;
 
-          SET gId = (
-            SELECT
-              cg.id
-            FROM
-              class_group cg
-            WHERE
-              cg.`name` = uGroup
-          );
+					SET gId = (
+						SELECT
+							cg.id
+						FROM
+							class_group cg
+						WHERE
+							cg.`name` = uGroup
+					);
 
-          IF( gId IS NOT NULL AND uType = 'ESTUDIANTE')
-          THEN
-            INSERT INTO
-              users
-            (
-              `user`,
-              pass,
-              `name`,
-              last_name,
-              rols_id           
-            )
-            VALUES
-            (
-              usr,
-              MD5(pss),
-              usrName,
-              usrLastName,
-              4
-            );
+					IF( gId IS NOT NULL AND uType = 'ESTUDIANTE')
+					THEN
+						INSERT INTO
+							users
+						(
+							`user`,
+							pass,
+							`name`,
+							last_name,
+							rols_id						
+						)
+						VALUES
+						(
+							usr,
+							MD5(pss),
+							usrName,
+							usrLastName,
+							4
+						);
 
-            SET @userId = LAST_INSERT_ID();
-            INSERT INTO
-              users_class_groups
-            (
-              users_id,
-              class_group_id
-            )
-            VALUES
-            (
-              @userId,
-              gId
-            );
-          ELSE
-            INSERT INTO
-              users
-            (
-              `user`,
-              pass,
-              `name`,
-              last_name,
-              rols_id           
-            )
-            VALUES
-            (
-              usr,
-              MD5(pss),
-              usrName,
-              usrLastName,
-              3
-            );
-          END IF;
-          
-        END LOOP;
-      END;
-      CLOSE cur2;
+						SET @userId = LAST_INSERT_ID();
+						INSERT INTO
+							users_class_groups
+						(
+							users_id,
+							class_group_id
+						)
+						VALUES
+						(
+							@userId,
+							gId
+						);
+					ELSE
+						INSERT INTO
+							users
+						(
+							`user`,
+							pass,
+							`name`,
+							last_name,
+							rols_id						
+						)
+						VALUES
+						(
+							usr,
+							MD5(pss),
+							usrName,
+							usrLastName,
+							3
+						);
+					END IF;
+					
+				END LOOP;
+			END;
+			CLOSE cur2;
 
-      DELETE FROM temp_labs;
-      SELECT 'true' as state, 'QUERY_OK' as res_code;
-    ELSE
-      SELECT 'true' as state, 'WRONG_DATA' as res_code;
-    END IF;
-  ELSE
-    SELECT 'true' as state, 'WRONG_DATA' as res_code;
-  END IF;
+			DELETE FROM temp_labs;
+			SELECT 'true' as state, 'QUERY_OK' as res_code;
+		ELSE
+			SELECT 'true' as state, 'WRONG_DATA' as res_code;
+		END IF;
+	ELSE
+		SELECT 'true' as state, 'WRONG_DATA' as res_code;
+	END IF;
 
-  
+	
 
 END
 ;;
@@ -3452,25 +3465,25 @@ DROP PROCEDURE IF EXISTS `user_delete`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `user_delete`(IN `userId` int)
 BEGIN
-		#RANKING
+		
 		DELETE FROM
 			ranking
 		WHERE
 			user_id = userId;
 
-		#MESSAGES_ALL
+		
 		DELETE FROM
 			messages_all
 		WHERE
 			user_id = userId;
 
-		#LABORATORIES_USERS
+		
 		DELETE FROM
 			laboratories_users
 		WHERE
 			user_id = userId;
 
-		#MESSAGES
+		
 		DELETE 
 			m.*
 		FROM
@@ -3479,7 +3492,7 @@ BEGIN
 		WHERE
 			ucg.users_id = userId;
 
-		#USERS_CLASS_GROUPS
+		
 		DELETE 
 			us.*
 		FROM
@@ -3492,9 +3505,9 @@ BEGIN
 			users_class_groups
 		WHERE
 			users_id = userId;
-		#----------------------------------
+		
 
-		# USERS
+		
 		DELETE FROM
 			users
 		WHERE
