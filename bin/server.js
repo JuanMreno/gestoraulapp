@@ -8,6 +8,8 @@ var conn = require('../objs/SqlConnection.js');
 var request = require('ajax-request');
 var getmac = require('getmac');
 var util = require('util');
+var fs = require('fs');
+
 /**
  * Get port from environment and store in Express.
  */
@@ -90,6 +92,7 @@ function onListening() {
 
   setServerIp();
   reportRanking();
+  deleteFolderRecursive(process.env.ABS_PDF_REPORTS_DIR);
 }
 
 function setServerIp() {
@@ -388,3 +391,17 @@ function reportRanking() {
 
   });
 }
+
+function deleteFolderRecursive(path) {
+  if( fs.existsSync(path) ) {
+    fs.readdirSync(path).forEach(function(file,index){
+      var curPath = path + "/" + file;
+      if(fs.lstatSync(curPath).isDirectory()) { // recurse
+        deleteFolderRecursive(curPath);
+      } else { // delete file
+        fs.unlinkSync(curPath);
+      }
+    });
+    fs.rmdirSync(path);
+  }
+};
