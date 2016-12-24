@@ -57,6 +57,7 @@ class PdfMakeConstructor {
 
 	b.push(header);
 
+	console.log(data);
 	data.rows.forEach(function(e,i,a){
 		var estado = (e.lab_state == "1") ? "Entregado" : "Pendiente";
 		b.push(

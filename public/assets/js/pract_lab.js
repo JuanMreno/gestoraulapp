@@ -410,8 +410,32 @@
 	    		rows:aData
 	    	}
 	    	
-    	 	const pdfConst = new PdfMakeConstructor(session.name + '_' + session.last_name + "_report.pdf");
-    	 	pdfConst.makeStudentReport(data);
+    	 	//const pdfConst = new PdfMakeConstructor(session.name + '_' + session.last_name + "_report.pdf");
+    	 	//pdfConst.makeStudentReport(data);
+
+            var jData = JSON.stringify(data);
+            $.ajax({
+                method: "GET",
+                url: CON_URL+"reports/makeStudentReport",
+                data:{data:jData}
+            })
+            .done(function( data ) {
+                var res = $.parseJSON(data);
+                if(res.state == "true"){
+                    //$.fileDownload(res.url);
+                    $('#btnDownLPdf').prop('href', res.url);
+                    document.getElementById('btnDownLPdf').click();
+                }
+                else{
+                    $('#alertModalCont').text("Ha ocurrido un error inesperado, inténtalo de nuevo.");
+                    $('#alertModal').modal('show');
+                }
+            })
+            .error(function(e) {
+                $('#alertModalCont').text("Ha ocurrido un error inesperado, inténtalo de nuevo.");
+                $('#alertModal').modal('show');
+                console.log("Error ajax.");
+            });
 	    });
 
 	    $('#dlExcelReport').off('click').on('click', function(event) {

@@ -852,10 +852,67 @@
 
             var selType = $('#nomSelect').attr('data-type');
 
+            /*
             if(selType == 'lab')
                 pdfConst.makeLabReport(data);
             else
                 pdfConst.makeStuReport(data);
+            */
+
+            var jData = JSON.stringify(data);
+            if(selType == 'lab'){
+                //pdfConst.makeLabReport(data);
+                $.ajax({
+                    method: "GET",
+                    url: CON_URL+"reports/makeLabReport",
+                    data:{data:jData}
+                })
+                .done(function( data ) {
+                    var res = $.parseJSON(data);
+                    if(res.state == "true"){
+                        //$.fileDownload(res.url);
+                        $('#btnDownLPdf').prop('href', res.url);
+                        document.getElementById('btnDownLPdf').click();
+                    }
+                    else{
+                        $('#alertModalCont').text("Ha ocurrido un error inesperado, inténtalo de nuevo.");
+                        $('#alertModal').modal('show');
+                    }
+                })
+                .error(function(e) {
+                    $('#alertModalCont').text("Ha ocurrido un error inesperado, inténtalo de nuevo.");
+                    $('#alertModal').modal('show');
+                    console.log("Error ajax.");
+                });
+            }
+            else{
+                //pdfConst.makeStuReport(data);
+                
+                var jData = JSON.stringify(data);
+                $.ajax({
+                    method: "GET",
+                    url: CON_URL+"reports/makeStuReport",
+                    data:{data:jData}
+                })
+                .done(function( data ) {
+                    var res = $.parseJSON(data);
+                    if(res.state == "true"){
+                        //$.fileDownload(res.url);
+                        $('#btnDownLPdf').prop('href', res.url);
+                        document.getElementById('btnDownLPdf').click();
+                    }
+                    else{
+                        $('#alertModalCont').text("Ha ocurrido un error inesperado, inténtalo de nuevo.");
+                        $('#alertModal').modal('show');
+                    }
+                })
+                .error(function(e) {
+                    $('#alertModalCont').text("Ha ocurrido un error inesperado, inténtalo de nuevo.");
+                    $('#alertModal').modal('show');
+                    console.log("Error ajax.");
+                });
+            }
+
         });
 
         $('#dlExcelReport').off('click').on('click', function(event) {
