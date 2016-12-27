@@ -174,7 +174,6 @@ function decode(str) {
 }
 
 router.get('/makeStudentReport', function(req, res) {
-	console.log(unescape(req.query.data));
 	var data = JSON.parse(unescape(req.query.data));
 
 	//////////////		PDFMAKE  	///////////////////////////
@@ -219,14 +218,16 @@ router.get('/makeStudentReport', function(req, res) {
 		style: 'watermark'
 	};
 
+
 	var fonts = {
 		Roboto: {
-			normal: 'fonts/Roboto-Regular.ttf',
-			bold: 'fonts/Roboto-Medium.ttf',
-			italics: 'fonts/Roboto-Italic.ttf',
-			bolditalics: 'fonts/Roboto-Italic.ttf'
+			normal: process.env.ABS_FONTS_DIR + '/Roboto-Regular.ttf',
+			bold: process.env.ABS_FONTS_DIR + '/Roboto-Medium.ttf',
+			italics: process.env.ABS_FONTS_DIR + '/Roboto-Italic.ttf',
+			bolditalics: process.env.ABS_FONTS_DIR + '/Roboto-Italic.ttf'
 		}
 	};
+
 	var PdfPrinter = require('pdfmake/src/printer');
 	var printer = new PdfPrinter(fonts);
 		
@@ -355,10 +356,10 @@ router.get('/makeLabReport', function(req, res) {
 
 	var fonts = {
 		Roboto: {
-			normal: 'fonts/Roboto-Regular.ttf',
-			bold: 'fonts/Roboto-Medium.ttf',
-			italics: 'fonts/Roboto-Italic.ttf',
-			bolditalics: 'fonts/Roboto-Italic.ttf'
+			normal: process.env.ABS_FONTS_DIR + '/Roboto-Regular.ttf',
+			bold: process.env.ABS_FONTS_DIR + '/Roboto-Medium.ttf',
+			italics: process.env.ABS_FONTS_DIR + '/Roboto-Italic.ttf',
+			bolditalics: process.env.ABS_FONTS_DIR + '/Roboto-Italic.ttf'
 		}
 	};
 	var PdfPrinter = require('pdfmake/src/printer');
@@ -494,10 +495,10 @@ router.get('/makeStuReport', function(req, res) {
 
 	var fonts = {
 		Roboto: {
-			normal: 'fonts/Roboto-Regular.ttf',
-			bold: 'fonts/Roboto-Medium.ttf',
-			italics: 'fonts/Roboto-Italic.ttf',
-			bolditalics: 'fonts/Roboto-Italic.ttf'
+			normal: process.env.ABS_FONTS_DIR + '/Roboto-Regular.ttf',
+			bold: process.env.ABS_FONTS_DIR + '/Roboto-Medium.ttf',
+			italics: process.env.ABS_FONTS_DIR + '/Roboto-Italic.ttf',
+			bolditalics: process.env.ABS_FONTS_DIR + '/Roboto-Italic.ttf'
 		}
 	};
 	var PdfPrinter = require('pdfmake/src/printer');

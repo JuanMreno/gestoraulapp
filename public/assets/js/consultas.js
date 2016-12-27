@@ -948,7 +948,9 @@
                 rows:aData
             }
 
-            $.fileDownload(CON_URL+"reports/getTeacher?data=" + JSON.stringify(data));
+            $('#btnDownLXL').prop('href', CON_URL+"reports/getTeacher?data=" + JSON.stringify(data));
+            document.getElementById('btnDownLXL').click();
+            //$.fileDownload(CON_URL+"reports/getTeacher?data=" + JSON.stringify(data));
         });
     }
 
