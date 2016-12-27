@@ -1,0 +1,78 @@
+{
+	"app_name":"Gestor de Aula",
+	"page_title":"Gestor de aula CloudLabs",
+	"done":"Aceptar",
+	"cancel":"Cancelar",
+	"close":"Cerrar",
+	"login_1":"Iniciar Sesión",
+	"user":"Usuario",
+	"pass":"Contraseña",
+	"starting":"Iniciando",
+	"all_fields":"Todos los campos son requeridos.",
+
+	"login_exp_1":"Nombre o Usuario inválido, intenta de nuevo.",
+	"login_exp_2":"Nombre o Usuario inválido, intenta de nuevo.",
+
+	"license_exp_1":"Hay un problema con la licencia del gestor de aula, por favor comuníquese con el proveedor.",
+	"license_exp_2":"Parece que ha pasado mucho tiempo desde la última vez que la licencia fue verificada. Es necesario conectar el equipo servidor del profesor a Internet y reiniciar la aplicación Gestor de aula CloudLabs.",
+
+	"subject":"Materia",
+	"dates":"Fechas",
+
+	"none":"Ninguna",
+	"none_data":"Ningún dato encontrado.",
+
+	"error_try_again":"Ha ocurrido un error inesperado, inténtalo de nuevo.",
+
+	"delivery":"Entregado",
+	"pending":"Pendiente",
+	"file_not_attached":"No se ha adjuntado ningún archivo.",
+	"file_upload_success":"El documento ha sido subido con éxito.",
+	"file_delivered":"El reporte ya ha sido entregado.",
+	"file_type_alert":"Únicamente se permiten adjuntar archivos tipo PDF o VPLC.",
+
+	"nav_1":"Prácticas",
+	"nav_2":"Consultas",
+	"nav_3":"Evaluación",
+	"nav_4":"Ranking",
+	"nav_5":"Anuncios",
+	"nav_6":"Mis grupos",
+	"nav_7":"Usuarios",
+	"nav_8":"Grupos",
+	"nav_9":"Materias",
+	"nav_10":"Laboratorios",
+	"nav_11":"Configuración",
+	"nav_12":"Servidor",
+	"nav_13":"Cerrar sesión",
+
+	"table_name":"Nombre",
+	"table_date":"Fecha",
+	"table_state":"Estado",
+	"table_t":"T",
+	"table_i":"I",
+	"table_p":"P",
+	"table_l":"L",
+	"table_f":"F",
+
+	"tooltip_1":"Entregado/Sin entregar",
+	"tooltip_2":"Tiempo de entrega",
+	"tooltip_3":"Intentos",
+	"tooltip_4":"Nota del Profesor",
+	"tooltip_5":"Nota de Laboratorio",
+	"tooltip_6":"Nota Final",
+
+	"lab_modal_1":"Unidad",
+	"lab_modal_2":"Fecha entrega",
+	"lab_modal_3":"Tiempo entrega",
+	"lab_modal_4":"Nota 1",
+	"lab_modal_5":"Nota 2",
+	"lab_modal_6":"Nota Final",
+	"lab_modal_7":"Intentos",
+	"lab_modal_8":"Observaciones",
+	"lab_modal_9":"Cargar reporte de laboratorio",
+	"lab_modal_10":"Subir",
+	"lab_modal_11":"Ver reporte de práctica",
+
+	"page_title_uc":"GESTIÓN DE AULA CLOUDLABS",
+	"pract_lab_title":"Prácticas de laboratorio"
+}

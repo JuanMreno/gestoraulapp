@@ -1,5 +1,21 @@
 (function($) {
 
+	$(document).ready(function() {
+		$('#pract-link').find('span').text(locale.nav_1);
+		$('#cons-link').find('span').text(locale.nav_2);
+		$('#eval-link').find('span').text(locale.nav_3);
+		$('#rank-link').find('span').text(locale.nav_4);
+		$('#anun-link').find('span').text(locale.nav_5);
+		$('#mgrp-link').find('span').text(locale.nav_6);
+		$('#usrs-link').find('span').text(locale.nav_7);
+		$('#grps-link').find('span').text(locale.nav_8);
+		$('#mtrs-link').find('span').text(locale.nav_9);
+		$('#labs-link').find('span').text(locale.nav_10);
+		$('#conf-link').find('span').text(locale.nav_11);
+		$('#serv-link').find('span').text(locale.nav_12);
+		$('#cses-link').find('span').text(locale.nav_13);
+	});
+	
 	mainInit();
 	sessionInit();
 

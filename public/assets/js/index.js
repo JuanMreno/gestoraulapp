@@ -6,11 +6,23 @@ var ADM_ROL = 'adm-rol';
 var SAD_ROL = 'sad-rol';
 var CON_URL = "http://"+window.location.hostname+":";
 var RANKING_WEB = "";
+var locale;
 
 $.getJSON("../../config.json", function(json) {
 	CON_URL += json.PORT + '/';
 	console.log(CON_URL);
 	RANKING_WEB = json.RANKING_WEB;
+});
+
+$.getJSON("../../locales/es.json", function(json) {
+	console.log(json);
+	locale = json;
+
+	$(document).ready(function() {
+		$('title').text(locale.app_name);
+		$('.doneText').text(locale.done);
+		$('.cancelText').text(locale.cancel);
+	});
 });
 
 (function($) {

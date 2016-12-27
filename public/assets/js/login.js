@@ -2,6 +2,12 @@
 (function($) {
 	var loadIntervaId;
 
+	$('.loginTitle').text(locale.page_title);
+	$('#loginBtn').text(locale.login_1);
+	$('#userInput').attr('placeholder', locale.user);
+	$('#passInput').attr('placeholder', locale.pass);
+
+
 	function loginInit() {
 		$('#loginBtn').click(function(event) {
 			event.preventDefault();
@@ -21,7 +27,7 @@
 					url: CON_URL+"login",
 					data:{data:jData},
 					beforeSend: function( xhr ) {
-						$('#loginBtn').text('Iniciando.');
+						$('#loginBtn').text(locale.starting + '.');
 						loadIntervaId = setInterval(loginLoader, 400);
 					}
 				})
@@ -40,12 +46,10 @@
 									var mns = "";
 									if(user.license != '0'){
 										var licState = getLicenseStateStr(user.license);
-										mns = "Hay un problema con la licencia del gestor de aula, por favor comuníquese con el proveedor.";
+										mns = locale.license_exp_1;
 									}
 									else{
-										mns = "Parece que ha pasado mucho tiempo desde la última vez que la licencia fue verificada. \
-												Es necesario conectar el equipo servidor del profesor a Internet y reiniciar la aplicación \
-												Gestor de aula CloudLabs.";
+										mns = locale.license_exp_2;
 									}
 
 									$('#alertModalCont').text(mns);
@@ -63,24 +67,25 @@
 							goToMain();
 						}
 						else{
-							$('#alertModalCont').text("Nombre o Usuario inválido, intenta de nuevo.");
+							$('#alertModalCont').text(locale.login_exp_1);
 							$('#alertModal').modal('show');
 							restartButton();
 						}
 					}
 					else{
-						$('#alertModalCont').text("Nombre o Usuario inválido, intenta de nuevo.");
+						$('#alertModalCont').text(locale.error_try_again);
 						$('#alertModal').modal('show');
 						restartButton();
 					}
 				})
 				.error(function(e) {
-					console.log("Error ajax.");
+					$('#alertModalCont').text(locale.error_try_again);
+					$('#alertModal').modal('show');
 					restartButton();
 				});
 			}
 			else{
-				$('#alertModalCont').text("Todos los campos son requeridos.");
+				$('#alertModalCont').text(locale.all_fields);
 				$('#alertModal').modal('show');
 				restartButton();
 			}
@@ -89,7 +94,7 @@
 
 	function restartButton() {
 		$('#loginBtn').removeAttr("disabled");
-		$('#loginBtn').text('Iniciar Sesión');
+		$('#loginBtn').text(locale.login_1);
 		clearInterval(loadIntervaId);
 	}
 
@@ -98,16 +103,16 @@
 
 		switch($loginBtn.text().length){
 			case 10:
-				$loginBtn.text("Iniciando..");
+				$loginBtn.text(locale.starting + "..");
 				break;
 			case 11:
-				$loginBtn.text("Iniciando...");
+				$loginBtn.text(locale.starting + "...");
 				break;
 			case 12:
-				$loginBtn.text("Iniciando....");
+				$loginBtn.text(locale.starting + "....");
 				break;
 			case 13:
-				$loginBtn.text("Iniciando.");
+				$loginBtn.text(locale.starting + ".");
 				break;
 			default:
 				break;

@@ -4,21 +4,21 @@
 		<div class="container">
 			<div>
 				<h1 class="h1ContHead">
-					<span class="text">GESTIÓN DE AULA CLOUDLABS</span>
+					<span class="text spanTitCont"></span>
 					<span class="span">
 						<img src="../assets/img/cl-header.png" class="contImgHeader">
 					</span>
     			</h1>
 			</div>
 			<div class="containerHeader">
-				<h1>Prácticas de laboratorio</h1>
+				<h1></h1>
 			</div>
 			<div class="row controlBar">
 			  <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
 				<div class="containerDropDown">
 			  		<div class="row">
 			  			<div class="col-xs-3 col-sm-5 col-md-5 col-lg-5">
-							<span>Materia</span>
+							<span id="subjectLabel">Materia</span>
 				  		</div>
 				  		<div class="col-xs-9 col-sm-7 col-md-7 col-lg-7 inputContDropDown">
 							<div id="subjectsDropDown" class="dropdown">
@@ -41,7 +41,7 @@
 			  		<div class="row">
 			  			<div class="col-xs-3 col-sm-4 col-md-4">
 							<i id="dateFilterBtn" class="fa fa-square-o" aria-hidden="true"></i>
-							<span> Fechas</span>
+							<span id="datesLabel"></span>
 				  		</div>
 				  		<div class="col-xs-9 col-sm-8 col-md-8 inputContDropDown">
 							<input id="practLabFchas" type="text" name="daterange" value="01/01/2015 - 01/31/2015" style="width:100%" />
@@ -93,10 +93,10 @@
       	<!--<h4 class="modal-title">Práctica</h4>-->
         <div class="row">
         	<div class="col-xs-8 col-sm-8 col-md-9 col-lg-9">
-		        <h4 class="modal-title">Práctica</h4>
+		        <h4 class="modal-title"></h4>
         	</div>
         	<div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 labelStateCont">
-		        <span class="labelState">Estado</span>
+		        <span class="labelState"></span>
         	</div>
         </div>
       </div>
@@ -104,7 +104,7 @@
       	<div class="row form-group">
         	<div class="col-sm-7">
 		        <div class="input-group">
-				  <span class="input-group-addon" id="basic-addon1">Unidad</span>
+				  <span id="unidadLabel" class="input-group-addon" id="basic-addon1"></span>
 				  <input id="cUnidad" type="text" class="form-control only-read" placeholder="" aria-describedby="basic-addon1">
 				</div>
         	</div>
@@ -112,13 +112,13 @@
       	<div class="row form-group">
         	<div class="col-sm-6">
 		        <div class="input-group">
-				  <span class="input-group-addon" id="basic-addon1">Fecha entrega</span>
+				  <span id="fEntrLabel" class="input-group-addon" id="basic-addon1"></span>
 				  <input id="fEntrega" type="text" class="form-control only-read" placeholder="" aria-describedby="basic-addon1">
 				</div>
         	</div>
         	<div class="col-sm-6">
 		        <div class="input-group">
-				  <span class="input-group-addon" id="basic-addon1">Tiempo entrega</span>
+				  <span id="tEntregaLabel" class="input-group-addon" id="basic-addon1"></span>
 				  <input id="tEntrega" type="text" class="form-control only-read" placeholder="" aria-describedby="basic-addon1">
 				</div>
         	</div>
@@ -126,19 +126,19 @@
         <div class="row form-group">
 			<div class="col-sm-4">
 		        <div class="input-group">
-				  <span class="input-group-addon" id="basic-addon1" data-toggle="tooltip" data-placement="right" title="Nota del profesor">Nota 1</span>
+				  <span id="nProfesorLabel" class="input-group-addon" id="basic-addon1" data-toggle="tooltip" data-placement="right"></span>
 				  <input id="nProfesor" type="text" class="form-control only-read" placeholder="" aria-describedby="basic-addon1">
 				</div>
 			</div>
 			<div class="col-sm-4">
 		        <div class="input-group">
-				  <span class="input-group-addon" id="basic-addon1" data-toggle="tooltip" data-placement="right" title="Nota de laboratorio">Nota 2</span>
+				  <span id="nAppLabel" class="input-group-addon" id="basic-addon1" data-toggle="tooltip" data-placement="right"></span>
 				  <input id="nApp" type="text" class="form-control only-read" placeholder="" aria-describedby="basic-addon1">
 				</div>
 			</div>
 			<div class="col-sm-4">
 		        <div class="input-group">
-				  <span class="input-group-addon" id="basic-addon1" data-toggle="tooltip" data-placement="right" title="Nota final">Nota Final</span>
+				  <span id="nFinalLabel" class="input-group-addon" id="basic-addon1" data-toggle="tooltip" data-placement="right"></span>
 				  <input id="nFinal" type="text" class="form-control only-read" placeholder="" aria-describedby="basic-addon1">
 				</div>
 			</div>
@@ -146,12 +146,12 @@
 		<div class="row form-group">
 			<div class="col-sm-3">
 				<div class="input-group">
-				  <span class="input-group-addon" id="basic-addon1">Intentos</span>
+				  <span id="nIntentLabel" class="input-group-addon" id="basic-addon1"></span>
 				  <input id="nIntent" type="text" class="form-control only-read" placeholder="" aria-describedby="basic-addon1">
 				</div>
 			</div>
 		</div>
-		<h6 class="field-label">Observaciones</h6>
+		<h6 id="obsrvLbl" class="field-label"></h6>
 		<textarea id="obsrv" class="form-control only-read" rows="3"></textarea>
 		<br>
 		<div class="form-group">
@@ -164,17 +164,17 @@
 	        </form>
 	        -->
 	        <form id="formLoadFile" action="students/put_lab" method="POST">
-				<h6 class="field-label">Cargar reporte de laboratorio</h6>
+				<h6 id="inpFileLbl" class="field-label"></h6>
 				<input id="inpFile" type="file" name="report_file" class="btn btn-default">
 			</form>
-			<button id="btnUploadReport" class="btn btn-primary">Subir</button>
+			<button id="btnUploadReport" class="btn btn-primary"></button>
 		</div>
 		
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        <button id="mdlCloseBtn" type="button" class="btn btn-default" data-dismiss="modal"></button>
         <a id="aBtnDownL" href="" target="_blank">
-	        <button id="btnDownL" type="button" class="btn btn-primary">Ver reporte de práctica</button>
+	        <button id="btnDownL" type="button" class="btn btn-primary"></button>
         </a>
       </div>
     </div>
