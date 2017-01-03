@@ -12,11 +12,51 @@
             '</button>'+
         '</div>';
 
+    $(document).ready(function() {
+        $('.spanTitCont').text(locale.page_title_uc);
+        $('.containerHeader').find('h1').text(locale.cons_title);
+
+        $('#groupSpan').text(locale.group);
+        $('#subjectLabel').text(locale.subject);
+        $('#typeSpan').text(locale.b_type);
+
+        $('#tipoDropdown').text(locale.student);
+        $('#tipoDropdown-estudiante').text(locale.student);
+        $('#tipoDropdown-practica').text(locale.prac_label);
+
+
+        $('#datesLabel').text(" " + locale.dates);
+        $('#nameLabel').text(" " + locale.name);
+        $('#perfLabel').text(" " + locale.perf);
+        $('#avgLabel').text(" " + locale.avg);
+
+        $('#pracLabel').text(" " + locale.prac_label);
+        $('#labelState').text(" " + locale.state);
+
+        $('#unidadLabel').text(locale.lab_modal_1);
+        $('#fEntrLabel').text(locale.lab_modal_2);
+        $('#tEntregaLabel').text(locale.lab_modal_3);
+        $('#nProfesorLabel').text(locale.lab_modal_4);
+        $('#nAppLabel').text(locale.lab_modal_5);
+        $('#nFinalLabel').text(locale.lab_modal_6);
+        $('#nIntentLabel').text(locale.lab_modal_7);
+        $('#obsrvLbl').text(locale.lab_modal_8);
+        $('#inpFileLbl').text(locale.lab_modal_9);
+        $('#btnUploadReport').text(locale.lab_modal_10);
+        $('#btnDownL').text(locale.lab_modal_11);
+
+        $('#nProfesorLabel').attr('title', locale.tooltip_4);
+        $('#nAppLabel').attr('title', locale.tooltip_5);
+        $('#nFinalLabel').attr('title', locale.tooltip_6);
+
+        $('#mdlCloseBtn').text(locale.close);
+    });
+
 	function mainInit() {
 		$('#tipoDropdown-practica').off('click').on('click', function(event) {
 			event.preventDefault();
 
-			$('#tipoDropdown').html('Practica  ' + '<span class="caret"></span>');
+			$('#tipoDropdown').html( locale.prac_label + '  <span class="caret"></span>');
 
             var subjectId = $("#subjectsDropDown").attr('data-sel-id'); 
             setLabsDropDown(subjectId);
@@ -25,7 +65,7 @@
 		$('#tipoDropdown-estudiante').off('click').on('click', function(event) {
 			event.preventDefault();
 
-			$('#tipoDropdown').html('Estudiante  ' + '<span class="caret"></span>');
+			$('#tipoDropdown').html(locale.student + '  <span class="caret"></span>');
             var groupId = $("#groupsDropDown").attr('data-sel-id'); 
             setStudentsDropDown(groupId);  
 		});;
@@ -136,7 +176,7 @@
 
             if(res.data.length == 0){
                 //setTableAnun('-1');
-                $dropDown.children('button').text('Ninguno')
+                $dropDown.children('button').text(locale.none2)
                 return;
             }
             else{
@@ -198,13 +238,13 @@
 
             if(res.data.length == 0){
                 //setTableAnun('-1');
-                $dropDown.children('button').text('Ninguna');
+                $dropDown.children('button').text(locale.none);
                 $dropDown.attr('data-sel-id', -1);
 
                 $('#nomSelect').html("");
                 $('#nomSelect').select2({
                   data: [],
-                  placeholder: 'Sin estudiantes'
+                  placeholder: locale.none_data
                 });  
 
                 $("#jsGrid").jsGrid("destroy");
@@ -279,7 +319,7 @@
             if(res.data.length == 0){
                 $('#nomSelect').select2({
                   data: res.data,
-                  placeholder: 'Sin estudiantes'
+                  placeholder: locale.none_data
                 });  
 
                 $("#jsGrid").jsGrid("destroy");
@@ -332,7 +372,7 @@
             if(res.data.length == 0){
                 $('#nomSelect').select2({
                   data: res.data,
-                  placeholder: 'Sin prácticas'
+                  placeholder: locale.none_data
                 });
 
                 $("#jsGrid").jsGrid("destroy");
@@ -384,7 +424,7 @@
             autoload: true,
             pageSize: 5,
             pageButtonCount: 5,
-            noDataContent: "Ningún dato encontrado.",
+            noDataContent: locale.none_data,
             controller: {
                 loadData: function(filter) {
                     var d = $.Deferred();
@@ -443,7 +483,7 @@
                 if(item.lab_state == "1"){
                     $labelState.removeClass('label-danger');
                     $labelState.addClass("label").addClass('label-success');
-                    $labelState.text('Entregado');
+                    $labelState.text(locale.delivery);
                     $modal.find('#fEntrega').val(item.delivery_date);
                     $modal.find('#tEntrega').val(item.lab_delivery_time);
                     $modal.find('#nProfesor').val(item.lab_teacher_score);
@@ -455,7 +495,7 @@
                 else{
                     $labelState.removeClass('label-success');
                     $labelState.addClass("label").addClass('label-danger');
-                    $labelState.text('Pendiente');
+                    $labelState.text(locale.pending);
                 }
 
                 if(item.lab_users_id == null){
@@ -486,12 +526,12 @@
                             $modal.modal('toggle');
                         }
                         else{
-                            $('#alertModalCont').text("La información no pudo ser actualizada.");
+                            $('#alertModalCont').text(locale.error_update);
                             $('#alertModal').modal('show');
                         }
                     }).fail(function(data) {
                         console.log("ajax fail");
-                        $('#alertModalCont').text("La información no pudo ser actualizada.");
+                        $('#alertModalCont').text(locale.error_update);
                         $('#alertModal').modal('show');
                     });
                 });
@@ -516,42 +556,42 @@
                     $e.attr({
                         "data-toggle": 'tooltip',
                         "data-container": 'body',
-                        "title": 'Entregado/Sin entregar'
+                        "title": locale.tooltip_1
                     });
 
                     $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(3)");
                     $e.attr({
                         "data-toggle": 'tooltip',
                         "data-container": 'body',
-                        "title": 'Tiempo de entrega'
+                        "title": locale.tooltip_2
                     });
 
                     $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(4)");
                     $e.attr({
                         "data-toggle": 'tooltip',
                         "data-container": 'body',
-                        "title": 'Intentos'
+                        "title": locale.tooltip_3
                     });
 
                     $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(5)");
                     $e.attr({
                         "data-toggle": 'tooltip',
                         "data-container": 'body',
-                        "title": 'Nota del profesor'
+                        "title": locale.tooltip_4
                     });
 
                     $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(6)");
                     $e.attr({
                         "data-toggle": 'tooltip',
                         "data-container": 'body',
-                        "title": 'Nota de laboratorio'
+                        "title": locale.tooltip_5
                     });
 
                     $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(7)");
                     $e.attr({
                         "data-toggle": 'tooltip',
                         "data-container": 'body',
-                        "title": 'Nota final'
+                        "title": locale.tooltip_6
                     });
 
                     $('[data-toggle="tooltip"]').tooltip();
@@ -559,14 +599,14 @@
             },
 
             fields: [
-                { name: "lab_name", type: "text", align: "center", width: 170, title: "Nombre" },
-                { name: "delivery_date", type: "text", align: "center", width: 60, title: "Fecha" },
-                { name: "lab_state", type: "checkbox", align: "center", width: 50, title: "Estado" },
-                { name: "lab_delivery_time", type: "text", align: "center", width: 50, title:"T" },
-                { name: "lab_attempts", type: "text", align: "center", width: 30, title:"I" },
-                { name: "lab_teacher_score", type: "text", align: "center", width: 30, title:"P" },
-                { name: "lab_app_score", type: "text", align: "center", width: 30, title:"L" },
-                { name: "lab_final_score", type: "text", align: "center", width: 30, title:"F" },
+                { name: "lab_name", type: "text", align: "center", width: 170, title: locale.table_name },
+                { name: "delivery_date", type: "text", align: "center", width: 60, title: locale.table_date },
+                { name: "lab_state", type: "checkbox", align: "center", width: 50, title: locale.table_state },
+                { name: "lab_delivery_time", type: "text", align: "center", width: 50, title:locale.table_t },
+                { name: "lab_attempts", type: "text", align: "center", width: 30, title:locale.table_i },
+                { name: "lab_teacher_score", type: "text", align: "center", width: 30, title:locale.table_p },
+                { name: "lab_app_score", type: "text", align: "center", width: 30, title:locale.table_l },
+                { name: "lab_final_score", type: "text", align: "center", width: 30, title:locale.table_f },
                 { type: "control" }
             ]
         });
@@ -591,7 +631,7 @@
             autoload: true,
             pageSize: 5,
             pageButtonCount: 5,
-            noDataContent: "Ningún dato encontrado.",
+            noDataContent: locale.none_data,
             controller: {
                 loadData: function(filter) {
                     var d = $.Deferred();
@@ -652,9 +692,9 @@
                 if(item.lab_state == "1"){
                     $labelState.removeClass('label-danger');
                     $labelState.addClass("label").addClass('label-success');
-                    $labelState.text('Entregado');
+                    $labelState.text(locale.delivery);
                     $modal.find('#fEntrega').val(item.delivery_date);
-                    $modal.find('#tEntrega').val(item.lab_delivery_time + " Días");
+                    $modal.find('#tEntrega').val(item.lab_delivery_time + ' ' + locale.days);
                     $modal.find('#nProfesor').val(item.lab_teacher_score);
                     $modal.find('#nApp').val(item.lab_app_score);
                     $modal.find('#nFinal').val(item.lab_final_score);
@@ -664,7 +704,7 @@
                 else{
                     $labelState.removeClass('label-success');
                     $labelState.addClass("label").addClass('label-danger');
-                    $labelState.text('Pendiente');
+                    $labelState.text(locale.pending);
                 }
 
                 if(item.lab_users_id == null || item.lab_users_id == ""){
@@ -695,12 +735,12 @@
                             $modal.modal('toggle');
                         }
                         else{
-                            $('#alertModalCont').text("La información no pudo ser actualizada.");
+                            $('#alertModalCont').text(locale.error_update);
                             $('#alertModal').modal('show');
                         }
                     }).fail(function(data) {
                         console.log("ajax fail");
-                        $('#alertModalCont').text("La información no pudo ser actualizada.");
+                        $('#alertModalCont').text(locale.error_update);
                         $('#alertModal').modal('show');
                     });
                 });
@@ -725,42 +765,42 @@
                     $e.attr({
                         "data-toggle": 'tooltip',
                         "data-container": 'body',
-                        "title": 'Entregado/Sin entregar'
+                        "title": locale.tooltip_1
                     });
 
                     $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(3)");
                     $e.attr({
                         "data-toggle": 'tooltip',
                         "data-container": 'body',
-                        "title": 'Tiempo de entrega'
+                        "title": locale.tooltip_2
                     });
 
                     $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(4)");
                     $e.attr({
                         "data-toggle": 'tooltip',
                         "data-container": 'body',
-                        "title": 'Intentos'
+                        "title": locale.tooltip_3
                     });
 
                     $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(5)");
                     $e.attr({
                         "data-toggle": 'tooltip',
                         "data-container": 'body',
-                        "title": 'Nota del profesor'
+                        "title": locale.tooltip_4
                     });
 
                     $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(6)");
                     $e.attr({
                         "data-toggle": 'tooltip',
                         "data-container": 'body',
-                        "title": 'Nota de laboratorio'
+                        "title": locale.tooltip_5
                     });
 
                     $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(7)");
                     $e.attr({
                         "data-toggle": 'tooltip',
                         "data-container": 'body',
-                        "title": 'Nota Final'
+                        "title": locale.tooltip_6
                     });
 
                     $('[data-toggle="tooltip"]').tooltip();
@@ -768,14 +808,14 @@
             },
 
             fields: [
-                { name: "user_name", type: "text", align: "center", width: 170, title: "Nombre" },
-                { name: "delivery_date", type: "text", align: "center", width: 60, title: "Fecha" },
-                { name: "lab_state", type: "checkbox", align: "center", width: 50, title: "Estado" },
-                { name: "lab_delivery_time", type: "text", align: "center", width: 50, title:"T" },
-                { name: "lab_attempts", type: "text", align: "center", width: 30, title:"I" },
-                { name: "lab_teacher_score", type: "text", align: "center", width: 30, title:"P" },
-                { name: "lab_app_score", type: "text", align: "center", width: 30, title:"L" },
-                { name: "lab_final_score", type: "text", align: "center", width: 30, title:"F" },
+                { name: "user_name", type: "text", align: "center", width: 170, title: locale.table_name },
+                { name: "delivery_date", type: "text", align: "center", width: 60, title: locale.table_date },
+                { name: "lab_state", type: "checkbox", align: "center", width: 50, title: locale.table_state },
+                { name: "lab_delivery_time", type: "text", align: "center", width: 50, title:locale.table_t },
+                { name: "lab_attempts", type: "text", align: "center", width: 30, title:locale.table_i },
+                { name: "lab_teacher_score", type: "text", align: "center", width: 30, title:locale.table_p },
+                { name: "lab_app_score", type: "text", align: "center", width: 30, title:locale.table_l },
+                { name: "lab_final_score", type: "text", align: "center", width: 30, title:locale.table_f },
                 { type: "control" }
             ]
         });
@@ -848,7 +888,7 @@
                 rows:aData
             }
             
-            const pdfConst = new PdfMakeConstructor(stuName.replace(" ", "_") + "_reporte.pdf");
+            const pdfConst = new PdfMakeConstructor(stuName.replace(" ", "_") + ".pdf");
 
             var selType = $('#nomSelect').attr('data-type');
 
@@ -875,12 +915,12 @@
                         document.getElementById('btnDownLPdf').click();
                     }
                     else{
-                        $('#alertModalCont').text("Ha ocurrido un error inesperado, inténtalo de nuevo.");
+                        $('#alertModalCont').text(locale.error_try_again);
                         $('#alertModal').modal('show');
                     }
                 })
                 .error(function(e) {
-                    $('#alertModalCont').text("Ha ocurrido un error inesperado, inténtalo de nuevo.");
+                    $('#alertModalCont').text(locale.error_try_again);
                     $('#alertModal').modal('show');
                     console.log("Error ajax.");
                 });
@@ -902,12 +942,12 @@
                         document.getElementById('btnDownLPdf').click();
                     }
                     else{
-                        $('#alertModalCont').text("Ha ocurrido un error inesperado, inténtalo de nuevo.");
+                        $('#alertModalCont').text(locale.error_try_again);
                         $('#alertModal').modal('show');
                     }
                 })
                 .error(function(e) {
-                    $('#alertModalCont').text("Ha ocurrido un error inesperado, inténtalo de nuevo.");
+                    $('#alertModalCont').text(locale.error_try_again);
                     $('#alertModal').modal('show');
                     console.log("Error ajax.");
                 });

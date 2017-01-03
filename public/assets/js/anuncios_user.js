@@ -1,6 +1,11 @@
 
 (function($) {
 
+    $(document).ready(function() {
+        $('.spanTitCont').text(locale.page_title_uc);
+        $('.containerHeader').find('h1').text(locale.anunc_title);
+    });
+
 	function init() {
         setTableAnun()
 	}
@@ -17,8 +22,8 @@
             confirmDeleting: false,
             pageSize: 10,
             pageButtonCount: 5,
-            noDataContent: "Ningún dato encontrado.",
-            loadMessage: "Cargando...",
+            noDataContent: locale.none_data,
+            loadMessage: locale.loading,
             controller: {
                 loadData: function(filter) {
                     var d = $.Deferred();
@@ -52,16 +57,16 @@
                 }
             },
 
-            pagerFormat: "Pag {first} {prev} {pages} {next} {last}    {pageIndex} de {pageCount}",
+            pagerFormat: "Pag {first} {prev} {pages} {next} {last}    {pageIndex} / {pageCount}",
             pagePrevText: " < ",
 		    pageNextText: " > ",
 		    pageFirstText: " << ",
 		    pageLastText: " >> ",
 
             fields: [
-             	{ name: "title", type: "text", align: "center", width: 250, filtering: true, inserting:true, editing: true, title:"Asunto" },
-	            { name: "content", type: "text", align: "center", width: 400, filtering: true, inserting:true, editing: true, title:"Mensaje" },
-	            { name: "date", type: "text", align: "center", width: 100, filtering: true, inserting:false, editing: false, title:"Fecha" },
+             	{ name: "title", type: "text", align: "center", width: 250, filtering: true, inserting:true, editing: true, title:locale.table_topic },
+	            { name: "content", type: "text", align: "center", width: 400, filtering: true, inserting:true, editing: true, title:locale.table_message },
+	            { name: "date", type: "text", align: "center", width: 100, filtering: true, inserting:false, editing: false, title:locale.table_date },
             	{ type: "control" }
             ]
         });

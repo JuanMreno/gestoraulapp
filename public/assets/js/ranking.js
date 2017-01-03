@@ -1,6 +1,14 @@
 
 (function($) {
 
+    $(document).ready(function() {
+        $('.spanTitCont').text(locale.page_title_uc);
+        $('#headerH1').text(locale.rank_title);
+
+        $('#studPos').text(locale.stud_pos);
+        $('#groupSpan').text(locale.group);
+    });
+
 	function init() {
         var session = $.cookie(SESSION_COOKIE);
 
@@ -37,16 +45,16 @@
 
             if(res.data.length == 0){
                 //setTableAnun('-1');
-                $dropDown.children('button').text('Ninguno')
+                $dropDown.children('button').text(locale.none2)
                 return;
             }
             else{
                 $dropDown.attr('data-sel-id',-1);
-                $dropDown.children('button').html('Colegio  <span class="caret"></span>');
+                $dropDown.children('button').html( locale.school +'  <span class="caret"></span>');
                 setRankTable();
             }
             
-            res.data.unshift({id:-1,name:'Colegio'});
+            res.data.unshift({id:-1,name:locale.school});
             res.data.forEach(function(e,i) {
                 $aNewRow = $('<a class="userGroupSelElem" data-id="' + e.id + '" href="#">' + e.name + '</a>');
                 $aNewRow.off("click").on('click', function(event) {
@@ -88,16 +96,16 @@
 
             if(res.data.length == 0){
                 //setTableAnun('-1');
-                $dropDown.children('button').text('Ninguno')
+                $dropDown.children('button').text(locale.none2)
                 return;
             }
             else{
                 $dropDown.attr('data-sel-id',-1);
-                $dropDown.children('button').html('Colegio  <span class="caret"></span>');
+                $dropDown.children('button').html(locale.school + '  <span class="caret"></span>');
                 setRankTable();
             }
             
-            res.data.unshift({group_id:-1,name:'Colegio'});
+            res.data.unshift({group_id:-1,name:locale.school});
             res.data.forEach(function(e,i) {
                 $aNewRow = $('<a class="userGroupSelElem" data-id="' + e.group_id + '" href="#">' + e.name + '</a>');
                 $aNewRow.off("click").on('click', function(event) {
@@ -130,8 +138,8 @@
             autoload: true,
             pageSize: 10,
             pageButtonCount: 5,
-            noDataContent: "Ningún dato encontrado.",
-            loadMessage: "Cargando...",
+            noDataContent: locale.none_data,
+            loadMessage: locale.loading,
             controller: {
                 loadData: function(filter) {
                     var d = $.Deferred();
@@ -180,7 +188,7 @@
                 }
             },
 
-            pagerFormat: "Pag {first} {prev} {pages} {next} {last}    {pageIndex} de {pageCount}",
+            pagerFormat: "Pag {first} {prev} {pages} {next} {last}    {pageIndex} / {pageCount}",
             pagePrevText: " < ",
 		    pageNextText: " > ",
 		    pageFirstText: " << ",
@@ -193,14 +201,14 @@
                     $e.attr({
                         "data-toggle": 'tooltip',
                         "data-container": 'body',
-                        "title": 'Cantidad de laboratorios entregados'
+                        "title": locale.tooltip_7
                     });
 
                     $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(3)");
                     $e.attr({
                         "data-toggle": 'tooltip',
                         "data-container": 'body',
-                        "title": 'Puntaje total'
+                        "title": locale.tooltip_8
                     });
 
                     $('[data-toggle="tooltip"]').tooltip();
@@ -208,10 +216,10 @@
             },
 
             fields: [
-             	{ name: "rank", type: "text", align: "center", width: 30, title: "Pos." },
-             	{ name: "name", type: "text", align: "center", width: 250, title: "Nombre" },
-	            { name: "lDeliv", type: "text", align: "center", filtering: false, width: 30, title:"L" },
-                { name: "rnkScore", type: "text", align: "center", filtering: false, width: 30, title:"Pts" },
+             	{ name: "rank", type: "text", align: "center", width: 30, title: locale.table_pos },
+             	{ name: "name", type: "text", align: "center", width: 250, title: locale.table_name },
+	            { name: "lDeliv", type: "text", align: "center", filtering: false, width: 30, title:locale.table_l },
+                { name: "rnkScore", type: "text", align: "center", filtering: false, width: 30, title:locale.table_pts },
             	{ type: "control" }
             ]
         });
