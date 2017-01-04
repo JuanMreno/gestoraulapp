@@ -21,6 +21,17 @@
         $('#gDropDownCont').hide();
 	}
 
+    $(document).ready(function() {
+        $('.spanTitCont').text(locale.page_title_uc);
+        $('.containerHeader').find('h1').text(locale.mgroups_title);
+
+        $('#type_label').text(locale.type_label);
+        $('#tipoDropdown').text(locale.groups);
+        $('#tipoDropdown-grupos').text(locale.groups);
+        $('#tipoDropdown-materias').text(locale.subjects);
+        $('#groupLabel').text(locale.group);
+    });
+
 	init();
 
     function setGroupsDropDown() {
@@ -45,7 +56,7 @@
 
             if(res.data.length == 0){
                 //setTableAnun('-1');
-                $dropDown.children('button').text('Ninguno')
+                $dropDown.children('button').text(locale.none2)
                 return;
             }
             else{
@@ -92,8 +103,8 @@
             autoload: true,
             pageSize: 10,
             pageButtonCount: 5,
-            noDataContent: "Ningún dato encontrado.",
-            loadMessage: "Cargando...",
+            noDataContent: locale.none_data,
+            loadMessage: locale.loading,
             controller: {
                 loadData: function(filter) {
                     var d = $.Deferred();
@@ -135,9 +146,9 @@
                     var session = $.cookie(SESSION_COOKIE);
                     var mns = "";
                     if(item.asignado)
-                        mns = '¿Está seguro que desea asignarse el grupo ' + item.name + '?';
+                        mns = locale.warning_3 + ' ' + item.name + '?';
                     else
-                        mns = 'Se perderá toda la información relacionada con el grupo ' + item.name + '. ¿Desea continuar?';
+                        mns = locale.warning_4 + ' ' + item.name + '. ' + locale.warning_5;
 
                     $confModal = $('#confirmModal');
                     $confModal.find('#confirmModalCont').text(mns);
@@ -179,15 +190,15 @@
                 var item = obj.item;
             },
 
-            pagerFormat: "Pag {first} {prev} {pages} {next} {last}    {pageIndex} de {pageCount}",
+            pagerFormat: "Pag {first} {prev} {pages} {next} {last}    {pageIndex} / {pageCount}",
             pagePrevText: " < ",
 		    pageNextText: " > ",
 		    pageFirstText: " << ",
 		    pageLastText: " >> ",
 
             fields: [ 
-                { name: "name", type: "text", align: "center", title: "Nombre", editing:false },
-                { name: "asignado", type: "checkbox", align: "center", title: "Matriculado" },
+                { name: "name", type: "text", align: "center", title: locale.table_name, editing:false },
+                { name: "asignado", type: "checkbox", align: "center", title: locale.table_matr },
             	{ type: "control" }
             ]
         });
@@ -206,10 +217,10 @@
             autoload: true,
             pageSize: 10,
             pageButtonCount: 5,
-            noDataContent: "Ningún dato encontrado.",
-            loadMessage: "Cargando...",
+            noDataContent: locale.none_data,
+            loadMessage: locale.loading,
             confirmDeleting: true,
-            deleteConfirm: "¿Seguro desea quitar la asignación?",
+            deleteConfirm: locale.warning_6,
             controller: {
                 loadData: function(filter) {
                     var d = $.Deferred();
@@ -253,9 +264,9 @@
                     });
 
                     if(item.asignado)
-                        mns = "¿Está seguro que desea asignarse como profesor de la materia " + item.name + ".";
+                        mns = locale.warning_7 + " " + item.name + ".";
                     else
-                        mns = "Se perderá toda la información relacionada con la materia " + item.name + ". ¿Desea continuar?";
+                        mns = locale.warning_8 + " " + item.name + '. ' + locale.warning_5;
 
                     $confModal = $('#confirmModal');
                     $confModal.find('#confirmModalCont').text(mns);
@@ -295,15 +306,15 @@
             },
 
 
-            pagerFormat: "Pag {first} {prev} {pages} {next} {last}    {pageIndex} de {pageCount}",
+            pagerFormat: "Pag {first} {prev} {pages} {next} {last}    {pageIndex} / {pageCount}",
             pagePrevText: " < ",
             pageNextText: " > ",
             pageFirstText: " << ",
             pageLastText: " >> ",
 
             fields: [ 
-                { name: "name", type: "text", align: "center", title: "Nombre", editing:false },
-                { name: "asignado", type: "checkbox", align: "center", title: "Matriculado" },
+                { name: "name", type: "text", align: "center", title: locale.table_name, editing:false },
+                { name: "asignado", type: "checkbox", align: "center", title: locale.table_matr },
                 { type: "control" }
             ]
         });

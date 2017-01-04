@@ -4,6 +4,25 @@
         getParams();
     }
 
+    $(document).ready(function() {
+        $('.spanTitCont').text(locale.page_title_uc);
+        $('.containerHeader').find('h1').text(locale.serv_title);
+
+        $('label[for="nameSchool"]').text(locale.serv_label_1);
+        $('label[for="country"]').text(locale.serv_label_2);
+        $('label[for="city"]').text(locale.serv_label_3);
+        $('label[for="serverName"]').text(locale.serv_label_4);
+        $('label[for="serverIp"]').text(locale.serv_label_5);
+        $('label[for="offlineExes"]').text(locale.serv_label_6);
+        $('label[for="numLic"]').text(locale.serv_label_7);
+        $('label[for="licenseState"]').text(locale.serv_label_8);
+
+        $('#nameSchool').attr('placeholder',locale.serv_label_1);
+        $('#country').attr('placeholder',locale.serv_label_2);
+        $('#city').attr('placeholder',locale.serv_label_3);
+
+    });
+
     init();
 
     function getParams() {

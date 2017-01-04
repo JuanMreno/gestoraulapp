@@ -9,6 +9,7 @@
 	"pass":"Contraseña",
 	"starting":"Iniciando",
 	"all_fields":"Todos los campos son requeridos.",
+	"all":"Todos",
 
 	"login_exp_1":"Nombre o Usuario inválido, intenta de nuevo.",
 	"login_exp_2":"Nombre o Usuario inválido, intenta de nuevo.",
@@ -19,12 +20,14 @@
 	"loading":"Cargando...",
 	"school":"Colegio",
 	"subject":"Materia",
+	"subjects":"Materias",
 	"dates":"Fechas",
 	"student":"Estudiante",
 	"name":"Nombre",
 	"perf":"Avance",
 	"avg":"Promedio",
 	"state":"Estado",
+	"save":"Guardar",
 
 	"none":"Ninguna",
 	"none2":"Ninguno",
@@ -66,6 +69,10 @@
 	"table_pts":"Pts",
 	"table_topic":"Asunto",
 	"table_message":"Mensaje",
+	"table_title":"Título",
+	"table_content":"Contenido",
+	"table_matr":"Matriculado",
+
 	"days":"Días",
 
 
@@ -101,6 +108,33 @@
 
 	"cons_title":"Consultas",
 	"b_type":"Por tipo",
-	"prac_label":"Práctica"
+	"prac_label":"Práctica",
 
+	"eval_title":"Evaluación",
+	"btnRestInt":"Restaurar intento",
+	"error_format_1":"El valor de tiempo entrega no tiene el formato correcto.",
+	"error_format_2":"El valor de nota debe estar entre 0-5.",
+	"warning_1":"La información que intenta modificar es enviada automáticamente por el simulador. Se recomienda ingresar esta información manualmente sólo si el estudiante ha enviado su reporte de forma manual. ¿Está seguro que desea modificar este campo?",
+    "warning_2":"¿Está seguro que desea permitir al estudiante realizar de nuevo esta práctica de laboratorio?",
+    "cofirm_1":"¿Seguro desea eliminar el mensaje?",
+
+    "mgroups_title":"Lista de Grupos",
+    "type_label":"Tipo",
+    "groups":"Grupos",
+    "warning_3":"¿Está seguro que desea asignarse el grupo",
+    "warning_4":"Se perderá toda la información relacionada con el grupo",
+    "warning_5":"¿Desea continuar?",
+    "warning_6":"¿Seguro desea quitar la asignación?",
+    "warning_7":"¿Está seguro que desea asignarse como profesor de la materia",
+    "warning_8":"Se perderá toda la información relacionada con la materia",
+
+    "serv_title":"Servidor",
+    "serv_label_1":"Nombre de la institución",
+    "serv_label_2":"País",
+    "serv_label_3":"Ciudad",
+    "serv_label_4":"Nombre del servidor",
+    "serv_label_5":"IP del servidor",
+    "serv_label_6":"Ejecuciones offline",
+    "serv_label_7":"Licencia",
+    "serv_label_8":"Estado de licencia"
 }

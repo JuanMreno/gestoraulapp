@@ -5,6 +5,13 @@
         setGroupsDropDown();
 	}
 
+    $(document).ready(function() {
+        $('.spanTitCont').text(locale.page_title_uc);
+        $('.containerHeader').find('h1').text(locale.anunc_title);
+
+        $('#groupSpan').text(locale.group);
+    });
+
 	init();
 
     function setGroupsDropDown() {
@@ -27,7 +34,7 @@
 
             if(res.data.length == 0){
                 setTableAnun('-1');
-                $dropDown.children('button').text('Ninguno')
+                $dropDown.children('button').text(locale.none2)
                 return;
             }
             else{
@@ -36,9 +43,9 @@
             }
 
             setTableAnunAll();
-            $dropDown.children('button').html('Todos  ' + '<span class="caret"></span>');
+            $dropDown.children('button').html(locale.all + '  <span class="caret"></span>');
 
-            $newRow = $('<li><a class="userGroupSelElem" data-id="-1" href="#">Todos</a></li>')
+            $newRow = $('<li><a class="userGroupSelElem" data-id="-1" href="#">' + locale.all + '</a></li>')
             $dropDownMenu.append($newRow);
             res.data.forEach(function(e,i) {
                 $newRow = $('<li><a class="userGroupSelElem" data-id="' + e.user_group_id + '" href="#">' + e.name + '</a></li>')
@@ -77,10 +84,10 @@
             autoload: true,
             pageSize: 10,
             pageButtonCount: 5,
-            noDataContent: "Ningún dato encontrado.",
-            loadMessage: "Cargando...",
+            noDataContent: locale.none_data,
+            loadMessage: locale.loading,
             confirmDeleting: true,
-            deleteConfirm: "¿Seguro desea eliminar el mensaje?",
+            deleteConfirm: locale.cofirm_1,
             controller: {
                 loadData: function(filter) {
                     var d = $.Deferred();
@@ -124,7 +131,7 @@
                     });
 
                     if(item.title == "" || item.content == ""){
-                        $('#alertModalCont').text("Todos los campos son necesarios.");
+                        $('#alertModalCont').text(locale.all_fields);
                         $('#alertModal').modal('show');
                         d.reject();
                     }
@@ -190,7 +197,7 @@
                     });
 
                     if(item.title == "" || item.content == ""){
-                        $('#alertModalCont').text("Todos los campos son necesarios.");
+                        $('#alertModalCont').text(locale.all_fields);
                         $('#alertModal').modal('show');
                         d.reject();
                     }
@@ -221,16 +228,16 @@
                 }
             },
 
-            pagerFormat: "Pag {first} {prev} {pages} {next} {last}    {pageIndex} de {pageCount}",
+            pagerFormat: "Pag {first} {prev} {pages} {next} {last}    {pageIndex} / {pageCount}",
             pagePrevText: " < ",
 		    pageNextText: " > ",
 		    pageFirstText: " << ",
 		    pageLastText: " >> ",
 
             fields: [
-             	{ name: "title", type: "text", align: "center", width: 250, filtering: true, inserting:true, editing: true, title:"Título" },
-	            { name: "content", type: "text", align: "center", width: 400, filtering: true, inserting:true, editing: true, title:"Contenido" },
-	            { name: "date", type: "text", align: "center", width: 100, filtering: true, inserting:false, editing: false, title:"Fecha" },
+             	{ name: "title", type: "text", align: "center", width: 250, filtering: true, inserting:true, editing: true, title:locale.table_title },
+	            { name: "content", type: "text", align: "center", width: 400, filtering: true, inserting:true, editing: true, title:locale.table_content },
+	            { name: "date", type: "text", align: "center", width: 100, filtering: true, inserting:false, editing: false, title:locale.table_date },
             	{ type: "control" }
             ]
         });
@@ -247,10 +254,10 @@
             autoload: true,
             pageSize: 10,
             pageButtonCount: 5,
-            noDataContent: "Ningún dato encontrado.",
-            loadMessage: "Cargando...",
+            noDataContent: locale.none_data,
+            loadMessage: locale.loading,
             confirmDeleting: true,
-            deleteConfirm: "¿Seguro desea eliminar el mensaje?",
+            deleteConfirm: locale.cofirm_1,
             controller: {
                 loadData: function(filter) {
                     var d = $.Deferred();
@@ -293,7 +300,7 @@
                     });
 
                     if(item.title == "" || item.content == ""){
-                        $('#alertModalCont').text("Todos los campos son necesarios.");
+                        $('#alertModalCont').text(locale.all_fields);
                         $('#alertModal').modal('show');
                         d.reject();
                     }
@@ -360,7 +367,7 @@
                     });
 
                     if(item.title == "" || item.content == ""){
-                        $('#alertModalCont').text("Todos los campos son necesarios.");
+                        $('#alertModalCont').text(locale.all_fields);
                         $('#alertModal').modal('show');
                         d.reject();
                     }
@@ -391,16 +398,16 @@
                 }
             },
 
-            pagerFormat: "Pag {first} {prev} {pages} {next} {last}    {pageIndex} de {pageCount}",
+            pagerFormat: "Pag {first} {prev} {pages} {next} {last}    {pageIndex} / {pageCount}",
             pagePrevText: " < ",
             pageNextText: " > ",
             pageFirstText: " << ",
             pageLastText: " >> ",
 
             fields: [
-                { name: "title", type: "text", align: "center", width: 250, filtering: true, inserting:true, editing: true, title:"Título" },
-                { name: "content", type: "text", align: "center", width: 400, filtering: true, inserting:true, editing: true, title:"Contenido" },
-                { name: "date", type: "text", align: "center", width: 100, filtering: true, inserting:false, editing: false, title:"Fecha" },
+               { name: "title", type: "text", align: "center", width: 250, filtering: true, inserting:true, editing: true, title:locale.table_title },
+                { name: "content", type: "text", align: "center", width: 400, filtering: true, inserting:true, editing: true, title:locale.table_content },
+                { name: "date", type: "text", align: "center", width: 100, filtering: true, inserting:false, editing: false, title:locale.table_date },
                 { type: "control" }
             ]
         });

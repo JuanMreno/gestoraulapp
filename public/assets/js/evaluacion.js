@@ -11,19 +11,61 @@
             '</button>'+
         '</div>';
 
+    $(document).ready(function() {
+        $('.spanTitCont').text(locale.page_title_uc);
+        $('.containerHeader').find('h1').text(locale.cons_title);
+
+        $('#groupSpan').text(locale.group);
+        $('#subjectLabel').text(locale.subject);
+        $('#typeSpan').text(locale.b_type);
+
+        $('#tipoDropdown').text(locale.student);
+        $('#tipoDropdown-estudiante').text(locale.student);
+        $('#tipoDropdown-practica').text(locale.prac_label);
+
+
+        $('#datesLabel').text(" " + locale.dates);
+        $('#nameLabel').text(" " + locale.name);
+        $('#perfLabel').text(" " + locale.perf);
+        $('#avgLabel').text(" " + locale.avg);
+
+        $('#pracLabel').text(" " + locale.prac_label);
+        $('#labelState').text(" " + locale.state);
+
+        $('#unidadLabel').text(locale.lab_modal_1);
+        $('#fEntrLabel').text(locale.lab_modal_2);
+        $('#tEntregaLabel').text(locale.lab_modal_3);
+        $('#nProfesorLabel').text(locale.lab_modal_4);
+        $('#nAppLabel').text(locale.lab_modal_5);
+        $('#nFinalLabel').text(locale.lab_modal_6);
+        $('#nIntentLabel').text(locale.lab_modal_7);
+        $('#obsrvLbl').text(locale.lab_modal_8);
+        $('#inpFileLbl').text(locale.lab_modal_9);
+        $('#btnUploadReport').text(locale.lab_modal_10);
+        $('#btnDownL').text(locale.lab_modal_11);
+
+        $('#nProfesorLabel').attr('title', locale.tooltip_4);
+        $('#nAppLabel').attr('title', locale.tooltip_5);
+        $('#nFinalLabel').attr('title', locale.tooltip_6);
+
+        $('#mdlCloseBtn').text(locale.close);
+        $('#btnRestInt').text(locale.btnRestInt);
+        $('#btnSave').text(locale.save);
+    });
+
 	function mainInit() {
 		$('#tipoDropdown-practica').on('click', function(event) {
             event.preventDefault();
 
             setTableConsPrac();
-            $('#tipoDropdown').text('Practica');
+            $('#tipoDropdown').text(locale.prac_label);
         });;
 
         $('#tipoDropdown-estudiante').on('click', function(event) {
             event.preventDefault();
 
             setTableConsEst();
-            $('#tipoDropdown').text('Estudiante');
+            $('#tipoDropdown').text(locale.student);
         });;
 
         /*
@@ -88,7 +130,7 @@
 
             if(res.data.length == 0){
                 //setTableAnun('-1');
-                $dropDown.children('button').text('Ninguno')
+                $dropDown.children('button').text(locale.none2)
                 return;
             }
             else{
@@ -145,13 +187,13 @@
 
             if(res.data.length == 0){
                 //setTableAnun('-1');
-                $dropDown.children('button').text('Ninguna');
+                $dropDown.children('button').text(locale.none);
                 $dropDown.attr('data-sel-id', -1);
 
                 $('#nomSelect').html("");
                 $('#nomSelect').select2({
                   data: [],
-                  placeholder: 'Sin datos'
+                  placeholder: locale.none_data
                 });  
 
                 $("#jsGrid").jsGrid("destroy");
@@ -209,7 +251,7 @@
             if(res.data.length == 0){
                 $('#nomSelect').select2({
                   data: res.data,
-                  placeholder: 'Sin estudiantes'
+                  placeholder: locale.none_data
                 });
                 $("#jsGrid").jsGrid("destroy");
             }
@@ -258,7 +300,7 @@
             autoload: true,
             pageSize: 5,
             pageButtonCount: 5,
-            noDataContent: "Ningún dato encontrado.",
+            noDataContent: locale.none_data,
             controller: {
                 loadData: function(filter) {
                     var d = $.Deferred();
@@ -327,12 +369,12 @@
                 if(item.lab_state == "1"){
                     $labelState.removeClass('label-danger');
                     $labelState.addClass("label").addClass('label-success');
-                    $labelState.text('Entregado');
+                    $labelState.text(locale.delivery);
                 }
                 else{
                     $labelState.removeClass('label-success');
                     $labelState.addClass("label").addClass('label-danger');
-                    $labelState.text('Pendiente');
+                    $labelState.text(locale.pending);
                 }
 
                 if(item.lab_users_id == null || item.lab_users_id == ""){
@@ -400,21 +442,21 @@
 
                     if(tEntVal != null)
                         if(!validateTimeFormat(tEntVal)){
-                            $('#alertModalCont').text("El valor de tiempo entrega no tiene el formato correcto.");
+                            $('#alertModalCont').text(locale.error_format_1);
                             $('#alertModal').modal('show');
                             return;
                         }
 
                     if(parseInt(nAppVal) != NaN)
                         if(parseInt(nAppVal) < 0 || parseInt(nAppVal) > 5){
-                            $('#alertModalCont').text("El valor de nota debe estar entre 0-5.");
+                            $('#alertModalCont').text(locale.error_format_2);
                             $('#alertModal').modal('show');
                             return;
                         }
 
                     if(parseInt(nProVal) != NaN)
                         if(parseInt(nProVal) < 0 || parseInt(nProVal) > 5){
-                            $('#alertModalCont').text("El valor de nota debe estar entre 0-5.");
+                            $('#alertModalCont').text(locale.error_format_2);
                             $('#alertModal').modal('show');
                             return;
                         }
@@ -422,10 +464,7 @@
                     if(nAppVal != nAppValAct || nIntVal != nIntValAct || tEntVal != tEntValAct ){
                         $confModal = $('#confirmModal');
                         $confModal.find('#confirmModalCont')
-                                .text("La información que intenta modificar es enviada automáticamente por el simulador. \
-                                        Se recomienda ingresar esta información manualmente sólo si el estudiante ha \
-                                        enviado su reporte de forma manual. ¿Está seguro que desea modificar este \
-                                        campo?");
+                                .text(locale.warning_1);
 
                         $confModal.find('#doneConfirmModal').off('click').on('click', function(event) {
                             event.preventDefault();
@@ -442,12 +481,12 @@
                                     $modal.modal('toggle');
                                 }
                                 else{
-                                    $('#alertModalCont').text("La información no pudo ser actualizada.");
+                                    $('#alertModalCont').text(locale.error_update);
                                     $('#alertModal').modal('show');
                                 }
                             }).fail(function(data) {
                                 console.log("ajax fail");
-                                $('#alertModalCont').text("La información no pudo ser actualizada.");
+                                $('#alertModalCont').text(locale.error_update);
                                 $('#alertModal').modal('show');
                             });
                         });
@@ -466,12 +505,12 @@
                                 $modal.modal('toggle');
                             }
                             else{
-                                $('#alertModalCont').text("La información no pudo ser actualizada.");
+                                $('#alertModalCont').text(locale.error_update);
                                 $('#alertModal').modal('show');
                             }
                         }).fail(function(data) {
                             console.log("ajax fail");
-                            $('#alertModalCont').text("La información no pudo ser actualizada.");
+                            $('#alertModalCont').text(locale.error_update);
                             $('#alertModal').modal('show');
                         });
                     }
@@ -482,8 +521,7 @@
                         event.preventDefault();
 
                         $confModal = $('#confirmModal');
-                        $confModal.find('#confirmModalCont').text("¿Está seguro que desea permitir al estudiante realizar de nuevo esta práctica de\
-                                            laboratorio?");
+                        $confModal.find('#confirmModalCont').text(locale.warning_2);
 
                         $confModal.find('#doneConfirmModal').off('click').on('click', function(event) {
                             event.preventDefault();
@@ -505,12 +543,12 @@
                                     $modal.modal('toggle');
                                 }
                                 else{
-                                    $('#alertModalCont').text("La información no pudo ser actualizada.");
+                                    $('#alertModalCont').text(locale.error_update);
                                     $('#alertModal').modal('show');
                                 }
                             }).fail(function(data) {
                                 console.log("ajax fail");
-                                $('#alertModalCont').text("La información no pudo ser actualizada.");
+                                $('#alertModalCont').text(locale.error_update);
                                 $('#alertModal').modal('show');
                             });
                         });
@@ -528,7 +566,7 @@
                 });
             },
 
-            pagerFormat: "Pag {first} {prev} {pages} {next} {last}    {pageIndex} de {pageCount}",
+            pagerFormat: "Pag {first} {prev} {pages} {next} {last}    {pageIndex} / {pageCount}",
             pagePrevText: " < ",
             pageNextText: " > ",
             pageFirstText: " << ",
@@ -542,42 +580,42 @@
                     $e.attr({
                         "data-toggle": 'tooltip',
                         "data-container": 'body',
-                        "title": 'Entregado/Sin entregar'
+                        "title": locale.tooltip_1
                     });
 
                     $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(3)");
                     $e.attr({
                         "data-toggle": 'tooltip',
                         "data-container": 'body',
-                        "title": 'Tiempo de entrega'
+                        "title": locale.tooltip_2
                     });
 
                     $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(4)");
                     $e.attr({
                         "data-toggle": 'tooltip',
                         "data-container": 'body',
-                        "title": 'Intentos'
+                        "title": locale.tooltip_3
                     });
 
                     $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(5)");
                     $e.attr({
                         "data-toggle": 'tooltip',
                         "data-container": 'body',
-                        "title": 'Nota del profesor'
+                        "title": locale.tooltip_4
                     });
 
                     $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(6)");
                     $e.attr({
                         "data-toggle": 'tooltip',
                         "data-container": 'body',
-                        "title": 'Nota de laboratorio'
+                        "title": locale.tooltip_5
                     });
 
                     $e = $(".jsgrid-header-row > .jsgrid-header-cell:eq(7)");
                     $e.attr({
                         "data-toggle": 'tooltip',
                         "data-container": 'body',
-                        "title": 'Nota final'
+                        "title": locale.tooltip_6
                     });
 
                     $('[data-toggle="tooltip"]').tooltip();
@@ -585,14 +623,14 @@
             },
 
             fields: [
-                { name: "lab_name", type: "text", align: "center", width: 160, title: "Nombre" },
-                { name: "delivery_date", type: "text", align: "center", width: 60, title: "Fecha" },
-                { name: "lab_state", type: "checkbox", align: "center", width: 50, title: "Estado" },
-                { name: "lab_delivery_time", type: "text", align: "center", width: 50, title:"T" },
-                { name: "lab_attempts", type: "text", align: "center", width: 30, title:"I" },
-                { name: "lab_teacher_score", type: "text", align: "center", width: 30, title:"P" },
-                { name: "lab_app_score", type: "text", align: "center", width: 30, title:"L" },
-                { name: "lab_final_score", type: "text", align: "center", width: 30, title:"F" },
+                { name: "lab_name", type: "text", align: "center", width: 170, title: locale.table_name },
+                { name: "delivery_date", type: "text", align: "center", width: 60, title: locale.table_date },
+                { name: "lab_state", type: "checkbox", align: "center", width: 50, title: locale.table_state },
+                { name: "lab_delivery_time", type: "text", align: "center", width: 50, title:locale.table_t },
+                { name: "lab_attempts", type: "text", align: "center", width: 30, title:locale.table_i },
+                { name: "lab_teacher_score", type: "text", align: "center", width: 30, title:locale.table_p },
+                { name: "lab_app_score", type: "text", align: "center", width: 30, title:locale.table_l },
+                { name: "lab_final_score", type: "text", align: "center", width: 30, title:locale.table_f },
                 { type: "control" }
             ]
         });
@@ -682,12 +720,12 @@
                     document.getElementById('btnDownLPdf').click();
                 }
                 else{
-                    $('#alertModalCont').text("Ha ocurrido un error inesperado, inténtalo de nuevo.");
+                    $('#alertModalCont').text(locale.error_try_again);
                     $('#alertModal').modal('show');
                 }
             })
             .error(function(e) {
-                $('#alertModalCont').text("Ha ocurrido un error inesperado, inténtalo de nuevo.");
+                $('#alertModalCont').text(locale.error_try_again);
                 $('#alertModal').modal('show');
                 console.log("Error ajax.");
             });
