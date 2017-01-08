@@ -868,7 +868,6 @@
             var fIni = drp.startDate.format('YYYY/MM/DD');
             var fFin = drp.endDate.format('YYYY/MM/DD');
 
-
             var group = $("#groupsDropDown").children('button').text();
             var subject = $("#subjectsDropDown").children('button').text();
 

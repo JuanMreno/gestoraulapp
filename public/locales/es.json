@@ -215,6 +215,27 @@
     "license_state_3":"Desactivada",
     "license_state_4":"Caducada",
     "license_state_5":"Aplicación no soportada",
-    "license_state_7":"Límite alcanzado"
+    "license_state_7":"Límite alcanzado",
+
+    "reports_report":"Reporte",
+    "reports_label_1":"Reporte de notas de laboratorio",
+    "reports_label_2":"Nombre",
+    "reports_label_3":"Grupo",
+    "reports_label_4":"Periodo",
+    "reports_label_5":"Materia",
+    "reports_label_6":"Avance",
+    "reports_label_7":"Promedio",
+    "reports_label_8":"Nombre",
+    "reports_label_9":"Unidad",
+    "reports_label_10":"Fecha",
+    "reports_label_11":"Estado",
+    "reports_label_12":"Tiempo entrega",
+    "reports_label_13":"Intentos",
+    "reports_label_14":"N. Profesor",
+    "reports_label_15":"N. Lab",
+    "reports_label_16":"N. Final",
+    "reports_label_17":"Entregado",
+    "reports_label_18":"Pendiente",
+    "reports_label_19":"Práctica"
 
 }

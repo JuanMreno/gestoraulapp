@@ -4,12 +4,15 @@ var conn = require('../objs/SqlConnection.js');
 var fs = require('fs');
 var Excel = require('exceljs');
 const url = require('url');
+var util = require('util');
+
+var locale = JSON.parse(fs.readFileSync( process.env.ABS_LOCALES_DIR + '/' + process.env.LOCALE_FILE, 'utf8'));
+//console.log(util.inspect(locale));
 
 router.use(function timeLog(req, res, next) {
   console.log('Time: ', Date.now());
   next();
 });
-
 
 router.get('/getTeacher', function(req, res) {
 	var data = JSON.parse(unescape(req.query.data));
@@ -30,18 +33,30 @@ router.get('/getTeacher', function(req, res) {
 	  }
 	];
 
-	var sheet = workbook.addWorksheet('Reporte');
+	var sheet = workbook.addWorksheet(locale.reports_report);
 
-	sheet.addRow(['Reporte de notas']);
-	sheet.addRow(['Nombre',decode(data.stuName)]);
-	sheet.addRow(['Grupo',decode(data.group)]);
-	sheet.addRow(['Periodo', decode(data.fIni + ' a ' + data.fFin)]);
-	sheet.addRow(['Materia',decode(data.subject)]);
-	sheet.addRow(['Avance',decode(data.avanInd)]);
-	sheet.addRow(['Promedio',decode(data.promInd)]);
+	sheet.addRow([locale.reports_label_1]);
+	sheet.addRow([locale.reports_label_2,decode(data.stuName)]);
+	sheet.addRow([locale.reports_label_3,decode(data.group)]);
+	sheet.addRow([locale.reports_label_4, decode(data.fIni + ' a ' + data.fFin)]);
+	sheet.addRow([locale.reports_label_5,decode(data.subject)]);
+	sheet.addRow([locale.reports_label_6,decode(data.avanInd)]);
+	sheet.addRow([locale.reports_label_7,decode(data.promInd)]);
 	sheet.addRow([]);
 	sheet.addRow([]);
-	sheet.addRow(["Nombre","Unidad","Fecha","Estado","Tiempo entrega","Intentos","N. Profesor","N. Lab","N. Final"]);
+	sheet.addRow(
+		[
+			locale.reports_label_8,
+			locale.reports_label_9,
+			locale.reports_label_10,
+			locale.reports_label_11,
+			locale.reports_label_12,
+			locale.reports_label_13,
+			locale.reports_label_14,
+			locale.reports_label_15,
+			locale.reports_label_16
+		]
+	);
 
 	sheet.getRow(1).font = { size: 15, bold: true };
 	for(var i=2 ; i<8 ; i++){
@@ -51,7 +66,7 @@ router.get('/getTeacher', function(req, res) {
 
 	var rows = data.rows;
 	rows.forEach(function(e,i) {
-		var estado = (e.lab_state == "1") ? "Entregado" : "Pendiente";
+		var estado = (e.lab_state == "1") ? locale.reports_label_17 : locale.reports_label_18;
 		var name = "";
 		if(data.type == 'lab') 
 			name = e.user_name;
@@ -108,24 +123,33 @@ router.get('/getStudent', function(req, res) {
 	  }
 	];
 
-	var sheet = workbook.addWorksheet('Reporte');
+	var sheet = workbook.addWorksheet(locale.reports_report);
 
 	sheet.addRow([]);
-	sheet.addRow(['Reporte de notas']);
-	sheet.addRow(['Periodo', decode(data.fIni + ' a ' + data.fFin)]);
-	sheet.addRow(['Materia',decode(data.subject)]);
+	sheet.addRow([locale.reports_label_1]);
+	sheet.addRow([locale.reports_label_4, decode(data.fIni + ' a ' + data.fFin)]);
+	sheet.addRow([locale.reports_label_5,decode(data.subject)]);
 	sheet.addRow([]);
 	sheet.addRow([]);
-	sheet.addRow(["Práctica","Unidad","Fecha","Estado","N. Profesor","N. Lab","N. Final"]);
+	sheet.addRow(
+		[
+			locale.reports_label_19,
+			locale.reports_label_9,
+			locale.reports_label_10,
+			locale.reports_label_11,
+			locale.reports_label_14,
+			locale.reports_label_15,
+			locale.reports_label_16
+		]
+	);
 
-	sheet.getRow(1).font = { size: 15, bold: true };
-	sheet.getRow(2).font = { size: 13, bold: true };
-	sheet.getRow(3).font = { size: 13, bold: true };
-	sheet.getRow(6).font = { size: 12, bold: true };
+	for(var i=1 ; i<8 ; i++){
+		sheet.getRow(i).font = { size: 14, bold: true };
+	}
 
 	var rows = data.rows;
 	rows.forEach(function(e,i) {
-		var estado = (e.lab_state == "1") ? "Entregado" : "Pendiente";
+		var estado = (e.lab_state == "1") ? locale.reports_label_17 : locale.reports_label_18;
 
 		sheet.addRow([
 				decode(e.lab_name),
@@ -235,19 +259,19 @@ router.get('/makeStudentReport', function(req, res) {
 
 	var b = [];
   	var header = [
-  		{ text: 'Práctica', style: 'tableHeader', alignment: 'center' }, 
-  		{ text: 'Unidad', style: 'tableHeader', alignment: 'center' }, 
-  		{ text: 'Fecha', style: 'tableHeader', alignment: 'center' }, 
-  		{ text: 'Estado', style: 'tableHeader', alignment: 'center' },
-  		{ text: 'N. Profesor', style: 'tableHeader', alignment: 'center' },
-  		{ text: 'N. Lab', style: 'tableHeader', alignment: 'center' },
-  		{ text: 'N. Final', style: 'tableHeader', alignment: 'center' }
+  		{ text: locale.reports_label_19, style: 'tableHeader', alignment: 'center' }, 
+  		{ text: locale.reports_label_9, style: 'tableHeader', alignment: 'center' }, 
+  		{ text: locale.reports_label_10, style: 'tableHeader', alignment: 'center' }, 
+  		{ text: locale.reports_label_11, style: 'tableHeader', alignment: 'center' },
+  		{ text: locale.reports_label_14, style: 'tableHeader', alignment: 'center' },
+  		{ text: locale.reports_label_15, style: 'tableHeader', alignment: 'center' },
+  		{ text: locale.reports_label_16, style: 'tableHeader', alignment: 'center' }
 	];
 
 	b.push(header);
 
 	data.rows.forEach(function(e,i,a){
-		var estado = (e.lab_state == "1") ? "Entregado" : "Pendiente";
+		var estado = (e.lab_state == "1") ? locale.reports_label_17 : locale.reports_label_18;
 		b.push(
 			[
 				e.lab_name,
@@ -265,11 +289,11 @@ router.get('/makeStudentReport', function(req, res) {
 	var docDefinition = {
 	  content: [
 		pdfHeaderObj,
-	  	{ text: 'Reporte de notas de laboratorio', style: 'header' },
-	  	{ text: 'Nombre: ' + data.name, style: 'subheader' },
-	  	{ text: 'Fecha:	' + data.date, style: 'subheader' },
+	  	{ text: locale.reports_label_1, style: 'header' },
+	  	{ text: locale.reports_label_8 + ': ' + data.name, style: 'subheader' },
+	  	{ text: locale.reports_label_10 + ': ' + data.date, style: 'subheader' },
 	  	//{ text: 'Grupo: ' + data.group, style: 'subheader' },
-	  	{ text: 'Materia: ' + data.subject, style: 'subheader' },
+	  	{ text: locale.reports_label_5 + ': ' + data.subject, style: 'subheader' },
 	    {
     		style: 'tableExample',
 			table: {
@@ -369,20 +393,20 @@ router.get('/makeLabReport', function(req, res) {
 
 	var b = [];
   	var header = [
-  		{ text: 'Práctica', style: 'tableHeader', alignment: 'center' }, 
-  		{ text: 'Fecha', style: 'tableHeader', alignment: 'center' }, 
-  		{ text: 'Estado', style: 'tableHeader', alignment: 'center' },
-  		{ text: 'Tiempo entrega', style: 'tableHeader', alignment: 'center' },
-  		{ text: 'Intentos', style: 'tableHeader', alignment: 'center' },
-  		{ text: 'N. Profesor', style: 'tableHeader', alignment: 'center' },
-  		{ text: 'N. Lab', style: 'tableHeader', alignment: 'center' },
-  		{ text: 'N. Final', style: 'tableHeader', alignment: 'center' }
+  		{ text: locale.reports_label_19, style: 'tableHeader', alignment: 'center' }, 
+  		{ text: locale.reports_label_10, style: 'tableHeader', alignment: 'center' }, 
+  		{ text: locale.reports_label_11, style: 'tableHeader', alignment: 'center' },
+  		{ text: locale.reports_label_12, style: 'tableHeader', alignment: 'center' },
+  		{ text: locale.reports_label_13, style: 'tableHeader', alignment: 'center' },
+  		{ text: locale.reports_label_14, style: 'tableHeader', alignment: 'center' },
+  		{ text: locale.reports_label_15, style: 'tableHeader', alignment: 'center' },
+  		{ text: locale.reports_label_16, style: 'tableHeader', alignment: 'center' }
 	];
 
 	b.push(header);
 
 	data.rows.forEach(function(e,i,a){
-		var estado = (e.lab_state == "1") ? "Entregado" : "Pendiente";
+		var estado = (e.lab_state == "1") ? locale.reports_label_17 : locale.reports_label_18;
 		
 		b.push(
 			[
@@ -402,13 +426,13 @@ router.get('/makeLabReport', function(req, res) {
   	var docDefinition = {
 	  content: [
 		pdfHeaderObj,
-	  	{ text: 'Reporte de notas de laboratorio', style: 'header' },
-	  	{ text: 'Nombre: ' + data.stuName, style: 'subheader' },
-	  	{ text: 'Grupo: ' + data.group, style: 'subheader' },
-	  	{ text: 'Periodo:	' + data.fIni + ' a ' + data.fFin, style: 'subheader' },
-	  	{ text: 'Materia: ' + data.subject, style: 'subheader' },
-	  	{ text: 'Avance: ' + data.avanInd, style: 'subheader' },
-	  	{ text: 'Promedio: ' + data.promInd, style: 'subheader' },
+	  	{ text: locale.reports_label_1, style: 'header' },
+	  	{ text: locale.reports_label_2 + ': ' + data.stuName, style: 'subheader' },
+	  	{ text: locale.reports_label_3 + ': ' + data.group, style: 'subheader' },
+	  	{ text: locale.reports_label_4 + ': ' + data.fIni + ' a ' + data.fFin, style: 'subheader' },
+	  	{ text: locale.reports_label_5 + ': ' + data.subject, style: 'subheader' },
+	  	{ text: locale.reports_label_6 + ': ' + data.avanInd, style: 'subheader' },
+	  	{ text: locale.reports_label_7 + ': ' + data.promInd, style: 'subheader' },
 	    {
     		style: 'tableExample',
 			table: {
@@ -508,15 +532,15 @@ router.get('/makeStuReport', function(req, res) {
 
 	var b = [];
   	var header = [
-  		{ text: 'Práctica', style: 'tableHeader', alignment: 'center' }, 
-  		{ text: 'Unidad', style: 'tableHeader', alignment: 'center' }, 
-  		{ text: 'Fecha', style: 'tableHeader', alignment: 'center' }, 
-  		{ text: 'Estado', style: 'tableHeader', alignment: 'center' },
-  		{ text: 'Tiempo entrega', style: 'tableHeader', alignment: 'center' },
-  		{ text: 'Intentos', style: 'tableHeader', alignment: 'center' },
-  		{ text: 'N. Profesor', style: 'tableHeader', alignment: 'center' },
-  		{ text: 'N. Lab', style: 'tableHeader', alignment: 'center' },
-  		{ text: 'N. Final', style: 'tableHeader', alignment: 'center' }
+  		{ text: locale.reports_label_19, style: 'tableHeader', alignment: 'center' }, 
+  		{ text: locale.reports_label_9, style: 'tableHeader', alignment: 'center' }, 
+  		{ text: locale.reports_label_10, style: 'tableHeader', alignment: 'center' }, 
+  		{ text: locale.reports_label_11, style: 'tableHeader', alignment: 'center' },
+  		{ text: locale.reports_label_12, style: 'tableHeader', alignment: 'center' },
+  		{ text: locale.reports_label_13, style: 'tableHeader', alignment: 'center' },
+  		{ text: locale.reports_label_14, style: 'tableHeader', alignment: 'center' },
+  		{ text: locale.reports_label_15, style: 'tableHeader', alignment: 'center' },
+  		{ text: locale.reports_label_16, style: 'tableHeader', alignment: 'center' }
 	];
 
 	b.push(header);
@@ -547,13 +571,13 @@ router.get('/makeStuReport', function(req, res) {
 		},*/
 		content: [
 			pdfHeaderObj,
-			{ text: 'Reporte de notas de laboratorio', style: 'header' },
-			{ text: 'Nombre: ' + data.stuName, style: 'subheader' },
-			{ text: 'Grupo: ' + data.group, style: 'subheader' },
-			{ text: 'Periodo:	' + data.fIni + ' a ' + data.fFin, style: 'subheader' },
-			{ text: 'Materia: ' + data.subject, style: 'subheader' },
-			{ text: 'Avance: ' + data.avanInd, style: 'subheader' },
-			{ text: 'Promedio: ' + data.promInd, style: 'subheader' },
+			{ text: locale.reports_label_1, style: 'header' },
+			{ text: locale.reports_label_8 + ': ' + data.stuName, style: 'subheader' },
+			{ text: locale.reports_label_3 + ': ' + data.group, style: 'subheader' },
+			{ text: locale.reports_label_4 + ': ' + data.fIni + ' a ' + data.fFin, style: 'subheader' },
+			{ text: locale.reports_label_5 + ': ' + data.subject, style: 'subheader' },
+			{ text: locale.reports_label_6 + ': ' + data.avanInd, style: 'subheader' },
+			{ text: locale.reports_label_7 + ': ' + data.promInd, style: 'subheader' },
 			{
 				style: 'tableExample',
 				table: {

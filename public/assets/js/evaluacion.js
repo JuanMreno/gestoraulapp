@@ -135,7 +135,7 @@
             }
             else{
                 //setTableAnun(res.data[0].user_group_id);
-                $dropDown.children('button').html(res.data[0].name + $dropDown.children('button').html());
+                $dropDown.children('button').html(res.data[0].name + '  <span class="caret"></span>');
                 $dropDown.attr('data-sel-id', res.data[0].group_id);
             }
 
@@ -709,7 +709,7 @@
             var jData = JSON.stringify(data);
             $.ajax({
                 method: "GET",
-                url: CON_URL+"reports/makeStudentReport",
+                url: CON_URL+"reports/makeStuReport",
                 data:{data:jData}
             })
             .done(function( data ) {

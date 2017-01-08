@@ -5,6 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var auth = require('http-auth');
+var fs = require('fs');
+var util = require('util');
 
 var basic = auth.basic({
   realm: "Simon Area.",
@@ -19,13 +21,14 @@ process.env.REPORTS_DIR = absLocRepPath;
 process.env.ABS_REPORTS_DIR = __dirname + "/public/reports";
 process.env.ABS_PDF_REPORTS_DIR = __dirname + "/public/reports/pdfs";
 process.env.ABS_FONTS_DIR = __dirname + "/fonts";
+process.env.ABS_LOCALES_DIR = __dirname + "/public/locales";
 
 process.env.REL_PDF_REPORTS_DIR = "/reports/pdfs";
+
+process.env.LOCALE_FILE = 'es.json';
 process.env.BUNDLE_ID = 'cloudlabs.server.classroomversion';
 process.env.LICENSE_SERVER = 'http://ielicenseserver.herokuapp.com/validacion/verificacion_licencia';
 process.env.RANKING_SERVER = 'http://ranking.indesap.com/server/WebService.asmx/entry';
-
-console.log(process.env.LOCAL_REPORTS_DIR);
 
 var app = express();
 
