@@ -9,6 +9,33 @@
     var countriesData = [];
     var citiesData = [];
 
+    $(document).ready(function() {
+        $('.spanTitCont').text(locale.page_title_uc);
+        $('.containerHeader').find('h1').text(locale.confg_title);
+
+        $('#updateParams').text(locale.save);
+        $('#licInfoLabel').text(locale.confg_label_8);
+        $('.newLicLabel').text(locale.confg_label_9);
+        $('#btnLic').text(locale.confg_label_10);
+        $('#closeBtn').text(locale.close);
+
+        $('label[for="nameSchool"]').text(locale.confg_label_1);
+        $('#nameSchool').attr('placeholder', locale.confg_label_1);
+
+        $('label[for="country"]').text(locale.confg_label_2);
+
+        $('label[for="city"]').text(locale.confg_label_3);
+
+        $('label[for="servName"]').text(locale.confg_label_4);
+        $('#servName').attr('placeholder', locale.confg_label_4);
+
+        $('label[for="license"]').text(locale.confg_label_5);
+
+        $('label[for="licenseState"]').text(locale.confg_label_6);
+
+        $('label[for="ranking"]').text(locale.confg_label_7);
+    });
+
     function init() {
         getCities();
 
@@ -44,7 +71,7 @@
                 var license = $('#licenseVal').val();
 
                 if(license == ""){
-                    $('#alertModalCont').text("Todos los campos son necesarios.");
+                    $('#alertModalCont').text(locale.all_fields);
                     $('#alertModal').modal('show');
                     return;
                 }
@@ -72,28 +99,28 @@
 
                         switch(resCode){
                             case 0:
-                                mns = "Licencia validada con éxito.";
+                                mns = locale.success_msg_2;
                                 break;
                             case 1:
-                                mns = "El número de licencia con el que se ha activado el producto es inválido. Por favor comuníquese con su proveedor.";
+                                mns = locale.license_state_msg_1;
                                 break;
                             case 2:
-                                mns = "Su licencia aún no ha sido activada. Por favor comuníquese con su proveedor.";
+                                mns = locale.license_state_msg_2;
                                 break;
                             case 3:
-                                mns = "Su licencia ha sido desactivada. Por favor comuníquese con su proveedor.";
+                                mns = locale.license_state_msg_3;
                                 break;
                             case 4:
-                                mns = "Su licencia ha caducado. Por favor comuníquese con su proveedor.";
+                                mns = locale.license_state_msg_4;
                                 break;
                             case 5:
-                                mns = "La licencia adquirida no permite ejecutar esta aplicación. Por favor comuníquese con su proveedor.";
+                                mns = locale.license_state_msg_5;
                                 break;
                             case 6:
-                                mns = "Se ha excedido el número de activaciones permitidas por su licencia. Por favor comuníquese con su proveedor.";
+                                mns = locale.license_state_msg_6;
                                 break;
                             default:
-                                mns = "La licencia no pudo ser validada.";
+                                mns = locale.license_state_msg_error;
                                 break;
                         }
 
@@ -101,13 +128,13 @@
                         $('#alertModal').modal('show');
                     }
                     else{
-                        $('#alertModalCont').text("Opps, parece que algo ha fallado en la conexión a Internet o con los servidores CloudLabs. Presione el botón VALIDAR para intentarlo de nuevo o CANCELAR para cerrar la aplicación.");
+                        $('#alertModalCont').text(locale.error_license);
                         $('#alertModal').modal('show');
                     }
                 })
                 .error(function(e) {
                     console.log("Error ajax.");
-                    $('#alertModalCont').text("Opps, parece que algo ha fallado en la conexión a Internet o con los servidores CloudLabs. Presione el botón VALIDAR para intentarlo de nuevo o CANCELAR para cerrar la aplicación.");
+                    $('#alertModalCont').text(locale.error_license);
                     $('#alertModal').modal('show');
                 });
 
@@ -120,13 +147,13 @@
         $('#countrySelect').html("");
         $('#countrySelect').select2({
           data: [],
-          placeholder: 'Sin datos'
+          placeholder: locale.none_data
         });  
 
         $('#citySelect').html("");
         $('#citySelect').select2({
           data: [],
-          placeholder: 'Sin datos'
+          placeholder: locale.none_data
         });  
     }
 
@@ -142,7 +169,7 @@
 
         console.log($('#ranking').bootstrapSwitch().state);
         if (nameSchool == "" || country == "" || city == "" || servName == "") {
-            $('#alertModalCont').text("Todos los valores deben ser configurados.");
+            $('#alertModalCont').text(locale.error_user_7);
             $('#alertModal').modal('show');
         } else {
             var data = {
@@ -162,12 +189,12 @@
                 var res = $.parseJSON(b64_to_utf8(data));
                 var dt = res.data;
                 if(res.status == "true"){
-                    $('#alertModalCont').text("Información cargada con éxito.");
+                    $('#alertModalCont').text(locale.success_msg_1);
                     $('#alertModal').modal('show');
                     getParams();
                 }
                 else{
-                    $('#alertModalCont').text("No se han podido guardar los datos.");
+                    $('#alertModalCont').text(locale.error_try_again);
                     $('#alertModal').modal('show');
                 }
                 
@@ -214,7 +241,7 @@
                             $('#citySelect').select2({
                                 placeholder: {
                                     id: -1,
-                                    text: "Seleccionar"
+                                    text: locale.sel
                                 },
                                 data: res.data
                             }); 
@@ -273,7 +300,7 @@
                 $('#countrySelect').select2({
                     placeholder: {
                         id: -1,
-                        text: "Seleccionar"
+                        text: locale.sel
                     },
                     data: res.data
                 });  
@@ -294,7 +321,7 @@
                             $('#citySelect').select2({
                                 placeholder: {
                                     id: -1,
-                                    text: "Seleccionar"
+                                    text: locale.sel
                                 },
                                 data: res.data
                             }); 
@@ -325,25 +352,25 @@
         var stateStr = "-";
         switch(licenseState){
             case '0':
-                stateStr = "Activa";
+                stateStr = locale.license_state_0;
                 break;
             case '1':
-                stateStr = "Inválida";
+                stateStr = locale.license_state_1;
                 break;
             case '2':
-                stateStr = "Inactiva";
+                stateStr = locale.license_state_2;
                 break;
             case '3':
-                stateStr = "Desactivada";
+                stateStr = locale.license_state_3;
                 break;
             case '4':
-                stateStr = "Caducada";
+                stateStr = locale.license_state_4;
                 break;
             case '5':
-                stateStr = "Aplicación no soportada";
+                stateStr = locale.license_state_5;
                 break;
             case '6':
-                stateStr = "Límite alcanzado";
+                stateStr = locale.license_state_6;
                 break;
             default:
                 break;

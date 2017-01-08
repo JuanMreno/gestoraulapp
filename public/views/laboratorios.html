@@ -4,21 +4,21 @@
 		<div class="container">
 			<div>
 				<h1 class="h1ContHead">
-					<span class="text">GESTIÓN DE AULA CLOUDLABS</span>
+					<span class="text spanTitCont"></span>
 					<span class="span">
 						<img src="../assets/img/cl-header.png" class="contImgHeader">
 					</span>
     			</h1>
 			</div>
 			<div class="containerHeader">
-				<h1>Lista de laboratorios</h1>
+				<h1></h1>
 			</div>
 			<div class="row controlBar">
 			  <div class="col-xs-12 col-sm-5 col-md-5 col-lg-4">
 				<div id="gDropDownCont" class="containerDropDown">
 			  		<div class="row">
 			  			<div class="col-xs-3 col-sm-5 col-md-5 col-lg-5">
-							<span>Materias</span>
+							<span id="subjsLabel"></span>
 				  		</div>
 				  		<div class="col-xs-9 col-sm-7 col-md-7 col-lg-7 inputContDropDown">
 							<div id="labsDropDown" class="dropdown">
@@ -36,7 +36,7 @@
 			  <div id="uploadLabsCont" class="col-xs-5 col-sm-3 col-md-2 col-lg-2">
 				<div class="containerDropDown">
 			  		<div class="row" style="text-align: center;margin-right: 0px;">
-			  			<button id="uploadLabs" type="button" class="btn btn-primary" data-toggle="tooltip" title="Ir al ranking global"  data-placement="bottom" style="margin-left:5px">
+			  			<button id="uploadLabs" type="button" class="btn btn-primary" data-toggle="tooltip"  data-placement="bottom" style="margin-left:5px">
 							<i class="fa fa-upload fa-2x" aria-hidden="true"></i>
 						</button>
 			  		</div>
@@ -55,21 +55,21 @@
       	<!--<h4 class="modal-title">Práctica</h4>-->
         <div class="row">
         	<div class="col-xs-9">
-		        <h4 class="modal-title">Cargar lista de laboratorios</h4>
+		        <h4 class="modal-title" id="loadLabs"></h4>
         	</div>
         </div>
       </div>
       <div class="modal-body">
       	<div class="form-group">
 	        <form id="uploadLabsForm" action="" method="POST">
-				<h6 class="field-label">Cargar laboratorios</h6>
+				<h6 class="field-label" id="loadLab"></h6>
 				<input id="inpFile" type="file" name="labs_file" class="btn btn-default">
 			</form>
-			<button id="btnUploadLabs" class="btn btn-primary">Subir</button>
+			<button id="btnUploadLabs" class="btn btn-primary"></button>
 		</div>		
       </div>
       <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="closeModal"></button>
       </div>
     </div>
   </div>

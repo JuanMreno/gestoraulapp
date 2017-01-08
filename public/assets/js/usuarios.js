@@ -3,11 +3,55 @@
 
     var globalUserId;
 
+    $(document).ready(function() {
+        $('.spanTitCont').text(locale.page_title_uc);
+        $('.containerHeader').find('h1').text(locale.usrs_title);
+
+        $('#usersLabel').text(locale.users);
+        $('#tipoDropdown').text(locale.Usuarios);
+        $('#tipoDropdown-profesores').text(locale.teachs);
+        $('#tipoDropdown-estudiantes').text(locale.students);
+        $('#uploadUsers').attr('title', locale.tooltip_11);
+        $('#infoUser').text(locale.info_user);
+
+        $('label[for="nameUser"]').text(locale.usrs_label_1);
+        $('#nameUser').attr('placeholder', locale.usrs_label_1);
+
+        $('label[for="password1"]').text(locale.usrs_label_2);
+        $('#password1').attr('placeholder', locale.usrs_label_2);
+
+        $('label[for="password2"]').text(locale.usrs_label_3);
+        $('#password2').attr('placeholder', locale.usrs_label_3);
+
+        $('#updatepass').text(locale.update_data);
+        $('#grpsAssig').text(locale.usrs_label_4);
+        $('#subjAssig').text(locale.usrs_label_5);
+
+        $('.closeBtn').text(locale.close);
+        $('#grpLabel').text(locale.group);
+        $('#loadUsrList').text(locale.usrs_label_6);
+        $('#loadUsrs').text(locale.usrs_label_7);
+        $('#btnUploadUsers').text(locale.upload);
+
+        $('label[for="nameUserst"]').text(locale.usrs_label_1);
+        $('#nameUserst').attr('placeholder', locale.usrs_label_1);
+
+        $('label[for="passwordst1"]').text(locale.usrs_label_2);
+        $('#passwordst1').attr('placeholder', locale.usrs_label_2);
+
+        $('label[for="passwordst2"]').text(locale.usrs_label_3);
+        $('#passwordst2').attr('placeholder', locale.usrs_label_3);
+
+        $('#updatepasswst').text(locale.update_data);
+
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
 	function init() {
 	    $('#tipoDropdown-profesores').off('click').on('click', function(event) {
             event.preventDefault();
 
-            $('#tipoDropdown').html('Profesores  ' + '<span class="caret"></span>');
+            $('#tipoDropdown').html(locale.teachs + '  <span class="caret"></span>');
             $("#tipoDropdown").attr('data-sel-id','3'); 
             setUsersTable();
         });
@@ -15,7 +59,7 @@
         $('#tipoDropdown-estudiantes').off('click').on('click', function(event) {
             event.preventDefault();
 
-            $('#tipoDropdown').html('Estudiantes  ' + '<span class="caret"></span>');
+            $('#tipoDropdown').html(locale.students + '  <span class="caret"></span>');
             $("#tipoDropdown").attr('data-sel-id','4'); 
             setUsersTable();  
         });
@@ -24,7 +68,7 @@
             $(this).children("ul").toggle().hide();           
         });
 
-        $('#tipoDropdown').html('Profesores  ' + '<span class="caret"></span>');
+        $('#tipoDropdown').html(locale.teachs + '  <span class="caret"></span>');
         $("#tipoDropdown").attr('data-sel-id','3'); 
 
         $('#uploadUsers').off('click').on('click', function(event) {
@@ -52,20 +96,18 @@
                         var res = $.parseJSON(b64_to_utf8(data));
                         if(res.state == "true"){
                             if(res.res_code == "QUERY_OK"){
-                                $('#alertModalCont').text("Información cargada con éxito.");
+                                $('#alertModalCont').text(locale.success_msg_1);
                                 $('#alertModal').modal('show');
                                 $modal.modal('hide');
                                 init();
                             }
                             else{
-                                $('#alertModalCont').text("El formato del archivo no corresponde con el esperado. Por favor revise el archivo\
-                                                            e intente de nuevo.");
+                                $('#alertModalCont').text(locale.error_format_3);
                                 $('#alertModal').modal('show');
                             }
                         }
                         else{
-                            $('#alertModalCont').text("El formato del archivo no corresponde con el esperado. Por favor revise el archivo\
-                                                        e intente de nuevo.");
+                            $('#alertModalCont').text(locale.error_format_3);
                             $('#alertModal').modal('show');
                         }
                     })
@@ -99,8 +141,8 @@
             autoload: true,
             pageSize: 10,
             pageButtonCount: 5,
-            noDataContent: "Ningún dato encontrado.",
-            loadMessage: "Cargando...",
+            noDataContent: locale.none_data,
+            loadMessage: locale.loading,
             confirmDeleting: false,
             controller: {
                 loadData: function(filter) {
@@ -145,7 +187,7 @@
                     });
 
                     if(item.name == "" || item.last_name == ""){
-                        $('#alertModalCont').text("Todos los campos son necesarios.");
+                        $('#alertModalCont').text(locale.all_fields);
                         $('#alertModal').modal('show');
                         d.reject();
                     }
@@ -169,11 +211,11 @@
                             }
                             else{
                                 if(res.data.state == "REPEATED"){
-                                    $('#alertModalCont').text("El usuario ya ha sido registrado.");
+                                    $('#alertModalCont').text(locale.error_user_1);
                                     $('#alertModal').modal('show');
                                 }
                                 else{
-                                    $('#alertModalCont').text("Error al intentar realizar el registro.");
+                                    $('#alertModalCont').text(locale.error_try_again);
                                     $('#alertModal').modal('show');
                                 }
                                 d.reject();
@@ -181,7 +223,7 @@
                             }
                         }).fail(function(data) {
                             console.log("ajax fail");
-                            $('#alertModalCont').text("Error al intentar realizar el registro.");
+                            $('#alertModalCont').text(locale.error_try_again);
                             $('#alertModal').modal('show');
                             d.reject();
                         });
@@ -200,7 +242,7 @@
                     });
 
                     if(item.name == "" || item.last_name == ""){
-                        $('#alertModalCont').text("Todos los campos son necesarios.");
+                        $('#alertModalCont').text(locale.all_fields);
                         $('#alertModal').modal('show');
                         d.reject();
                     }
@@ -223,11 +265,11 @@
                             }
                             else{
                                 if(res.data.state == "REPEATED"){
-                                    $('#alertModalCont').text("El usuario ya ha sido registrado.");
+                                    $('#alertModalCont').text(locale.error_user_1);
                                     $('#alertModal').modal('show');
                                 }
                                 else{
-                                    $('#alertModalCont').text("Error al intentar realizar el registro.");
+                                    $('#alertModalCont').text(locale.error_try_again);
                                     $('#alertModal').modal('show');
                                 }
                                 d.reject();
@@ -235,7 +277,7 @@
                             }
                         }).fail(function(data) {
                             console.log("ajax fail");
-                            $('#alertModalCont').text("Error al intentar realizar el registro.");
+                            $('#alertModalCont').text(locale.error_try_again);
                             $('#alertModal').modal('show');
                             d.reject();
                         });
@@ -252,7 +294,7 @@
                         $("#jsGrid").jsGrid("render");
                     }); 
 
-                    mns = "ALERTA ¿Está seguro que desea eliminar el usuario? Si hace esto perderá toda la información relacionada.";
+                    mns = locale.cofirm_2;
                     $confModal = $('#confirmModal');
                     $confModal.find('#confirmModalCont').text(mns);
 
@@ -276,14 +318,14 @@
                                 //$("#jsGrid").jsGrid("deleteItem", item);
                             }
                             else{
-                                $('#alertModalCont').text("Error al intentar eliminar el elemento.");
+                                $('#alertModalCont').text(locale.error_try_again);
                                 $('#alertModal').modal('show');
                                 d.reject();
                                 //d.resolve(false);
                             }
                         }).fail(function(data) {
                             console.log("ajax fail");
-                            $('#alertModalCont').text("Error al intentar eliminar el elemento.");
+                            $('#alertModalCont').text(locale.error_try_again);
                             $('#alertModal').modal('show');
                             d.reject();
                         });
@@ -354,7 +396,7 @@
                                     jsonDataLoad.push(e.params.data.id) ;
                                     listAllGroupsSubjets(objUser.item.id);                                   
                                 } else{
-                                    $('#alertModalCont').text("Error al intentar realizar el registro.");
+                                    $('#alertModalCont').text(locale.error_try_again);
                                     $('#alertModal').modal('show');
                                 }                                       
                             }).fail(function(data) {
@@ -364,7 +406,7 @@
 
                         $("#listGroups").on("select2:unselect", function(e) { 
 
-                            var mns = "ALERTA ¿Está seguro que desea retirar el profesor del grupo? Si hace esto perderá toda la información relacionada.";
+                            var mns = locale.cofirm_3;
                             $confModal = $('#confirmModal');
                             $confModal.find('#confirmModalCont').text(mns);
 
@@ -413,7 +455,7 @@
 
                             if (changepass) {
                                 if (pass1 == "" || pass2 == "" || username == "") {
-                                    $('#alertModalCont').text("Todos los campos son necesarios.");
+                                    $('#alertModalCont').text(locale.all_fields);
                                     $('#alertModal').modal('show');
                                 }else {
                                     console.log(pass1);
@@ -436,25 +478,25 @@
                                                 $("#password2").val('xxxxxxxxxx');
                                                 $("#jsGrid").jsGrid("render");
 
-                                                $('#alertModalCont').text("Los datos han sido actualizados.");
+                                                $('#alertModalCont').text(locale.success_msg_1);
                                                 $('#alertModal').modal('show');
                                             }else{
-                                                $('#alertModalCont').text("Ha ocurrido un error inesperado, inténtalo de nuevo.");
+                                                $('#alertModalCont').text(locale.error_try_again);
                                                 $('#alertModal').modal('show');
                                             }
                                         }).fail(function(data) {
                                             console.log("ajax fail");
-                                            $('#alertModalCont').text("Ha ocurrido un error inesperado, inténtalo de nuevo.");
+                                            $('#alertModalCont').text(locale.error_try_again);
                                             $('#alertModal').modal('show');
                                         });
                                     }else {
-                                        $('#alertModalCont').text("Las contraseñas deben coincidir.");
+                                        $('#alertModalCont').text(locale.error_user_2);
                                         $('#alertModal').modal('show');
                                     }
                                 }
                             }else{
                                 if (username == "") {
-                                    $('#alertModalCont').text("Todos los campos son necesarios.");
+                                    $('#alertModalCont').text(locale.all_fields);
                                     $('#alertModal').modal('show');
                                 }else {
                                     var data = {
@@ -474,15 +516,15 @@
                                             $("#password2").val('xxxxxxxxxx');
                                             $("#jsGrid").jsGrid("render");
 
-                                            $('#alertModalCont').text("Los datos han sido actualizados.");
+                                            $('#alertModalCont').text(locale.success_msg_1);
                                             $('#alertModal').modal('show');
                                         }else{
-                                            $('#alertModalCont').text("Ha ocurrido un error inesperado, inténtalo de nuevo.");
+                                            $('#alertModalCont').text(locale.error_try_again);
                                             $('#alertModal').modal('show');
                                         }
                                     }).fail(function(data) {
                                         console.log("ajax fail");
-                                        $('#alertModalCont').text("Ha ocurrido un error inesperado, inténtalo de nuevo.");
+                                        $('#alertModalCont').text(locale.error_try_again);
                                         $('#alertModal').modal('show');
                                     });
                                 }
@@ -554,7 +596,7 @@
                             }).done(function(data) {
                                 var res = $.parseJSON(b64_to_utf8(data));
                                 if (res.status == "true") {
-                                    $('#alertModalCont').text("Los datos han sido actualizados.");
+                                    $('#alertModalCont').text(locale.success_msg_1);
                                     $('#alertModal').modal('show');
                                 }
                                          
@@ -563,8 +605,7 @@
                             });
                         }
                         else{
-                            mensaje = "ALERTA ¿Está seguro que desea cambiar el grupo? Si hace esto perderá toda la\
-                                información relacionada.";
+                            mensaje = locale.cofirm_4;
 
                             $confModal = $('#confirmModal');
                             $confModal.find('#confirmModalCont').text(mensaje);
@@ -584,7 +625,7 @@
                                 }).done(function(data) {
                                     var res = $.parseJSON(b64_to_utf8(data));
                                     if (res.status == "true") {
-                                        $('#alertModalCont').text("Los datos han sido actualizados.");
+                                        $('#alertModalCont').text(locale.success_msg_1);
                                         $('#alertModal').modal('show');
                                     }
                                              
@@ -609,7 +650,7 @@
                         debugger;
                         if (changepassSt) {
                             if (pass1 == "" || pass2 == "" || username == "") {
-                                $('#alertModalCont').text("Todos los campos son necesarios.");
+                                $('#alertModalCont').text(locale.all_fields);
                                 $('#alertModal').modal('show');
                             }else {
                                 console.log(pass1);
@@ -632,25 +673,25 @@
                                             $("#passwordst2").val('xxxxxxxxxx');
                                             $("#jsGrid").jsGrid("render");
 
-                                            $('#alertModalCont').text("Los datos han sido actualizados.");
+                                            $('#alertModalCont').text(locale.success_msg_1);
                                             $('#alertModal').modal('show');
                                         }else{
-                                            $('#alertModalCont').text("Ha ocurrido un error inesperado, inténtalo de nuevo.");
+                                            $('#alertModalCont').text(locale.error_try_again);
                                             $('#alertModal').modal('show');
                                         }
                                     }).fail(function(data) {
                                         console.log("ajax fail");
-                                        $('#alertModalCont').text("Ha ocurrido un error inesperado, inténtalo de nuevo.");
+                                        $('#alertModalCont').text(locale.error_try_again);
                                         $('#alertModal').modal('show');
                                     });
                                 }else {
-                                    $('#alertModalCont').text("Las contraseñas deben coincidir.");
+                                    $('#alertModalCont').text(locale.error_user_2);
                                     $('#alertModal').modal('show');
                                 }
                             }
                         }else{
                             if (username == "") {
-                                $('#alertModalCont').text("Todos los campos son necesarios.");
+                                $('#alertModalCont').text(locale.all_fields);
                                 $('#alertModal').modal('show');
                             }else {
                                 var data = {
@@ -670,15 +711,15 @@
                                         $("#passwordst2").val('xxxxxxxxxx');
                                         $("#jsGrid").jsGrid("render");
 
-                                        $('#alertModalCont').text("Los datos han sido actualizados.");
+                                        $('#alertModalCont').text(locale.success_msg_1);
                                         $('#alertModal').modal('show');
                                     }else{
-                                        $('#alertModalCont').text("Ha ocurrido un error inesperado, inténtalo de nuevo.");
+                                        $('#alertModalCont').text(locale.error_try_again);
                                         $('#alertModal').modal('show');
                                     }
                                 }).fail(function(data) {
                                     console.log("ajax fail");
-                                    $('#alertModalCont').text("Ha ocurrido un error inesperado, inténtalo de nuevo.");
+                                    $('#alertModalCont').text(locale.error_try_again);
                                     $('#alertModal').modal('show');
                                 });
                             }
@@ -699,15 +740,15 @@
                 
             },
 
-            pagerFormat: "Pag {first} {prev} {pages} {next} {last}    {pageIndex} de {pageCount}",
+            pagerFormat: "Pag {first} {prev} {pages} {next} {last}    {pageIndex} / {pageCount}",
             pagePrevText: " < ",
 		    pageNextText: " > ",
 		    pageFirstText: " << ",
 		    pageLastText: " >> ",
 
             fields: [ 
-                { name: "name", type: "text", align: "center", title: "Nombres", editing:true },
-                { name: "last_name", type: "text", align: "center", title: "Apellidos", editing:true },
+                { name: "name", type: "text", align: "center", title: locale.table_names, editing:true },
+                { name: "last_name", type: "text", align: "center", title: locale.table_last_names, editing:true },
             	{ type: "control" }
             ]
         });
@@ -728,7 +769,7 @@
             if(res.status == "true"){
                 var html = "";
 
-                html+="<option value='-1' disabled>Ninguno</option>";
+                html+="<option value='-1' disabled>" + locale.none2 + "</option>";
                 for (var i = 0; i < dt.length; i++) {
                     html+="<option value='"+dt[i].id+"'>"+dt[i].name+"</option>";
                 }
@@ -753,7 +794,7 @@
             var dt = res.data;
             if(res.status == "true"){
                 var html = "";
-                html+="<option value='' >Seleccionar grupo</option>";
+                html+="<option value='' >" + locale.group_sel + "</option>";
                 for (var i = 0; i < dt.length; i++) {
                     html+="<option value='"+dt[i].group_id+"' data-id='"+dt[i].user_group_id+"'>"+dt[i].name+"</option>";
                 }
@@ -820,7 +861,7 @@
                         if (res.status == "true") {
                             jsonDataLoadx.push(e.params.data.id);                                   
                         } else{
-                            $('#alertModalCont').text("Ha ocurrido un error inesperado, inténtalo de nuevo.");
+                            $('#alertModalCont').text(locale.error_try_again);
                             $('#alertModal').modal('show');
                         }                                       
                     }).fail(function(data) {
@@ -834,8 +875,7 @@
                     $("#listsubjectsGroup").trigger('select2:close');
                     $('.select2-selection__rendered').focusout();
 
-                    var mensaje = "ALERTA ¿Está seguro que desea retirar el profesor del grupo? Si hace esto\
-                                            perderá toda la información relacionada.";
+                    var mensaje = locale.cofirm_5;
 
                     $confModal = $('#confirmModal');
                     $confModal.find('#confirmModalCont').text(mensaje);

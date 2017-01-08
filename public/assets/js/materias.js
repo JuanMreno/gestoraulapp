@@ -5,6 +5,11 @@
 	    setSubjectsTable();
 	}
 
+    $(document).ready(function() {
+        $('.spanTitCont').text(locale.page_title_uc);
+        $('.containerHeader').find('h1').text(locale.subjs_title);
+    });
+
 	init();
 
     var subData = [];
@@ -30,8 +35,8 @@
             autoload: true,
             pageSize: 10,
             pageButtonCount: 5,
-            noDataContent: "Ningún dato encontrado.",
-            loadMessage: "Cargando...",
+            noDataContent: locale.none_data,
+            loadMessage: locale.loading,
             controller: {
                 loadData: function(filter) {
                     var d = $.Deferred();
@@ -72,7 +77,7 @@
                     });
 
                     if(item.name == ""){
-                        $('#alertModalCont').text("Todos los campos son necesarios.");
+                        $('#alertModalCont').text(locale.all_fields);
                         $('#alertModal').modal('show');
                         d.reject();
                     }
@@ -93,11 +98,11 @@
                                 d.resolve(item);
                             else{
                                 if(res.data.state == "REPEATED"){
-                                    $('#alertModalCont').text("La materia ya ha sido registrada.");
+                                    $('#alertModalCont').text(locale.error_user_5);
                                     $('#alertModal').modal('show');
                                 }
                                 else{
-                                    $('#alertModalCont').text("Error al intentar registrar la materia.");
+                                    $('#alertModalCont').text(locale.error_try_again);
                                     $('#alertModal').modal('show');
                                 }
                                 d.reject();
@@ -106,7 +111,7 @@
                         }).fail(function(data) {
                             console.log("ajax fail");
                             item.asignado = (item.asignado == 0) ? 1 : 0;
-                            $('#alertModalCont').text("Error al intentar registrar la materia.");
+                            $('#alertModalCont').text(locale.error_try_again);
                             $('#alertModal').modal('show');
                             d.resolve(item);
                         });
@@ -125,7 +130,7 @@
                     });
 
                     if(item.name == ""){
-                        $('#alertModalCont').text("Todos los campos son necesarios.");
+                        $('#alertModalCont').text(locale.all_fields);
                         $('#alertModal').modal('show');
                         d.reject();
                     }
@@ -144,11 +149,11 @@
                                 d.resolve(item);
                             else{
                                 if(res.data.state == "REPEATED"){
-                                    $('#alertModalCont').text("La materia ya ha sido registrada.");
+                                    $('#alertModalCont').text(locale.error_user_5);
                                     $('#alertModal').modal('show');
                                 }
                                 else{
-                                    $('#alertModalCont').text("Error al intentar registrar la materia.");
+                                    $('#alertModalCont').text(locale.error_try_again);
                                     $('#alertModal').modal('show');
                                 }
                                 d.reject();
@@ -156,7 +161,7 @@
                             }
                         }).fail(function(data) {
                             console.log("ajax fail");
-                            $('#alertModalCont').text("Error al intentar registrar la materia.");
+                            $('#alertModalCont').text(locale.error_try_again);
                             $('#alertModal').modal('show');
                             d.reject();
                         });
@@ -173,7 +178,7 @@
                         $("#jsGrid").jsGrid("render");
                     });
 
-                    var mns = "Se eliminarán todos los datos asociados a la materia, ¿está seguro de realizar esta operación?";
+                    var mns = locale.cofirm_6;
 
                     $confModal = $('#confirmModal');
                     $confModal.find('#confirmModalCont').text(mns);
@@ -197,14 +202,14 @@
                                 d.reject();
                             }
                             else{
-                                $('#alertModalCont').text("Error al intentar eliminar el elemento.");
+                                $('#alertModalCont').text(locale.error_try_again);
                                 $('#alertModal').modal('show');
                                 d.reject();
                                 //d.resolve(false);
                             }
                         }).fail(function(data) {
                             console.log("ajax fail");
-                            $('#alertModalCont').text("Error al intentar eliminar el elemento.");
+                            $('#alertModalCont').text(locale.error_try_again);
                             $('#alertModal').modal('show');
                             d.reject();
                         });
@@ -219,14 +224,14 @@
                 }
             },
 
-            pagerFormat: "Pag {first} {prev} {pages} {next} {last}    {pageIndex} de {pageCount}",
+            pagerFormat: "Pag {first} {prev} {pages} {next} {last}    {pageIndex} / {pageCount}",
             pagePrevText: " < ",
 		    pageNextText: " > ",
 		    pageFirstText: " << ",
 		    pageLastText: " >> ",
 
             fields: [ 
-                { name: "name", type: "text", align: "center", title: "Nombre", editing:true},
+                { name: "name", type: "text", align: "center", title: locale.name, editing:true},
             	{ type: "control" }
             ]
         });

@@ -4,31 +4,31 @@
 		<div class="container">
 			<div>
 				<h1 class="h1ContHead">
-					<span class="text">GESTIÓN DE AULA CLOUDLABS</span>
+					<span class="text spanTitCont"></span>
 					<span class="span">
 						<img src="../assets/img/cl-header.png" class="contImgHeader">
 					</span>
     			</h1>
 			</div>
 			<div class="containerHeader">
-				<h1>Lista de profesores y estudiantes</h1>
+				<h1></h1>
 			</div>
 			<div class="row controlBar">
 			  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
 				<div class="containerDropDown">
 			  		<div class="row">
 			  			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-							<span>Usuarios</span>
+							<span id="usersLabel"></span>
 				  		</div>
 				  		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 inputContDropDown">
 							<div class="dropdown">
 							  <button class="btn btn-primary dropdown-toggle" type="button" id="tipoDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-							    Profesores
+							    
 							    <span class="caret"></span>
 							  </button>
 							  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-							    <li><a href="#" id="tipoDropdown-profesores">Profesores</a></li>
-							    <li><a href="#" id="tipoDropdown-estudiantes">Estudiantes</a></li>
+							    <li><a href="#" id="tipoDropdown-profesores"></a></li>
+							    <li><a href="#" id="tipoDropdown-estudiantes"></a></li>
 							  </ul>
 							</div>
 				  		</div>
@@ -38,7 +38,7 @@
 			  <div class="col-xs-5 col-sm-3 col-md-2 col-lg-2">
 				<div class="containerDropDown">
 			  		<div class="row" style="text-align: center;margin-right: 0px;">
-			  			<button id="uploadUsers" type="button" class="btn btn-primary" data-toggle="tooltip" title="Ir al ranking global"  data-placement="bottom" style="margin-left:5px">
+			  			<button id="uploadUsers" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" style="margin-left:5px">
 							<i class="fa fa-upload fa-2x" aria-hidden="true"></i>
 						</button>
 			  		</div>
@@ -58,7 +58,7 @@
       	<!--<h4 class="modal-title">Práctica</h4>-->
         <div class="row">
         	<div class="col-xs-9">
-		        <h4 class="modal-title">Información de usuario</h4>
+		        <h4 class="modal-title" id="infoUser"></h4>
         	</div>
         </div>
       </div>
@@ -66,29 +66,29 @@
       	<div class="row form-group">
       		<div class="col-sm-8">
 		        <div class="form-group">
-				    <label  class="field-label" for="nameUser">Nombre de usuario</label>
-				    <input type="text" class="form-control profilepf" id="nameUser" placeholder="Nombre de Usuario" autocomplete="off">
+				    <label  class="field-label" for="nameUser"></label>
+				    <input type="text" class="form-control profilepf" id="nameUser" autocomplete="off">
 				</div>
         	</div>      		
         	<div class="col-sm-6">
 		        <div class="form-group">
-				    <label  class="field-label" for="password1">Nueva contraseña</label>
+				    <label  class="field-label" for="password1"></label>
 				    <input type="password" class="form-control passpf" id="password1" placeholder="Contraseña" autocomplete="new-password">
 				</div>
         	</div>
         	<div class="col-sm-6">
 		        <div class="form-group">
-				    <label  class="field-label" for="password2">Repetir contraseña</label>
+				    <label  class="field-label" for="password2"></label>
 				    <input type="password" class="form-control passpf" id="password2" placeholder="Repetir Contraseña" autocomplete="new-password">
 				</div>
         	</div>
         	<div class="col-sm-6">
-		        <button class="btn btn-primary" id="updatepass">Actualizar datos</button>
+		        <button class="btn btn-primary" id="updatepass"></button>
         	</div>
         </div>
         <div class="row">
   			<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-				<span class="title-label">Grupos asignados</span>
+				<span class="title-label" id="grpsAssig"></span>
 	  		</div>
 	  		<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 				<select id="listGroups" class=""  multiple="multiple"></select>
@@ -97,7 +97,7 @@
   		<br>
   		<div class="row">
   			<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-		  		<h6 class="title-label">Asignar materias</h6>
+		  		<h6 class="title-label" id="subjAssig"></h6>
 			</div>
   		</div>
   		<div class="row">
@@ -115,7 +115,7 @@
   		</div>		
       </div>
       <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-default closeBtn" data-dismiss="modal"></button>
       </div>
     </div>
   </div>
@@ -128,7 +128,7 @@
       	<!--<h4 class="modal-title">Práctica</h4>-->
         <div class="row">
         	<div class="col-xs-9">
-		        <h4 class="modal-title">Información de estudiante</h4>
+		        <h4 class="modal-title" id="infoUser"></h4>
         	</div>
         </div>
       </div>
@@ -136,29 +136,29 @@
       	<div class="row form-group">
       		<div class="col-sm-8">
 		        <div class="form-group">
-				    <label  class="field-label" for="nameUserst">Nombre de usuario</label>
-				    <input type="text" class="form-control profilest" id="nameUserst" placeholder="Nombre de Usuario">
+				    <label  class="field-label" for="nameUserst"></label>
+				    <input type="text" class="form-control profilest" id="nameUserst">
 				</div>
         	</div>    		
         	<div class="col-sm-6">
 		        <div class="form-group">
-				    <label class="field-label" for="passwordst1">Nueva contraseña</label>
-				    <input type="password" class="form-control passst" id="passwordst1" placeholder="Contraseña">
+				    <label class="field-label" for="passwordst1"></label>
+				    <input type="password" class="form-control passst" id="passwordst1">
 				</div>
         	</div>
         	<div class="col-sm-6">
 		        <div class="form-group">
-				    <label class="field-label" for="passwordst2">Repetir contraseña</label>
-				    <input type="password" class="form-control passst" id="passwordst2" placeholder="Repetir Contraseña">
+				    <label class="field-label" for="passwordst2"></label>
+				    <input type="password" class="form-control passst" id="passwordst2">
 				</div>
         	</div>
         	<div class="col-sm-6">
-		        <button class="btn btn-primary" id="updatepasswst">Actualizar información</button>
+		        <button class="btn btn-primary" id="updatepasswst"></button>
         	</div>
         </div>
         <div class="row">
   			<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-		  		<h6 class="title-label">Grupo</h6>
+		  		<h6 class="title-label" id="grpLabel"></h6>
 			</div>
 	  		<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 				<select class="form-control" id="allGroupSt">
@@ -168,7 +168,7 @@
   		</div>		
       </div>
       <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-default closeBtn" data-dismiss="modal"></button>
       </div>
     </div>
   </div>
@@ -181,21 +181,21 @@
       	<!--<h4 class="modal-title">Práctica</h4>-->
         <div class="row">
         	<div class="col-xs-9">
-		        <h4 class="modal-title">Cargar lista de usuarios</h4>
+		        <h4 class="modal-title" id="loadUsrList"></h4>
         	</div>
         </div>
       </div>
       <div class="modal-body">
       	<div class="form-group">
 	        <form id="uploadUsersForm" action="externals/put_lab" method="POST">
-				<h6 class="field-label">Cargar usuarios</h6>
+				<h6 class="field-label" id="loadUsrs"></h6>
 				<input id="inpFile" type="file" name="users_file" class="btn btn-default">
 			</form>
-			<button id="btnUploadUsers" class="btn btn-primary">Subir</button>
+			<button id="btnUploadUsers" class="btn btn-primary"></button>
 		</div>		
       </div>
       <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-default closeBtn" data-dismiss="modal" id="closeBtn2"></button>
       </div>
     </div>
   </div>

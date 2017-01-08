@@ -5,6 +5,12 @@
 	    setGroupsDropDown();
 	}
 
+    $(document).ready(function() {
+        $('.spanTitCont').text(locale.page_title_uc);
+        $('.containerHeader').find('h1').text(locale.grps_title);
+        $('#groupsLabel').text(locale.groups);
+    });
+
 	init();
 
     function setGroupsDropDown() {
@@ -25,11 +31,11 @@
         }).done(function(data) {
             var res = $.parseJSON(b64_to_utf8(data));
 
-            $dropDown.children('button').html('Todos  ' + '<span class="caret"></span>');
+            $dropDown.children('button').html( locale.all + '  <span class="caret"></span>');
             $dropDown.attr('data-sel-id', '-1');
             setGroupsTable();
 
-            $newRow = $('<li><a class="userGroupSelElem" data-id="-1" href="#">Todos</a></li>');
+            $newRow = $('<li><a class="userGroupSelElem" data-id="-1" href="#">' + locale.all + '</a></li>');
             $newRow.off("click").on('click', function(event) {
                 event.preventDefault();
                 $this = $(this);
@@ -72,8 +78,8 @@
             autoload: true,
             pageSize: 10,
             pageButtonCount: 5,
-            noDataContent: "Ningún dato encontrado.",
-            loadMessage: "Cargando...",
+            noDataContent: locale.none_data,
+            loadMessage: locale.loading,
             controller: {
                 loadData: function(filter) {
                     var d = $.Deferred();
@@ -113,7 +119,7 @@
                     });
 
                     if(item.name == ""){
-                        $('#alertModalCont').text("Todos los campos son necesarios.");
+                        $('#alertModalCont').text(locale.all_fields);
                         $('#alertModal').modal('show');
                         d.reject();
                     }
@@ -134,11 +140,11 @@
                                 d.resolve(item);
                             else{
                                 if(res.data.state == "REPEATED"){
-                                    $('#alertModalCont').text("El grupo ya ha sido registrado.");
+                                    $('#alertModalCont').text(locale.error_user_3);
                                     $('#alertModal').modal('show');
                                 }
                                 else{
-                                    $('#alertModalCont').text("Error al intentar realizar el registro.");
+                                    $('#alertModalCont').text(locale.error_user_4);
                                     $('#alertModal').modal('show');
                                 }
                                 d.reject();
@@ -147,7 +153,7 @@
                         }).fail(function(data) {
                             console.log("ajax fail");
                             item.asignado = (item.asignado == 0) ? 1 : 0;
-                            $('#alertModalCont').text("Error al intentar realizar el registro.");
+                            $('#alertModalCont').text(locale.error_try_again);
                             $('#alertModal').modal('show');
                             d.reject();
                         });
@@ -166,7 +172,7 @@
                     });
 
                     if(item.name == ""){
-                        $('#alertModalCont').text("Todos los campos son necesarios.");
+                        $('#alertModalCont').text(locale.all_fields);
                         $('#alertModal').modal('show');
                         d.reject();
                     }
@@ -185,11 +191,11 @@
                                 d.resolve(item);
                             else{
                                 if(res.data.state == "REPEATED"){
-                                    $('#alertModalCont').text("El grupo ya ha sido registrado.");
+                                    $('#alertModalCont').text(locale.error_user_3);
                                     $('#alertModal').modal('show');
                                 }
                                 else{
-                                    $('#alertModalCont').text("Error al intentar realizar el registro.");
+                                    $('#alertModalCont').text(locale.error_try_again);
                                     $('#alertModal').modal('show');
                                 }
                                 d.reject();
@@ -197,7 +203,7 @@
                             }
                         }).fail(function(data) {
                             console.log("ajax fail");
-                            $('#alertModalCont').text("Error al intentar realizar el registro.");
+                            $('#alertModalCont').text(locale.error_try_again);
                             $('#alertModal').modal('show');
                             d.reject();
                         });
@@ -207,14 +213,14 @@
                 }
             },
 
-            pagerFormat: "Pag {first} {prev} {pages} {next} {last}    {pageIndex} de {pageCount}",
+            pagerFormat: "Pag {first} {prev} {pages} {next} {last}    {pageIndex} / {pageCount}",
             pagePrevText: " < ",
 		    pageNextText: " > ",
 		    pageFirstText: " << ",
 		    pageLastText: " >> ",
 
             fields: [ 
-                { name: "name", type: "text", align: "center", title: "Nombre", editing:true },
+                { name: "name", type: "text", align: "center", title: locale.name, editing:true },
             	{ type: "control" }
             ]
         });
@@ -232,10 +238,10 @@
             autoload: true,
             pageSize: 10,
             pageButtonCount: 5,
-            noDataContent: "Ningún dato encontrado.",
-            loadMessage: "Cargando...",
+            noDataContent: locale.none_data,
+            loadMessage: locale.loading,
             confirmDeleting: true,
-            deleteConfirm: "¿Seguro desea quitar la asignación?",
+            deleteConfirm: locale.warning_6,
             controller: {
                 loadData: function(filter) {
                     var d = $.Deferred();
@@ -296,15 +302,15 @@
             },
 
 
-            pagerFormat: "Pag {first} {prev} {pages} {next} {last}    {pageIndex} de {pageCount}",
+            pagerFormat: "Pag {first} {prev} {pages} {next} {last}    {pageIndex} / {pageCount}",
             pagePrevText: " < ",
             pageNextText: " > ",
             pageFirstText: " << ",
             pageLastText: " >> ",
 
             fields: [ 
-                { name: "name", type: "text", align: "center", title: "Nombre", editing:false },
-                { name: "asignado", type: "checkbox", align: "center", title: "Asignado" },
+                { name: "name", type: "text", align: "center", title: locale.name, editing:false },
+                { name: "asignado", type: "checkbox", align: "center", title: locale.assigned},
                 { type: "control" }
             ]
         });

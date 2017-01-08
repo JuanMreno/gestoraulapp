@@ -1,6 +1,20 @@
 
 (function($) {
 
+    $(document).ready(function() {
+        $('.spanTitCont').text(locale.page_title_uc);
+        $('.containerHeader').find('h1').text(locale.labs_title);
+
+        $('#subjsLabel').text(locale.subjects);
+        $('#uploadLabs').attr('title', locale.tooltip_10);
+        $('#loadLabs').text(locale.labs_label_1);
+        $('#loadLab').text(locale.labs_label_2);
+        $('#btnUploadLabs').text(locale.upload);
+        $('#closeModal').text(locale.close);
+
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
 	function init() {
 	    setGroupsDropDown();
 
@@ -36,23 +50,23 @@
                         var res = $.parseJSON(b64_to_utf8(data));
                         if(res.state == "true"){
                             if(res.res_code == "QUERY_OK"){
-                                $('#alertModalCont').text("Información cargada con éxito.");
+                                $('#alertModalCont').text(locale.success_msg_1);
                                 $('#alertModal').modal('show');
                                 $modal.modal('hide');
                                 init();
                             }
                             else{
-                                $('#alertModalCont').text("Formato o información incorrecta, valide la información e intente de nuevo.");
+                                $('#alertModalCont').text(locale.error_format_4);
                                 $('#alertModal').modal('show');
                             }
                         }
                         else{
-                            $('#alertModalCont').text("Ha ocurrido un error inesperado, inténtalo de nuevo.");
+                            $('#alertModalCont').text(locale.error_try_again);
                             $('#alertModal').modal('show');
                         }
                     })
                     .error(function(e) {
-                        $('#alertModalCont').text("Error de conexión.");
+                        $('#alertModalCont').text(locale.error_try_again);
                         $('#alertModal').modal('show');
                         console.log("Error ajax.");
                     });
@@ -124,8 +138,8 @@
             autoload: true,
             pageSize: 10,
             pageButtonCount: 5,
-            noDataContent: "Ningún dato encontrado.",
-            loadMessage: "Cargando...",
+            noDataContent: locale.none_data,
+            loadMessage: locale.loading,
             controller: {
                 loadData: function(filter) {
                     var d = $.Deferred();
@@ -165,7 +179,7 @@
                         $("#jsGrid").jsGrid("render");
                     });
 
-                    var mns = "Se eliminarán todos los datos asociados a la práctica, ¿está seguro de realizar esta operación?";
+                    var mns = locale.cofirm_7;
 
                     $confModal = $('#confirmModal');
                     $confModal.find('#confirmModalCont').text(mns);
@@ -190,14 +204,14 @@
                                 $("#jsGrid").jsGrid("deleteItem", item);
                             }
                             else{
-                                $('#alertModalCont').text("Error al intentar eliminar el elemento.");
+                                $('#alertModalCont').text(locale.error_try_again);
                                 $('#alertModal').modal('show');
                                 d.reject();
                                 //d.resolve(false);
                             }
                         }).fail(function(data) {
                             console.log("ajax fail");
-                            $('#alertModalCont').text("Error al intentar eliminar el elemento.");
+                            $('#alertModalCont').text(locale.error_try_again);
                             $('#alertModal').modal('show');
                             d.reject();
                         });
@@ -220,7 +234,7 @@
                     }); 
 
                     if (item.name == "" || item.lesson_name == "" || item.lab_code == "") {
-                        $('#alertModalCont').text("Todos los campos son necesarios.");
+                        $('#alertModalCont').text(locale.all_fields);
                         $('#alertModal').modal('show');
                         d.reject();
                     } else {
@@ -244,11 +258,11 @@
                             }
                             else{
                                 if(res.data.state == "REPEATED"){
-                                    $('#alertModalCont').text("El laboratorio ya ha sido registrado.");
+                                    $('#alertModalCont').text(locale.error_user_6);
                                     $('#alertModal').modal('show');
                                 }
                                 else{
-                                    $('#alertModalCont').text("Error al intentar realizar el registro.");
+                                    $('#alertModalCont').text(locale.error_try_again);
                                     $('#alertModal').modal('show');
                                 }
                                 d.reject();
@@ -256,7 +270,7 @@
                             }
                         }).fail(function(data) {
                             console.log("ajax fail");
-                            $('#alertModalCont').text("Error al intentar realizar el registro.");
+                            $('#alertModalCont').text(locale.error_try_again);
                             $('#alertModal').modal('show');
                             d.reject();
                         });
@@ -273,7 +287,7 @@
                     });
 
                     if (item.name == "" || item.lesson_name == "" || item.lab_code == "") {
-                        $('#alertModalCont').text("Todos los campos son necesarios.");
+                        $('#alertModalCont').text(locale.all_fields);
                         $('#alertModal').modal('show');
                         d.reject();
                     } else {
@@ -294,11 +308,11 @@
                                 d.resolve(item);
                             else{
                                 if(res.data.state == "REPEATED"){
-                                    $('#alertModalCont').text("El laboratorio ya ha sido registrado.");
+                                    $('#alertModalCont').text(locale.error_user_6);
                                     $('#alertModal').modal('show');
                                 }
                                 else{
-                                    $('#alertModalCont').text("Error al intentar realizar el registro.");
+                                    $('#alertModalCont').text(locale.error_try_again);
                                     $('#alertModal').modal('show');
                                 }
                                 d.reject();
@@ -306,7 +320,7 @@
                             }
                         }).fail(function(data) {
                             console.log("ajax fail");
-                            $('#alertModalCont').text("Error al intentar realizar el registro.");
+                            $('#alertModalCont').text(locale.error_try_again);
                             $('#alertModal').modal('show');
                             d.reject();
                         });
@@ -315,16 +329,16 @@
                 }
             },
 
-            pagerFormat: "Pag {first} {prev} {pages} {next} {last}    {pageIndex} de {pageCount}",
+            pagerFormat: "Pag {first} {prev} {pages} {next} {last}    {pageIndex} / {pageCount}",
             pagePrevText: " < ",
 		    pageNextText: " > ",
 		    pageFirstText: " << ",
 		    pageLastText: " >> ",
 
             fields: [ 
-                { name: "name", type: "text", align: "center", title: "Nombre", editing:writePremission },
-                { name: "lesson_name", type: "text", align: "center", title: "Unidad", editing:writePremission },
-                { name: "lab_code", type: "text", align: "center", title: "Código", editing:writePremission },
+                { name: "name", type: "text", align: "center", title: locale.name, editing:writePremission },
+                { name: "lesson_name", type: "text", align: "center", title: locale.table_less, editing:writePremission },
+                { name: "lab_code", type: "text", align: "center", title: locale.table_code, editing:writePremission },
             	{ type: "control"}
             ]
         });
